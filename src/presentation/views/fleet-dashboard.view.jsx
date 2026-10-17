@@ -97,6 +97,38 @@ export function FleetDashboardView(props) {
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
   const [sorting, setSorting] = useState([{ id: "total", desc: true }]);
+  const [aiFor, setAiFor] = useState(null);
+  const [aiText, setAiText] = useState("");
+  const [aiBusy, setAiBusy] = useState(false);
+  const [aiError, setAiError] = useState("");
+
+  async function assessWithAi(d) {
+    if (!props.onDraftAssessment || aiBusy) return;
+    const plane = aircraftById[d.aircraftId];
+    setAiFor(d.id);
+    setAiText("");
+    setAiError("");
+    setAiBusy(true);
+    try {
+      const draft = await props.onDraftAssessment({
+        tailNumber: plane?.tailNumber,
+        aircraftType: plane?.aircraftType,
+        writeUp: d.writeUp,
+        ataCode: d.ataCode,
+        component: d.component,
+        symptom: d.symptom,
+        repeatCount: d.repeatCount,
+        classificationRationale: d.classificationRationale,
+        similarCases: [],
+      });
+      setAiText(draft);
+    } catch (err) {
+      setAiError(err instanceof Error ? err.message : "AI assessment is unavailable right now.");
+    } finally {
+      setAiBusy(false);
+    }
+  }
+  const aiDefect = aiFor ? DefectReport.find((x) => x.id === aiFor) : null;
 
   const openCount = DefectReport.filter((d) => enumIs(d.status, "open", "DefectReport.status")).length;
   const deferredCount = DefectReport.filter((d) => enumIs(d.status, "deferred", "DefectReport.status")).length;
@@ -210,6 +242,11 @@ export function FleetDashboardView(props) {
                         <a href="#review-queue" className="type-meta inline-flex min-h-6 items-center text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">
                           {enumIs(d.status, "open", "DefectReport.status") ? "Add assessment" : "View assessment"}
                         </a>
+                        {props.onDraftAssessment && (
+                          <Button type="button" variant="outline" size="sm" className="ml-2" disabled={aiBusy} onClick={() => assessWithAi(d)}>
+                            {aiBusy && aiFor === d.id ? "Assessing…" : "Assess with AI"}
+                          </Button>
+                        )}
                       </TableCell>
                     </TableRow>
                   );
@@ -218,6 +255,15 @@ export function FleetDashboardView(props) {
             </Table>
           )}
         </div>
+        {aiFor && (
+          <div role="status" aria-live="polite" className="flex flex-col gap-2 border border-border bg-card p-(--card-padding) rounded-card">
+            <p className="type-eyebrow text-text-muted">AI assessment{aiDefect ? ` · ${aircraftById[aiDefect.aircraftId]?.tailNumber ?? ""} ${(aiDefect.ataCode ?? "").split(" ")[0]}` : ""}</p>
+            {aiBusy && <p className="type-meta text-text-muted">Preparing the assessment…</p>}
+            {aiError && <p role="alert" className="type-meta text-status-danger-ink">{aiError}</p>}
+            {aiText && <p className="type-body whitespace-pre-wrap">{aiText}</p>}
+            <p className="type-caption text-text-muted">Advisory only. The controller reviews it and records the final assessment in the Review Queue below.</p>
+          </div>
+        )}
       </section>
 
       <section data-vid="1f40f6ba" className="flex min-w-0 flex-col gap-(--component-gap) border border-border bg-card p-(--card-padding) rounded-card">
