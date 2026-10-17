@@ -23,9 +23,11 @@ function mark(label) {
 
 const toDateInput = (iso) => (iso ? String(iso).slice(0, 10) : "");
 
-function DefectEditor({ report, aircraft, MelItem, SdrCase, repeatCount, onUpdate, onDraft }) {
+function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, onUpdate, onDraft }) {
   const parts = (report.ataCode || "").split(" ")[0].split("-");
   const [f, setF] = useState({
+    aircraftId: report.aircraftId ?? "",
+    reporterType: report.reporterType ?? "",
     writeUp: report.writeUp ?? "",
     status: report.status ?? "OPEN",
     priority: report.priority ?? "",
@@ -83,6 +85,8 @@ function DefectEditor({ report, aircraft, MelItem, SdrCase, repeatCount, onUpdat
     if (!onUpdate) return;
     setBusy(true);
     const patch = {
+      aircraftId: f.aircraftId || report.aircraftId,
+      reporterType: f.reporterType || report.reporterType,
       writeUp: f.writeUp || report.writeUp,
       status: f.status,
       priority: f.priority || undefined,
@@ -117,6 +121,20 @@ function DefectEditor({ report, aircraft, MelItem, SdrCase, repeatCount, onUpdat
       </div>
       <p className="type-caption text-text-muted">AI suggests ATA chapter and section, MEL item, deferral due date and an assessment. Review and edit everything before saving.</p>
       <div className="flex flex-wrap gap-(--component-gap) border border-border p-(--card-padding)">
+        <label className="flex min-w-40 flex-1 flex-col gap-1">
+          <span className="type-caption text-text-muted">Aircraft</span>
+          <select value={f.aircraftId} onChange={set("aircraftId")} className="min-h-11 border border-border bg-background px-2 type-body">
+            {fleet.map((a) => <option key={a.id} value={a.id}>{a.tailNumber}{a.aircraftType ? ` — ${a.aircraftType}` : ""}</option>)}
+          </select>
+        </label>
+        <label className="flex min-w-40 flex-1 flex-col gap-1">
+          <span className="type-caption text-text-muted">Reported by</span>
+          <select value={f.reporterType} onChange={set("reporterType")} className="min-h-11 border border-border bg-background px-2 type-body">
+            <option value="pilot">Pilot</option>
+            <option value="mechanic">Mechanic</option>
+            <option value="mro_system">MRO system</option>
+          </select>
+        </label>
         <label className="flex w-full flex-col gap-1">
           <span className="type-caption text-text-muted">Defect description (write-up)</span>
           <textarea value={f.writeUp} onChange={set("writeUp")} rows={3} className="border border-border bg-background p-2 type-body" />
@@ -281,7 +299,7 @@ export function DefectGuidanceView(props) {
         </section>
       </div>
 
-      <DefectEditor key={report.id + (report.controllerAssessment ?? "")} report={report} aircraft={aircraft} MelItem={MelItem} SdrCase={SdrCase} repeatCount={report.repeatCount} onUpdate={props.onUpdateDefectReport} onDraft={props.onDraftAssessment} />
+      <DefectEditor key={report.id + (report.controllerAssessment ?? "")} report={report} aircraft={aircraft} fleet={Aircraft} MelItem={MelItem} SdrCase={SdrCase} repeatCount={report.repeatCount} onUpdate={props.onUpdateDefectReport} onDraft={props.onDraftAssessment} />
 
       <section data-vid="5273e453" aria-labelledby="mel" className="flex flex-col gap-(--component-gap) border-t border-border pt-(--component-gap)">
         <div data-vid="b1f54eae" className="flex flex-wrap items-center justify-between gap-2">
