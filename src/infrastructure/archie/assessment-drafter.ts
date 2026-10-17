@@ -77,11 +77,16 @@ export function createAssessmentDrafter(ai: Ai): AssessmentDrafter {
   return {
     async draft(input) {
       try {
-        const result = await ai.chat({
+        const request = {
           system: SYSTEM,
-          messages: [{ role: 'user', content: describe(input) }],
+          messages: [{ role: 'user' as const, content: describe(input) }],
           maxTokens: 400,
           temperature: 0.3,
+        };
+        // OpenAI first through the Archie AI service; if it refuses, use the project's default provider.
+        const result = await ai.chat({ ...request, provider: 'openai' }).catch((first: unknown) => {
+          console.error('[review-queue] OpenAI draft failed, trying default provider', first);
+          return ai.chat(request);
         });
         const text = result.content
           .map((part) => (part.type === 'text' ? part.text : ''))
