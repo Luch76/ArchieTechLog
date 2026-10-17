@@ -226,6 +226,69 @@ export const NAV_DATA = {
           "order": 5
         }
       ]
+    },
+    "7ea5585e-5f21-45c1-aa3f-1c4f80e4d9d8": {
+      "label": "Platform Administrator",
+      "id": "7ea5585e-5f21-45c1-aa3f-1c4f80e4d9d8",
+      "access": {
+        "organizations": "manage",
+        "users": "manage",
+        "user-detail": "manage",
+        "org-settings": "manage",
+        "integrations": "manage",
+        "account": "manage",
+        "notifications": "manage",
+        "search": "manage",
+        "help": "manage"
+      },
+      "nav": [
+        {
+          "resource": "organizations",
+          "section": "s3",
+          "order": 4
+        },
+        {
+          "resource": "users",
+          "section": "s3",
+          "order": 5
+        }
+      ]
+    },
+    "d590235d-4f6e-42ef-9e95-8f0a6436a5b8": {
+      "label": "Organization Administrator",
+      "id": "d590235d-4f6e-42ef-9e95-8f0a6436a5b8",
+      "access": {
+        "organizations": "manage",
+        "users": "manage",
+        "user-detail": "manage",
+        "org-settings": "manage",
+        "integrations": "manage",
+        "fleet": "manage",
+        "aircraft-detail": "manage",
+        "mel-library": "manage",
+        "sdr-library": "manage",
+        "account": "manage",
+        "notifications": "manage",
+        "search": "manage",
+        "help": "manage"
+      },
+      "nav": [
+        {
+          "resource": "fleet",
+          "section": "s2",
+          "order": 2
+        },
+        {
+          "resource": "mel-library",
+          "section": "s2",
+          "order": 3
+        },
+        {
+          "resource": "users",
+          "section": "s3",
+          "order": 5
+        }
+      ]
     }
   }
 } as unknown as {
@@ -237,7 +300,11 @@ export const ROLE_INDEX: Record<string, string> = {
   "e2d6f469-0ccb-4b16-870b-26a874eed960": "e2d6f469-0ccb-4b16-870b-26a874eed960",
   "612d05c6-ead5-4bec-8fac-0aa2efa55bc0": "612d05c6-ead5-4bec-8fac-0aa2efa55bc0",
   "line mechanic / pilot": "e2d6f469-0ccb-4b16-870b-26a874eed960",
-  "maintenance controller": "612d05c6-ead5-4bec-8fac-0aa2efa55bc0"
+  "maintenance controller": "612d05c6-ead5-4bec-8fac-0aa2efa55bc0",
+  "7ea5585e-5f21-45c1-aa3f-1c4f80e4d9d8": "7ea5585e-5f21-45c1-aa3f-1c4f80e4d9d8",
+  "d590235d-4f6e-42ef-9e95-8f0a6436a5b8": "d590235d-4f6e-42ef-9e95-8f0a6436a5b8",
+  "platform administrator": "7ea5585e-5f21-45c1-aa3f-1c4f80e4d9d8",
+  "organization administrator": "d590235d-4f6e-42ef-9e95-8f0a6436a5b8"
 };
 export const DEFAULT_NAV: NavGroup[] = [
   {
