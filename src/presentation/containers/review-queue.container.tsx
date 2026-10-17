@@ -193,7 +193,7 @@ export function ReviewQueueScreenContainer(
   }, [repositories, reloadToken]);
 
   const onUpdateDefectReport = React.useCallback(
-    (id: DefectReportId, patch: Pick<UpdateDefectReport, 'controllerAssessment' | 'status'>): void => {
+    (id: DefectReportId, patch: Pick<UpdateDefectReport, 'controllerAssessment' | 'status' | 'melItemId' | 'deferralDueAt'>): void => {
       setWriteError(null);
       void repositories.defectReport
         .update(id, patch)

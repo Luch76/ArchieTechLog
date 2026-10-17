@@ -61,7 +61,7 @@ export interface ReviewQueueScreenViewModel {
   readonly error: RepoError | null;
   /** Updates an existing `DefectReport`. The patch is partial by definition. Returns
    *  `void`. */
-  readonly onUpdateDefectReport: (id: DefectReportId, patch: Pick<UpdateDefectReport, 'controllerAssessment' | 'status'>) => void;
+  readonly onUpdateDefectReport: (id: DefectReportId, patch: Pick<UpdateDefectReport, 'controllerAssessment' | 'status' | 'melItemId' | 'deferralDueAt'>) => void;
   /** Static write availability: render disabled-with-reason from it, never guess. */
   readonly availability: ReviewQueueScreenViewModelAvailability;
   /** Navigates to another screen by route (`/slug`). The view never imports the

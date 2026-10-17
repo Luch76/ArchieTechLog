@@ -92,8 +92,16 @@ export function ReviewQueueView(props) {
     setAck(false);
   }
 
-  function record(id) {
-    props.onUpdateDefectReport(id, { status: "DEFERRED", controllerAssessment: text.trim() });
+  function record(d) {
+    const linked = MelItem.find((m) => m.id === d.melItemId);
+    const days = linked?.deferralInterval;
+    props.onUpdateDefectReport(d.id, {
+      status: "DEFERRED",
+      controllerAssessment: text.trim(),
+      ...(typeof days === "number" && days > 0
+        ? { deferralDueAt: new Date(Date.now() + days * 864e5).toISOString() }
+        : {}),
+    });
     setStep(0);
     setText("");
     setAck(false);
@@ -244,11 +252,20 @@ export function ReviewQueueView(props) {
                 {enumIs(d.status, "open", "DefectReport.status") ? (
                   <div data-vid="059c7d82" className="mt-3 flex flex-col gap-3">
                     <div data-vid="1ce98e03" className="flex flex-wrap items-center gap-x-4 gap-y-1">
-                      <Stepper data-vid="ca5f910b" steps={STEPS} current={step} onSelect={(s) => setStep(STEPS.indexOf(s.label ?? s))} label={t('review-queue.4035115d')} />
+                      <Stepper data-vid="ca5f910b" steps={STEPS} current={step} onSelect={(s) => {
+                        const target = STEPS.indexOf(s.label ?? s);
+                        if (target < 0) return;
+                        setStep(target > 0 && !(text.trim() && ack) ? Math.min(target, 1) : target);
+                      }} label={t('review-queue.4035115d')} />
                       <span data-vid="e3e72297" className="type-caption text-text-muted tabular-nums">{t('review-queue.8e6a6cca')} {step + 1} {t('review-queue.28391d3b')} {STEPS.length}</span>
                     </div>
 
-                    {step === 0 && <p data-vid="c4cc6546" className="type-body text-text-body">{t('review-queue.f64e1ab1')}</p>}
+                    {step === 0 && (
+                      <div data-vid="c4cc6546" className="flex flex-col gap-1">
+                        <p className="type-body text-text-body">{t('review-queue.f64e1ab1')}</p>
+                        {!dm && <p className="type-caption text-text-muted">No MEL item is linked to this defect yet. You can still enter your own assessment.</p>}
+                      </div>
+                    )}
                     {step === 1 && (
                       <div data-vid="f3b2d98a" className="flex flex-col gap-3">
                         <Label data-vid="4b9c68e8" htmlFor="assessment" className="type-meta">{t('review-queue.0de68189')}</Label>
@@ -269,9 +286,9 @@ export function ReviewQueueView(props) {
 
                     <div data-vid="d8e886d5" className="flex flex-wrap items-center justify-end gap-2">
                       {step > 0 && <Button data-vid="07ce0559" variant="ghost" className="min-h-11" onClick={() => setStep(step - 1)}>{t('review-queue.76900f1b')}</Button>}
-                      {step === 0 && <Button data-vid="9be6305c" className="min-h-11" disabled={!dm} onClick={() => setStep(1)}>{t('review-queue.c9ea369f')}</Button>}
+                      {step === 0 && <Button data-vid="9be6305c" className="min-h-11" onClick={() => setStep(1)}>{t('review-queue.c9ea369f')}</Button>}
                       {step === 1 && <Button data-vid="fa71fdb4" className="min-h-11" disabled={!text.trim() || !ack} onClick={() => setStep(2)}>{t('review-queue.34ebe7d0')}</Button>}
-                      {step === 2 && <Button data-vid="06afe391" className="min-h-11"                                                               onClick={() => record(d.id)}>{t('review-queue.dca1d5b9')}</Button>}
+                      {step === 2 && <Button data-vid="06afe391" className="min-h-11"                                                               onClick={() => record(d)}>{t('review-queue.dca1d5b9')}</Button>}
                     </div>
                   </div>
                 ) : (
