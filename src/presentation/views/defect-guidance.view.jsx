@@ -26,6 +26,11 @@ const toDateInput = (iso) => (iso ? String(iso).slice(0, 10) : "");
 function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, onUpdate, onDraft }) {
   const parts = (report.ataCode || "").split(" ")[0].split("-");
   const [f, setF] = useState({
+    ataCode: report.ataCode ?? "",
+    classificationConfidence: typeof report.classificationConfidence === "number" ? String(Math.round(report.classificationConfidence <= 1 ? report.classificationConfidence * 100 : report.classificationConfidence)) : "",
+    classificationRationale: report.classificationRationale ?? "",
+    repeatCount: report.repeatCount != null ? String(report.repeatCount) : "",
+    deferredAt: toDateInput(report.deferredAt),
     aircraftId: report.aircraftId ?? "",
     reporterType: report.reporterType ?? "",
     writeUp: report.writeUp ?? "",
@@ -85,6 +90,11 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
     if (!onUpdate) return;
     setBusy(true);
     const patch = {
+      ataCode: f.ataCode || undefined,
+      classificationConfidence: f.classificationConfidence === "" ? undefined : (typeof report.classificationConfidence === "number" && report.classificationConfidence > 1 ? Number(f.classificationConfidence) : Number(f.classificationConfidence) / 100),
+      classificationRationale: f.classificationRationale || undefined,
+      repeatCount: f.repeatCount === "" ? undefined : Number(f.repeatCount),
+      deferredAt: f.deferredAt ? new Date(f.deferredAt).toISOString() : undefined,
       aircraftId: f.aircraftId || report.aircraftId,
       reporterType: f.reporterType || report.reporterType,
       writeUp: f.writeUp || report.writeUp,
@@ -136,7 +146,7 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
           </select>
         </label>
         <label className="flex w-full flex-col gap-1">
-          <span className="type-caption text-text-muted">Defect description (write-up)</span>
+          <span className="type-caption text-text-muted">Source write-up (original report text)</span>
           <textarea value={f.writeUp} onChange={set("writeUp")} rows={3} className="border border-border bg-background p-2 type-body" />
         </label>
         <label className="flex min-w-40 flex-1 flex-col gap-1">
@@ -158,6 +168,14 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
           </select>
         </label>
         {field("Reported date", "reportedAt", "date")}
+        {field("ATA code (classification)", "ataCode")}
+        {field("Classification confidence (%)", "classificationConfidence", "number")}
+        {field("Repeat count", "repeatCount", "number")}
+        {field("Deferred date", "deferredAt", "date")}
+        <label className="flex w-full flex-col gap-1">
+          <span className="type-caption text-text-muted">Classification rationale</span>
+          <textarea value={f.classificationRationale} onChange={set("classificationRationale")} rows={3} className="border border-border bg-background p-2 type-body" />
+        </label>
         {field("ATA chapter", "ataChapter")}
         {field("ATA section", "ataSection")}
         {field("Component", "component")}
