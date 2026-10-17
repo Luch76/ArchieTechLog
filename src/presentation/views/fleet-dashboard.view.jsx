@@ -90,7 +90,7 @@ export function FleetDashboardView(props) {
       ) },
     { id: "open", accessorKey: "open", header: "Open", enableGlobalFilter: false, meta: { numeric: true } },
     { id: "deferred", accessorKey: "deferred", header: "Deferred", enableGlobalFilter: false, meta: { numeric: true } },
-    { id: "total", accessorKey: "total", header: "Total", enableGlobalFilter: false },
+    { id: "total", accessorKey: "total", header: "Open + deferred", enableGlobalFilter: false, meta: { numeric: true } },
   ];
     return { aircraftById, tailRowsAll, columns };
   }, [DefectReport, Aircraft, href]);
