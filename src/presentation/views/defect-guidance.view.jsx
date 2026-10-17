@@ -90,8 +90,6 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
     if (!onUpdate) return;
     setBusy(true);
     const patch = {
-      ataCode: f.ataCode || undefined,
-      classificationConfidence: f.classificationConfidence === "" ? undefined : (typeof report.classificationConfidence === "number" && report.classificationConfidence > 1 ? Number(f.classificationConfidence) : Number(f.classificationConfidence) / 100),
       classificationRationale: f.classificationRationale || undefined,
       repeatCount: f.repeatCount === "" ? undefined : Number(f.repeatCount),
       deferredAt: f.deferredAt ? new Date(f.deferredAt).toISOString() : undefined,
@@ -103,8 +101,6 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
       reportedAt: f.reportedAt ? new Date(f.reportedAt).toISOString() : undefined,
       ataChapter: f.ataChapter || undefined,
       ataSection: f.ataSection || undefined,
-      component: f.component || undefined,
-      symptom: f.symptom || undefined,
       melItemId: f.melItemId || undefined,
       deferralDueAt: f.deferralDueAt ? new Date(f.deferralDueAt).toISOString() : undefined,
       controllerAssessment: f.controllerAssessment || undefined,
@@ -168,8 +164,6 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
           </select>
         </label>
         {field("Reported date", "reportedAt", "date")}
-        {field("ATA code (classification)", "ataCode")}
-        {field("Classification confidence (%)", "classificationConfidence", "number")}
         {field("Repeat count", "repeatCount", "number")}
         {field("Deferred date", "deferredAt", "date")}
         <label data-vid="vufhs5p" className="flex w-full flex-col gap-1">
@@ -178,8 +172,6 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
         </label>
         {field("ATA chapter", "ataChapter")}
         {field("ATA section", "ataSection")}
-        {field("Component", "component")}
-        {field("Symptom", "symptom")}
         <label data-vid="myyuw89" className="flex min-w-40 flex-1 flex-col gap-1">
           <span data-vid="ws9vups" className="type-caption text-text-muted">MEL item</span>
           <select data-vid="j94dr8g" value={f.melItemId} onChange={set("melItemId")} className="min-h-11 border border-border bg-background px-2 type-body">
