@@ -383,6 +383,8 @@ export function computeNavForRoles(roleKeys: string[]): NavGroup[] {
     for (const e of roles[key]?.nav ?? []) {
       const resource = typeof e.resource === 'string' ? e.resource : '';
       if (!resource) continue;
+      // Review Queue now lives on the Fleet Dashboard: no separate menu entry.
+      if (resource === 'review-queue') continue;
       const order = Number(e.order ?? 0);
       const prev = entryByResource.get(resource);
       if (!prev || order < prev.order) {
