@@ -136,7 +136,7 @@ export function FleetDashboardView(props) {
   const expiryRows = (enumIs(filter, "open")
     ? DefectReport.filter((d) => enumIs(d.status, "open", "DefectReport.status")).sort((a, b) => a.createdAt.localeCompare(b.createdAt))
     : DefectReport.filter((d) => enumIs(d.status, "deferred", "DefectReport.status")).sort((a, b) => (a.deferralDueAt ?? "").localeCompare(b.deferralDueAt ?? ""))
-  ).slice(0, 8);
+  );
 
   const tailData = filter === "all" ? tailRowsAll : tailRowsAll.filter((t) => t[filter] > 0);
 
