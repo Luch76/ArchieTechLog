@@ -123,22 +123,37 @@ export function AircraftDetailView(props) {
               <tbody>
                 {attention.map((d) => {
                   const isDef = enumIs(d.status, "deferred", "DefectReport.status");
-                  const parts = (d.ataCode ?? "").split(" ")[0].split("-");
+                  const linked = MelItem.find((m) => m.id === d.melItemId);
+                  const guessed = linked ?? MelItem.find((m) => d.ataCode && m.ataCode && codeOf(m.ataCode) === codeOf(d.ataCode));
+                  const ataSrc = codeOf(d.ataCode) !== "—" ? codeOf(d.ataCode) : codeOf(guessed?.ataCode);
+                  const parts = ataSrc === "—" ? [] : ataSrc.split("-");
+                  const sChapter = d.ataChapter ? null : parts[0] ?? null;
+                  const sSection = d.ataSection ? null : parts[1] ?? null;
+                  const sMel = d.melItemId ? null : guessed?.itemCode ?? null;
+                  const sDays = !d.deferralDueAt && guessed && guessed.repairCategory !== "NOT_DEFERRABLE" ? guessed.deferralInterval : null;
+                  const sugg = [sChapter && `ATA ${sChapter}`, sSection && `section ${sSection}`, sMel && `MEL ${sMel}`, sDays != null && `${sDays} deferral days`].filter(Boolean);
+                  const ai = d.classificationRationale ?? d.controllerAssessment ?? null;
                   const daysLeft = d.deferralDueAt ? Math.ceil((Date.parse(d.deferralDueAt) - Date.now()) / 86400000) : null;
                   return (
                     <tr key={d.id} className="border-b border-border last:border-b-0 hover:bg-muted">
                       <td className="px-(--card-padding) py-2 whitespace-nowrap"><StatusMark entity="DefectReport" status={d.status} /></td>
                       <td className="type-body max-w-72 truncate px-(--card-padding) py-2">
                         <a href={open(d)} className="text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">{d.symptom ?? d.writeUp ?? d.component ?? "—"}</a>
+                        <div className="type-caption mt-1 whitespace-normal border-l-2 border-border pl-2 text-text-muted">
+                          <span className="font-medium text-text-body">AI assessment</span>
+                          {typeof d.classificationConfidence === "number" ? ` (${Math.round(d.classificationConfidence <= 1 ? d.classificationConfidence * 100 : d.classificationConfidence)}% confidence)` : ""}
+                          {ai ? `: ${ai}` : ": no assessment yet"}
+                          {sugg.length > 0 && <div>Suggested: {sugg.join(", ")}</div>}
+                        </div>
                       </td>
-                      <td className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap">{d.ataChapter ?? (parts[0] || "—")}</td>
-                      <td className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap">{d.ataSection ?? parts[1] ?? "—"}</td>
-                      <td className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap text-text-muted">{melCode(d)}</td>
+                      <td className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap">{d.ataChapter ?? (sChapter ? <em className="text-text-muted" title="AI suggested">{sChapter}</em> : "—")}</td>
+                      <td className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap">{d.ataSection ?? (sSection ? <em className="text-text-muted" title="AI suggested">{sSection}</em> : "—")}</td>
+                      <td className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap text-text-muted">{d.melItemId ? melCode(d) : sMel ? <em title="AI suggested">{sMel}</em> : "—"}</td>
                       <td className="type-caption px-(--card-padding) py-2 whitespace-nowrap">{d.reportedAt ?? d.createdAt ? <DateValue value={d.reportedAt ?? d.createdAt} /> : "—"}</td>
                       <td className="type-caption px-(--card-padding) py-2 whitespace-nowrap tabular-nums">
                         {isDef && daysLeft !== null ? (
                           <span className="inline-flex items-center gap-1"><Clock className="size-4" />{daysLeft >= 0 ? `${daysLeft} d left` : `${-daysLeft} d overdue`}</span>
-                        ) : "—"}
+                        ) : sDays != null ? <em className="text-text-muted" title="AI suggested">{sDays} d allowed</em> : "—"}
                       </td>
                       <td className="type-caption px-(--card-padding) py-2 whitespace-nowrap">{d.deferralDueAt ? <DateValue value={d.deferralDueAt} /> : "—"}</td>
                     </tr>
