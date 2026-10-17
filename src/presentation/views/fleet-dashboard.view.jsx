@@ -194,6 +194,11 @@ export function FleetDashboardView(props) {
           <h2 data-vid="1dedb7e3" className="type-section">{enumIs(filter, "open") ? t('fleet-dashboard.fd1ff93f') : t('fleet-dashboard.272899b8')}</h2>
           <p data-vid="aa686847" className="type-caption text-text-muted tabular-nums">{t('fleet-dashboard.d604310a')} {expiryRows.length} {t('fleet-dashboard.28391d3b')} {enumIs(filter, "open") ? openCount : deferredCount}</p>
         </div>
+        <p className="type-meta flex flex-wrap gap-x-4 gap-y-1 text-text-body tabular-nums">
+          <span><span className="type-eyebrow text-text-muted">Open</span> {openCount} awaiting controller review</span>
+          <span><span className="type-eyebrow text-text-muted">Deferred</span> {deferredCount} under an MEL deferral</span>
+          <span><span className="type-eyebrow text-text-muted">Overdue</span> {DefectReport.filter((d) => enumIs(d.status, "deferred", "DefectReport.status") && d.deferralDueAt && Date.parse(d.deferralDueAt) < ASOF).length}</span>
+        </p>
         <div data-vid="dcc83a18" className="overflow-x-auto border border-border bg-card rounded-card">
           {expiryRows.length === 0 ? (
             <EmptyState data-vid="cbe7233c" title={t('fleet-dashboard.6414adef')} description={t('fleet-dashboard.0b14bbe9')} />
@@ -206,6 +211,7 @@ export function FleetDashboardView(props) {
                   <TableHead data-vid="da6ab40e" className="type-eyebrow">{t('fleet-dashboard.a6527b2e')}</TableHead>
                   <TableHead data-vid="a3c6cf74" className="type-eyebrow">{enumIs(filter, "open") ? t('fleet-dashboard.34540bb7') : t('fleet-dashboard.9071738f')}</TableHead>
                   <TableHead data-vid="c0d815e8" className="type-eyebrow text-right">{t('fleet-dashboard.b6b7a006')}</TableHead>
+                  <TableHead className="type-eyebrow">Status</TableHead>
                   <TableHead className="type-eyebrow text-right">Assessment</TableHead>
                 </TableRow>
               </TableHeader>
@@ -238,6 +244,7 @@ export function FleetDashboardView(props) {
                           <span data-vid="24c5c8de" className="type-stat inline-block bg-secondary-tone px-2 text-secondary-tone-foreground rounded-sm">×<NumberValue data-vid="ca8ac095" value={d.repeatCount} /></span>
                         ) : "—"}
                       </TableCell>
+                      <TableCell className="type-meta whitespace-nowrap">{enumIs(d.status, "open", "DefectReport.status") ? "Open" : "Deferred"}</TableCell>
                       <TableCell className="text-right whitespace-nowrap">
                         <a href="#review-queue" className="type-meta inline-flex min-h-6 items-center text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">
                           {enumIs(d.status, "open", "DefectReport.status") ? "Add assessment" : "View assessment"}
