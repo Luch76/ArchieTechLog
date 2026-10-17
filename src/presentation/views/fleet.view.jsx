@@ -61,7 +61,7 @@ const columns = [
 
 /** @param {import("@/application/view-models/fleet.vm").FleetScreenViewModel} props */
 export function FleetView(props) {
-  const { Aircraft, MroConnection, href } = props;
+  const { Aircraft, MroConnection, href, defectCounts } = props;
   const { t } = useTranslation();
   const [sorting, setSorting] = useState([{ id: "tailNumber", desc: false }]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -138,6 +138,11 @@ export function FleetView(props) {
               {statusLabels[s]} <span data-vid="2348ac8a" className="text-foreground">{counts[s] ?? 0}</span>
             </p>
           ))}
+          <p data-vid="fleet-defect-counts" className="type-meta whitespace-nowrap text-text-muted tabular-nums">
+            Open defects <span className="text-foreground">{defectCounts?.open ?? 0}</span>
+            {" · "}Deferred <span className="text-foreground">{defectCounts?.deferred ?? 0}</span>
+            {" · "}Closed <span className="text-foreground">{defectCounts?.closed ?? 0}</span>
+          </p>
           {freshest && (
             <p data-vid="619a4ebc" className="type-meta min-w-0 text-text-muted lg:ml-auto">
               {t('fleet.536dc7c4')} {freshest?.name},{" "}
