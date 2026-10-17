@@ -26,6 +26,10 @@ const toDateInput = (iso) => (iso ? String(iso).slice(0, 10) : "");
 function DefectEditor({ report, aircraft, MelItem, SdrCase, repeatCount, onUpdate, onDraft }) {
   const parts = (report.ataCode || "").split(" ")[0].split("-");
   const [f, setF] = useState({
+    writeUp: report.writeUp ?? "",
+    status: report.status ?? "OPEN",
+    priority: report.priority ?? "",
+    reportedAt: toDateInput(report.reportedAt ?? report.createdAt),
     ataChapter: report.ataChapter ?? "",
     ataSection: report.ataSection ?? "",
     component: report.component ?? "",
@@ -79,6 +83,10 @@ function DefectEditor({ report, aircraft, MelItem, SdrCase, repeatCount, onUpdat
     if (!onUpdate) return;
     setBusy(true);
     const patch = {
+      writeUp: f.writeUp || report.writeUp,
+      status: f.status,
+      priority: f.priority || undefined,
+      reportedAt: f.reportedAt ? new Date(f.reportedAt).toISOString() : undefined,
       ataChapter: f.ataChapter || undefined,
       ataSection: f.ataSection || undefined,
       component: f.component || undefined,
@@ -109,6 +117,29 @@ function DefectEditor({ report, aircraft, MelItem, SdrCase, repeatCount, onUpdat
       </div>
       <p className="type-caption text-text-muted">AI suggests ATA chapter and section, MEL item, deferral due date and an assessment. Review and edit everything before saving.</p>
       <div className="flex flex-wrap gap-(--component-gap) border border-border p-(--card-padding)">
+        <label className="flex w-full flex-col gap-1">
+          <span className="type-caption text-text-muted">Defect description (write-up)</span>
+          <textarea value={f.writeUp} onChange={set("writeUp")} rows={3} className="border border-border bg-background p-2 type-body" />
+        </label>
+        <label className="flex min-w-40 flex-1 flex-col gap-1">
+          <span className="type-caption text-text-muted">Status</span>
+          <select value={f.status} onChange={set("status")} className="min-h-11 border border-border bg-background px-2 type-body">
+            <option value="OPEN">Open</option>
+            <option value="DEFERRED">Deferred</option>
+            <option value="CLOSED">Closed</option>
+          </select>
+        </label>
+        <label className="flex min-w-40 flex-1 flex-col gap-1">
+          <span className="type-caption text-text-muted">Priority</span>
+          <select value={f.priority} onChange={set("priority")} className="min-h-11 border border-border bg-background px-2 type-body">
+            <option value="">Not set</option>
+            <option value="LOW">Low</option>
+            <option value="MEDIUM">Medium</option>
+            <option value="HIGH">High</option>
+            <option value="CRITICAL">Critical</option>
+          </select>
+        </label>
+        {field("Reported date", "reportedAt", "date")}
         {field("ATA chapter", "ataChapter")}
         {field("ATA section", "ataSection")}
         {field("Component", "component")}
