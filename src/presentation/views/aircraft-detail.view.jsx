@@ -111,35 +111,42 @@ export function AircraftDetailView(props) {
             {t('aircraft-detail.ed8d87e0')}
           </p>
         ) : (
-          <ul data-vid="04c8b402" className="flex flex-col border border-border bg-card">
-            {attention.map((d) => (
-              <li data-vid="711743c7" key={d.id} className="border-b border-border last:border-b-0">
-                <a data-vid="72eaf85e"
-                  href={open(d)}
-                  className="flex min-h-11 flex-wrap items-center gap-x-4 gap-y-1 px-(--card-padding) py-2 hover:bg-muted focus-visible:ring-2 focus-visible:ring-ring"
-                >
-                  <span data-vid="7c667b03" className="type-row-title min-w-48 flex-1 truncate">{d.symptom ?? d.component ?? "—"}</span>
-                  <span data-vid="81c9223f" className="type-mono-id whitespace-nowrap">{codeOf(d.ataCode)}</span>
-                  <StatusMark data-vid="fbb1645b" entity="DefectReport" status={d.status} />
-                  <span data-vid="c1a186eb" className="type-mono-id whitespace-nowrap text-text-muted">{melCode(d)}</span>
-                  <span data-vid="fdd3c555" className="type-caption whitespace-nowrap">
-                    {enumIs(d.status, "deferred", "DefectReport.status") && d.deferralDueAt ? (
-                      <span data-vid="4010def4" className="inline-flex items-center gap-1">
-                        <Clock data-vid="546c8583" className="size-4" /> {t('aircraft-detail.9071738f')} <DateValue data-vid="13370209" value={d.deferralDueAt} />
-                      </span>
-                    ) : (
-                      "—"
-                    )}
-                  </span>
-                  {d.repeatCount >= 2 && (
-                    <span data-vid="7c283938" className="type-stat whitespace-nowrap bg-secondary-tone px-2 text-secondary-tone-foreground tabular-nums">
-                      {t('aircraft-detail.73c9bdda')}{d.repeatCount}
-                    </span>
-                  )}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className="overflow-x-auto border border-border bg-card">
+            <table className="w-full min-w-[60rem] border-collapse text-left">
+              <thead>
+                <tr className="border-b border-border">
+                  {["Status", "Defect description", "ATA chapter", "ATA section", "MEL code", "Reported date", "Deferral days", "Projected due date"].map((h) => (
+                    <th key={h} scope="col" className="type-eyebrow whitespace-nowrap px-(--card-padding) py-2 font-medium">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {attention.map((d) => {
+                  const isDef = enumIs(d.status, "deferred", "DefectReport.status");
+                  const parts = (d.ataCode ?? "").split(" ")[0].split("-");
+                  const daysLeft = d.deferralDueAt ? Math.ceil((Date.parse(d.deferralDueAt) - Date.now()) / 86400000) : null;
+                  return (
+                    <tr key={d.id} className="border-b border-border last:border-b-0 hover:bg-muted">
+                      <td className="px-(--card-padding) py-2 whitespace-nowrap"><StatusMark entity="DefectReport" status={d.status} /></td>
+                      <td className="type-body max-w-72 truncate px-(--card-padding) py-2">
+                        <a href={open(d)} className="text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">{d.symptom ?? d.writeUp ?? d.component ?? "—"}</a>
+                      </td>
+                      <td className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap">{d.ataChapter ?? (parts[0] || "—")}</td>
+                      <td className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap">{d.ataSection ?? parts[1] ?? "—"}</td>
+                      <td className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap text-text-muted">{melCode(d)}</td>
+                      <td className="type-caption px-(--card-padding) py-2 whitespace-nowrap">{d.reportedAt ?? d.createdAt ? <DateValue value={d.reportedAt ?? d.createdAt} /> : "—"}</td>
+                      <td className="type-caption px-(--card-padding) py-2 whitespace-nowrap tabular-nums">
+                        {isDef && daysLeft !== null ? (
+                          <span className="inline-flex items-center gap-1"><Clock className="size-4" />{daysLeft >= 0 ? `${daysLeft} d left` : `${-daysLeft} d overdue`}</span>
+                        ) : "—"}
+                      </td>
+                      <td className="type-caption px-(--card-padding) py-2 whitespace-nowrap">{d.deferralDueAt ? <DateValue value={d.deferralDueAt} /> : "—"}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         )}
       </section>
 
