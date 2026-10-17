@@ -70,7 +70,7 @@ function Guarded_aircraft_detail() {
   );
 }
 
-const LazyScreen_organizations = lazy(() => import('./presentation/views/organizations.view'));
+const LazyScreen_organizations = lazy(() => import('./presentation/containers/organizations.container'));
 function Guarded_organizations() {
   return (
     <AuthGuard loadingComponent={<LoadingFallback />} fallback={<Navigate to="/login" replace />}>
