@@ -67,6 +67,10 @@ export function ReportDefectView(props) {
       setVoiceError("Voice dictation isn't supported in this browser. Try Chrome, Edge or Safari, or type the write-up.");
       return;
     }
+    if (typeof window !== "undefined" && window.isSecureContext === false) {
+      setVoiceError("Dictation only works on a secure (https) page.");
+      return;
+    }
     setVoiceError("");
     const rec = new Recognition();
     rec.lang = document.documentElement.lang || navigator.language || "en-US";
@@ -85,7 +89,16 @@ export function ReportDefectView(props) {
     };
     rec.onerror = (event) => {
       if (event.error === "not-allowed" || event.error === "service-not-allowed") {
-        setVoiceError("Microphone access was blocked. Allow the microphone for this site and try again.");
+        const embedded = typeof window !== "undefined" && window.self !== window.top;
+        setVoiceError(
+          embedded
+            ? "The microphone is blocked inside this embedded preview. Open the app in its own browser tab (the preview address) and try again."
+            : "Microphone access was blocked. Allow the microphone for this site in the browser's address bar and try again.",
+        );
+      } else if (event.error === "network") {
+        setVoiceError("Dictation needs an internet connection to the browser's speech service. Check your connection and try again.");
+      } else if (event.error === "audio-capture") {
+        setVoiceError("No microphone was found. Connect one and try again.");
       } else if (event.error === "no-speech") {
         setVoiceError("I didn't hear anything. Try again and speak close to the microphone.");
       } else if (event.error !== "aborted") {
@@ -102,8 +115,8 @@ export function ReportDefectView(props) {
       rec.start();
       recognitionRef.current = rec;
       setRecording(true);
-    } catch {
-      setVoiceError("Couldn't start the microphone. Try again.");
+    } catch (err) {
+      setVoiceError(`Couldn't start the microphone (${err && err.name ? err.name : "error"}). Try again.`);
     }
   }
 
