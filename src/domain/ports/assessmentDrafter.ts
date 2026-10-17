@@ -24,7 +24,14 @@ export interface AssessmentDraftInput {
   }>;
 }
 
+export interface AtaClassification {
+  readonly ataChapter: string;
+  readonly ataSection: string;
+}
+
 export interface AssessmentDrafter {
+  /** Classifies a write-up into an ATA chapter and section (two digits each). Resolves null when the AI cannot decide. */
+  classifyAta(input: { readonly writeUp: string; readonly aircraftType?: string }): Promise<AtaClassification | null>;
   /** Resolves with the drafted assessment text. Rejects with an `Error` whose message is safe to show. */
   draft(input: AssessmentDraftInput): Promise<string>;
 }

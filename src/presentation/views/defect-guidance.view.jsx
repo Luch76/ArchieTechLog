@@ -56,7 +56,7 @@ function parseAta(text) {
 }
 const toDateInput = (iso) => (iso ? String(iso).slice(0, 10) : "");
 
-function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, onUpdate, onDraft }) {
+function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, onUpdate, onDraft, onClassify }) {
   const parts = (report.ataCode || "").split(" ")[0].split("-");
   const [f, setF] = useState({
     ataCode: report.ataCode ?? "",
@@ -90,7 +90,15 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
     setBusy(true);
     setMsg(null);
     const sourceText = f.writeUp || report.writeUp || "";
-    let ataFound = parts[0] ? { ataChapter: parts[0], ataSection: parts[1] ?? "" } : guessAta(sourceText);
+    let ataFound = null;
+    if (onClassify) {
+      try {
+        ataFound = await onClassify({ writeUp: sourceText, aircraftType: aircraft?.aircraftType });
+      } catch {
+        ataFound = null;
+      }
+    }
+    if (!ataFound) ataFound = parts[0] ? { ataChapter: parts[0], ataSection: parts[1] ?? "" } : guessAta(sourceText);
     const melId = f.melItemId || guess?.id || "";
     const m = MelItem.find((x) => x.id === melId);
     const days = !f.deferralDueAt && m && m.repairCategory !== "NOT_DEFERRABLE"
@@ -102,7 +110,7 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
         text = await onDraft({
           tailNumber: aircraft?.tailNumber,
           aircraftType: aircraft?.aircraftType,
-          writeUp: `${sourceText}\n\n[Instruction: from the write-up above, first output ONE line exactly in the form "ATA: NN-NN" (ATA chapter and section numbers, e.g. "ATA: 21-50"), then the assessment.]`,
+          writeUp: sourceText,
           ataCode: report.ataCode,
           component: f.component || report.component,
           symptom: f.symptom || report.symptom,
@@ -117,7 +125,7 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
       }
     }
     const parsed = parseAta(text);
-    if (parsed.ata) { ataFound = parsed.ata; text = parsed.text; }
+    if (parsed.ata) { text = parsed.text; }
     const base = ataFound ? { ataChapter: ataFound.ataChapter, ataSection: ataFound.ataSection } : {};
     setF((p) => ({ ...p, ...base, melItemId: melId, deferralDueAt: days, controllerAssessment: text }));
     setBusy(false);
@@ -294,7 +302,7 @@ export function DefectGuidanceView(props) {
         </p>
       </header>
 
-      <DefectEditor data-vid="0k0twxh" key={report.id + (report.controllerAssessment ?? "")} report={report} aircraft={aircraft} fleet={Aircraft} MelItem={MelItem} SdrCase={SdrCase} repeatCount={report.repeatCount} onUpdate={props.onUpdateDefectReport} onDraft={props.onDraftAssessment} />
+      <DefectEditor data-vid="0k0twxh" key={report.id + (report.controllerAssessment ?? "")} report={report} aircraft={aircraft} fleet={Aircraft} MelItem={MelItem} SdrCase={SdrCase} repeatCount={report.repeatCount} onUpdate={props.onUpdateDefectReport} onDraft={props.onDraftAssessment} onClassify={props.onClassifyAta} />
 
       {report?.photo?.src && (
         <figure data-vid="ofk39qd" className="flex max-w-sm flex-col gap-2">

@@ -228,7 +228,12 @@ export function DefectGuidanceScreenContainer(
     loading,
     error: loadError,
     onUpdateDefectReport,
-    ...(drafter !== null ? { onDraftAssessment: (input) => drafter.draft(input) } : {}),
+    ...(drafter !== null
+      ? {
+          onDraftAssessment: (input) => drafter.draft(input),
+          onClassifyAta: (input) => drafter.classifyAta(input),
+        }
+      : {}),
     navigate,
     href,
     query,

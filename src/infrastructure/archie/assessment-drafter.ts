@@ -73,8 +73,54 @@ function templateDraft(input: AssessmentDraftInput): string {
   return s.join(' ');
 }
 
+const ATA_SYSTEM = [
+  'You classify an aircraft defect write-up into its ATA iSpec 2200 chapter and section.',
+  'Answer ONLY with JSON: {"ataChapter":"NN","ataSection":"NN"}, two digits each (for example air conditioning is 21 and 50).',
+  'Use only the write-up. If you cannot decide, answer {"ataChapter":"","ataSection":""}.',
+].join(' ');
+
+function parseAtaAnswer(text: string): { ataChapter: string; ataSection: string } | null {
+  const json = /\{[\s\S]*\}/.exec(text);
+  if (json) {
+    try {
+      const o = JSON.parse(json[0]) as { ataChapter?: unknown; ataSection?: unknown };
+      const ch = String(o.ataChapter ?? '').replace(/\D/g, '').padStart(2, '0').slice(-2);
+      const se = String(o.ataSection ?? '').replace(/\D/g, '').padStart(2, '0').slice(-2);
+      if (String(o.ataChapter ?? '').trim() !== '' && ch !== '00') return { ataChapter: ch, ataSection: se };
+    } catch {
+      /* fall through to the pattern below */
+    }
+  }
+  const m = /(\d{2})\s*[-\u2013 ]\s*(\d{2})/.exec(text);
+  return m ? { ataChapter: m[1] as string, ataSection: m[2] as string } : null;
+}
+
 export function createAssessmentDrafter(ai: Ai): AssessmentDrafter {
   return {
+    async classifyAta(input) {
+      try {
+        const request = {
+          system: ATA_SYSTEM,
+          messages: [
+            {
+              role: 'user' as const,
+              content: `${input.aircraftType ? `Aircraft type: ${input.aircraftType}\n` : ''}Write-up: ${input.writeUp}`,
+            },
+          ],
+          maxTokens: 60,
+          temperature: 0,
+        };
+        const result = await ai.chat({ ...request, provider: 'openai' }).catch(() => ai.chat(request));
+        const text = result.content
+          .map((part) => (part.type === 'text' ? part.text : ''))
+          .join('')
+          .trim();
+        return parseAtaAnswer(text);
+      } catch (cause) {
+        console.error('[defect-guidance] ATA classification failed', cause);
+        return null;
+      }
+    },
     async draft(input) {
       try {
         const request = {
