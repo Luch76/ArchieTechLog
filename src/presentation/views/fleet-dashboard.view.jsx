@@ -76,19 +76,18 @@ export function FleetDashboardView(props) {
     weekMap[k] = (weekMap[k] ?? 0) + 1;
   });
     const columns = [
-    { id: "tail", accessorKey: "tail", header: "Tail",
+    { id: "tail", accessorKey: "tail", header: "Aircraft",
       cell: ({ row }) => (
         <a data-vid="6c249952" href={href("aircraft-detail", { id: row.original.id })} className="type-mono-id inline-flex min-h-6 items-center text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">{row.original.tail}</a>
       ) },
-    { id: "type", accessorKey: "type", header: "Type", enableGlobalFilter: false, enableSorting: false },
-    { id: "op", accessorKey: "op", header: "Operating status", enableGlobalFilter: false, enableSorting: false,
+    { id: "open", accessorKey: "open", header: "Open defects", enableGlobalFilter: false, meta: { numeric: true } },
+    { id: "op", accessorKey: "op", header: "Status", enableGlobalFilter: false, enableSorting: false,
       cell: ({ getValue }) => (
         <span data-vid="e8de4170" className={cn("inline-flex items-center gap-2 type-meta whitespace-nowrap", enumIs(getValue(), "aog") ? "text-status-danger-ink" : "text-text-body")}>
           <span data-vid="499cdcb6" className={cn("size-2 rounded-full", enumIs(getValue(), "aog") ? "bg-status-danger" : "border border-border-strong")} aria-hidden="true" />
           {opLabel[getValue()] ?? getValue()}
         </span>
       ) },
-    { id: "open", accessorKey: "open", header: "Open", enableGlobalFilter: false, meta: { numeric: true } },
     { id: "deferred", accessorKey: "deferred", header: "Deferred", enableGlobalFilter: false, meta: { numeric: true } },
     { id: "total", accessorKey: "total", header: "Open + deferred", enableGlobalFilter: false, meta: { numeric: true } },
   ];
@@ -96,7 +95,7 @@ export function FleetDashboardView(props) {
   }, [DefectReport, Aircraft, href]);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
-  const [sorting, setSorting] = useState([{ id: "total", desc: true }]);
+  const [sorting, setSorting] = useState([{ id: "open", desc: true }]);
   const [aiFor, setAiFor] = useState(null);
   const [aiText, setAiText] = useState("");
   const [aiBusy, setAiBusy] = useState(false);
@@ -151,7 +150,7 @@ export function FleetDashboardView(props) {
   const table = useReactTable({
     data: tailData,
     columns,
-    state: { sorting, globalFilter: search, columnVisibility: { total: false } },
+    state: { sorting, globalFilter: search, columnVisibility: { total: false, type: false } },
     onSortingChange: setSorting,
     onGlobalFilterChange: setSearch,
     getCoreRowModel: getCoreRowModel(),
@@ -167,7 +166,7 @@ export function FleetDashboardView(props) {
 
   return (
     <div data-vid="397066f8" className="flex flex-col gap-(--section-gap) px-(--container-padding) py-(--section-gap)">
-      <header data-vid="44143f3a" className="flex flex-col gap-1">
+      <header data-vid="44143f3a" className="order-[-2] flex flex-col gap-1">
         <p data-vid="99dc1234" className="type-eyebrow text-text-muted">{t('fleet-dashboard.700c427d')}</p>
         <h1 data-vid="27ebcc2a" className="type-page-title">{t('fleet-dashboard.803e4b03')}</h1>
         <p data-vid="a1ab8c7c" className="type-meta text-text-muted">
@@ -319,7 +318,7 @@ export function FleetDashboardView(props) {
         )}
       </section>
 
-      <section data-vid="748dfeda" className="flex min-w-0 flex-col gap-(--component-gap)">
+      <section data-vid="748dfeda" className="order-[-1] flex min-w-0 flex-col gap-(--component-gap)">
         <div data-vid="3b7d5972" className="flex flex-wrap items-center justify-between gap-(--component-gap)">
           <h2 data-vid="493a5ab9" className="type-section">{t('fleet-dashboard.b86d13b7')}</h2>
           <div data-vid="92e92c87" className="flex min-h-11 w-full items-center gap-2 border border-border-strong bg-background px-3 rounded-control focus-within:ring-2 focus-within:ring-ring sm:w-72">
