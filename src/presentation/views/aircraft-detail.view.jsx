@@ -77,6 +77,13 @@ export function AircraftDetailView(props) {
   const applied = status !== "all" || ata !== "all" || needle;
   const clear = () => { setStatus("all"); setAta("all"); setQ(""); setPage(0); };
   const open = (d) => href("defect-guidance", { id: d.id });
+  const showStatus = (s) => {
+    setStatus(s);
+    setAta("all");
+    setQ("");
+    setPage(0);
+    document.getElementById("hist")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
   return (
     <div data-vid="9bf0db8f" className="flex flex-col gap-(--section-gap) p-(--container-padding)">
@@ -90,7 +97,9 @@ export function AircraftDetailView(props) {
           <span data-vid="ad91e151" className="type-meta text-text-muted">{OP[aircraft?.operatingStatus] ?? aircraft?.operatingStatus}</span>
         </div>
         <p data-vid="c1ed61e3" className="type-meta text-text-muted tabular-nums">
-          {openN} {t('aircraft-detail.19672033')} {defN} {t('aircraft-detail.0d1f0b25')} {rows.length} {t('aircraft-detail.fd7f8f31')}
+          <button type="button" className="min-h-6 underline-offset-2 hover:underline focus-visible:ring-2 focus-visible:ring-ring" onClick={() => showStatus("open")}>{openN} {t('aircraft-detail.19672033')}</button>{" "}
+          <button type="button" className="min-h-6 underline-offset-2 hover:underline focus-visible:ring-2 focus-visible:ring-ring" onClick={() => showStatus("deferred")}>{defN} {t('aircraft-detail.0d1f0b25')}</button>{" "}
+          <button type="button" className="min-h-6 underline-offset-2 hover:underline focus-visible:ring-2 focus-visible:ring-ring" onClick={() => showStatus("all")}>{rows.length} {t('aircraft-detail.fd7f8f31')}</button>
         </p>
       </header>
 
