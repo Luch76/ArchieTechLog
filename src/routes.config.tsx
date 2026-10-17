@@ -81,7 +81,7 @@ function Guarded_organizations() {
   );
 }
 
-const LazyScreen_user_detail = lazy(() => import('./presentation/views/user-detail.view'));
+const LazyScreen_user_detail = lazy(() => import('./presentation/containers/user-detail.container'));
 function Guarded_user_detail() {
   return (
     <AuthGuard loadingComponent={<LoadingFallback />} fallback={<Navigate to="/login" replace />}>
