@@ -86,6 +86,36 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
     ?? MelItem.find((m) => m.ataCode && report.ataCode && m.ataCode.slice(0, 5) === report.ataCode.slice(0, 5))
     ?? MelItem.find((m) => m.ataCode && report.ataCode && m.ataCode.slice(0, 2) === report.ataCode.slice(0, 2));
 
+  const [melBusy, setMelBusy] = useState(false);
+  const suggestMel = async () => {
+    if (!onSelectMel) return;
+    setMelBusy(true);
+    setMsg(null);
+    try {
+      const id = await onSelectMel({
+        writeUp: f.writeUp || report.writeUp || "",
+        ataChapter: f.ataChapter || undefined,
+        ataSection: f.ataSection || undefined,
+        candidates: MelItem.map((x) => ({ id: x.id, itemCode: x.itemCode, title: x.title, ataCode: x.ataCode })),
+      });
+      const picked = MelItem.find((x) => x.id === id);
+      if (picked) {
+        setF((p) => ({
+          ...p,
+          melItemId: picked.id,
+          deferralDueAt: picked.repairCategory !== "NOT_DEFERRABLE" && picked.deferralInterval
+            ? toDateInput(new Date(Date.now() + picked.deferralInterval * 86400000).toISOString())
+            : p.deferralDueAt,
+        }));
+      } else {
+        setMsg("The AI found no MEL item in your library that covers this write-up.");
+      }
+    } catch {
+      setMsg("The AI could not suggest a MEL item right now.");
+    }
+    setMelBusy(false);
+  };
+
   const suggest = async () => {
     setBusy(true);
     setMsg(null);
@@ -234,10 +264,16 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
         {field("ATA section", "ataSection")}
         <label data-vid="myyuw89" className="flex min-w-40 flex-1 flex-col gap-1">
           <span data-vid="ws9vups" className="type-caption text-text-muted">MEL item</span>
+          <span className="border border-border bg-muted/40 p-2 type-caption text-text-muted">Source write-up: {f.writeUp || report.writeUp || "—"}</span>
           <select data-vid="j94dr8g" value={f.melItemId} onChange={set("melItemId")} className="min-h-11 border border-border bg-background px-2 type-body">
             <option data-vid="77si3pa" value="">None</option>
             {MelItem.map((m) => <option data-vid="jkeuf38" key={m.id} value={m.id}>{m.itemCode}{m.title ? ` — ${m.title}` : ""}</option>)}
           </select>
+          {onSelectMel && (
+            <Button type="button" variant="outline" className="min-h-11" onClick={suggestMel} disabled={melBusy || busy}>
+              <Sparkles className="mr-2 size-4" /> {melBusy ? "Matching…" : "Generate MEL item with AI"}
+            </Button>
+          )}
         </label>
         {field("Deferral due date", "deferralDueAt", "date")}
         <label data-vid="lxses7t" className="flex w-full flex-col gap-1">
