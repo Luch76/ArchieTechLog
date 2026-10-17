@@ -42,6 +42,8 @@ export interface DefectReportRow {
   reporterType: string;
   status: string;
   ataCode: string | null;
+  ataChapter?: string | null;
+  ataSection?: string | null;
   component: string | null;
   symptom: string | null;
   classificationConfidence: number | null;
@@ -224,6 +226,8 @@ export function toDefectReport(row: DefectReportRow): RepoResult<DefectReport> {
       reporterType,
       status,
       ataCode: assetUrls(row.ataCode) ?? undefined,
+      ataChapter: row.ataChapter ?? undefined,
+      ataSection: row.ataSection ?? undefined,
       component: assetUrls(row.component) ?? undefined,
       symptom: assetUrls(row.symptom) ?? undefined,
       classificationConfidence: assetUrls(row.classificationConfidence) ?? undefined,
@@ -248,6 +252,8 @@ export function toDefectReportCreateInput(input: NewDefectReport): Record<string
   const out: Record<string, unknown> = {
   };
   if (input.ataCode !== undefined) out.ataCode = input.ataCode;
+  if (input.ataChapter !== undefined) out.ataChapter = input.ataChapter;
+  if (input.ataSection !== undefined) out.ataSection = input.ataSection;
   if (input.classificationConfidence !== undefined) out.classificationConfidence = toFloat(input.classificationConfidence);
   if (input.classificationRationale !== undefined) out.classificationRationale = input.classificationRationale;
   if (input.closedAt !== undefined) out.closedAt = input.closedAt;
@@ -282,6 +288,8 @@ export function toDefectReportUpdateInput(patch: UpdateDefectReport): Record<str
   const out: Record<string, unknown> = {};
   if (patch.aircraftId != null && String(patch.aircraftId) !== '') out.aircraftId = patch.aircraftId;
   if (patch.ataCode !== undefined) out.ataCode = patch.ataCode;
+  if (patch.ataChapter !== undefined) out.ataChapter = patch.ataChapter;
+  if (patch.ataSection !== undefined) out.ataSection = patch.ataSection;
   if (patch.classificationConfidence !== undefined) out.classificationConfidence = toFloat(patch.classificationConfidence);
   if (patch.classificationRationale !== undefined) out.classificationRationale = patch.classificationRationale;
   if (patch.closedAt !== undefined) out.closedAt = patch.closedAt;

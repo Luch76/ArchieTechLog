@@ -25,6 +25,8 @@ export const DEFECT_REPORT_LIST = `query Gen_DefectReport_List_g1($filter: Defec
       reporterType
       status
       ataCode
+      ataChapter
+      ataSection
       component
       symptom
       classificationConfidence
@@ -52,6 +54,8 @@ export const DEFECT_REPORT_BY_ID = `query Gen_DefectReport_ById_g1($id: String) 
     reporterType
     status
     ataCode
+    ataChapter
+    ataSection
     component
     symptom
     classificationConfidence
@@ -78,6 +82,8 @@ export const DEFECT_REPORT_CREATE = `mutation Gen_DefectReport_Create_g1($input:
     reporterType
     status
     ataCode
+    ataChapter
+    ataSection
     component
     symptom
     classificationConfidence
@@ -103,6 +109,8 @@ export const DEFECT_REPORT_UPDATE = `mutation Gen_DefectReport_Update_g1($id: St
     reporterType
     status
     ataCode
+    ataChapter
+    ataSection
     component
     symptom
     classificationConfidence

@@ -28,6 +28,8 @@ const formSchema = z.object({
     .string()
     .trim()
     .min(1, "Enter the write-up: type the squawk or dictate it."),
+  ataChapter: z.string().trim().optional(),
+  ataSection: z.string().trim().optional(),
 });
 
 /** @param {import("@/application/view-models/report-defect.vm").ReportDefectScreenViewModel} props */
@@ -44,7 +46,7 @@ export function ReportDefectView(props) {
 
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: { aircraftId: "", writeUp: "" },
+    defaultValues: { aircraftId: "", writeUp: "", ataChapter: "", ataSection: "" },
     mode: "onTouched",
   });
 
@@ -128,12 +130,14 @@ export function ReportDefectView(props) {
     const ok = await props.onCreateDefectReport({
       aircraftId: tail.id,
       writeUp: values.writeUp.trim(),
+      ataChapter: values.ataChapter?.trim() || undefined,
+      ataSection: values.ataSection?.trim() || undefined,
       reporterType: "mechanic",
       status: "open",
       reportedAt: new Date().toISOString(),
       organizationId: tail.organizationId,
     });
-    if (ok) setSaved({ tail: tail.tailNumber, writeUp: values.writeUp.trim() });
+    if (ok) setSaved({ tail: tail.tailNumber, writeUp: values.writeUp.trim(), ataChapter: values.ataChapter?.trim() || "", ataSection: values.ataSection?.trim() || "" });
   }
 
   if (saved) {
@@ -151,6 +155,10 @@ export function ReportDefectView(props) {
             <StatusMark data-vid="0035d1c9" entity="DefectReport" status="open" />
           </div>
           <p data-vid="6cd700ee" className="type-body text-text-body">{saved.writeUp}</p>
+          <p className="type-caption flex flex-wrap gap-x-4 text-text-muted">
+            <span>{t('defectAta.chapter', 'ATA chapter')} <span className="font-mono text-foreground">{saved.ataChapter || '—'}</span></span>
+            <span>{t('defectAta.section', 'ATA section')} <span className="font-mono text-foreground">{saved.ataSection || '—'}</span></span>
+          </p>
         </div>
         <div data-vid="5a8332f0">
           <Button data-vid="18e21f8d" asChild>
@@ -266,6 +274,17 @@ export function ReportDefectView(props) {
             </Field>
           )}
         />
+
+        <div className="grid grid-cols-1 gap-(--component-gap) sm:grid-cols-2">
+          <Field>
+            <FieldLabel htmlFor="ataChapter">{t('defectAta.chapter', 'ATA chapter')}</FieldLabel>
+            <Input id="ataChapter" inputMode="numeric" placeholder="21" className="min-h-11 border-border-strong" {...form.register("ataChapter")} />
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="ataSection">{t('defectAta.section', 'ATA section')}</FieldLabel>
+            <Input id="ataSection" inputMode="numeric" placeholder="31" className="min-h-11 border-border-strong" {...form.register("ataSection")} />
+          </Field>
+        </div>
 
         <Field data-vid="96663a70">
           <FieldLabel data-vid="2230de34" htmlFor="photo">{t('report-defect.027f5006')}</FieldLabel>

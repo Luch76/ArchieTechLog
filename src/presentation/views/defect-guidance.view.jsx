@@ -87,6 +87,10 @@ export function DefectGuidanceView(props) {
           <h2 data-vid="27d8e893" id="src" className="type-eyebrow text-text-muted">{t('defect-guidance.4b80aa1b')}</h2>
           <blockquote data-vid="503dc46f" className="border border-border bg-card p-(--card-padding)">
             <p data-vid="67dbb50b" className="type-body text-foreground [overflow-wrap:anywhere]">{report?.writeUp}</p>
+              <p className="type-caption mt-2 flex flex-wrap gap-x-4 text-text-muted">
+                <span>{t('defectAta.chapter', 'ATA chapter')} <span className="font-mono text-foreground">{report?.ataChapter ?? '—'}</span></span>
+                <span>{t('defectAta.section', 'ATA section')} <span className="font-mono text-foreground">{report?.ataSection ?? '—'}</span></span>
+              </p>
           </blockquote>
           {report?.photo?.src && (
             <figure data-vid="6f9f82d2" className="flex max-w-sm flex-col gap-2">

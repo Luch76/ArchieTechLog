@@ -102,6 +102,12 @@ export function DefectReportCard({
           >
             {t('defect-report-card.fad10282')} {r.ataCode ?? '—'}
           </span>
+          <span data-element="ata-chapter" className="whitespace-nowrap">
+            {t('defectAta.chapter', 'ATA chapter')} <span className="font-mono text-foreground">{r.ataChapter ?? '—'}</span>
+          </span>
+          <span data-element="ata-section" className="whitespace-nowrap">
+            {t('defectAta.section', 'ATA section')} <span className="font-mono text-foreground">{r.ataSection ?? '—'}</span>
+          </span>
           {r.symptom ? <span data-vid="69958427" className="min-w-0 break-words">{r.symptom}</span> : null}
         </div>
 

@@ -133,7 +133,7 @@ export function ReportDefectScreenContainer(
   );
 
   const onCreateDefectReport = React.useCallback(
-    (input: Pick<NewDefectReport, 'aircraftId' | 'writeUp' | 'reporterType' | 'status' | 'reportedAt' | 'organizationId'>): Promise<boolean> => {
+    (input: Pick<NewDefectReport, 'aircraftId' | 'writeUp' | 'ataChapter' | 'ataSection' | 'reporterType' | 'status' | 'reportedAt' | 'organizationId'>): Promise<boolean> => {
       setWriteError(null);
       return repositories.defectReport
         .create(input)

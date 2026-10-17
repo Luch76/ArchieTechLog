@@ -49,6 +49,6 @@ export interface ReportDefectScreenViewModel {
   readonly onUnavailable: (reason: 'escritura-no-disponible') => void;
   /** Files one defect report; resolves `true` when it was saved. */
   readonly onCreateDefectReport: (
-    input: Pick<NewDefectReport, 'aircraftId' | 'writeUp' | 'reporterType' | 'status' | 'reportedAt' | 'organizationId'>,
+    input: Pick<NewDefectReport, 'aircraftId' | 'writeUp' | 'ataChapter' | 'ataSection' | 'reporterType' | 'status' | 'reportedAt' | 'organizationId'>,
   ) => Promise<boolean>;
 }

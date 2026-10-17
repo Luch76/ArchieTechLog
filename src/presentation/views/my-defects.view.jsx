@@ -67,6 +67,10 @@ export function MyDefectsView(props) {
             ) : null}
           </div>
           <p data-vid="dbd3882e" className="type-body line-clamp-2 text-text-body">{d.writeUp}</p>
+          <div className="type-caption flex flex-wrap gap-x-3 text-text-muted">
+            <span>{t('defectAta.chapter', 'ATA chapter')} <span className="font-mono text-foreground">{d.ataChapter ?? '—'}</span></span>
+            <span>{t('defectAta.section', 'ATA section')} <span className="font-mono text-foreground">{d.ataSection ?? '—'}</span></span>
+          </div>
           <div data-vid="2301f43b" className="type-caption flex flex-wrap gap-x-3 text-text-muted">
             <span data-vid="86e29411">{t('my-defects.34540bb7')} <DateValue data-vid="8ed0b0c5" value={d.createdAt} /></span>
             {closed && d.closedAt ? <span data-vid="55b3eacf">{t('my-defects.c21ead06.span')} <DateValue data-vid="ebf806ef" value={d.closedAt} /></span> : null}

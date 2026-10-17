@@ -167,7 +167,7 @@ export function ReviewQueueView(props) {
         id="id"
         title={(d) => aircraftById[d.aircraftId]?.tailNumber ?? "—"}
         identifier={(d) => (d.ataCode || "—").split(" ")[0]}
-        subtitle={(d) => d.symptom ?? d.writeUp}
+        subtitle={(d) => `${d.symptom ?? d.writeUp}${d.ataChapter || d.ataSection ? ` · ATA ${d.ataChapter || '—'}-${d.ataSection || '—'}` : ''}`}
         stage="status"
         stages={[
           { value: "OPEN", label: t('review-queue.ed077f3d'), exception: true },

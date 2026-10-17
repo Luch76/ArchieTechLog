@@ -26,6 +26,8 @@ export interface DefectReport {
   reporterType: DefectReportReporterType;
   status: DefectReportStatus;
   ataCode?: string;
+  ataChapter?: string;
+  ataSection?: string;
   component?: string;
   symptom?: string;
   classificationConfidence?: number;
