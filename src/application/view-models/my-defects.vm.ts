@@ -7,6 +7,7 @@
 import type { RepoError } from '../../domain/shared';
 import type { Aircraft } from '../../domain/entities/aircraft';
 import type { DefectReport } from '../../domain/entities/defectReport';
+import type { MelItem } from '../../domain/entities/melItem';
 import type { DataNotice } from './notices';
 
 // NOTE: This screen has 2 data sources and `loading`/`error` AGGREGATE them: the
@@ -21,6 +22,8 @@ export interface MyDefectsScreenViewModel {
   /** Why `Aircraft` is empty / `null` without being a transport error, or `null`
    *  when it was served as declared. */
   readonly AircraftNotice: DataNotice | null;
+  /** MEL items, used to show each defect's MEL code. */
+  readonly MelItem: readonly MelItem[];
   /** ALL the rows of `DefectReport` the screen aggregates over (served whole,
    *  capped; never a page). When the cap is hit the container serves `[]` and
    *  `DefectReportNotice` says `agregado-truncado`. */

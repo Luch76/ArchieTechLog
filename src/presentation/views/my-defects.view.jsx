@@ -33,10 +33,11 @@ const FILTERS = [
 
 /** @param {import("@/application/view-models/my-defects.vm").MyDefectsScreenViewModel} props */
 export function MyDefectsView(props) {
-  const { DefectReport, Aircraft, href } = props;
+  const { DefectReport, Aircraft, MelItem = [], href } = props;
   const { t } = useTranslation();
   const { aircraftById, tailOf, DefectRow, RowList } = useMemo(() => {
     const aircraftById = Object.fromEntries(Aircraft.map((a) => [a.id, a]));
+    const melById = Object.fromEntries(MelItem.map((m) => [m.id, m]));
     const tailOf = (d) => aircraftById[d.aircraftId]?.tailNumber ?? "—";
     function DefectRow({ d }) {
     const { t } = useTranslation();
@@ -70,6 +71,7 @@ export function MyDefectsView(props) {
           <div className="type-caption flex flex-wrap gap-x-3 text-text-muted">
             <span>{t('defectAta.chapter', 'ATA chapter')} <span className="font-mono text-foreground">{d.ataChapter ?? '—'}</span></span>
             <span>{t('defectAta.section', 'ATA section')} <span className="font-mono text-foreground">{d.ataSection ?? '—'}</span></span>
+            <span>{t('defectMel.code', 'MEL code')} <span className="font-mono text-foreground">{melById[d.melItemId]?.itemCode ?? '—'}</span></span>
           </div>
           <div data-vid="2301f43b" className="type-caption flex flex-wrap gap-x-3 text-text-muted">
             <span data-vid="86e29411">{t('my-defects.34540bb7')} <DateValue data-vid="8ed0b0c5" value={d.reportedAt ?? d.createdAt} /></span>
@@ -107,7 +109,7 @@ export function MyDefectsView(props) {
     );
   }
     return { aircraftById, tailOf, DefectRow, RowList };
-  }, [Aircraft, href]);
+  }, [Aircraft, MelItem, href]);
   const [status, setStatus] = useState("all");
   const [tail, setTail] = useState("all");
   const [failed, setFailed] = useState(false);

@@ -91,6 +91,7 @@ export function DefectGuidanceView(props) {
               <p className="type-caption mt-2 flex flex-wrap gap-x-4 text-text-muted">
                 <span>{t('defectAta.chapter', 'ATA chapter')} <span className="font-mono text-foreground">{report?.ataChapter ?? '—'}</span></span>
                 <span>{t('defectAta.section', 'ATA section')} <span className="font-mono text-foreground">{report?.ataSection ?? '—'}</span></span>
+                <span>{t('defectMel.code', 'MEL code')} <span className="font-mono text-foreground">{linked?.itemCode ?? '—'}</span></span>
               </p>
           </blockquote>
           {report?.photo?.src && (

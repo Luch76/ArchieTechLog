@@ -16,6 +16,7 @@ import type { Aircraft } from '../../domain/entities/aircraft';
 import type { DefectReport } from '../../domain/entities/defectReport';
 import type { DataNotice } from '../../application/view-models/notices';
 import type { MyDefectsScreenViewModel } from '../../application/view-models/my-defects.vm';
+import type { MelItem } from '../../domain/entities/melItem';
 import { useRepositories } from '../app-context';
 import { MyDefectsView } from '../views/my-defects.view';
 import { ScreenError, ScreenLoading } from '../screen-state';
@@ -52,6 +53,7 @@ export function MyDefectsScreenContainer(
     [routeParams, searchParams],
   );
   const [Aircraft, setAircraft] = React.useState<readonly Aircraft[]>([]);
+  const [MelItem, setMelItem] = React.useState<readonly MelItem[]>([]);
   const [AircraftNotice, setAircraftNotice] = React.useState<DataNotice | null>(null);
   const [AircraftTruncatedCap, setAircraftTruncatedCap] = React.useState<number | null>(null);
   const [DefectReport, setDefectReport] = React.useState<readonly DefectReport[]>([]);
@@ -75,9 +77,11 @@ export function MyDefectsScreenContainer(
     void Promise.all([
       repositories.aircraft.listAll(),
       repositories.defectReport.listAll(),
+      repositories.melItem.listAll(),
     ])
-    .then(([AircraftResult, DefectReportResult]) => {
+    .then(([AircraftResult, DefectReportResult, MelResult]) => {
       if (!live) return;
+      setMelItem(MelResult !== null && MelResult.ok === true ? MelResult.data.items : []);
       if (AircraftResult === null) {
         setAircraft([]);
         setAircraftTruncatedCap(null);
@@ -145,6 +149,7 @@ export function MyDefectsScreenContainer(
   const { t } = useTranslation();
   const vm: MyDefectsScreenViewModel = {
     Aircraft,
+    MelItem,
     AircraftNotice,
     DefectReport,
     DefectReportNotice,
