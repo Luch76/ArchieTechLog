@@ -14,6 +14,7 @@ import { useAppNavigate } from '@/presentation/navigation';
 import type { RepoError } from '../../domain/shared';
 import type { Aircraft } from '../../domain/entities/aircraft';
 import type { DataNotice } from '../../application/view-models/notices';
+import type { NewDefectReport } from '../../domain/ports/defectReport.repository';
 import { reportDefectScreenViewModelAvailability, type ReportDefectScreenViewModel } from '../../application/view-models/report-defect.vm';
 import { useRepositories } from '../app-context';
 import { ReportDefectView } from '../views/report-defect.view';
@@ -131,8 +132,34 @@ export function ReportDefectScreenContainer(
     [],
   );
 
+  const onCreateDefectReport = React.useCallback(
+    (input: Pick<NewDefectReport, 'aircraftId' | 'writeUp' | 'reporterType' | 'status' | 'reportedAt' | 'organizationId'>): Promise<boolean> => {
+      setWriteError(null);
+      return repositories.defectReport
+        .create(input)
+        .then((result): boolean => {
+          if (result.ok === false) {
+            setWriteError(result.error);
+            return false;
+          }
+          return true;
+        })
+        .catch((cause: unknown): boolean => {
+          console.error('[archie] defect create failed outside the RepoResult contract:', cause);
+          setWriteError({
+            kind: 'transport',
+            message: 'The write failed in a way the transport could not normalize.',
+            detail: 'promise rejected outside the RepoResult contract',
+          });
+          return false;
+        });
+    },
+    [repositories],
+  );
+
   const { t } = useTranslation();
   const vm: ReportDefectScreenViewModel = {
+    onCreateDefectReport,
     Aircraft,
     AircraftNotice,
     loading,

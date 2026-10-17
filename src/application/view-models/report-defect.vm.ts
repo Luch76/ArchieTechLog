@@ -7,15 +7,16 @@
 import type { RepoError } from '../../domain/shared';
 import type { Aircraft } from '../../domain/entities/aircraft';
 import type { DataNotice } from './notices';
+import type { NewDefectReport } from '../../domain/ports/defectReport.repository';
 
 /** Which writes the screen can actually perform, as DATA (the view renders a
  *  disabled control with its reason; V6 reads this). Static: it is decided at emit
  *  time. */
 export type ReportDefectScreenViewModelAvailability = {
-  readonly onCreateDefectReport: { readonly available: false; readonly reason: 'escritura-no-disponible' };
+  readonly onCreateDefectReport: { readonly available: true };
 };
 export const reportDefectScreenViewModelAvailability: ReportDefectScreenViewModelAvailability = {
-  onCreateDefectReport: { available: false, reason: 'escritura-no-disponible' },
+  onCreateDefectReport: { available: true },
 };
 
 export interface ReportDefectScreenViewModel {
@@ -46,4 +47,8 @@ export interface ReportDefectScreenViewModel {
    *  (`availability.<write>.available === false`). The container shows the reason in
    *  its write-error state; nothing is written. Returns `void`. */
   readonly onUnavailable: (reason: 'escritura-no-disponible') => void;
+  /** Files one defect report; resolves `true` when it was saved. */
+  readonly onCreateDefectReport: (
+    input: Pick<NewDefectReport, 'aircraftId' | 'writeUp' | 'reporterType' | 'status' | 'reportedAt' | 'organizationId'>,
+  ) => Promise<boolean>;
 }

@@ -97,7 +97,12 @@ export type NewDefectReport = Partial<
     | 'closedAt'
     | 'priority'
   >
->;
+> & {
+  /** When the defect was discovered (the table requires it). */
+  reportedAt?: string;
+  /** The tenant the defect belongs to. */
+  organizationId?: string;
+};
 
 /** Parche de actualización de `DefectReport`: TODO opcional, porque un parche es
  *  parcial por definición. Los campos salen del `DefectReportUpdateInput` REAL. */

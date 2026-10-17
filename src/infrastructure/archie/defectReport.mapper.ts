@@ -261,8 +261,12 @@ export function toDefectReportCreateInput(input: NewDefectReport): Record<string
   if (input.reporterType !== undefined) out.reporterType = valueToWire(DEFECT_REPORT_REPORTER_TYPE_TO_WIRE, input.reporterType);
   if (input.status !== undefined) out.status = wireEnumOutDefectReport('status', input.status);
   if (input.writeUp !== undefined) out.writeUp = input.writeUp;
+  if (input.reportedAt !== undefined) out.reportedAt = input.reportedAt;
   if (input.aircraftId != null && String(input.aircraftId) !== '') {
     out.aircraft = { connect: { id: input.aircraftId } };
+  }
+  if (input.organizationId != null && String(input.organizationId) !== '') {
+    out.organization = { connect: { id: input.organizationId } };
   }
   if (input.melItemId != null && String(input.melItemId) !== '') {
     out.melItem = { connect: { id: input.melItemId } };

@@ -48,9 +48,18 @@ export function ReportDefectView(props) {
 
   const missing = Object.values(form.formState.errors).map((e) => e?.message).filter(Boolean);
 
-  function onSave(values) {
+  async function onSave(values) {
     const tail = Aircraft.find((a) => a.id === values.aircraftId);
-    props.onUnavailable("escritura-no-disponible");
+    if (!tail) return;
+    const ok = await props.onCreateDefectReport({
+      aircraftId: tail.id,
+      writeUp: values.writeUp.trim(),
+      reporterType: "mechanic",
+      status: "open",
+      reportedAt: new Date().toISOString(),
+      organizationId: tail.organizationId,
+    });
+    if (ok) setSaved({ tail: tail.tailNumber, writeUp: values.writeUp.trim() });
   }
 
   if (saved) {
