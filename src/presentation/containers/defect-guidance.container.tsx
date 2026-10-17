@@ -18,6 +18,8 @@ import type { MelItem } from '../../domain/entities/melItem';
 import type { SdrCase } from '../../domain/entities/sdrCase';
 import type { DataNotice } from '../../application/view-models/notices';
 import type { DefectGuidanceScreenViewModel } from '../../application/view-models/defect-guidance.vm';
+import type { UpdateDefectReport } from '../../domain/ports/defectReport.repository';
+import { useAssessmentDrafter } from '../assessment-drafter-context';
 import { useRepositories } from '../app-context';
 import { DefectGuidanceView } from '../views/defect-guidance.view';
 import { ScreenError, ScreenLoading } from '../screen-state';
@@ -191,6 +193,29 @@ export function DefectGuidanceScreenContainer(
   }, [repositories, reloadToken]);
 
   const { t } = useTranslation();
+  const drafter = useAssessmentDrafter();
+  const onUpdateDefectReport = React.useCallback(
+    async (id: string, patch: UpdateDefectReport): Promise<string | null> => {
+      try {
+        const withDate: UpdateDefectReport =
+          String(patch.status ?? '').toLowerCase() === 'deferred'
+            ? { ...patch, deferredAt: new Date().toISOString() }
+            : patch;
+        const result = await repositories.defectReport.update(id, withDate);
+        if (result.ok === false) {
+          return result.error.kind === 'unauthorized' || result.error.kind === 'forbidden' || result.error.kind === 'unidentified'
+            ? 'You do not have permission to edit this report.'
+            : 'The report could not be saved. Try again.';
+        }
+        reload();
+        return null;
+      } catch (cause: unknown) {
+        console.error('[archie] defect update failed', cause);
+        return 'The report could not be saved. Try again.';
+      }
+    },
+    [repositories, reload],
+  );
   const vm: DefectGuidanceScreenViewModel = {
     Aircraft,
     AircraftNotice,
@@ -202,6 +227,8 @@ export function DefectGuidanceScreenContainer(
     SdrCaseNotice,
     loading,
     error: loadError,
+    onUpdateDefectReport,
+    ...(drafter !== null ? { onDraftAssessment: (input) => drafter.draft(input) } : {}),
     navigate,
     href,
     query,

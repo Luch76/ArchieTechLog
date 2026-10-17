@@ -9,6 +9,8 @@ import type { Aircraft } from '../../domain/entities/aircraft';
 import type { DefectReport } from '../../domain/entities/defectReport';
 import type { MelItem } from '../../domain/entities/melItem';
 import type { SdrCase } from '../../domain/entities/sdrCase';
+import type { UpdateDefectReport } from '../../domain/ports/defectReport.repository';
+import type { AssessmentDraftInput } from '../../domain/ports/assessmentDrafter';
 import type { DataNotice } from './notices';
 
 // NOTE: This screen has 4 data sources and `loading`/`error` AGGREGATE them: the
@@ -49,6 +51,10 @@ export interface DefectGuidanceScreenViewModel {
   /** The load failure as a `RepoError`, or `null`. Distinguishes "backend down" from
    *  "no data". */
   readonly error: RepoError | null;
+  /** Saves edits to a defect report. Resolves with an error message, or `null` on success. */
+  readonly onUpdateDefectReport?: (id: string, patch: UpdateDefectReport) => Promise<string | null>;
+  /** Drafts an assessment with AI (advisory). Absent when AI is unavailable. */
+  readonly onDraftAssessment?: (input: AssessmentDraftInput) => Promise<string>;
   /** Navigates to another screen by route (`/slug`). The view never imports the
    *  router (L38): the container wires it. */
   readonly navigate: (path: string) => void;
