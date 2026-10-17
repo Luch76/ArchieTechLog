@@ -24,6 +24,10 @@ export function UsersView(props: UsersScreenViewModel): React.ReactElement {
   const [roleFilter, setRoleFilter] = useState("all");
   const [openId, setOpenId] = useState<string | null>(null);
   const [inviteOpen, setInviteOpen] = useState(false);
+  const [inviteEmail, setInviteEmail] = useState("");
+  const [inviteRole, setInviteRole] = useState("");
+  const [inviteSaving, setInviteSaving] = useState(false);
+  const [inviteFailed, setInviteFailed] = useState(false);
 
   const reasonText = (code: string) =>
     code === "escritura-campos-faltantes" ? t("_reason.escritura-campos-faltantes") : code === "sesion-no-identificada" ? t("_reason.sesion-no-identificada") : t("_reason.escritura-no-disponible");
@@ -250,21 +254,55 @@ export function UsersView(props: UsersScreenViewModel): React.ReactElement {
             <DialogTitle>{t("users.08aa7a0b.dialogtitle")}</DialogTitle>
             <DialogDescription>{t("users.5ccfbaa2")}</DialogDescription>
           </DialogHeader>
-          <form onSubmit={(e) => e.preventDefault()} noValidate className="flex flex-col gap-(--section-gap)">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              const email = inviteEmail.trim();
+              if (email === "" || inviteSaving) return;
+              setInviteSaving(true);
+              setInviteFailed(false);
+              void props.onInvite({ email, role: inviteRole }).then((ok) => {
+                setInviteSaving(false);
+                if (ok) {
+                  setInviteEmail("");
+                  setInviteRole("");
+                  setInviteOpen(false);
+                  setTab("pending");
+                } else {
+                  setInviteFailed(true);
+                }
+              });
+            }}
+            className="flex flex-col gap-(--section-gap)"
+          >
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="invite-email">{t("users.969ccbd3.fieldlabel")}</FieldLabel>
-                <Input id="invite-email" type="email" autoComplete="off" disabled className="border-border-strong max-md:min-h-11" />
+                <Input id="invite-email" type="email" autoComplete="off" required value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} className="border-border-strong max-md:min-h-11" />
               </Field>
               <Field>
                 <FieldLabel htmlFor="invite-role">{t("users.14736a2e.fieldlabel")}</FieldLabel>
+                <select
+                  id="invite-role"
+                  value={inviteRole}
+                  onChange={(e) => setInviteRole(e.target.value)}
+                  className="h-9 w-full rounded-md border border-border-strong bg-background px-3 text-sm max-md:min-h-11"
+                >
+                  <option value="">Select a role</option>
+                  {roleOptions.map((name) => (
+                    <option key={name} value={name}>{name}</option>
+                  ))}
+                </select>
                 <FieldDescription>{t("users.351dbdf9")}</FieldDescription>
               </Field>
             </FieldGroup>
             {unavailable && notice}
+            {inviteFailed ? (
+              <p role="alert" className="type-caption text-destructive">The invitation could not be saved. Try again.</p>
+            ) : null}
             <DialogFooter>
               <Button type="button" variant="outline" onClick={() => setInviteOpen(false)}>{t("users.19766ed6")}</Button>
-              <Button type="button" disabled>{t("users.dba4038b")}</Button>
+              <Button type="submit" disabled={unavailable || inviteSaving || inviteEmail.trim() === ""}>{t("users.dba4038b")}</Button>
             </DialogFooter>
           </form>
         </DialogContent>

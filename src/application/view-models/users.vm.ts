@@ -17,12 +17,12 @@ import type { DataNotice } from './notices';
  *  disabled control with its reason; V6 reads this). Static: it is decided at emit
  *  time. */
 export type UsersScreenViewModelAvailability = {
-  readonly onCreateInvitation: { readonly available: false; readonly reason: 'escritura-no-disponible' };
+  readonly onCreateInvitation: { readonly available: boolean; readonly reason: string };
   readonly onDeleteInvitation: { readonly available: false; readonly reason: 'escritura-no-disponible' };
   readonly onUpdateInvitation: { readonly available: false; readonly reason: 'escritura-no-disponible' };
 };
 export const usersScreenViewModelAvailability: UsersScreenViewModelAvailability = {
-  onCreateInvitation: { available: false, reason: 'escritura-no-disponible' },
+  onCreateInvitation: { available: true, reason: 'escritura-no-disponible' },
   onDeleteInvitation: { available: false, reason: 'escritura-no-disponible' },
   onUpdateInvitation: { available: false, reason: 'escritura-no-disponible' },
 };
@@ -68,6 +68,8 @@ export interface UsersScreenViewModel {
   readonly error: RepoError | null;
   /** Static write availability: render disabled-with-reason from it, never guess. */
   readonly availability: UsersScreenViewModelAvailability;
+  /** Records a pending invitation. Resolves `true` when it was saved. */
+  readonly onInvite: (input: { readonly email: string; readonly role: string }) => Promise<boolean>;
   /** Navigates to another screen by route (`/slug`). The view never imports the
    *  router (L38): the container wires it. */
   readonly navigate: (path: string) => void;

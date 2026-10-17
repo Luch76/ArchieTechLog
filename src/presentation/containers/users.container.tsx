@@ -153,6 +153,16 @@ export function UsersScreenContainer(
     loading,
     error: loadError,
     availability: usersScreenViewModelAvailability,
+    onInvite: async (input) => {
+      const result = await repositories.invitation.create({
+        email: input.email,
+        role: input.role,
+        status: 'PENDING',
+      });
+      if (result.ok === false) return false;
+      reload();
+      return true;
+    },
     navigate,
   };
 
