@@ -262,34 +262,19 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
         </label>
         {field("ATA chapter", "ataChapter")}
         {field("ATA section", "ataSection")}
-        <div data-vid="myyuw89" className="flex min-w-40 flex-1 flex-col gap-1">
+        <label data-vid="myyuw89" className="flex min-w-40 flex-1 flex-col gap-1">
           <span data-vid="ws9vups" className="type-caption text-text-muted">MEL item</span>
           <span className="border border-border bg-muted/40 p-2 type-caption text-text-muted">Source write-up: {f.writeUp || report.writeUp || "—"}</span>
-          <div data-vid="j94dr8g" className="min-h-11 border border-border bg-background p-2 type-body">
-            {mel ? (
-              <>
-                <div className="font-medium">{mel.itemCode}{mel.title ? ` — ${mel.title}` : ""}</div>
-                <div className="type-caption text-text-muted">
-                  {mel.repairCategory === "NOT_DEFERRABLE"
-                    ? "Not deferrable"
-                    : `Category ${mel.repairCategory ?? "—"}${mel.deferralInterval ? `, ${mel.deferralInterval} days allowed` : ""}`}
-                </div>
-              </>
-            ) : (
-              <span className="text-text-muted">No MEL item selected. Use the button to generate one with AI.</span>
-            )}
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {onSelectMel && (
-              <Button type="button" variant="outline" className="min-h-11" onClick={suggestMel} disabled={melBusy || busy}>
-                <Sparkles className="mr-2 size-4" /> {melBusy ? "Matching…" : "Generate MEL item with AI"}
-              </Button>
-            )}
-            {mel && (
-              <Button type="button" variant="ghost" className="min-h-11" onClick={() => setF((p) => ({ ...p, melItemId: "" }))}>Clear</Button>
-            )}
-          </div>
-        </div>
+          <select data-vid="j94dr8g" value={f.melItemId} onChange={set("melItemId")} className="min-h-11 border border-border bg-background px-2 type-body">
+            <option data-vid="77si3pa" value="">None</option>
+            {MelItem.map((m) => <option data-vid="jkeuf38" key={m.id} value={m.id}>{m.itemCode}{m.title ? ` — ${m.title}` : ""}</option>)}
+          </select>
+          {onSelectMel && (
+            <Button type="button" variant="outline" className="min-h-11" onClick={suggestMel} disabled={melBusy || busy}>
+              <Sparkles className="mr-2 size-4" /> {melBusy ? "Matching…" : "Generate MEL item with AI"}
+            </Button>
+          )}
+        </label>
         {field("Deferral due date", "deferralDueAt", "date")}
         <label data-vid="lxses7t" className="flex w-full flex-col gap-1">
           <span data-vid="1lub1x9" className="type-caption text-text-muted">Assessment {mel ? `(MEL ${mel.itemCode}, ${mel.deferralInterval} days allowed)` : ""}</span>
