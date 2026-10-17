@@ -54,6 +54,7 @@ export interface DefectGuidanceScreenViewModel {
   /** Saves edits to a defect report. Resolves with an error message, or `null` on success. */
   readonly onUpdateDefectReport?: (id: string, patch: UpdateDefectReport) => Promise<string | null>;
   /** Drafts an assessment with AI (advisory). Absent when AI is unavailable. */
+  readonly onSelectMel?: (input: { writeUp: string; ataChapter?: string; ataSection?: string; candidates: ReadonlyArray<{ id: string; itemCode?: string; title?: string; ataCode?: string }> }) => Promise<string | null>;
   readonly onClassifyAta?: (input: { writeUp: string; aircraftType?: string }) => Promise<{ ataChapter: string; ataSection: string } | null>;
   readonly onDraftAssessment?: (input: AssessmentDraftInput) => Promise<string>;
   /** Navigates to another screen by route (`/slug`). The view never imports the

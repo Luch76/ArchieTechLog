@@ -95,8 +95,47 @@ function parseAtaAnswer(text: string): { ataChapter: string; ataSection: string 
   return m ? { ataChapter: m[1] as string, ataSection: m[2] as string } : null;
 }
 
+const MEL_SYSTEM = [
+  'You match an aircraft defect write-up to the Minimum Equipment List (MEL) item that covers it.',
+  'You receive a numbered candidate list. Answer ONLY with JSON: {"number":N} where N is the best candidate.',
+  'If no candidate clearly covers the defect, answer {"number":0}. Never invent a candidate.',
+].join(' ');
+
 export function createAssessmentDrafter(ai: Ai): AssessmentDrafter {
   return {
+    async selectMel(input) {
+      const list = input.candidates.slice(0, 80);
+      if (list.length === 0) return null;
+      try {
+        const lines = list.map(
+          (c, i) => `${i + 1}. ${c.itemCode ?? ''} | ATA ${c.ataCode ?? '?'} | ${c.title ?? ''}`,
+        );
+        const ata =
+          input.ataChapter ? `ATA chapter/section: ${input.ataChapter}-${input.ataSection ?? ''}\n` : '';
+        const request = {
+          system: MEL_SYSTEM,
+          messages: [
+            {
+              role: 'user' as const,
+              content: `${ata}Write-up: ${input.writeUp}\n\nCandidates:\n${lines.join('\n')}`,
+            },
+          ],
+          maxTokens: 30,
+          temperature: 0,
+        };
+        const result = await ai.chat({ ...request, provider: 'openai' }).catch(() => ai.chat(request));
+        const text = result.content
+          .map((part) => (part.type === 'text' ? part.text : ''))
+          .join('')
+          .trim();
+        const m = /"?number"?\s*:\s*(\d+)/.exec(text) ?? /^(\d+)/.exec(text);
+        const n = m ? Number(m[1]) : 0;
+        return n >= 1 && n <= list.length ? (list[n - 1] as { id: string }).id : null;
+      } catch (cause) {
+        console.error('[defect-guidance] MEL selection failed', cause);
+        return null;
+      }
+    },
     async classifyAta(input) {
       try {
         const request = {

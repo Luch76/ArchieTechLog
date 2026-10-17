@@ -232,6 +232,7 @@ export function DefectGuidanceScreenContainer(
       ? {
           onDraftAssessment: (input) => drafter.draft(input),
           onClassifyAta: (input) => drafter.classifyAta(input),
+          onSelectMel: (input) => drafter.selectMel(input),
         }
       : {}),
     navigate,

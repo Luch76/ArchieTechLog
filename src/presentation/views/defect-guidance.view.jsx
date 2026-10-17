@@ -56,7 +56,7 @@ function parseAta(text) {
 }
 const toDateInput = (iso) => (iso ? String(iso).slice(0, 10) : "");
 
-function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, onUpdate, onDraft, onClassify }) {
+function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, onUpdate, onDraft, onClassify, onSelectMel }) {
   const parts = (report.ataCode || "").split(" ")[0].split("-");
   const [f, setF] = useState({
     ataCode: report.ataCode ?? "",
@@ -99,9 +99,26 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
       }
     }
     if (!ataFound) ataFound = parts[0] ? { ataChapter: parts[0], ataSection: parts[1] ?? "" } : guessAta(sourceText);
-    const melId = f.melItemId || guess?.id || "";
+    let aiMelId = null;
+    if (onSelectMel && MelItem.length > 0) {
+      try {
+        const near = ataFound
+          ? MelItem.filter((x) => (x.ataCode || "").slice(0, 2) === ataFound.ataChapter)
+          : [];
+        const pool = near.length > 0 ? near : MelItem;
+        aiMelId = await onSelectMel({
+          writeUp: sourceText,
+          ataChapter: ataFound?.ataChapter,
+          ataSection: ataFound?.ataSection,
+          candidates: pool.map((x) => ({ id: x.id, itemCode: x.itemCode, title: x.title, ataCode: x.ataCode })),
+        });
+      } catch {
+        aiMelId = null;
+      }
+    }
+    const melId = aiMelId || f.melItemId || guess?.id || "";
     const m = MelItem.find((x) => x.id === melId);
-    const days = !f.deferralDueAt && m && m.repairCategory !== "NOT_DEFERRABLE"
+    const days = (aiMelId || !f.deferralDueAt) && m && m.repairCategory !== "NOT_DEFERRABLE"
       ? toDateInput(new Date(Date.parse(report.reportedAt ?? report.createdAt) + m.deferralInterval * DAY).toISOString())
       : f.deferralDueAt;
     let text = f.controllerAssessment;
