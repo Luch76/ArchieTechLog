@@ -14,6 +14,7 @@ import { useAppNavigate } from '@/presentation/navigation';
 import type { RepoError } from '../../domain/shared';
 import type { Aircraft } from '../../domain/entities/aircraft';
 import type { DefectReport } from '../../domain/entities/defectReport';
+import type { MelItem } from '../../domain/entities/melItem';
 import type { DataNotice } from '../../application/view-models/notices';
 import type { FleetDashboardScreenViewModel } from '../../application/view-models/fleet-dashboard.vm';
 import { useRepositories } from '../app-context';
@@ -57,6 +58,7 @@ export function FleetDashboardScreenContainer(
   const [DefectReport, setDefectReport] = React.useState<readonly DefectReport[]>([]);
   const [DefectReportNotice, setDefectReportNotice] = React.useState<DataNotice | null>(null);
   const [DefectReportTruncatedCap, setDefectReportTruncatedCap] = React.useState<number | null>(null);
+  const [MelItem, setMelItem] = React.useState<readonly MelItem[]>([]);
   const [loading, setLoading] = React.useState(true);
   const [loadError, setLoadError] = React.useState<RepoError | null>(null);
   const [reloadToken, setReloadToken] = React.useState(0);
@@ -75,9 +77,11 @@ export function FleetDashboardScreenContainer(
     void Promise.all([
       repositories.aircraft.listAll(),
       repositories.defectReport.listAll(),
+      repositories.melItem.listAll(),
     ])
-    .then(([AircraftResult, DefectReportResult]) => {
+    .then(([AircraftResult, DefectReportResult, MelItemResult]) => {
       if (!live) return;
+      setMelItem(MelItemResult !== null && MelItemResult.ok ? MelItemResult.data.items : []);
       if (AircraftResult === null) {
         setAircraft([]);
         setAircraftTruncatedCap(null);
@@ -148,6 +152,7 @@ export function FleetDashboardScreenContainer(
     AircraftNotice,
     DefectReport,
     DefectReportNotice,
+    MelItem,
     loading,
     error: loadError,
     navigate,

@@ -213,13 +213,15 @@ export function FleetDashboardView(props) {
             <Table data-vid="cd20ffda">
               <TableHeader data-vid="5304ac5a">
                 <TableRow data-vid="8bd940ec">
-                  <TableHead data-vid="ec31a1d6" className="type-eyebrow">{t('fleet-dashboard.ae9c3bd1.tablehead')}</TableHead>
-                  <TableHead data-vid="919a45c0" className="type-eyebrow">{t('fleet-dashboard.fad10282')}</TableHead>
-                  <TableHead data-vid="da6ab40e" className="type-eyebrow">{t('fleet-dashboard.a6527b2e')}</TableHead>
-                  <TableHead data-vid="a3c6cf74" className="type-eyebrow">{filter === "open" ? t('fleet-dashboard.34540bb7') : filter === "deferred" ? t('fleet-dashboard.9071738f') : "Due / reported"}</TableHead>
-                  <TableHead className="type-eyebrow">Priority</TableHead>
-                  <TableHead data-vid="c0d815e8" className="type-eyebrow text-right">{t('fleet-dashboard.b6b7a006')}</TableHead>
+                  <TableHead className="type-eyebrow">Aircraft</TableHead>
                   <TableHead className="type-eyebrow">Status</TableHead>
+                  <TableHead className="type-eyebrow">Defect description</TableHead>
+                  <TableHead className="type-eyebrow">ATA chapter</TableHead>
+                  <TableHead className="type-eyebrow">ATA section</TableHead>
+                  <TableHead className="type-eyebrow">MEL code</TableHead>
+                  <TableHead className="type-eyebrow">Reported date</TableHead>
+                  <TableHead className="type-eyebrow text-right">Deferral days</TableHead>
+                  <TableHead className="type-eyebrow">Projected due date</TableHead>
                   <TableHead className="type-eyebrow text-right">Assessment</TableHead>
                 </TableRow>
               </TableHeader>
@@ -235,25 +237,20 @@ export function FleetDashboardView(props) {
                       <TableCell data-vid="13437316" className="whitespace-nowrap">
                         <a data-vid="d5e80869" href={href("aircraft-detail", { id: d.aircraftId })} className="type-mono-id inline-flex min-h-6 items-center text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">{ac?.tailNumber ?? "—"}</a>
                       </TableCell>
-                      <TableCell data-vid="962825cf" className="type-mono-id whitespace-nowrap">{(d.ataCode ?? "—").split(" ")[0]}</TableCell>
-                      <TableCell data-vid="21ce75bb" className="type-meta max-w-64 truncate text-text-body">{d.symptom ?? "—"}</TableCell>
-                      <TableCell data-vid="9c3f39af" className="whitespace-nowrap">
-                        {isOpenD(d) ? (
-                          <DateValue data-vid="ece5f94e" value={d.createdAt} kind="datetime" />
-                        ) : (
-                          <span data-vid="9a999020" className={cn("flex flex-col", tone)}>
-                            <DateValue data-vid="637b1a57" value={d.deferralDueAt} kind="datetime" />
-                            <span data-vid="37623669" className="type-caption tabular-nums">{left}</span>
-                          </span>
-                        )}
-                      </TableCell>
-                      <TableCell className="type-meta whitespace-nowrap">{d.priority ?? "—"}</TableCell>
-                      <TableCell data-vid="16dc0575" className="text-right whitespace-nowrap tabular-nums">
-                        {(d.repeatCount ?? 0) >= 2 ? (
-                          <span data-vid="24c5c8de" className="type-stat inline-block bg-secondary-tone px-2 text-secondary-tone-foreground rounded-sm">×<NumberValue data-vid="ca8ac095" value={d.repeatCount} /></span>
-                        ) : "—"}
-                      </TableCell>
                       <TableCell className="type-meta whitespace-nowrap">{isOpenD(d) ? "Open" : "Deferred"}</TableCell>
+                      <TableCell className="type-meta max-w-64 truncate text-text-body">{d.symptom ?? d.writeUp ?? "—"}</TableCell>
+                      <TableCell className="type-mono-id whitespace-nowrap">{d.ataChapter ?? (d.ataCode ?? "—").split(" ")[0].split("-")[0]}</TableCell>
+                      <TableCell className="type-mono-id whitespace-nowrap">{d.ataSection ?? (d.ataCode ?? "—").split(" ")[0].split("-")[1] ?? "—"}</TableCell>
+                      <TableCell className="type-mono-id whitespace-nowrap">{(props.MelItem ?? []).find((m) => m.id === d.melItemId)?.itemCode ?? "—"}</TableCell>
+                      <TableCell className="whitespace-nowrap">
+                        <DateValue value={d.reportedAt ?? d.createdAt} kind="date" />
+                      </TableCell>
+                      <TableCell className={cn("text-right whitespace-nowrap tabular-nums type-meta", tone)}>
+                        {days == null || isOpenD(d) ? "—" : left}
+                      </TableCell>
+                      <TableCell className="whitespace-nowrap">
+                        {d.deferralDueAt ? <DateValue value={d.deferralDueAt} kind="date" /> : "—"}
+                      </TableCell>
                       <TableCell className="text-right whitespace-nowrap">
                         <a href="#review-queue" className="type-meta inline-flex min-h-6 items-center text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">
                           {enumIs(d.status, "open", "DefectReport.status") ? "Add assessment" : "View assessment"}

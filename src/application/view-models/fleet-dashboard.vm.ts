@@ -7,6 +7,7 @@
 import type { RepoError } from '../../domain/shared';
 import type { Aircraft } from '../../domain/entities/aircraft';
 import type { DefectReport } from '../../domain/entities/defectReport';
+import type { MelItem } from '../../domain/entities/melItem';
 import type { DataNotice } from './notices';
 
 // NOTE: This screen has 2 data sources and `loading`/`error` AGGREGATE them: the
@@ -28,6 +29,8 @@ export interface FleetDashboardScreenViewModel {
   /** Why `DefectReport` is empty / `null` without being a transport error, or `null`
    *  when it was served as declared. */
   readonly DefectReportNotice: DataNotice | null;
+  /** MEL items, used to show the MEL code of each defect. */
+  readonly MelItem: readonly MelItem[];
   /** `true` while ANY data source of the screen is in flight. Aggregated per screen. */
   readonly loading: boolean;
   /** The load failure as a `RepoError`, or `null`. Distinguishes "backend down" from
