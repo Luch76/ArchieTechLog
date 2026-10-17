@@ -21,6 +21,39 @@ function mark(label) {
   return <Badge data-vid="38afc66e" variant="outline" className="whitespace-nowrap">{label}</Badge>;
 }
 
+const ATA_KEYWORDS = [
+  [/air.?condition|pack|cabin temp|bleed|pressuri|ecs/i, "21", "50"],
+  [/autopilot|auto.?flight|autothrottle/i, "22", "10"],
+  [/radio|vhf|hf |comm|intercom|selcal/i, "23", "10"],
+  [/generator|battery|electrical|ac power|dc power|bus/i, "24", "30"],
+  [/galley|lavatory|seat|cabin|emergency equip|oxygen mask/i, "25", "20"],
+  [/fire|smoke|extinguish/i, "26", "10"],
+  [/flap|slat|aileron|elevator|rudder|flight control|trim/i, "27", "50"],
+  [/fuel|tank|boost pump/i, "28", "20"],
+  [/hydraulic/i, "29", "10"],
+  [/ice|anti.?ice|rain|wiper/i, "30", "10"],
+  [/display|efis|ecam|eicas|indicat|recorder/i, "31", "60"],
+  [/landing gear|gear|brake|tire|tyre|wheel|nose wheel|steering/i, "32", "40"],
+  [/light|beacon|strobe|landing light|nav light/i, "33", "40"],
+  [/pitot|static|altimeter|airspeed|gps|ils|adf|vor|tcas|radar|nav/i, "34", "10"],
+  [/oxygen/i, "35", "10"],
+  [/pneumatic|manifold/i, "36", "10"],
+  [/apu|auxiliary power/i, "49", "10"],
+  [/door|hatch|cargo door/i, "52", "10"],
+  [/window|windshield|windscreen/i, "56", "10"],
+  [/wing|fuselage|skin|corrosion|dent|crack/i, "57", "10"],
+  [/propeller|prop /i, "61", "10"],
+  [/engine|oil|egt|n1|n2|thrust|compressor|turbine|start/i, "72", "00"],
+];
+function guessAta(text) {
+  const hit = ATA_KEYWORDS.find(([re]) => re.test(text || ""));
+  return hit ? { ataChapter: hit[1], ataSection: hit[2] } : null;
+}
+function parseAta(text) {
+  const m = /^\s*ATA\s*:?\s*(\d{2})\s*[-\u2013 ]\s*(\d{2})\b.*$/im.exec(text || "");
+  if (!m) return { ata: null, text };
+  return { ata: { ataChapter: m[1], ataSection: m[2] }, text: text.replace(m[0], "").trim() };
+}
 const toDateInput = (iso) => (iso ? String(iso).slice(0, 10) : "");
 
 function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, onUpdate, onDraft }) {
@@ -56,7 +89,8 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
   const suggest = async () => {
     setBusy(true);
     setMsg(null);
-    const base = parts[0] ? { ataChapter: f.ataChapter || parts[0], ataSection: f.ataSection || (parts[1] ?? "") } : {};
+    const sourceText = f.writeUp || report.writeUp || "";
+    let ataFound = parts[0] ? { ataChapter: parts[0], ataSection: parts[1] ?? "" } : guessAta(sourceText);
     const melId = f.melItemId || guess?.id || "";
     const m = MelItem.find((x) => x.id === melId);
     const days = !f.deferralDueAt && m && m.repairCategory !== "NOT_DEFERRABLE"
@@ -68,7 +102,7 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
         text = await onDraft({
           tailNumber: aircraft?.tailNumber,
           aircraftType: aircraft?.aircraftType,
-          writeUp: f.symptom ? `${report.writeUp} (${f.symptom})` : report.writeUp,
+          writeUp: `${sourceText}\n\n[Instruction: from the write-up above, first output ONE line exactly in the form "ATA: NN-NN" (ATA chapter and section numbers, e.g. "ATA: 21-50"), then the assessment.]`,
           ataCode: report.ataCode,
           component: f.component || report.component,
           symptom: f.symptom || report.symptom,
@@ -82,6 +116,9 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
         setMsg(e instanceof Error ? e.message : "The AI could not draft an assessment.");
       }
     }
+    const parsed = parseAta(text);
+    if (parsed.ata) { ataFound = parsed.ata; text = parsed.text; }
+    const base = ataFound ? { ataChapter: ataFound.ataChapter, ataSection: ataFound.ataSection } : {};
     setF((p) => ({ ...p, ...base, melItemId: melId, deferralDueAt: days, controllerAssessment: text }));
     setBusy(false);
   };
