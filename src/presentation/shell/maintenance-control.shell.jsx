@@ -33,10 +33,11 @@ function groupNav(nav) {
   return groups;
 }
 
-function NavRow({ item, current, markCurrent, onNavigate }) {
+function NavRow({ item, current, markCurrent, onNavigate, collapse }) {
   const active = item.slug === current;
   const base = cn(
     "relative flex h-9 w-full items-center gap-3 rounded-control px-3 type-meta text-chrome-foreground",
+    collapse && "max-md:justify-center max-md:gap-0 max-md:px-0",
     focusRing
   );
   const inner = (
@@ -45,7 +46,7 @@ function NavRow({ item, current, markCurrent, onNavigate }) {
         <span data-vid="f4e5e526" aria-hidden="true" className="absolute inset-y-1 left-0 w-0.5 bg-chrome-active-bar" />
       )}
       <NavIcon data-vid="99847a5e" name={item.icon} aria-hidden="true" className="size-4 shrink-0" />
-      <span data-vid="bb0884e1" className="min-w-0 flex-1 truncate">{item.title}</span>
+      <span data-vid="bb0884e1" className={cn("min-w-0 flex-1 truncate", collapse && "max-md:sr-only")}>{item.title}</span>
     </>
   );
   if (item.generated === false) {
@@ -68,7 +69,7 @@ function NavRow({ item, current, markCurrent, onNavigate }) {
   );
 }
 
-function NavList({ nav, current, markCurrent, onNavigate }) {
+function NavList({ nav, current, markCurrent, onNavigate, collapse }) {
   const groups = groupNav(nav);
   return (
     <div data-vid="d18dc4c8" className="flex flex-col gap-1">
@@ -77,10 +78,10 @@ function NavList({ nav, current, markCurrent, onNavigate }) {
         return (
           <div data-vid="0e5f9573" key={gi} className={cn("flex flex-col gap-1", gi > 0 && !labelled && "mt-2 border-t border-chrome-border pt-2")}>
             {labelled && (
-              <p data-vid="be5e2265" className="mt-3 px-3 type-eyebrow text-chrome-muted">{g.key}</p>
+              <p data-vid="be5e2265" className={cn("mt-3 px-3 type-eyebrow text-chrome-muted", collapse && "max-md:hidden")}>{g.key}</p>
             )}
             {g.items.map((item) => (
-              <NavRow data-vid="a88ca82b" key={item.slug + item.href} item={item} current={current} markCurrent={markCurrent} onNavigate={onNavigate} />
+              <NavRow data-vid="a88ca82b" key={item.slug + item.href} item={item} current={current} markCurrent={markCurrent} onNavigate={onNavigate} collapse={collapse} />
             ))}
           </div>
         );
@@ -132,8 +133,8 @@ export function MaintenanceControlShell({ vm, children }) {
       </a>
 
       <div data-vid="c5683425" className="flex flex-1">
-        <aside data-vid="9a71c4fb" className="sticky top-0 hidden h-screen w-(--rail-w) shrink-0 flex-col border-r border-chrome-border bg-chrome text-chrome-foreground md:flex">
-          <div data-vid="d1b92731" className="flex h-(--topbar-h) shrink-0 items-center border-b border-chrome-border px-4">
+        <aside data-vid="9a71c4fb" className="sticky top-0 flex h-screen w-(--rail-w) shrink-0 flex-col border-r border-chrome-border bg-chrome text-chrome-foreground max-md:w-14">
+          <div data-vid="d1b92731" className="flex h-(--topbar-h) shrink-0 items-center border-b border-chrome-border px-4 max-md:justify-center max-md:px-0">
             <a data-vid="02822937"
               href={homeHref}
               data-slot="brand"
@@ -144,13 +145,13 @@ export function MaintenanceControlShell({ vm, children }) {
               ) : (
                 <>
                   <ClipboardList data-vid="b42f595f" aria-hidden="true" className="size-5 shrink-0" />
-                  <span data-vid="77fe91c9">{name}</span>
+                  <span data-vid="77fe91c9" className="max-md:sr-only">{name}</span>
                 </>
               )}
             </a>
           </div>
-          <nav data-vid="9299848b" aria-label={t('maintenance-control.efe10c80')} className="min-h-0 flex-1 overflow-y-auto p-3">
-            <NavList data-vid="8b7d107c" nav={nav} current={current} markCurrent />
+          <nav data-vid="9299848b" aria-label={t('maintenance-control.efe10c80')} className="min-h-0 flex-1 overflow-y-auto p-3 max-md:p-1.5">
+            <NavList data-vid="8b7d107c" nav={nav} current={current} markCurrent collapse />
           </nav>
         </aside>
 
