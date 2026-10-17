@@ -9,5 +9,5 @@ import { AuthContainer } from './auth.container';
 import { ForgotPasswordView } from '../views/forgot-password.view';
 
 export default function ForgotPasswordRoute(): React.ReactElement {
-  return <AuthContainer intent="requestReset" view={ForgotPasswordView} />;
+  return <AuthContainer data-vid="mc4246t" intent="requestReset" view={ForgotPasswordView} />;
 }

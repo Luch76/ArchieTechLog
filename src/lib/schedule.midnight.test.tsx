@@ -47,7 +47,7 @@ describe("segmentsForDay / splitByDay", () => {
 interface Ev { id: string; title: string; startsAt: string; endsAt: string; allDay?: boolean }
 const night: Ev = { id: "night", title: "Night shift", startsAt: iso(1, 22), endsAt: iso(2, 2) }
 const render = (view: "week" | "month" | "day" | "agenda", data: Ev[], date = "2026-10-01") =>
-  renderToString(<Schedule rows={data} start="startsAt" end="endsAt" allDay="allDay" date={date} today="2026-10-01" defaultView={view} dayStartHour={0} dayEndHour={24} />)
+  renderToString(<Schedule data-vid="ealsjsm" rows={data} start="startsAt" end="endsAt" allDay="allDay" date={date} today="2026-10-01" defaultView={view} dayStartHour={0} dayEndHour={24} />)
 const weekGrid = (html: string) => html.slice(html.indexOf("hidden md:block"), html.indexOf('<div class="md:hidden">'))
 /** Day columns of a time grid (Sunday-first week: Oct 1 is index 4). */
 const columns = (html: string) => html.split('class="relative min-w-0 border-l border-border"').slice(1)
@@ -91,9 +91,9 @@ describe("Schedule: events spanning midnight", () => {
     expect(boxStyle(cols[5], "e23")).toContain("height:39rem")
   })
   test("no-end / zero-length events at the first visible hour still render", () => {
-    const noEnd = renderToString(<Schedule rows={[{ id: "ne", title: "NE", startsAt: iso(1, 7) }]} start="startsAt" end="endsAt" date="2026-10-01" defaultView="day" />)
+    const noEnd = renderToString(<Schedule data-vid="r3lv082" rows={[{ id: "ne", title: "NE", startsAt: iso(1, 7) }]} start="startsAt" end="endsAt" date="2026-10-01" defaultView="day" />)
     expect(idCount(noEnd, "ne")).toBe(1)
-    const zero = renderToString(<Schedule rows={[{ id: "z", title: "Z", startsAt: iso(1), endsAt: iso(1) }]} start="startsAt" end="endsAt" date="2026-10-01" defaultView="day" dayStartHour={0} dayEndHour={24} />)
+    const zero = renderToString(<Schedule data-vid="71v5c3t" rows={[{ id: "z", title: "Z", startsAt: iso(1), endsAt: iso(1) }]} start="startsAt" end="endsAt" date="2026-10-01" defaultView="day" dayStartHour={0} dayEndHour={24} />)
     expect(idCount(zero, "z")).toBe(1)
   })
   test("a 23:50 event's 30-minute floor stays inside the grid", () => {
@@ -107,7 +107,7 @@ describe("Schedule: events spanning midnight", () => {
     expect(html).not.toContain("data-end-offset")
   })
   test("hidden hours: a segment wholly outside the visible hours is dropped", () => {
-    const html = renderToString(<Schedule rows={[night]} start="startsAt" end="endsAt" date="2026-10-01" defaultView="day" dayStartHour={7} dayEndHour={21} />)
+    const html = renderToString(<Schedule data-vid="b5o7ctb" rows={[night]} start="startsAt" end="endsAt" date="2026-10-01" defaultView="day" dayStartHour={7} dayEndHour={21} />)
     expect(idCount(html, "night")).toBe(0)
   })
   test("month: once in each of the two cells, never twice in a cell, both marked", () => {
@@ -146,7 +146,7 @@ describe("Schedule: events spanning midnight", () => {
   })
   test("resource day view clips per day", () => {
     const e = { ...night, room: "A" }
-    const html = renderToString(<Schedule rows={[e]} start="startsAt" end="endsAt" resource="room" date="2026-10-02" defaultView="day" dayStartHour={0} dayEndHour={24} />)
+    const html = renderToString(<Schedule data-vid="w4ljj4i" rows={[e]} start="startsAt" end="endsAt" resource="room" date="2026-10-02" defaultView="day" dayStartHour={0} dayEndHour={24} />)
     expect(boxStyle(html, "night")).toContain("top:0rem;height:6rem")
   })
   test("all-day events are unaffected (flagged, and whole-UTC-day spans)", () => {

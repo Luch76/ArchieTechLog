@@ -492,5 +492,5 @@ export function MaintenanceControlShellContainer({ children }: { readonly childr
         }
       : {}),
   };
-  return <MaintenanceControlShell vm={vm}>{children}</MaintenanceControlShell>;
+  return <MaintenanceControlShell data-vid="2ib4o3d" vm={vm}>{children}</MaintenanceControlShell>;
 }

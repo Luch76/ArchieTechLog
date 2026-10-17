@@ -158,9 +158,9 @@ export function ReportDefectView(props) {
             <StatusMark data-vid="0035d1c9" entity="DefectReport" status="open" />
           </div>
           <p data-vid="6cd700ee" className="type-body text-text-body">{saved.writeUp}</p>
-          <p className="type-caption flex flex-wrap gap-x-4 text-text-muted">
-            <span>{t('defectAta.chapter', 'ATA chapter')} <span className="font-mono text-foreground">{saved.ataChapter || '—'}</span></span>
-            <span>{t('defectAta.section', 'ATA section')} <span className="font-mono text-foreground">{saved.ataSection || '—'}</span></span>
+          <p data-vid="042wt44" className="type-caption flex flex-wrap gap-x-4 text-text-muted">
+            <span data-vid="fur2j41">{t('defectAta.chapter', 'ATA chapter')} <span data-vid="6l6w5ia" className="font-mono text-foreground">{saved.ataChapter || '—'}</span></span>
+            <span data-vid="x0dk8hd">{t('defectAta.section', 'ATA section')} <span data-vid="rwjuo02" className="font-mono text-foreground">{saved.ataSection || '—'}</span></span>
           </p>
         </div>
         <div data-vid="5a8332f0">
@@ -270,7 +270,7 @@ export function ReportDefectView(props) {
                 </p>
               )}
               {voiceError && (
-                <p role="alert" className="type-caption text-status-danger-ink">{voiceError}</p>
+                <p data-vid="b0bd3pa" role="alert" className="type-caption text-status-danger-ink">{voiceError}</p>
               )}
               <FieldDescription data-vid="2b8fa1c6">{t('report-defect.93906718')}</FieldDescription>
               {fieldState.invalid && <FieldError data-vid="ee83c221" errors={[fieldState.error]} />}
@@ -278,23 +278,23 @@ export function ReportDefectView(props) {
           )}
         />
 
-        <div className="grid grid-cols-1 gap-(--component-gap) sm:grid-cols-2">
-          <Controller
+        <div data-vid="m469i4f" className="grid grid-cols-1 gap-(--component-gap) sm:grid-cols-2">
+          <Controller data-vid="vdwv5hd"
             name="melItemId"
             control={form.control}
             render={({ field }) => (
-              <Field>
-                <FieldLabel htmlFor="melItemId">{t('defectMel.code', 'MEL code')}</FieldLabel>
-                <Select value={field.value || "none"} onValueChange={(v) => field.onChange(v === "none" ? "" : v)}>
-                  <SelectTrigger id="melItemId" className="min-h-11 w-full border-border-strong">
-                    <SelectValue placeholder={t('defectMel.none', 'No MEL item')} />
+              <Field data-vid="l96k66c">
+                <FieldLabel data-vid="cezd5cj" htmlFor="melItemId">{t('defectMel.code', 'MEL code')}</FieldLabel>
+                <Select data-vid="a26a14g" value={field.value || "none"} onValueChange={(v) => field.onChange(v === "none" ? "" : v)}>
+                  <SelectTrigger data-vid="jvi6a04" id="melItemId" className="min-h-11 w-full border-border-strong">
+                    <SelectValue data-vid="7l0gpe4" placeholder={t('defectMel.none', 'No MEL item')} />
                   </SelectTrigger>
-                  <SelectContent className="max-h-72">
-                    <SelectItem value="none">{t('defectMel.none', 'No MEL item')}</SelectItem>
+                  <SelectContent data-vid="xdunnsb" className="max-h-72">
+                    <SelectItem data-vid="j3k5rri" value="none">{t('defectMel.none', 'No MEL item')}</SelectItem>
                     {MelItem.map((m) => (
-                      <SelectItem key={m.id} value={m.id}>
-                        <span className="font-mono">{m.itemCode}</span>
-                        {m.title ? <span className="text-text-muted">, {m.title}</span> : null}
+                      <SelectItem data-vid="akderp2" key={m.id} value={m.id}>
+                        <span data-vid="vlt6go5" className="font-mono">{m.itemCode}</span>
+                        {m.title ? <span data-vid="l1fkoov" className="text-text-muted">, {m.title}</span> : null}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -302,17 +302,17 @@ export function ReportDefectView(props) {
               </Field>
             )}
           />
-          <Field>
-            <FieldLabel htmlFor="reportedDate">{t('defectDates.reported', 'Date reported')}</FieldLabel>
-            <Input id="reportedDate" type="date" className="min-h-11 border-border-strong" {...form.register("reportedDate")} />
+          <Field data-vid="xhncksu">
+            <FieldLabel data-vid="n1xzpax" htmlFor="reportedDate">{t('defectDates.reported', 'Date reported')}</FieldLabel>
+            <Input data-vid="e2q3wxa" id="reportedDate" type="date" className="min-h-11 border-border-strong" {...form.register("reportedDate")} />
           </Field>
-          <Field>
-            <FieldLabel htmlFor="ataChapter">{t('defectAta.chapter', 'ATA chapter')}</FieldLabel>
-            <Input id="ataChapter" inputMode="numeric" placeholder="21" className="min-h-11 border-border-strong" {...form.register("ataChapter")} />
+          <Field data-vid="artgsql">
+            <FieldLabel data-vid="wyqtd26" htmlFor="ataChapter">{t('defectAta.chapter', 'ATA chapter')}</FieldLabel>
+            <Input data-vid="fe06qox" id="ataChapter" inputMode="numeric" placeholder="21" className="min-h-11 border-border-strong" {...form.register("ataChapter")} />
           </Field>
-          <Field>
-            <FieldLabel htmlFor="ataSection">{t('defectAta.section', 'ATA section')}</FieldLabel>
-            <Input id="ataSection" inputMode="numeric" placeholder="31" className="min-h-11 border-border-strong" {...form.register("ataSection")} />
+          <Field data-vid="5oqi86q">
+            <FieldLabel data-vid="bx6haj5" htmlFor="ataSection">{t('defectAta.section', 'ATA section')}</FieldLabel>
+            <Input data-vid="u25jhpv" id="ataSection" inputMode="numeric" placeholder="31" className="min-h-11 border-border-strong" {...form.register("ataSection")} />
           </Field>
         </div>
 

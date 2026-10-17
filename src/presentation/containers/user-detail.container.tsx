@@ -129,11 +129,11 @@ export default function UserDetailScreenRoute(): React.ReactElement {
   return (
     <>
       {loading ? (
-        <ScreenLoading />
+        <ScreenLoading data-vid="r4mflbk" />
       ) : loadError !== null ? (
-        <ScreenError error={loadError} onRetry={reload} />
+        <ScreenError data-vid="1ox10jn" error={loadError} onRetry={reload} />
       ) : (
-        <UserDetailView key={user?.id ?? 'none'} {...vm} />
+        <UserDetailView data-vid="yitipa1" key={user?.id ?? 'none'} {...vm} />
       )}
     </>
   );

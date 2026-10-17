@@ -503,5 +503,5 @@ export function FieldDefectEntryShellContainer({ children }: { readonly children
         }
       : {}),
   };
-  return <FieldDefectEntryShell vm={vm}>{children}</FieldDefectEntryShell>;
+  return <FieldDefectEntryShell data-vid="vb0wfbu" vm={vm}>{children}</FieldDefectEntryShell>;
 }

@@ -57,12 +57,12 @@ export function AccountView(props: AccountScreenViewModel): React.ReactElement {
 
   const rowCls = "flex min-h-14 flex-wrap items-center gap-(--component-gap) border-t border-border py-3 first:border-t-0";
   const renderRow = (Icon: LucideIcon, title: string, desc: React.ReactNode, children: React.ReactNode) => (
-    <div className={rowCls}>
-      <div className="flex min-w-0 flex-1 basis-56 items-start gap-3">
-        <Icon className="mt-0.5 size-5 shrink-0 text-text-muted" />
-        <div className="min-w-0">
-          <p className="type-row-title">{title}</p>
-          <p className="type-meta text-text-muted">{desc}</p>
+    <div data-vid="9mr0zj9" className={rowCls}>
+      <div data-vid="3az9qe7" className="flex min-w-0 flex-1 basis-56 items-start gap-3">
+        <Icon data-vid="blot0c6" className="mt-0.5 size-5 shrink-0 text-text-muted" />
+        <div data-vid="7rrzsi2" className="min-w-0">
+          <p data-vid="whmnhks" className="type-row-title">{title}</p>
+          <p data-vid="jjxfw9t" className="type-meta text-text-muted">{desc}</p>
         </div>
       </div>
       {children}
@@ -102,47 +102,47 @@ export function AccountView(props: AccountScreenViewModel): React.ReactElement {
   ];
 
   return (
-    <MotionConfig reducedMotion="user">
-    <div className="flex flex-col gap-(--section-gap) px-(--container-padding) py-(--section-gap)">
-      <header className="flex items-center gap-4">
-        <Avatar className="size-14">
-          <AvatarImage src={me?.avatar?.src} alt={fullName} />
-          <AvatarFallback>{(me?.firstName ?? "?").slice(0, 1)}</AvatarFallback>
+    <MotionConfig data-vid="ttvh3lk" reducedMotion="user">
+    <div data-vid="1sduzk5" className="flex flex-col gap-(--section-gap) px-(--container-padding) py-(--section-gap)">
+      <header data-vid="917gwnw" className="flex items-center gap-4">
+        <Avatar data-vid="v0ep36u" className="size-14">
+          <AvatarImage data-vid="jzb9o1y" src={me?.avatar?.src} alt={fullName} />
+          <AvatarFallback data-vid="dsct152">{(me?.firstName ?? "?").slice(0, 1)}</AvatarFallback>
         </Avatar>
-        <div className="min-w-0">
-          <h1 className="type-page-title">{t("account.271c62fa")}</h1>
-          <p className="type-meta text-text-muted">{fullName} · {me?.role}</p>
+        <div data-vid="028zowx" className="min-w-0">
+          <h1 data-vid="isd8egt" className="type-page-title">{t("account.271c62fa")}</h1>
+          <p data-vid="2smolfg" className="type-meta text-text-muted">{fullName} · {me?.role}</p>
         </div>
       </header>
 
-      <Tabs value={tab} onValueChange={setTab} className="flex flex-col gap-(--section-gap)">
-        <div className="overflow-x-auto">
-          <TabsList variant="line" className="w-max">
+      <Tabs data-vid="5gwn4b2" value={tab} onValueChange={setTab} className="flex flex-col gap-(--section-gap)">
+        <div data-vid="lp0q442" className="overflow-x-auto">
+          <TabsList data-vid="8mmqd0x" variant="line" className="w-max">
             {tabs.map(([v, l]) => (
-              <TabsTrigger key={v} value={v} className="min-h-11 px-4">{l}</TabsTrigger>
+              <TabsTrigger data-vid="edxz02l" key={v} value={v} className="min-h-11 px-4">{l}</TabsTrigger>
             ))}
           </TabsList>
         </div>
 
-        <TabsContent value="profile" className="flex flex-col gap-(--section-gap)">
-          <Card>
-            <CardHeader><CardTitle className="type-card-title">{t("account.d696a35b")}</CardTitle></CardHeader>
-            <CardContent className="flex flex-col gap-(--component-gap)">
-              <dl className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] gap-x-(--component-gap) gap-y-4">
+        <TabsContent data-vid="kwoqeef" value="profile" className="flex flex-col gap-(--section-gap)">
+          <Card data-vid="i1pgvld">
+            <CardHeader data-vid="0z58xav"><CardTitle data-vid="vqsj9fa" className="type-card-title">{t("account.d696a35b")}</CardTitle></CardHeader>
+            <CardContent data-vid="tfk7bjx" className="flex flex-col gap-(--component-gap)">
+              <dl data-vid="4t0tk0s" className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] gap-x-(--component-gap) gap-y-4">
                 {profileValues.map(([k, v]) => (
-                  <div key={k} className="min-w-0">
-                    <dd className="type-body break-words">{v || "—"}</dd>
+                  <div data-vid="z83s82f" key={k} className="min-w-0">
+                    <dd data-vid="3ymbz2t" className="type-body break-words">{v || "—"}</dd>
                   </div>
                 ))}
               </dl>
-              <p className="type-caption text-text-muted">{t("account.58253acc")}</p>
+              <p data-vid="f5049ok" className="type-caption text-text-muted">{t("account.58253acc")}</p>
             </CardContent>
           </Card>
 
-          <Card id="language">
-            <CardHeader><CardTitle className="type-card-title">{t("account.003e8754")}</CardTitle></CardHeader>
-            <CardContent className="flex flex-col gap-(--component-gap)">
-              <form
+          <Card data-vid="2q17qdz" id="language">
+            <CardHeader data-vid="alc0oko"><CardTitle data-vid="toohlji" className="type-card-title">{t("account.003e8754")}</CardTitle></CardHeader>
+            <CardContent data-vid="lpjgejk" className="flex flex-col gap-(--component-gap)">
+              <form data-vid="g8jxmn0"
                 onSubmit={form.handleSubmit((values) => {
                   setLang(values.language);
                   setSavedLang(values);
@@ -150,15 +150,15 @@ export function AccountView(props: AccountScreenViewModel): React.ReactElement {
                 })}
                 noValidate
               >
-                <FieldGroup>
-                  <div className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] gap-(--component-gap)">
-                    <Controller
+                <FieldGroup data-vid="ckwrxea">
+                  <div data-vid="tng4kp9" className="grid grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] gap-(--component-gap)">
+                    <Controller data-vid="4ctjlp6"
                       name="language"
                       control={form.control}
                       render={({ field, fieldState }) => (
-                        <Field data-invalid={fieldState.invalid}>
-                          <FieldLabel htmlFor="lang">{t("account.a4fe6526")}</FieldLabel>
-                          <NativeSelect
+                        <Field data-vid="y1nmwml" data-invalid={fieldState.invalid}>
+                          <FieldLabel data-vid="a7wqmwi" htmlFor="lang">{t("account.a4fe6526")}</FieldLabel>
+                          <NativeSelect data-vid="x10mfnw"
                             id="lang"
                             name={field.name}
                             value={lang}
@@ -170,93 +170,93 @@ export function AccountView(props: AccountScreenViewModel): React.ReactElement {
                             aria-invalid={fieldState.invalid}
                             className="min-h-11 border-border-strong"
                           >
-                            {LANGS.map((l) => <NativeSelectOption key={l} value={l}>{l}</NativeSelectOption>)}
+                            {LANGS.map((l) => <NativeSelectOption data-vid="zec14w2" key={l} value={l}>{l}</NativeSelectOption>)}
                           </NativeSelect>
-                          {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                          {fieldState.invalid && <FieldError data-vid="69db060" errors={[fieldState.error]} />}
                         </Field>
                       )}
                     />
-                    <Controller
+                    <Controller data-vid="ld24alm"
                       name="region"
                       control={form.control}
                       render={({ field, fieldState }) => (
-                        <Field data-invalid={fieldState.invalid}>
-                          <FieldLabel htmlFor="region">{t("account.d3a008ef")}</FieldLabel>
-                          <Input {...field} id="region" aria-invalid={fieldState.invalid} className="min-h-11 border-border-strong" />
-                          {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                        <Field data-vid="2ezxg00" data-invalid={fieldState.invalid}>
+                          <FieldLabel data-vid="1ixhtbu" htmlFor="region">{t("account.d3a008ef")}</FieldLabel>
+                          <Input data-vid="e23izgk" {...field} id="region" aria-invalid={fieldState.invalid} className="min-h-11 border-border-strong" />
+                          {fieldState.invalid && <FieldError data-vid="2a90wxg" errors={[fieldState.error]} />}
                         </Field>
                       )}
                     />
-                    <Controller
+                    <Controller data-vid="zufg4az"
                       name="dateFormat"
                       control={form.control}
                       render={({ field, fieldState }) => (
-                        <Field data-invalid={fieldState.invalid}>
-                          <FieldLabel htmlFor="datefmt">{t("account.43123f5c")}</FieldLabel>
-                          <Input {...field} id="datefmt" aria-invalid={fieldState.invalid} className="min-h-11 border-border-strong" />
-                          {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                        <Field data-vid="1mo7sfx" data-invalid={fieldState.invalid}>
+                          <FieldLabel data-vid="mum0shl" htmlFor="datefmt">{t("account.43123f5c")}</FieldLabel>
+                          <Input data-vid="t1dj492" {...field} id="datefmt" aria-invalid={fieldState.invalid} className="min-h-11 border-border-strong" />
+                          {fieldState.invalid && <FieldError data-vid="kcg5ip0" errors={[fieldState.error]} />}
                         </Field>
                       )}
                     />
                   </div>
                 </FieldGroup>
-                <AnimatePresence initial={false}>
+                <AnimatePresence data-vid="tjmegyu" initial={false}>
                   {showNote && (
-                    <motion.div key="note" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="mt-(--component-gap)">
-                      <Alert>
-                        <AlertTitle>{t("account.3673f9c1")}</AlertTitle>
-                        <AlertDescription>{t("account.d9691cba")}</AlertDescription>
+                    <motion.div data-vid="d24pnz7" key="note" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="mt-(--component-gap)">
+                      <Alert data-vid="dgdbhd6">
+                        <AlertTitle data-vid="2ovqqvr">{t("account.3673f9c1")}</AlertTitle>
+                        <AlertDescription data-vid="wv8j2z9">{t("account.d9691cba")}</AlertDescription>
                       </Alert>
                     </motion.div>
                   )}
                 </AnimatePresence>
-                <div className="mt-(--component-gap)">
-                  <Button type="submit" variant="outline" className="min-h-11" disabled={form.formState.isSubmitting}>
+                <div data-vid="szzfpcz" className="mt-(--component-gap)">
+                  <Button data-vid="gq47flu" type="submit" variant="outline" className="min-h-11" disabled={form.formState.isSubmitting}>
                     {t("account.e80e0bd0")}
                   </Button>
                 </div>
               </form>
               {savedLang && (
-                <p className="type-caption text-text-muted">{t("account.b6199040")} {savedLang.language} · {savedLang.region} · {savedLang.dateFormat}</p>
+                <p data-vid="qc8d1hz" className="type-caption text-text-muted">{t("account.b6199040")} {savedLang.language} · {savedLang.region} · {savedLang.dateFormat}</p>
               )}
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="security" className="flex flex-col gap-(--section-gap)">
-          <Card>
-            <CardHeader><CardTitle className="type-card-title">{t("account.8f6fb4eb")}</CardTitle></CardHeader>
-            <CardContent>
+        <TabsContent data-vid="ytdmgbc" value="security" className="flex flex-col gap-(--section-gap)">
+          <Card data-vid="5qua6n6">
+            <CardHeader data-vid="gpgfkka"><CardTitle data-vid="vuwdp5u" className="type-card-title">{t("account.8f6fb4eb")}</CardTitle></CardHeader>
+            <CardContent data-vid="bdhjwyb">
               {renderRow(
                 KeyRound,
                 t("account.3f9c991f"),
                 t("account.66a5b409"),
-                <Button variant="outline" className="min-h-11" onClick={() => props.navigate(routes["forgot-password"]())}>
-                  {t("account.66a5b409")} <ChevronRight className="size-4" />
+                <Button data-vid="u7h6hfr" variant="outline" className="min-h-11" onClick={() => props.navigate(routes["forgot-password"]())}>
+                  {t("account.66a5b409")} <ChevronRight data-vid="x7ed64b" className="size-4" />
                 </Button>,
               )}
               {renderRow(
                 LogOut,
                 t("account.d28874d5"),
                 reason,
-                <Button variant="outline" className="min-h-11" disabled>{t("account.ff5913c1")}</Button>,
+                <Button data-vid="kgxxwgs" variant="outline" className="min-h-11" disabled>{t("account.ff5913c1")}</Button>,
               )}
               {renderRow(
                 MonitorSmartphone,
                 t("account.0fa0b317.row-attr-title"),
                 reason,
-                <Button variant="outline" className="min-h-11" onClick={() => setTab("security")}>{t("account.b53eedad")}</Button>,
+                <Button data-vid="m8illwl" variant="outline" className="min-h-11" onClick={() => setTab("security")}>{t("account.b53eedad")}</Button>,
               )}
             </CardContent>
           </Card>
 
-          <Card id="devices" data-archie-section="account-sessions">
-            <CardHeader><CardTitle className="type-card-title">{t("account.0fa0b317.cardtitle")}</CardTitle></CardHeader>
-            <CardContent className="flex flex-col gap-(--component-gap)">
-              <ul>
-                <AnimatePresence initial={false}>
+          <Card data-vid="uxn5dee" id="devices" data-archie-section="account-sessions">
+            <CardHeader data-vid="cf250ej"><CardTitle data-vid="lfi5w2o" className="type-card-title">{t("account.0fa0b317.cardtitle")}</CardTitle></CardHeader>
+            <CardContent data-vid="rhqyi56" className="flex flex-col gap-(--component-gap)">
+              <ul data-vid="wjtfkrr">
+                <AnimatePresence data-vid="ro32hey" initial={false}>
                   {props.sessions.map((s) => (
-                    <motion.li
+                    <motion.li data-vid="u8vk6ur"
                       key={s.id}
                       layout
                       initial={false}
@@ -264,50 +264,50 @@ export function AccountView(props: AccountScreenViewModel): React.ReactElement {
                       transition={{ duration: 0.2 }}
                       className="flex min-h-14 flex-wrap items-center gap-3 border-t border-border py-3 first:border-t-0"
                     >
-                      <div className="min-w-0 flex-1 basis-48">
-                        <p className="type-row-title truncate">{s.device ?? "—"}</p>
-                        <p className="type-meta truncate text-text-muted">{s.userAgent ?? "—"}</p>
-                        <p className="type-caption tabular-nums text-text-muted">
+                      <div data-vid="xesay2b" className="min-w-0 flex-1 basis-48">
+                        <p data-vid="regrlln" className="type-row-title truncate">{s.device ?? "—"}</p>
+                        <p data-vid="w4mexb0" className="type-meta truncate text-text-muted">{s.userAgent ?? "—"}</p>
+                        <p data-vid="fnrcyra" className="type-caption tabular-nums text-text-muted">
                           {t("account.830ec7f8")} {s.lastUsedAt ? formatDateTime(s.lastUsedAt) : "—"}
                         </p>
                       </div>
                       {s.current ? (
-                        <Badge variant="secondary">{t("account.d052579c")}</Badge>
+                        <Badge data-vid="x76ttl8" variant="secondary">{t("account.d052579c")}</Badge>
                       ) : (
-                        <div className="flex flex-col gap-1">
-                          <Button variant="outline" size="sm" className="min-h-11" disabled>{t("account.48f0d3d3.button")}</Button>
-                          <span className="type-caption text-text-muted">{reason}</span>
+                        <div data-vid="3agl571" className="flex flex-col gap-1">
+                          <Button data-vid="xw2x4bw" variant="outline" size="sm" className="min-h-11" disabled>{t("account.48f0d3d3.button")}</Button>
+                          <span data-vid="xq52h2d" className="type-caption text-text-muted">{reason}</span>
                         </div>
                       )}
                     </motion.li>
                   ))}
                 </AnimatePresence>
               </ul>
-              <div className="border-t border-border pt-3 flex flex-col gap-1">
-                <Button variant="outline" className="min-h-11 w-fit" disabled>{t("account.8d7292e8")}</Button>
-                <span className="type-caption text-text-muted">{reason}</span>
+              <div data-vid="kagbnne" className="border-t border-border pt-3 flex flex-col gap-1">
+                <Button data-vid="1zldp4u" variant="outline" className="min-h-11 w-fit" disabled>{t("account.8d7292e8")}</Button>
+                <span data-vid="z07fu88" className="type-caption text-text-muted">{reason}</span>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="notifications">
-          <Card>
-            <CardHeader><CardTitle className="type-card-title">{t("account.78801183")}</CardTitle></CardHeader>
-            <CardContent className="flex flex-col gap-(--component-gap)">
+        <TabsContent data-vid="h7maacn" value="notifications">
+          <Card data-vid="ccv8f3n">
+            <CardHeader data-vid="s31fdto"><CardTitle data-vid="ef16q89" className="type-card-title">{t("account.78801183")}</CardTitle></CardHeader>
+            <CardContent data-vid="t9hwcd4" className="flex flex-col gap-(--component-gap)">
               {prefGroups.map((g) => (
-                <div key={g.id} className="flex flex-col">
-                  <div className="flex items-center justify-between py-2">
-                    <p className="type-eyebrow text-text-muted">{g.title}</p>
-                    <p className="type-eyebrow text-text-muted">{t("account.a2de1567")}</p>
+                <div data-vid="fk8ui71" key={g.id} className="flex flex-col">
+                  <div data-vid="96y6ak1" className="flex items-center justify-between py-2">
+                    <p data-vid="7a2gn49" className="type-eyebrow text-text-muted">{g.title}</p>
+                    <p data-vid="d1mt18b" className="type-eyebrow text-text-muted">{t("account.a2de1567")}</p>
                   </div>
                   {g.rows.map((r) => (
-                    <div key={r.id} className="flex min-h-12 items-center justify-between gap-3 border-t border-border py-2">
-                      <Label htmlFor={r.id} className="type-body min-w-0 flex-1">
+                    <div data-vid="v8kg5fz" key={r.id} className="flex min-h-12 items-center justify-between gap-3 border-t border-border py-2">
+                      <Label data-vid="i5z7cnx" htmlFor={r.id} className="type-body min-w-0 flex-1">
                         {r.label}
-                        {r.locked && <span className="type-caption ml-2 text-text-muted">{t("account.4850b174")}</span>}
+                        {r.locked && <span data-vid="qyxxmjq" className="type-caption ml-2 text-text-muted">{t("account.4850b174")}</span>}
                       </Label>
-                      <Checkbox
+                      <Checkbox data-vid="3cpnwgp"
                         id={r.id}
                         checked={r.locked ? true : prefs[r.id] === true}
                         disabled={r.locked}
@@ -318,41 +318,41 @@ export function AccountView(props: AccountScreenViewModel): React.ReactElement {
                   ))}
                 </div>
               ))}
-              <div>
-                <Button disabled className="min-h-11">{t("account.089e57e3")}</Button>
+              <div data-vid="br8qd7a">
+                <Button data-vid="jk5stp1" disabled className="min-h-11">{t("account.089e57e3")}</Button>
               </div>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="appearance">
-          <Card>
-            <CardHeader><CardTitle className="type-card-title">{t("account.3907fa7f")}</CardTitle></CardHeader>
-            <CardContent className="flex flex-col gap-(--component-gap)">
-              <RadioGroup value={theme} onValueChange={setTheme} className="grid grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] gap-3">
+        <TabsContent data-vid="z2462q8" value="appearance">
+          <Card data-vid="9f9vu7j">
+            <CardHeader data-vid="5ob6wd8"><CardTitle data-vid="klchx7z" className="type-card-title">{t("account.3907fa7f")}</CardTitle></CardHeader>
+            <CardContent data-vid="89yyyt6" className="flex flex-col gap-(--component-gap)">
+              <RadioGroup data-vid="qy85gtw" value={theme} onValueChange={setTheme} className="grid grid-cols-[repeat(auto-fit,minmax(9rem,1fr))] gap-3">
                 {themes.map(([v]) => (
-                  <Label key={v} htmlFor={`th-${v}`} className="type-body flex min-h-11 items-center gap-3 border border-border-strong px-3">
-                    <RadioGroupItem id={`th-${v}`} value={v} />
+                  <Label data-vid="1zlnrwd" key={v} htmlFor={`th-${v}`} className="type-body flex min-h-11 items-center gap-3 border border-border-strong px-3">
+                    <RadioGroupItem data-vid="swhe17t" id={`th-${v}`} value={v} />
                   </Label>
                 ))}
               </RadioGroup>
-              <p className="type-caption text-text-muted">{t("account.7e34cfe8")}</p>
+              <p data-vid="tvs1oi4" className="type-caption text-text-muted">{t("account.7e34cfe8")}</p>
             </CardContent>
           </Card>
         </TabsContent>
 
-        <TabsContent value="activity">
-          <section data-entity="UserActivity" className="flex flex-col gap-(--component-gap)">
-            <h2 className="type-section">{t("account.6cb44b56")}</h2>
-            {props.activityTotal === 0 && <p className="type-body text-text-muted">{t("account.773efc57")}</p>}
-            <ul>
+        <TabsContent data-vid="jfbmktt" value="activity">
+          <section data-vid="7l0yrre" data-entity="UserActivity" className="flex flex-col gap-(--component-gap)">
+            <h2 data-vid="n82zay6" className="type-section">{t("account.6cb44b56")}</h2>
+            {props.activityTotal === 0 && <p data-vid="x4db7wo" className="type-body text-text-muted">{t("account.773efc57")}</p>}
+            <ul data-vid="t093vby">
               {props.activity.map((a) => (
-                <li key={a.id} className="flex min-h-12 flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-border py-2">
-                  <div className="min-w-0">
-                    <p className="type-row-title truncate">{a.operation}</p>
-                    <p className="type-meta truncate text-text-muted">{a.tableName}</p>
+                <li data-vid="ikmi3hu" key={a.id} className="flex min-h-12 flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-border py-2">
+                  <div data-vid="vy9dwvd" className="min-w-0">
+                    <p data-vid="fm2wt2f" className="type-row-title truncate">{a.operation}</p>
+                    <p data-vid="4b55uxe" className="type-meta truncate text-text-muted">{a.tableName}</p>
                   </div>
-                  <time dateTime={a.createdAt} className="type-mono-id whitespace-nowrap tabular-nums text-text-muted">
+                  <time data-vid="noljijh" dateTime={a.createdAt} className="type-mono-id whitespace-nowrap tabular-nums text-text-muted">
                     {formatDateTime(a.createdAt)}
                   </time>
                 </li>

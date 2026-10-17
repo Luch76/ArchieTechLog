@@ -61,28 +61,28 @@ export function PageHead({
   className,
 }: PageHeadProps) {
   return (
-    <header data-slot="page-head" className={cn('w-full space-y-4', className)}>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
-        <div className="min-w-0 space-y-1.5">
+    <header data-vid="ay7os74" data-slot="page-head" className={cn('w-full space-y-4', className)}>
+      <div data-vid="4mj0why" className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+        <div data-vid="sxt1kk0" className="min-w-0 space-y-1.5">
           {back && (
-            <Link
+            <Link data-vid="neyrwqo"
               to={back.href}
               className="inline-flex items-center gap-1 rounded-sm text-sm text-muted-foreground outline-none transition-colors hover:text-foreground focus-visible:ring-3 focus-visible:ring-ring/50 motion-reduce:transition-none"
             >
-              <ArrowLeft aria-hidden className="size-3.5" />
+              <ArrowLeft data-vid="2iu63yu" aria-hidden className="size-3.5" />
               {back.label}
             </Link>
           )}
           {breadcrumb}
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-            <h1 className="min-w-0 text-balance text-2xl font-semibold tracking-tight text-foreground">{title}</h1>
+          <div data-vid="pdnjxxr" className="flex flex-wrap items-center gap-x-3 gap-y-1">
+            <h1 data-vid="6c0646r" className="min-w-0 text-balance text-2xl font-semibold tracking-tight text-foreground">{title}</h1>
             {status}
           </div>
-          {description && <p className="text-sm text-muted-foreground">{description}</p>}
-          {meta && <p className="text-sm text-muted-foreground">{meta}</p>}
+          {description && <p data-vid="yi64120" className="text-sm text-muted-foreground">{description}</p>}
+          {meta && <p data-vid="raa9w8m" className="text-sm text-muted-foreground">{meta}</p>}
         </div>
         {actions && (
-          <div data-slot="page-head-actions" className="flex shrink-0 flex-wrap items-center gap-2 sm:justify-end">
+          <div data-vid="dvf6ag3" data-slot="page-head-actions" className="flex shrink-0 flex-wrap items-center gap-2 sm:justify-end">
             {actions}
           </div>
         )}

@@ -24,9 +24,9 @@ async function render(node: React.ReactNode, lng: "en" | "es" = "en", catalogs: 
   // ThemeProvider reads localStorage in its initializer; give it an empty one on the server.
   ;(globalThis as { localStorage?: unknown }).localStorage ??= { getItem: () => null, setItem: () => {} }
   return renderToStaticMarkup(
-    <I18nextProvider i18n={i18n}>
-      <MemoryRouter>
-        <ThemeProvider defaultTheme="system" storageKey="archie-ui-theme">{node}</ThemeProvider>
+    <I18nextProvider data-vid="ct4jwbk" i18n={i18n}>
+      <MemoryRouter data-vid="lpvul3t">
+        <ThemeProvider data-vid="bmccegm" defaultTheme="system" storageKey="archie-ui-theme">{node}</ThemeProvider>
       </MemoryRouter>
     </I18nextProvider>,
   )
@@ -35,14 +35,14 @@ async function render(node: React.ReactNode, lng: "en" | "es" = "en", catalogs: 
 describe("PageHead", () => {
   test("one h1 with the title; wayfinding, status, support, meta and actions around it", async () => {
     const html = await render(
-      <PageHead
+      <PageHead data-vid="e3q4cq7"
         title="Invoice 1042"
         description="Waiting on the client"
         meta="Due 3 Nov"
         back={{ label: "Invoices", href: "/invoices" }}
-        status={<StatusChip tone="pending" label="Sent" />}
-        actions={<button>Approve</button>}
-        tabs={<div data-testid="tabs" />}
+        status={<StatusChip data-vid="0cz3oyn" tone="pending" label="Sent" />}
+        actions={<button data-vid="ftt67xf">Approve</button>}
+        tabs={<div data-vid="zx2ihmx" data-testid="tabs" />}
       />,
     )
     expect(html.match(/<h1\b/g)?.length).toBe(1)
@@ -54,7 +54,7 @@ describe("PageHead", () => {
   })
 
   test("optional parts are omitted, not rendered empty", async () => {
-    const html = await render(<PageHead title="Clients" />)
+    const html = await render(<PageHead data-vid="x9dcjp1" title="Clients" />)
     expect(html).not.toContain("<a ")
     expect(html).not.toContain("page-head-actions")
     expect(html).not.toContain("<p")
@@ -64,7 +64,7 @@ describe("PageHead", () => {
 describe("StatusChip", () => {
   test("the text says the state and the tone is exposed; it is not a button", async () => {
     for (const tone of STATUS_TONES) {
-      const html = await render(<StatusChip tone={tone} label="Delivered" />)
+      const html = await render(<StatusChip data-vid="k6s73lz" tone={tone} label="Delivered" />)
       expect(html).toContain("Delivered")
       expect(html).toContain(`data-tone="${tone}"`)
       expect(html).not.toContain("<button")
@@ -72,31 +72,31 @@ describe("StatusChip", () => {
   })
 
   test("same label and tone render the same chip anywhere (TBL.10)", async () => {
-    expect(await render(<StatusChip tone="ok" label="Paid" />)).toBe(await render(<StatusChip tone="ok" label="Paid" />))
+    expect(await render(<StatusChip data-vid="ta4nn3h" tone="ok" label="Paid" />)).toBe(await render(<StatusChip data-vid="4ukogni" tone="ok" label="Paid" />))
   })
 
   test("defaults to neutral", async () => {
-    expect(await render(<StatusChip label="Draft" />)).toContain('data-tone="neutral"')
+    expect(await render(<StatusChip data-vid="sk2l80g" label="Draft" />)).toContain('data-tone="neutral"')
   })
 })
 
 describe("EmptyState", () => {
   test("renders the sentence, support line and the add action once", async () => {
-    const html = await render(<EmptyState title="No clients yet." description="Clients appear here." action={<button>Add client</button>} />)
+    const html = await render(<EmptyState data-vid="92pp0cq" title="No clients yet." description="Clients appear here." action={<button data-vid="gxa5zpl">Add client</button>} />)
     expect(html).toContain("No clients yet.")
     expect(html).toContain("Clients appear here.")
     expect(html.match(/Add client/g)?.length).toBe(1)
   })
 
   test("without an action there is no actions slot", async () => {
-    const html = await render(<EmptyState title="Nothing here." description="Invoices appear here when a client pays." />)
+    const html = await render(<EmptyState data-vid="fsz4twa" title="Nothing here." description="Invoices appear here when a client pays." />)
     expect(html).not.toContain("empty-content")
   })
 })
 
 describe("ThemeControl", () => {
   test("segmented-icons: radiogroup, three named radios, caption naming the choice", async () => {
-    const html = await render(<ThemeControl />)
+    const html = await render(<ThemeControl data-vid="tbcpypy" />)
     expect(html).toContain('role="radiogroup"')
     expect(html).toContain('aria-label="Theme"')
     expect(html.match(/role="radio"/g)?.length).toBe(3)
@@ -107,32 +107,32 @@ describe("ThemeControl", () => {
   })
 
   test("controlled value drives the selection and the caption", async () => {
-    const html = await render(<ThemeControl value="dark" />)
+    const html = await render(<ThemeControl data-vid="lkewiax" value="dark" />)
     expect(html).toContain(">Dark</p>")
     expect(html).not.toContain("following your device")
   })
 
   test("segmented-labels shows visible text and no default caption", async () => {
-    const html = await render(<ThemeControl variant="segmented-labels" />)
+    const html = await render(<ThemeControl data-vid="itkhjnz" variant="segmented-labels" />)
     expect(html).toContain("<span>Light</span>")
     expect(html).not.toContain("theme-control-caption")
   })
 
   test("preview-cards: three cards with a label under each thumbnail, radiogroup", async () => {
-    const html = await render(<ThemeControl variant="preview-cards" />)
+    const html = await render(<ThemeControl data-vid="3e7pml7" variant="preview-cards" />)
     expect(html).toContain('role="radiogroup"')
     expect(html.match(/role="radio"/g)?.length).toBe(3)
     expect(html).toContain("theme-control-caption")
   })
 
   test("es: translated labels and caption", async () => {
-    const html = await render(<ThemeControl />, "es")
+    const html = await render(<ThemeControl data-vid="qscekjy" />, "es")
     expect(html).toContain('aria-label="Tema"')
     expect(html).toContain("Sistema · sigue tu dispositivo (Claro)")
   })
 
   test("a catalog without themeControl.* falls back to English, never raw keys", async () => {
-    const html = await render(<ThemeControl />, "es", { en: { a: 1 }, es: { a: 1 } })
+    const html = await render(<ThemeControl data-vid="0mytqyo" />, "es", { en: { a: 1 }, es: { a: 1 } })
     expect(html).toContain('aria-label="Theme"')
     expect(html).not.toMatch(/themeControl\./)
   })

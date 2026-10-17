@@ -239,13 +239,13 @@ export function DefectGuidanceScreenContainer(
   return (
     <>
       {loading ? (
-        <ScreenLoading />
+        <ScreenLoading data-vid="rcdz36p" />
       ) : loadError !== null ? (
-        <ScreenError error={loadError} onRetry={reload} />
+        <ScreenError data-vid="3tgplkv" error={loadError} onRetry={reload} />
       ) : (
         <>
           {truncatedCap !== null && (
-            <div
+            <div data-vid="momcp7r"
               role="status"
               data-truncation-banner=""
               className="border-b border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-900"
@@ -253,7 +253,7 @@ export function DefectGuidanceScreenContainer(
               {t('_app.truncated', { limit: truncatedCap.toLocaleString() })}
             </div>
           )}
-          <View {...vm} />
+          <View data-vid="un0e2zx" {...vm} />
         </>
       )}
     </>
@@ -263,5 +263,5 @@ export function DefectGuidanceScreenContainer(
 // THE ROUTE MODULE. `routes.config.tsx` lazy-imports this file and needs a prop-less
 // `export default`: it binds the container to its view and does nothing else.
 export default function DefectGuidanceScreenRoute(): React.ReactElement {
-  return <DefectGuidanceScreenContainer view={DefectGuidanceView} />;
+  return <DefectGuidanceScreenContainer data-vid="t9k4yty" view={DefectGuidanceView} />;
 }

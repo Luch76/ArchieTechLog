@@ -107,22 +107,22 @@ export function itemProps<Row>(href: string | null | undefined, onSelect: ((row:
 export function ItemBox<Row>({ href, onSelect, row, children, ...rest }: Omit<ComponentPropsWithoutRef<"div">, "onSelect"> & { href?: string | null; onSelect?: ((row: Row) => void) | null; row: Row }) {
   const tag = itemTag(href, onSelect)
   const props = itemProps(href, onSelect, row)
-  if (tag === "a") return <a href={props.href} {...(rest as ComponentPropsWithoutRef<"a">)}>{children}</a>
-  if (tag === "button") return <button type="button" onClick={props.onClick} {...(rest as ComponentPropsWithoutRef<"button">)}>{children}</button>
-  return <div {...rest}>{children}</div>
+  if (tag === "a") return <a data-vid="96mnbu1" href={props.href} {...(rest as ComponentPropsWithoutRef<"a">)}>{children}</a>
+  if (tag === "button") return <button data-vid="rni5fa8" type="button" onClick={props.onClick} {...(rest as ComponentPropsWithoutRef<"button">)}>{children}</button>
+  return <div data-vid="2alhtc3" {...rest}>{children}</div>
 }
 
 export function ChevronIcon({ dir = "right", className }: { dir?: "left" | "right"; className?: string }) {
   return (
-    <svg viewBox="0 0 16 16" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d={dir === "left" ? "M10 3 5 8l5 5" : "M6 3l5 5-5 5"} />
+    <svg data-vid="6w8yazf" viewBox="0 0 16 16" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path data-vid="zqaugsp" d={dir === "left" ? "M10 3 5 8l5 5" : "M6 3l5 5-5 5"} />
     </svg>
   )
 }
 export function CheckIcon({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 16 16" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3.5 8.5 6.5 11.5 12.5 4.5" />
+    <svg data-vid="7qgc5tb" viewBox="0 0 16 16" aria-hidden="true" className={className} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path data-vid="w5oqcdo" d="M3.5 8.5 6.5 11.5 12.5 4.5" />
     </svg>
   )
 }

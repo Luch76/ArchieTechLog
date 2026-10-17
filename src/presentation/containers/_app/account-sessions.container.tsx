@@ -102,7 +102,7 @@ export function AccountSessionsContainer() {
 
   const status: AccountSessionsStatus = memory ? 'memory' : phase.kind;
   return (
-    <AccountSessionsView
+    <AccountSessionsView data-vid="fwmyl0t"
       status={status}
       devices={phase.kind === 'ready' ? phase.devices : []}
       revokingId={revokingId}

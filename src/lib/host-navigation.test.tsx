@@ -84,7 +84,7 @@ function selectHandlers(closed: boolean[] = []): Array<() => void> {
     tree = ShellPalette({ open: true, onOpenChange: (o: boolean) => { closed.push(o) }, actions: { routes: [{ href: "/orders/1?x=2", title: "Order", group: "Sales" }] } as never })
     return null
   }
-  renderToStaticMarkup(<Probe />)
+  renderToStaticMarkup(<Probe data-vid="8vl1w9z" />)
   const out: Array<() => void> = []
   const walk = (n: ReactNode): void => {
     if (Array.isArray(n)) { n.forEach(walk); return }

@@ -465,6 +465,6 @@ export function ArchiePreviewAuth(props: { children?: React.ReactNode }) {
   }, [client]);
 
   if (phase === 'pending') return null;
-  if (phase === 'handshaking') return <LoadingFallback />;
+  if (phase === 'handshaking') return <LoadingFallback data-vid="bpb29bd" />;
   return <>{props.children}</>;
 }

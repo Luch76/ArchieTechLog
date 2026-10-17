@@ -20,9 +20,9 @@ export interface SceneProps extends Omit<ComponentPropsWithoutRef<"div">, "child
 
 export function Scene({ ratio = 16 / 9, camera = [4, 3, 6], controls = true, background = null, className, children, ...rest }: SceneProps) {
   return (
-    <div data-slot="scene" className={cn("relative isolate w-full overflow-hidden bg-surface-sunken", className)} style={{ aspectRatio: String(ratio) }} {...rest}>
-      <ClientOnly fallback={<div className="absolute inset-0" aria-hidden="true" />}>
-        {() => <Three camera={camera} controls={controls} background={background}>{children}</Three>}
+    <div data-vid="pvhilq3" data-slot="scene" className={cn("relative isolate w-full overflow-hidden bg-surface-sunken", className)} style={{ aspectRatio: String(ratio) }} {...rest}>
+      <ClientOnly data-vid="fx49bc1" fallback={<div data-vid="frfbtw3" className="absolute inset-0" aria-hidden="true" />}>
+        {() => <Three data-vid="695a52p" camera={camera} controls={controls} background={background}>{children}</Three>}
       </ClientOnly>
     </div>
   )
@@ -51,12 +51,12 @@ function Three({ camera, controls, background, children }: ThreeProps) {
   if (!mod) return null
   const { Canvas } = mod.fiber
   return (
-    <Canvas camera={{ position: camera, fov: 45 }} style={{ position: "absolute", inset: 0 }} dpr={[1, 2]}>
-      {background ? <color attach="background" args={[background]} /> : null}
-      <ambientLight intensity={0.6} />
-      <directionalLight position={[5, 8, 4]} intensity={1.1} />
+    <Canvas data-vid="nomofbj" camera={{ position: camera, fov: 45 }} style={{ position: "absolute", inset: 0 }} dpr={[1, 2]}>
+      {background ? <color data-vid="lgmkmwm" attach="background" args={[background]} /> : null}
+      <ambientLight data-vid="rvnrqpb" intensity={0.6} />
+      <directionalLight data-vid="t0w1u7l" position={[5, 8, 4]} intensity={1.1} />
       {typeof children === "function" ? children() : children}
-      {controls ? <Controls fiber={mod.fiber} OrbitControls={mod.OrbitControls} /> : null}
+      {controls ? <Controls data-vid="tova1ly" fiber={mod.fiber} OrbitControls={mod.OrbitControls} /> : null}
     </Canvas>
   )
 }

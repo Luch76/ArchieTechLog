@@ -53,56 +53,56 @@ export function UsersView(props: UsersScreenViewModel): React.ReactElement {
   const unavailable = !props.availability.onCreateInvitation.available;
 
   const notice = (
-    <p className="type-caption text-text-muted">{reasonText(props.availability.onCreateInvitation.reason)}</p>
+    <p data-vid="p1n3cht" className="type-caption text-text-muted">{reasonText(props.availability.onCreateInvitation.reason)}</p>
   );
 
   if (props.loading) {
-    return <div className="type-meta text-text-muted">…</div>;
+    return <div data-vid="h4uyl7b" className="type-meta text-text-muted">…</div>;
   }
   if (props.error) {
     return (
-      <div className="flex flex-col gap-(--component-gap)">
-        <h1 className="type-page-title">{t("users.6b0cc904")}</h1>
-        <p className="type-meta text-text-muted">{t("users.0dd07d63")}</p>
+      <div data-vid="j2pgx1x" className="flex flex-col gap-(--component-gap)">
+        <h1 data-vid="c8tylhe" className="type-page-title">{t("users.6b0cc904")}</h1>
+        <p data-vid="ywoalcz" className="type-meta text-text-muted">{t("users.0dd07d63")}</p>
       </div>
     );
   }
 
   const empty = (title: string, desc: string) => (
-    <div className="flex flex-col items-center gap-1 p-6 text-center">
-      <p className="type-row-title">{title}</p>
-      <p className="type-meta text-text-muted">{desc}</p>
+    <div data-vid="r1aeuw0" className="flex flex-col items-center gap-1 p-6 text-center">
+      <p data-vid="brfb0qe" className="type-row-title">{title}</p>
+      <p data-vid="kq227o6" className="type-meta text-text-muted">{desc}</p>
     </div>
   );
 
   return (
-    <div className="flex flex-col gap-(--component-gap)">
-      <header className="flex flex-wrap items-start justify-between gap-(--component-gap)">
-        <div className="min-w-0">
-          <h1 className="type-page-title">{t("users.6b0cc904")}</h1>
-          <p className="type-meta text-text-muted">{t("users.1766b927")}</p>
+    <div data-vid="g7rrqsn" className="flex flex-col gap-(--component-gap)">
+      <header data-vid="2xydv4z" className="flex flex-wrap items-start justify-between gap-(--component-gap)">
+        <div data-vid="degkc7e" className="min-w-0">
+          <h1 data-vid="qtty8eo" className="type-page-title">{t("users.6b0cc904")}</h1>
+          <p data-vid="qjjfb5u" className="type-meta text-text-muted">{t("users.1766b927")}</p>
         </div>
-        <div className="flex flex-col items-end gap-1">
-          <Button onClick={() => setInviteOpen(true)} className="max-md:min-h-11">
-            <UserPlus className="size-4" /> {t("users.08aa7a0b.button")}
+        <div data-vid="h4wm8vy" className="flex flex-col items-end gap-1">
+          <Button data-vid="aa7e94y" onClick={() => setInviteOpen(true)} className="max-md:min-h-11">
+            <UserPlus data-vid="wag3051" className="size-4" /> {t("users.08aa7a0b.button")}
           </Button>
         </div>
       </header>
 
-      <Tabs value={tab} onValueChange={setTab} className="gap-(--component-gap)">
-        <div className="overflow-x-auto">
-          <TabsList variant="line">
-            <TabsTrigger value="members" className="max-md:min-h-11">{t("users.1044a4c0")}</TabsTrigger>
-            <TabsTrigger value="pending" className="max-md:min-h-11">{t("users.331551b0")}</TabsTrigger>
-            <TabsTrigger value="roles" className="max-md:min-h-11">{t("users.c2533705")}</TabsTrigger>
+      <Tabs data-vid="pl0e043" value={tab} onValueChange={setTab} className="gap-(--component-gap)">
+        <div data-vid="kaipxqd" className="overflow-x-auto">
+          <TabsList data-vid="ga5ib2j" variant="line">
+            <TabsTrigger data-vid="2ykt486" value="members" className="max-md:min-h-11">{t("users.1044a4c0")}</TabsTrigger>
+            <TabsTrigger data-vid="thhggsx" value="pending" className="max-md:min-h-11">{t("users.331551b0")}</TabsTrigger>
+            <TabsTrigger data-vid="ongczpt" value="roles" className="max-md:min-h-11">{t("users.c2533705")}</TabsTrigger>
           </TabsList>
         </div>
 
         {tab !== "roles" && (
-          <div className="flex flex-col gap-2 md:flex-row md:items-center">
-            <div className="flex min-h-11 w-full items-center gap-2 rounded-control border border-border-strong bg-background px-3 focus-within:ring-2 focus-within:ring-ring md:max-w-sm">
-              <Search className="size-4 shrink-0 text-text-muted" />
-              <input
+          <div data-vid="dqt3z06" className="flex flex-col gap-2 md:flex-row md:items-center">
+            <div data-vid="q6yzgjh" className="flex min-h-11 w-full items-center gap-2 rounded-control border border-border-strong bg-background px-3 focus-within:ring-2 focus-within:ring-ring md:max-w-sm">
+              <Search data-vid="idlamg5" className="size-4 shrink-0 text-text-muted" />
+              <input data-vid="mmpei1j"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={t("users.04bf7b77.input-attr-placeholder")}
@@ -110,50 +110,50 @@ export function UsersView(props: UsersScreenViewModel): React.ReactElement {
                 className="type-body min-w-0 flex-1 bg-transparent outline-none placeholder:text-text-subtle"
               />
             </div>
-            <Select value={roleFilter} onValueChange={setRoleFilter}>
-              <SelectTrigger aria-label={t("users.67fd9c1a")} className="min-h-11 w-full border-border-strong md:w-56">
-                <SelectValue />
+            <Select data-vid="l6d04mk" value={roleFilter} onValueChange={setRoleFilter}>
+              <SelectTrigger data-vid="p5fo200" aria-label={t("users.67fd9c1a")} className="min-h-11 w-full border-border-strong md:w-56">
+                <SelectValue data-vid="ymfx4io" />
               </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">{t("users.78f133af")}</SelectItem>
-                {roleOptions.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}
+              <SelectContent data-vid="d0757sb">
+                <SelectItem data-vid="kj2ugub" value="all">{t("users.78f133af")}</SelectItem>
+                {roleOptions.map((r) => <SelectItem data-vid="jnvq2n3" key={r} value={r}>{r}</SelectItem>)}
               </SelectContent>
             </Select>
           </div>
         )}
 
-        <TabsContent value="members">
+        <TabsContent data-vid="f7addcw" value="members">
           {members.length === 0 ? (
             empty(t("users.669a52e9"), t("users.6f5395fd"))
           ) : (
-            <div className="overflow-x-auto rounded-card border border-border bg-card">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="type-eyebrow">{t("users.6007db63")}</TableHead>
-                    <TableHead className="type-eyebrow">{t("users.969ccbd3.table-column")}</TableHead>
-                    <TableHead className="type-eyebrow">{t("users.63dceb88")}</TableHead>
-                    <TableHead className="type-eyebrow">{t("users.14736a2e.table-column")}</TableHead>
-                    <TableHead className="type-eyebrow">{t("users.69318b0c.table-column")}</TableHead>
-                    <TableHead className="w-12"><span className="sr-only">{t("users.ed077f3d.span")}</span></TableHead>
+            <div data-vid="h5nghpj" className="overflow-x-auto rounded-card border border-border bg-card">
+              <Table data-vid="oqgj0h2">
+                <TableHeader data-vid="gjpd540">
+                  <TableRow data-vid="3e09kie">
+                    <TableHead data-vid="zdgs9q9" className="type-eyebrow">{t("users.6007db63")}</TableHead>
+                    <TableHead data-vid="56paje4" className="type-eyebrow">{t("users.969ccbd3.table-column")}</TableHead>
+                    <TableHead data-vid="wmmmhju" className="type-eyebrow">{t("users.63dceb88")}</TableHead>
+                    <TableHead data-vid="2q7nss4" className="type-eyebrow">{t("users.14736a2e.table-column")}</TableHead>
+                    <TableHead data-vid="7xjb5lk" className="type-eyebrow">{t("users.69318b0c.table-column")}</TableHead>
+                    <TableHead data-vid="nmag2o3" className="w-12"><span data-vid="r62gb1h" className="sr-only">{t("users.ed077f3d.span")}</span></TableHead>
                   </TableRow>
                 </TableHeader>
-                <TableBody>
+                <TableBody data-vid="6wg32vh">
                   {members.map((u) => (
-                    <TableRow key={u.id}>
-                      <TableCell>
-                        <span className="flex min-w-0 items-center gap-3">
-                          <Avatar className="size-8"><AvatarFallback>{initials(u)}</AvatarFallback></Avatar>
-                          <span className="type-row-title truncate">{fullName(u)}</span>
+                    <TableRow data-vid="2y3qte6" key={u.id}>
+                      <TableCell data-vid="npwshck">
+                        <span data-vid="ecqa4c0" className="flex min-w-0 items-center gap-3">
+                          <Avatar data-vid="vn6vvt2" className="size-8"><AvatarFallback data-vid="zenb7l2">{initials(u)}</AvatarFallback></Avatar>
+                          <span data-vid="673rorv" className="type-row-title truncate">{fullName(u)}</span>
                         </span>
                       </TableCell>
-                      <TableCell><span className="type-meta text-text-body">{u.email}</span></TableCell>
-                      <TableCell><span className="type-meta whitespace-nowrap tabular-nums text-text-body">{u.phone ?? "—"}</span></TableCell>
-                      <TableCell><span className="type-meta whitespace-nowrap">{u.role ?? "—"}</span></TableCell>
-                      <TableCell><span className="whitespace-nowrap">{formatDate(u.createdAt)}</span></TableCell>
-                      <TableCell className="text-right">
-                        <Button variant="ghost" size="icon-sm" aria-label={t("users.ed077f3d.button-attr-aria-label")} onClick={() => setOpenId(u.id)}>
-                          <ChevronRight className="size-4" />
+                      <TableCell data-vid="s7bu4a6"><span data-vid="p68v4m7" className="type-meta text-text-body">{u.email}</span></TableCell>
+                      <TableCell data-vid="m5ib9sq"><span data-vid="wh8dd8f" className="type-meta whitespace-nowrap tabular-nums text-text-body">{u.phone ?? "—"}</span></TableCell>
+                      <TableCell data-vid="a5uc41d"><span data-vid="4jd39xw" className="type-meta whitespace-nowrap">{u.role ?? "—"}</span></TableCell>
+                      <TableCell data-vid="opiidmo"><span data-vid="tyhjxsy" className="whitespace-nowrap">{formatDate(u.createdAt)}</span></TableCell>
+                      <TableCell data-vid="nqkm97x" className="text-right">
+                        <Button data-vid="2ncl2qy" variant="ghost" size="icon-sm" aria-label={t("users.ed077f3d.button-attr-aria-label")} onClick={() => setOpenId(u.id)}>
+                          <ChevronRight data-vid="hky5bsv" className="size-4" />
                         </Button>
                       </TableCell>
                     </TableRow>
@@ -164,39 +164,39 @@ export function UsersView(props: UsersScreenViewModel): React.ReactElement {
           )}
         </TabsContent>
 
-        <TabsContent value="pending">
+        <TabsContent data-vid="mghu0qc" value="pending">
           {pending.length === 0 ? (
             empty(t("users.275814da"), t("users.544ad576"))
           ) : (
-            <div className="overflow-x-auto rounded-card border border-border bg-card">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="type-eyebrow">{t("users.969ccbd3.tablehead")}</TableHead>
-                    <TableHead className="type-eyebrow">{t("users.14736a2e.tablehead")}</TableHead>
-                    <TableHead className="type-eyebrow">{t("users.920e413c")}</TableHead>
-                    <TableHead className="type-eyebrow">{t("users.c16bc82b")}</TableHead>
-                    <TableHead className="text-right type-eyebrow">{t("users.ff8059dc")}</TableHead>
+            <div data-vid="kxtgiic" className="overflow-x-auto rounded-card border border-border bg-card">
+              <Table data-vid="gkji4ew">
+                <TableHeader data-vid="qwz6ulj">
+                  <TableRow data-vid="zeuwckz">
+                    <TableHead data-vid="ltu60xf" className="type-eyebrow">{t("users.969ccbd3.tablehead")}</TableHead>
+                    <TableHead data-vid="lrbq5hk" className="type-eyebrow">{t("users.14736a2e.tablehead")}</TableHead>
+                    <TableHead data-vid="jhyb58u" className="type-eyebrow">{t("users.920e413c")}</TableHead>
+                    <TableHead data-vid="b9gbp23" className="type-eyebrow">{t("users.c16bc82b")}</TableHead>
+                    <TableHead data-vid="s26dju9" className="text-right type-eyebrow">{t("users.ff8059dc")}</TableHead>
                   </TableRow>
                 </TableHeader>
-                <TableBody>
+                <TableBody data-vid="gd1dv17">
                   {pending.map((i) => (
-                    <TableRow key={i.id}>
-                      <TableCell className="type-row-title">{i.email}</TableCell>
-                      <TableCell className="type-meta whitespace-nowrap">{i.role ?? "—"}</TableCell>
-                      <TableCell>
-                        <Badge variant="outline" className="whitespace-nowrap border-transparent bg-status-pending-bg text-status-pending-ink">
-                          <span className="type-meta">{i.status}</span>
+                    <TableRow data-vid="rgg53fz" key={i.id}>
+                      <TableCell data-vid="76g5pfk" className="type-row-title">{i.email}</TableCell>
+                      <TableCell data-vid="o9fray4" className="type-meta whitespace-nowrap">{i.role ?? "—"}</TableCell>
+                      <TableCell data-vid="otpeotl">
+                        <Badge data-vid="s0sz29c" variant="outline" className="whitespace-nowrap border-transparent bg-status-pending-bg text-status-pending-ink">
+                          <span data-vid="lhzcvum" className="type-meta">{i.status}</span>
                         </Badge>
                       </TableCell>
-                      <TableCell className="whitespace-nowrap">{formatDate(i.sentAt)}</TableCell>
-                      <TableCell>
-                        <div className="flex justify-end gap-1">
-                          <Button variant="ghost" size="sm" disabled>
-                            <RotateCw className="size-4" /> {t("users.1f948437")}
+                      <TableCell data-vid="pdmn0dh" className="whitespace-nowrap">{formatDate(i.sentAt)}</TableCell>
+                      <TableCell data-vid="bzm6d5x">
+                        <div data-vid="8d9vxkj" className="flex justify-end gap-1">
+                          <Button data-vid="752rfvb" variant="ghost" size="sm" disabled>
+                            <RotateCw data-vid="jf8qfi7" className="size-4" /> {t("users.1f948437")}
                           </Button>
-                          <Button variant="ghost" size="sm" disabled>
-                            <X className="size-4" /> {t("users.87e6d00b")}
+                          <Button data-vid="dagpu30" variant="ghost" size="sm" disabled>
+                            <X data-vid="ov1tsxh" className="size-4" /> {t("users.87e6d00b")}
                           </Button>
                         </div>
                       </TableCell>
@@ -204,37 +204,37 @@ export function UsersView(props: UsersScreenViewModel): React.ReactElement {
                   ))}
                 </TableBody>
               </Table>
-              <div className="p-3">{notice}</div>
+              <div data-vid="qfdai3y" className="p-3">{notice}</div>
             </div>
           )}
         </TabsContent>
 
-        <TabsContent value="roles">
-          <div className="overflow-x-auto rounded-card border border-border bg-card">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="type-eyebrow">{t("users.14736a2e.tablehead")}</TableHead>
-                  <TableHead className="type-eyebrow">{t("users.526e0087")}</TableHead>
-                  <TableHead className="type-eyebrow">{t("users.a3b50c47")}</TableHead>
-                  <TableHead className="type-eyebrow">{t("users.abccc78c")}</TableHead>
+        <TabsContent data-vid="kp228ua" value="roles">
+          <div data-vid="ks2a6qn" className="overflow-x-auto rounded-card border border-border bg-card">
+            <Table data-vid="56ck2yb">
+              <TableHeader data-vid="liiccob">
+                <TableRow data-vid="clsm3y6">
+                  <TableHead data-vid="k6q2nwi" className="type-eyebrow">{t("users.14736a2e.tablehead")}</TableHead>
+                  <TableHead data-vid="egl2kds" className="type-eyebrow">{t("users.526e0087")}</TableHead>
+                  <TableHead data-vid="6qmv4cz" className="type-eyebrow">{t("users.a3b50c47")}</TableHead>
+                  <TableHead data-vid="iziz6wj" className="type-eyebrow">{t("users.abccc78c")}</TableHead>
                 </TableRow>
               </TableHeader>
-              <TableBody>
+              <TableBody data-vid="war8blf">
                 {props.roles.map((r) => {
                   const perms = (r.permissions ?? "").split(",").map((p) => p.trim()).filter(Boolean);
                   return (
-                    <TableRow key={r.id} className="align-top">
-                      <TableCell className="type-row-title whitespace-nowrap">{r.name}</TableCell>
-                      <TableCell className="type-meta min-w-56 whitespace-normal text-text-body">{r.description}</TableCell>
-                      <TableCell className="type-meta whitespace-nowrap">{r.isActive ? t("users.92340695") : t("users.ac7c949f")}</TableCell>
-                      <TableCell className="min-w-64 whitespace-normal">
+                    <TableRow data-vid="vpbpole" key={r.id} className="align-top">
+                      <TableCell data-vid="niye2o8" className="type-row-title whitespace-nowrap">{r.name}</TableCell>
+                      <TableCell data-vid="dbz20c0" className="type-meta min-w-56 whitespace-normal text-text-body">{r.description}</TableCell>
+                      <TableCell data-vid="6s8co5t" className="type-meta whitespace-nowrap">{r.isActive ? t("users.92340695") : t("users.ac7c949f")}</TableCell>
+                      <TableCell data-vid="pnj7ya8" className="min-w-64 whitespace-normal">
                         {perms.length === 0 ? (
-                          <span className="text-text-muted">—</span>
+                          <span data-vid="7kimg7t" className="text-text-muted">—</span>
                         ) : (
-                          <div className="flex flex-wrap gap-1">
+                          <div data-vid="xc4okj3" className="flex flex-wrap gap-1">
                             {perms.map((p) => (
-                              <span key={p} className="type-mono-id rounded-badge border border-border-strong px-1.5 py-0.5 text-text-body whitespace-nowrap">{p}</span>
+                              <span data-vid="x0vbtyn" key={p} className="type-mono-id rounded-badge border border-border-strong px-1.5 py-0.5 text-text-body whitespace-nowrap">{p}</span>
                             ))}
                           </div>
                         )}
@@ -248,13 +248,13 @@ export function UsersView(props: UsersScreenViewModel): React.ReactElement {
         </TabsContent>
       </Tabs>
 
-      <Dialog open={inviteOpen} onOpenChange={setInviteOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{t("users.08aa7a0b.dialogtitle")}</DialogTitle>
-            <DialogDescription>{t("users.5ccfbaa2")}</DialogDescription>
+      <Dialog data-vid="l0xwnt8" open={inviteOpen} onOpenChange={setInviteOpen}>
+        <DialogContent data-vid="o31hwe9">
+          <DialogHeader data-vid="q8mwyx1">
+            <DialogTitle data-vid="ugahsyb">{t("users.08aa7a0b.dialogtitle")}</DialogTitle>
+            <DialogDescription data-vid="765i601">{t("users.5ccfbaa2")}</DialogDescription>
           </DialogHeader>
-          <form
+          <form data-vid="mjmgi2f"
             onSubmit={(e) => {
               e.preventDefault();
               const email = inviteEmail.trim();
@@ -275,70 +275,70 @@ export function UsersView(props: UsersScreenViewModel): React.ReactElement {
             }}
             className="flex flex-col gap-(--section-gap)"
           >
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="invite-email">{t("users.969ccbd3.fieldlabel")}</FieldLabel>
-                <Input id="invite-email" type="email" autoComplete="off" required value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} className="border-border-strong max-md:min-h-11" />
+            <FieldGroup data-vid="doji34q">
+              <Field data-vid="dug3nkq">
+                <FieldLabel data-vid="5nnwd3r" htmlFor="invite-email">{t("users.969ccbd3.fieldlabel")}</FieldLabel>
+                <Input data-vid="i9dbs47" id="invite-email" type="email" autoComplete="off" required value={inviteEmail} onChange={(e) => setInviteEmail(e.target.value)} className="border-border-strong max-md:min-h-11" />
               </Field>
-              <Field>
-                <FieldLabel htmlFor="invite-role">{t("users.14736a2e.fieldlabel")}</FieldLabel>
-                <select
+              <Field data-vid="fhw0uay">
+                <FieldLabel data-vid="73yh5rt" htmlFor="invite-role">{t("users.14736a2e.fieldlabel")}</FieldLabel>
+                <select data-vid="jucsgxs"
                   id="invite-role"
                   value={inviteRole}
                   onChange={(e) => setInviteRole(e.target.value)}
                   className="h-9 w-full rounded-md border border-border-strong bg-background px-3 text-sm max-md:min-h-11"
                 >
-                  <option value="">Select a role</option>
+                  <option data-vid="zydyrng" value="">Select a role</option>
                   {roleOptions.map((name) => (
-                    <option key={name} value={name}>{name}</option>
+                    <option data-vid="0u9nkv1" key={name} value={name}>{name}</option>
                   ))}
                 </select>
-                <FieldDescription>{t("users.351dbdf9")}</FieldDescription>
+                <FieldDescription data-vid="iod7uqu">{t("users.351dbdf9")}</FieldDescription>
               </Field>
             </FieldGroup>
             {unavailable && notice}
             {inviteFailed ? (
-              <p role="alert" className="type-caption text-destructive">The invitation could not be saved. Try again.</p>
+              <p data-vid="he05g2r" role="alert" className="type-caption text-destructive">The invitation could not be saved. Try again.</p>
             ) : null}
-            <DialogFooter>
-              <Button type="button" variant="outline" onClick={() => setInviteOpen(false)}>{t("users.19766ed6")}</Button>
-              <Button type="submit" disabled={unavailable || inviteSaving || inviteEmail.trim() === ""}>{t("users.dba4038b")}</Button>
+            <DialogFooter data-vid="3ekhwwl">
+              <Button data-vid="2gcfrxx" type="button" variant="outline" onClick={() => setInviteOpen(false)}>{t("users.19766ed6")}</Button>
+              <Button data-vid="q9dcd1i" type="submit" disabled={unavailable || inviteSaving || inviteEmail.trim() === ""}>{t("users.dba4038b")}</Button>
             </DialogFooter>
           </form>
         </DialogContent>
       </Dialog>
 
-      <Sheet open={!!opened} onOpenChange={(o) => { if (!o) setOpenId(null); }}>
-        <SheetContent className="w-full overflow-y-auto sm:max-w-md">
+      <Sheet data-vid="pc3nsp1" open={!!opened} onOpenChange={(o) => { if (!o) setOpenId(null); }}>
+        <SheetContent data-vid="l718alb" className="w-full overflow-y-auto sm:max-w-md">
           {opened && (
             <>
-              <SheetHeader>
-                <div className="flex items-center gap-3">
-                  <Avatar className="size-14"><AvatarFallback>{initials(opened)}</AvatarFallback></Avatar>
-                  <div className="min-w-0">
-                    <SheetTitle className="type-card-title">{fullName(opened)}</SheetTitle>
-                    <SheetDescription className="type-meta">{opened.role ?? t("users.784a7208")}</SheetDescription>
+              <SheetHeader data-vid="vv0id4h">
+                <div data-vid="na777tk" className="flex items-center gap-3">
+                  <Avatar data-vid="0l7bh85" className="size-14"><AvatarFallback data-vid="rh85tci">{initials(opened)}</AvatarFallback></Avatar>
+                  <div data-vid="scummf2" className="min-w-0">
+                    <SheetTitle data-vid="8fbxem2" className="type-card-title">{fullName(opened)}</SheetTitle>
+                    <SheetDescription data-vid="7qw5u6n" className="type-meta">{opened.role ?? t("users.784a7208")}</SheetDescription>
                   </div>
                 </div>
               </SheetHeader>
-              <dl className="flex flex-col gap-(--component-gap) px-4">
-                <div className="border-t border-border pt-3">
-                  <dt className="type-eyebrow text-text-muted">{t("users.969ccbd3.fieldlabel")}</dt>
-                  <dd className="type-body break-all text-text-body">{opened.email}</dd>
+              <dl data-vid="qgoesnv" className="flex flex-col gap-(--component-gap) px-4">
+                <div data-vid="ludx8mg" className="border-t border-border pt-3">
+                  <dt data-vid="e0spcuf" className="type-eyebrow text-text-muted">{t("users.969ccbd3.fieldlabel")}</dt>
+                  <dd data-vid="3nlal3m" className="type-body break-all text-text-body">{opened.email}</dd>
                 </div>
-                <div className="border-t border-border pt-3">
-                  <dt className="type-eyebrow text-text-muted">{t("users.63dceb88")}</dt>
-                  <dd className="type-body break-all text-text-body">{opened.phone ?? "—"}</dd>
+                <div data-vid="pc8vynq" className="border-t border-border pt-3">
+                  <dt data-vid="e1ibufw" className="type-eyebrow text-text-muted">{t("users.63dceb88")}</dt>
+                  <dd data-vid="g1qsc23" className="type-body break-all text-text-body">{opened.phone ?? "—"}</dd>
                 </div>
-                <div className="border-t border-border pt-3">
-                  <dt className="type-eyebrow text-text-muted">{t("users.69318b0c.dt")}</dt>
-                  <dd className="type-body">{formatDate(opened.createdAt)}</dd>
+                <div data-vid="5u7qmgi" className="border-t border-border pt-3">
+                  <dt data-vid="jvnest9" className="type-eyebrow text-text-muted">{t("users.69318b0c.dt")}</dt>
+                  <dd data-vid="68x6gnw" className="type-body">{formatDate(opened.createdAt)}</dd>
                 </div>
-                <div className="border-t border-border pt-3">
-                  <dt className="type-eyebrow text-text-muted">{t("users.fe4de572")}</dt>
-                  <dd className="type-body text-text-body">
+                <div data-vid="j6iv7xq" className="border-t border-border pt-3">
+                  <dt data-vid="z3a6c0m" className="type-eyebrow text-text-muted">{t("users.fe4de572")}</dt>
+                  <dd data-vid="flyjv72" className="type-body text-text-body">
                     {t("users.fb0ac77b")}{" "}
-                    <a href={routes.fleet()} onClick={(e) => { e.preventDefault(); props.navigate(routes.fleet()); }} className="text-text-link hover:underline">{t("users.2bb4f92c")}</a>.
+                    <a data-vid="ztarp1u" href={routes.fleet()} onClick={(e) => { e.preventDefault(); props.navigate(routes.fleet()); }} className="text-text-link hover:underline">{t("users.2bb4f92c")}</a>.
                   </dd>
                 </div>
               </dl>

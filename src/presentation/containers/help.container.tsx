@@ -50,11 +50,11 @@ export function HelpScreenContainer(
     query,
   };
 
-  return <View {...vm} />;
+  return <View data-vid="qs1hzy3" {...vm} />;
 }
 
 // THE ROUTE MODULE. `routes.config.tsx` lazy-imports this file and needs a prop-less
 // `export default`: it binds the container to its view and does nothing else.
 export default function HelpScreenRoute(): React.ReactElement {
-  return <HelpScreenContainer view={HelpView} />;
+  return <HelpScreenContainer data-vid="c099qgv" view={HelpView} />;
 }

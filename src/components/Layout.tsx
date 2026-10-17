@@ -24,10 +24,10 @@ installGenerateBridge();
 export function Layout() {
   useClientLinks();
   return (
-    <ArchiePreviewAuth>
-      <AppProviders>
-        <ShellMount>
-          <Outlet />
+    <ArchiePreviewAuth data-vid="uh2p17a">
+      <AppProviders data-vid="hrc7say">
+        <ShellMount data-vid="93zz70w">
+          <Outlet data-vid="m6g32gl" />
         </ShellMount>
       </AppProviders>
     </ArchiePreviewAuth>

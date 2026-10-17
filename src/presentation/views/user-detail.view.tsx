@@ -21,13 +21,13 @@ export function UserDetailView(props: UserDetailScreenViewModel) {
 
   if (user === null) {
     return (
-      <div className="flex w-full flex-1 flex-col gap-3 bg-background p-6 text-foreground" data-agent-id="screen:user-detail-not-found">
-        <h1 className="m-0 text-2xl font-semibold">Member not found</h1>
-        <p className="m-0 text-sm text-muted-foreground">
+      <div data-vid="9h34vqh" className="flex w-full flex-1 flex-col gap-3 bg-background p-6 text-foreground" data-agent-id="screen:user-detail-not-found">
+        <h1 data-vid="rbgw5oj" className="m-0 text-2xl font-semibold">Member not found</h1>
+        <p data-vid="huapcjf" className="m-0 text-sm text-muted-foreground">
           This member does not exist or was removed. Open a member from the Users list.
         </p>
-        <div>
-          <Button type="button" variant="outline" onClick={props.onBack}>
+        <div data-vid="abvwjum">
+          <Button data-vid="az7tp0u" type="button" variant="outline" onClick={props.onBack}>
             Back to users
           </Button>
         </div>
@@ -39,22 +39,22 @@ export function UserDetailView(props: UserDetailScreenViewModel) {
   const roleOptions = props.roleNames.includes(role) || role === '' ? props.roleNames : [...props.roleNames, role];
 
   return (
-    <div className="flex w-full flex-1 flex-col gap-4 bg-background p-4 text-foreground md:p-6" data-agent-id="screen:user-detail">
-      <header className="flex flex-wrap items-start justify-between gap-3">
-        <div className="min-w-0">
-          <h1 className="m-0 text-2xl font-semibold">{fullName === '' ? user.email : fullName}</h1>
-          <p className="m-0 mt-1 text-sm text-muted-foreground">
+    <div data-vid="uvyqmti" className="flex w-full flex-1 flex-col gap-4 bg-background p-4 text-foreground md:p-6" data-agent-id="screen:user-detail">
+      <header data-vid="xucdcxn" className="flex flex-wrap items-start justify-between gap-3">
+        <div data-vid="6h3bam7" className="min-w-0">
+          <h1 data-vid="4a23vxo" className="m-0 text-2xl font-semibold">{fullName === '' ? user.email : fullName}</h1>
+          <p data-vid="zvrpi6p" className="m-0 mt-1 text-sm text-muted-foreground">
             {user.email}
             {user.role !== undefined ? ` · ${user.role}` : ''}
           </p>
         </div>
-        <Button type="button" variant="outline" onClick={props.onBack}>
+        <Button data-vid="bk0pp6d" type="button" variant="outline" onClick={props.onBack}>
           Back to users
         </Button>
       </header>
 
       {props.notice !== null ? (
-        <p
+        <p data-vid="4s1nare"
           role={props.notice.tone === 'error' ? 'alert' : 'status'}
           className={`m-0 rounded-md p-3 text-sm ${
             props.notice.tone === 'error'
@@ -66,52 +66,52 @@ export function UserDetailView(props: UserDetailScreenViewModel) {
         </p>
       ) : null}
 
-      <form
+      <form data-vid="qetbaw7"
         className="grid gap-3 rounded-lg border border-border bg-card p-4 text-card-foreground md:grid-cols-2"
         onSubmit={(event) => {
           event.preventDefault();
           props.onSaveProfile({ firstName: firstName.trim(), lastName: lastName.trim(), email: email.trim(), phone: phone.trim() });
         }}
       >
-        <h2 className="m-0 text-base font-semibold md:col-span-2">Profile</h2>
-        <label className="flex flex-col gap-1 text-sm">
+        <h2 data-vid="hr6feab" className="m-0 text-base font-semibold md:col-span-2">Profile</h2>
+        <label data-vid="a4tfwg3" className="flex flex-col gap-1 text-sm">
           First name
-          <input className={FIELD} value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
+          <input data-vid="155fgri" className={FIELD} value={firstName} onChange={(e) => setFirstName(e.target.value)} required />
         </label>
-        <label className="flex flex-col gap-1 text-sm">
+        <label data-vid="3122b64" className="flex flex-col gap-1 text-sm">
           Last name
-          <input className={FIELD} value={lastName} onChange={(e) => setLastName(e.target.value)} />
+          <input data-vid="kc6i5vm" className={FIELD} value={lastName} onChange={(e) => setLastName(e.target.value)} />
         </label>
-        <label className="flex flex-col gap-1 text-sm">
+        <label data-vid="mf4skyf" className="flex flex-col gap-1 text-sm">
           Email
-          <input className={FIELD} type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input data-vid="7d4h8yz" className={FIELD} type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </label>
-        <label className="flex flex-col gap-1 text-sm">
+        <label data-vid="fh8onlw" className="flex flex-col gap-1 text-sm">
           Phone
-          <input className={FIELD} value={phone} onChange={(e) => setPhone(e.target.value)} />
+          <input data-vid="iyjbm3g" className={FIELD} value={phone} onChange={(e) => setPhone(e.target.value)} />
         </label>
-        <div className="md:col-span-2">
-          <Button type="submit" disabled={props.saving}>
+        <div data-vid="5r40cyu" className="md:col-span-2">
+          <Button data-vid="o9mgkw4" type="submit" disabled={props.saving}>
             {props.saving ? 'Saving…' : 'Save profile'}
           </Button>
         </div>
       </form>
 
-      <section className="grid gap-3 rounded-lg border border-border bg-card p-4 text-card-foreground">
-        <h2 className="m-0 text-base font-semibold">Role</h2>
-        <div className="flex flex-wrap items-end gap-3">
-          <label className="flex min-w-48 flex-col gap-1 text-sm">
+      <section data-vid="gato2dl" className="grid gap-3 rounded-lg border border-border bg-card p-4 text-card-foreground">
+        <h2 data-vid="4kvbi4d" className="m-0 text-base font-semibold">Role</h2>
+        <div data-vid="9c9wjhy" className="flex flex-wrap items-end gap-3">
+          <label data-vid="b1k3tot" className="flex min-w-48 flex-col gap-1 text-sm">
             Role
-            <select className={FIELD} value={role} onChange={(e) => setRole(e.target.value)}>
-              <option value="">No role</option>
+            <select data-vid="943mrxk" className={FIELD} value={role} onChange={(e) => setRole(e.target.value)}>
+              <option data-vid="l3mu27c" value="">No role</option>
               {roleOptions.map((name) => (
-                <option key={name} value={name}>
+                <option data-vid="5xgkkls" key={name} value={name}>
                   {name}
                 </option>
               ))}
             </select>
           </label>
-          <Button
+          <Button data-vid="ngrkht1"
             type="button"
             disabled={props.saving || role === '' || role === user.role}
             onClick={() => props.onChangeRole(role)}
@@ -121,38 +121,38 @@ export function UserDetailView(props: UserDetailScreenViewModel) {
         </div>
       </section>
 
-      <section className="rounded-lg border border-border bg-card p-4 text-card-foreground">
-        <h2 className="m-0 text-base font-semibold">Activity</h2>
-        <dl className="m-0 mt-2 grid gap-1 text-sm md:grid-cols-2">
-          <div>
-            <dt className="text-muted-foreground">Member since</dt>
-            <dd className="m-0">{formatStamp(user.createdAt)}</dd>
+      <section data-vid="1vlbgia" className="rounded-lg border border-border bg-card p-4 text-card-foreground">
+        <h2 data-vid="jfcb1z8" className="m-0 text-base font-semibold">Activity</h2>
+        <dl data-vid="9cr71f2" className="m-0 mt-2 grid gap-1 text-sm md:grid-cols-2">
+          <div data-vid="c9ujlxg">
+            <dt data-vid="fmv9gpd" className="text-muted-foreground">Member since</dt>
+            <dd data-vid="0bldok5" className="m-0">{formatStamp(user.createdAt)}</dd>
           </div>
-          <div>
-            <dt className="text-muted-foreground">Record last changed</dt>
-            <dd className="m-0">{formatStamp(user.updatedAt)}</dd>
+          <div data-vid="6lshp7h">
+            <dt data-vid="u5nb5tp" className="text-muted-foreground">Record last changed</dt>
+            <dd data-vid="s4uhdx3" className="m-0">{formatStamp(user.updatedAt)}</dd>
           </div>
         </dl>
       </section>
 
-      <section className="rounded-lg border border-border bg-card p-4 text-card-foreground">
-        <h2 className="m-0 text-base font-semibold">Remove member</h2>
-        <p className="m-0 mt-1 text-sm text-muted-foreground">
+      <section data-vid="kw0bwhj" className="rounded-lg border border-border bg-card p-4 text-card-foreground">
+        <h2 data-vid="bq1k78a" className="m-0 text-base font-semibold">Remove member</h2>
+        <p data-vid="ydzuaxj" className="m-0 mt-1 text-sm text-muted-foreground">
           Removing a member ends their access to the organization.
         </p>
-        <div className="mt-3 flex flex-wrap items-center gap-2">
+        <div data-vid="5x6jbcf" className="mt-3 flex flex-wrap items-center gap-2">
           {confirmRemove ? (
             <>
-              <span className="text-sm">Remove {fullName === '' ? user.email : fullName}?</span>
-              <Button type="button" variant="destructive" disabled={props.saving} onClick={props.onRemove}>
+              <span data-vid="a54obow" className="text-sm">Remove {fullName === '' ? user.email : fullName}?</span>
+              <Button data-vid="rmr1twx" type="button" variant="destructive" disabled={props.saving} onClick={props.onRemove}>
                 Yes, remove
               </Button>
-              <Button type="button" variant="outline" onClick={() => setConfirmRemove(false)}>
+              <Button data-vid="5kv06h9" type="button" variant="outline" onClick={() => setConfirmRemove(false)}>
                 Cancel
               </Button>
             </>
           ) : (
-            <Button type="button" variant="outline" onClick={() => setConfirmRemove(true)}>
+            <Button data-vid="unap3wr" type="button" variant="outline" onClick={() => setConfirmRemove(true)}>
               Remove member
             </Button>
           )}

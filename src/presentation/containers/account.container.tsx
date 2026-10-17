@@ -180,11 +180,11 @@ export function AccountScreenContainer(
   return (
     <>
       {loading ? (
-        <ScreenLoading />
+        <ScreenLoading data-vid="xkwbbve" />
       ) : loadError !== null ? (
-        <ScreenError error={loadError} onRetry={reload} />
+        <ScreenError data-vid="iodmdx6" error={loadError} onRetry={reload} />
       ) : (
-        <View {...vm} />
+        <View data-vid="7al3iea" {...vm} />
       )}
     </>
   );
@@ -195,9 +195,9 @@ export function AccountScreenContainer(
 export default function AccountScreenRoute(): React.ReactElement {
   return (
     <>
-      <AccountScreenContainer view={AccountView} />
-      <section data-archie-account-sessions="">
-        <AccountSessionsContainer />
+      <AccountScreenContainer data-vid="3h5kql9" view={AccountView} />
+      <section data-vid="ozknj8x" data-archie-account-sessions="">
+        <AccountSessionsContainer data-vid="nw36qvo" />
       </section>
     </>
   );

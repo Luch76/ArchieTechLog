@@ -21,7 +21,7 @@ function Command({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive>) {
   return (
-    <CommandPrimitive
+    <CommandPrimitive data-vid="2pfam8q"
       data-slot="command"
       className={cn(
         "flex size-full flex-col overflow-hidden rounded-xl! bg-popover p-1 text-popover-foreground",
@@ -48,12 +48,12 @@ function CommandDialog({
 }) {
   const t = useChrome()
   return (
-    <Dialog {...props}>
-      <DialogHeader className="sr-only">
-        <DialogTitle>{title ?? t("kit.command.title")}</DialogTitle>
-        <DialogDescription>{description ?? t("kit.command.description")}</DialogDescription>
+    <Dialog data-vid="hux0zsm" {...props}>
+      <DialogHeader data-vid="wuk8bcn" className="sr-only">
+        <DialogTitle data-vid="k1y5q3c">{title ?? t("kit.command.title")}</DialogTitle>
+        <DialogDescription data-vid="zjbqrbe">{description ?? t("kit.command.description")}</DialogDescription>
       </DialogHeader>
-      <DialogContent
+      <DialogContent data-vid="ytar2pq"
         className={cn(
           "top-1/3 translate-y-0 overflow-hidden rounded-xl! p-0",
           className
@@ -71,9 +71,9 @@ function CommandInput({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Input>) {
   return (
-    <div data-slot="command-input-wrapper" className="p-1 pb-0">
-      <InputGroup className="h-(--control-md)! rounded-control! border-input/30 bg-input/30 shadow-none! *:data-[slot=input-group-addon]:pl-2!">
-        <CommandPrimitive.Input
+    <div data-vid="bqjbiwh" data-slot="command-input-wrapper" className="p-1 pb-0">
+      <InputGroup data-vid="fcagsa4" className="h-(--control-md)! rounded-control! border-input/30 bg-input/30 shadow-none! *:data-[slot=input-group-addon]:pl-2!">
+        <CommandPrimitive.Input data-vid="f7mou4a"
           data-slot="command-input"
           className={cn(
             "w-full text-sm outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
@@ -81,8 +81,8 @@ function CommandInput({
           )}
           {...props}
         />
-        <InputGroupAddon>
-          <SearchIcon className="size-4 shrink-0 opacity-50" />
+        <InputGroupAddon data-vid="6eeyjvf">
+          <SearchIcon data-vid="zfsa7yj" className="size-4 shrink-0 opacity-50" />
         </InputGroupAddon>
       </InputGroup>
     </div>
@@ -94,7 +94,7 @@ function CommandList({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.List>) {
   return (
-    <CommandPrimitive.List
+    <CommandPrimitive.List data-vid="ov0gtoh"
       data-slot="command-list"
       className={cn(
         "no-scrollbar max-h-72 scroll-py-1 overflow-x-hidden overflow-y-auto outline-none",
@@ -110,7 +110,7 @@ function CommandEmpty({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Empty>) {
   return (
-    <CommandPrimitive.Empty
+    <CommandPrimitive.Empty data-vid="klk5rc1"
       data-slot="command-empty"
       className={cn("py-6 text-center text-sm", className)}
       {...props}
@@ -123,7 +123,7 @@ function CommandGroup({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Group>) {
   return (
-    <CommandPrimitive.Group
+    <CommandPrimitive.Group data-vid="zvhejnu"
       data-slot="command-group"
       className={cn(
         "overflow-hidden p-1 text-foreground **:[[cmdk-group-heading]]:px-2 **:[[cmdk-group-heading]]:py-1.5 **:[[cmdk-group-heading]]:text-xs **:[[cmdk-group-heading]]:font-medium **:[[cmdk-group-heading]]:text-muted-foreground",
@@ -139,7 +139,7 @@ function CommandSeparator({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Separator>) {
   return (
-    <CommandPrimitive.Separator
+    <CommandPrimitive.Separator data-vid="fuqv900"
       data-slot="command-separator"
       className={cn("-mx-1 h-px bg-border", className)}
       {...props}
@@ -153,7 +153,7 @@ function CommandItem({
   ...props
 }: React.ComponentProps<typeof CommandPrimitive.Item>) {
   return (
-    <CommandPrimitive.Item
+    <CommandPrimitive.Item data-vid="10a7ip0"
       data-slot="command-item"
       className={cn(
         "group/command-item relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none in-data-[slot=dialog-content]:rounded-lg! data-[disabled=true]:pointer-events-none data-[disabled=true]:opacity-50 data-selected:bg-muted data-selected:text-foreground [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 data-selected:*:[svg]:text-foreground",
@@ -162,7 +162,7 @@ function CommandItem({
       {...props}
     >
       {children}
-      <CheckIcon className="ml-auto opacity-0 group-has-data-[slot=command-shortcut]/command-item:hidden group-data-[checked=true]/command-item:opacity-100" />
+      <CheckIcon data-vid="w977d7n" className="ml-auto opacity-0 group-has-data-[slot=command-shortcut]/command-item:hidden group-data-[checked=true]/command-item:opacity-100" />
     </CommandPrimitive.Item>
   )
 }
@@ -172,7 +172,7 @@ function CommandShortcut({
   ...props
 }: React.ComponentProps<"span">) {
   return (
-    <span
+    <span data-vid="9wywpqw"
       data-slot="command-shortcut"
       className={cn(
         "ml-auto text-xs tracking-widest text-muted-foreground group-data-selected/command-item:text-foreground",

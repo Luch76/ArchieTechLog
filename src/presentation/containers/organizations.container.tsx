@@ -86,11 +86,11 @@ export default function OrganizationsScreenRoute(): React.ReactElement {
   return (
     <>
       {loading ? (
-        <ScreenLoading />
+        <ScreenLoading data-vid="ix7qk6z" />
       ) : loadError !== null ? (
-        <ScreenError error={loadError} onRetry={reload} />
+        <ScreenError data-vid="f2y6p8g" error={loadError} onRetry={reload} />
       ) : (
-        <OrganizationsView {...vm} />
+        <OrganizationsView data-vid="a5vz6iu" {...vm} />
       )}
     </>
   );

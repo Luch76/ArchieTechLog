@@ -186,13 +186,13 @@ export function AircraftDetailScreenContainer(
   return (
     <>
       {loading ? (
-        <ScreenLoading />
+        <ScreenLoading data-vid="ymwaurx" />
       ) : loadError !== null ? (
-        <ScreenError error={loadError} onRetry={reload} />
+        <ScreenError data-vid="9gejwwi" error={loadError} onRetry={reload} />
       ) : (
         <>
           {truncatedCap !== null && (
-            <div
+            <div data-vid="6mmul7t"
               role="status"
               data-truncation-banner=""
               className="border-b border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-900"
@@ -200,7 +200,7 @@ export function AircraftDetailScreenContainer(
               {t('_app.truncated', { limit: truncatedCap.toLocaleString() })}
             </div>
           )}
-          <View {...vm} />
+          <View data-vid="cjun2cm" {...vm} />
         </>
       )}
     </>
@@ -210,5 +210,5 @@ export function AircraftDetailScreenContainer(
 // THE ROUTE MODULE. `routes.config.tsx` lazy-imports this file and needs a prop-less
 // `export default`: it binds the container to its view and does nothing else.
 export default function AircraftDetailScreenRoute(): React.ReactElement {
-  return <AircraftDetailScreenContainer view={AircraftDetailView} />;
+  return <AircraftDetailScreenContainer data-vid="b59euba" view={AircraftDetailView} />;
 }

@@ -28,7 +28,7 @@ function ButtonGroup({
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof buttonGroupVariants>) {
   return (
-    <div
+    <div data-vid="nzcgpmf"
       role="group"
       data-slot="button-group"
       data-orientation={orientation}
@@ -48,7 +48,7 @@ function ButtonGroupText({
   const Comp = asChild ? Slot.Root : "div"
 
   return (
-    <Comp
+    <Comp data-vid="ycqwvlk"
       className={cn(
         "flex items-center gap-2 rounded-control border bg-muted px-2.5 text-sm font-medium [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className
@@ -64,7 +64,7 @@ function ButtonGroupSeparator({
   ...props
 }: React.ComponentProps<typeof Separator>) {
   return (
-    <Separator
+    <Separator data-vid="wxdqnt1"
       data-slot="button-group-separator"
       orientation={orientation}
       className={cn(

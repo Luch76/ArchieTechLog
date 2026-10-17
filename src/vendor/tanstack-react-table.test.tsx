@@ -23,9 +23,9 @@ describe("useReactTable v8 aliases", () => {
       seen.kinds = [typeof table.getPaginationRowModel, typeof table.getPrePaginationRowModel]
       seen.paged = table.getPaginationRowModel().rows.length
       seen.pre = table.getPrePaginationRowModel().rows.length
-      return <div>{table.getRowModel().rows.length}</div>
+      return <div data-vid="t7jaqqq">{table.getRowModel().rows.length}</div>
     }
-    renderToString(<Probe />)
+    renderToString(<Probe data-vid="7u1zzkk" />)
     expect(seen.kinds).toEqual(["function", "function"])
     expect(seen.paged).toBe(1)
     expect(seen.pre).toBe(2)

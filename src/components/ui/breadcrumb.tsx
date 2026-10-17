@@ -10,7 +10,7 @@ function Breadcrumb({
 }: React.ComponentProps<"nav">) {
   const t = useChrome()
   return (
-    <nav
+    <nav data-vid="9wxcc82"
       aria-label={t("kit.breadcrumb.label")}
       data-slot="breadcrumb"
       className={cn(className)}
@@ -24,7 +24,7 @@ function BreadcrumbList({
   ...props
 }: React.ComponentProps<"ol">) {
   return (
-    <ol
+    <ol data-vid="x73tyos"
       data-slot="breadcrumb-list"
       className={cn(
         "flex flex-wrap items-center gap-1.5 text-sm wrap-break-word text-muted-foreground",
@@ -40,7 +40,7 @@ function BreadcrumbItem({
   ...props
 }: React.ComponentProps<"li">) {
   return (
-    <li
+    <li data-vid="tcnl28h"
       data-slot="breadcrumb-item"
       className={cn("inline-flex items-center gap-1", className)}
       {...props}
@@ -58,7 +58,7 @@ function BreadcrumbLink({
   const Comp = asChild ? Slot.Root : "a"
 
   return (
-    <Comp
+    <Comp data-vid="1aoajcn"
       data-slot="breadcrumb-link"
       className={cn("transition-colors hover:text-foreground", className)}
       {...props}
@@ -71,7 +71,7 @@ function BreadcrumbPage({
   ...props
 }: React.ComponentProps<"span">) {
   return (
-    <span
+    <span data-vid="tss3tjd"
       data-slot="breadcrumb-page"
       role="link"
       aria-disabled="true"
@@ -88,7 +88,7 @@ function BreadcrumbSeparator({
   ...props
 }: React.ComponentProps<"li">) {
   return (
-    <li
+    <li data-vid="csxyizw"
       data-slot="breadcrumb-separator"
       role="presentation"
       aria-hidden="true"
@@ -96,7 +96,7 @@ function BreadcrumbSeparator({
       {...props}
     >
       {children ?? (
-        <ChevronRightIcon />
+        <ChevronRightIcon data-vid="adrqbt9" />
       )}
     </li>
   )
@@ -108,7 +108,7 @@ function BreadcrumbEllipsis({
 }: React.ComponentProps<"span">) {
   const t = useChrome()
   return (
-    <span
+    <span data-vid="lasl6bs"
       data-slot="breadcrumb-ellipsis"
       role="presentation"
       aria-hidden="true"
@@ -118,9 +118,9 @@ function BreadcrumbEllipsis({
       )}
       {...props}
     >
-      <MoreHorizontalIcon
+      <MoreHorizontalIcon data-vid="0tpwhkh"
       />
-      <span className="sr-only">{t("kit.breadcrumb.more")}</span>
+      <span data-vid="1nxfgof" className="sr-only">{t("kit.breadcrumb.more")}</span>
     </span>
   )
 }

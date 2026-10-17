@@ -160,13 +160,13 @@ export function WelcomeScreenContainer(
   return (
     <>
       {loading ? (
-        <ScreenLoading />
+        <ScreenLoading data-vid="wat3izs" />
       ) : loadError !== null ? (
-        <ScreenError error={loadError} onRetry={reload} />
+        <ScreenError data-vid="f0f6i3v" error={loadError} onRetry={reload} />
       ) : (
         <>
           {truncatedCap !== null && (
-            <div
+            <div data-vid="jhx2oue"
               role="status"
               data-truncation-banner=""
               className="border-b border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-900"
@@ -174,7 +174,7 @@ export function WelcomeScreenContainer(
               {t('_app.truncated', { limit: truncatedCap.toLocaleString() })}
             </div>
           )}
-          <View {...vm} />
+          <View data-vid="ay3gpli" {...vm} />
         </>
       )}
     </>
@@ -184,5 +184,5 @@ export function WelcomeScreenContainer(
 // THE ROUTE MODULE. `routes.config.tsx` lazy-imports this file and needs a prop-less
 // `export default`: it binds the container to its view and does nothing else.
 export default function WelcomeScreenRoute(): React.ReactElement {
-  return <WelcomeScreenContainer view={WelcomeView} />;
+  return <WelcomeScreenContainer data-vid="avycsp1" view={WelcomeView} />;
 }

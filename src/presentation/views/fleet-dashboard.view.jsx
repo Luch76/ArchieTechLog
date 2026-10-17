@@ -201,10 +201,10 @@ export function FleetDashboardView(props) {
           <h2 data-vid="1dedb7e3" className="type-section">{enumIs(filter, "open") ? t('fleet-dashboard.fd1ff93f') : t('fleet-dashboard.272899b8')}</h2>
           <p data-vid="aa686847" className="type-caption text-text-muted tabular-nums">{t('fleet-dashboard.d604310a')} {expiryRows.length} {t('fleet-dashboard.28391d3b')} {enumIs(filter, "open") ? openCount : deferredCount}</p>
         </div>
-        <p className="type-meta flex flex-wrap gap-x-4 gap-y-1 text-text-body tabular-nums">
-          <span><span className="type-eyebrow text-text-muted">Open</span> {openCount} awaiting controller review</span>
-          <span><span className="type-eyebrow text-text-muted">Deferred</span> {deferredCount} under an MEL deferral</span>
-          <span><span className="type-eyebrow text-text-muted">Overdue</span> {DefectReport.filter((d) => enumIs(d.status, "deferred", "DefectReport.status") && d.deferralDueAt && Date.parse(d.deferralDueAt) < ASOF).length}</span>
+        <p data-vid="aoz2b2o" className="type-meta flex flex-wrap gap-x-4 gap-y-1 text-text-body tabular-nums">
+          <span data-vid="ynejibp"><span data-vid="x01inlp" className="type-eyebrow text-text-muted">Open</span> {openCount} awaiting controller review</span>
+          <span data-vid="vjq343a"><span data-vid="4rqgaqv" className="type-eyebrow text-text-muted">Deferred</span> {deferredCount} under an MEL deferral</span>
+          <span data-vid="47teomm"><span data-vid="602tg7a" className="type-eyebrow text-text-muted">Overdue</span> {DefectReport.filter((d) => enumIs(d.status, "deferred", "DefectReport.status") && d.deferralDueAt && Date.parse(d.deferralDueAt) < ASOF).length}</span>
         </p>
         <div data-vid="dcc83a18" className="overflow-x-auto border border-border bg-card rounded-card">
           {expiryRows.length === 0 ? (
@@ -213,16 +213,16 @@ export function FleetDashboardView(props) {
             <Table data-vid="cd20ffda">
               <TableHeader data-vid="5304ac5a">
                 <TableRow data-vid="8bd940ec">
-                  <TableHead className="type-eyebrow">Aircraft</TableHead>
-                  <TableHead className="type-eyebrow">Status</TableHead>
-                  <TableHead className="type-eyebrow">Defect description</TableHead>
-                  <TableHead className="type-eyebrow">ATA chapter</TableHead>
-                  <TableHead className="type-eyebrow">ATA section</TableHead>
-                  <TableHead className="type-eyebrow">MEL code</TableHead>
-                  <TableHead className="type-eyebrow">Reported date</TableHead>
-                  <TableHead className="type-eyebrow text-right">Deferral days</TableHead>
-                  <TableHead className="type-eyebrow">Projected due date</TableHead>
-                  <TableHead className="type-eyebrow text-right">Assessment</TableHead>
+                  <TableHead data-vid="kwxb30t" className="type-eyebrow">Aircraft</TableHead>
+                  <TableHead data-vid="zo9dtgi" className="type-eyebrow">Status</TableHead>
+                  <TableHead data-vid="6kpxsbn" className="type-eyebrow">Defect description</TableHead>
+                  <TableHead data-vid="whws2pz" className="type-eyebrow">ATA chapter</TableHead>
+                  <TableHead data-vid="jz0xuop" className="type-eyebrow">ATA section</TableHead>
+                  <TableHead data-vid="svso6h8" className="type-eyebrow">MEL code</TableHead>
+                  <TableHead data-vid="0fnm3a6" className="type-eyebrow">Reported date</TableHead>
+                  <TableHead data-vid="k5v5rch" className="type-eyebrow text-right">Deferral days</TableHead>
+                  <TableHead data-vid="dgxrdsf" className="type-eyebrow">Projected due date</TableHead>
+                  <TableHead data-vid="jtbjtdt" className="type-eyebrow text-right">Assessment</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody data-vid="212f0eaa">
@@ -237,26 +237,26 @@ export function FleetDashboardView(props) {
                       <TableCell data-vid="13437316" className="whitespace-nowrap">
                         <a data-vid="d5e80869" href={href("aircraft-detail", { id: d.aircraftId })} className="type-mono-id inline-flex min-h-6 items-center text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">{ac?.tailNumber ?? "—"}</a>
                       </TableCell>
-                      <TableCell className="type-meta whitespace-nowrap">{isOpenD(d) ? "Open" : "Deferred"}</TableCell>
-                      <TableCell className="type-meta max-w-64 truncate text-text-body">{d.symptom ?? d.writeUp ?? "—"}</TableCell>
-                      <TableCell className="type-mono-id whitespace-nowrap">{d.ataChapter ?? (d.ataCode ?? "—").split(" ")[0].split("-")[0]}</TableCell>
-                      <TableCell className="type-mono-id whitespace-nowrap">{d.ataSection ?? (d.ataCode ?? "—").split(" ")[0].split("-")[1] ?? "—"}</TableCell>
-                      <TableCell className="type-mono-id whitespace-nowrap">{(props.MelItem ?? []).find((m) => m.id === d.melItemId)?.itemCode ?? "—"}</TableCell>
-                      <TableCell className="whitespace-nowrap">
-                        <DateValue value={d.reportedAt ?? d.createdAt} kind="date" />
+                      <TableCell data-vid="asta5nf" className="type-meta whitespace-nowrap">{isOpenD(d) ? "Open" : "Deferred"}</TableCell>
+                      <TableCell data-vid="g1715tr" className="type-meta max-w-64 truncate text-text-body">{d.symptom ?? d.writeUp ?? "—"}</TableCell>
+                      <TableCell data-vid="xecsvcf" className="type-mono-id whitespace-nowrap">{d.ataChapter ?? (d.ataCode ?? "—").split(" ")[0].split("-")[0]}</TableCell>
+                      <TableCell data-vid="dimf62q" className="type-mono-id whitespace-nowrap">{d.ataSection ?? (d.ataCode ?? "—").split(" ")[0].split("-")[1] ?? "—"}</TableCell>
+                      <TableCell data-vid="io0mnm8" className="type-mono-id whitespace-nowrap">{(props.MelItem ?? []).find((m) => m.id === d.melItemId)?.itemCode ?? "—"}</TableCell>
+                      <TableCell data-vid="6mgt9ni" className="whitespace-nowrap">
+                        <DateValue data-vid="oxdvb8v" value={d.reportedAt ?? d.createdAt} kind="date" />
                       </TableCell>
-                      <TableCell className={cn("text-right whitespace-nowrap tabular-nums type-meta", tone)}>
+                      <TableCell data-vid="khyw18d" className={cn("text-right whitespace-nowrap tabular-nums type-meta", tone)}>
                         {days == null || isOpenD(d) ? "—" : left}
                       </TableCell>
-                      <TableCell className="whitespace-nowrap">
-                        {d.deferralDueAt ? <DateValue value={d.deferralDueAt} kind="date" /> : "—"}
+                      <TableCell data-vid="as9xp23" className="whitespace-nowrap">
+                        {d.deferralDueAt ? <DateValue data-vid="prmtp10" value={d.deferralDueAt} kind="date" /> : "—"}
                       </TableCell>
-                      <TableCell className="text-right whitespace-nowrap">
-                        <a href="#review-queue" className="type-meta inline-flex min-h-6 items-center text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">
+                      <TableCell data-vid="tdunh8n" className="text-right whitespace-nowrap">
+                        <a data-vid="bvj3roy" href="#review-queue" className="type-meta inline-flex min-h-6 items-center text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">
                           {enumIs(d.status, "open", "DefectReport.status") ? "Add assessment" : "View assessment"}
                         </a>
                         {props.onDraftAssessment && (
-                          <Button type="button" variant="outline" size="sm" className="ml-2" disabled={aiBusy} onClick={() => assessWithAi(d)}>
+                          <Button data-vid="dqhar3h" type="button" variant="outline" size="sm" className="ml-2" disabled={aiBusy} onClick={() => assessWithAi(d)}>
                             {aiBusy && aiFor === d.id ? "Assessing…" : "Assess with AI"}
                           </Button>
                         )}
@@ -269,12 +269,12 @@ export function FleetDashboardView(props) {
           )}
         </div>
         {aiFor && (
-          <div role="status" aria-live="polite" className="flex flex-col gap-2 border border-border bg-card p-(--card-padding) rounded-card">
-            <p className="type-eyebrow text-text-muted">AI assessment{aiDefect ? ` · ${aircraftById[aiDefect.aircraftId]?.tailNumber ?? ""} ${(aiDefect.ataCode ?? "").split(" ")[0]}` : ""}</p>
-            {aiBusy && <p className="type-meta text-text-muted">Preparing the assessment…</p>}
-            {aiError && <p role="alert" className="type-meta text-status-danger-ink">{aiError}</p>}
-            {aiText && <p className="type-body whitespace-pre-wrap">{aiText}</p>}
-            <p className="type-caption text-text-muted">Advisory only. The controller reviews it and records the final assessment in the Review Queue below.</p>
+          <div data-vid="n1k4s1x" role="status" aria-live="polite" className="flex flex-col gap-2 border border-border bg-card p-(--card-padding) rounded-card">
+            <p data-vid="dzmhohv" className="type-eyebrow text-text-muted">AI assessment{aiDefect ? ` · ${aircraftById[aiDefect.aircraftId]?.tailNumber ?? ""} ${(aiDefect.ataCode ?? "").split(" ")[0]}` : ""}</p>
+            {aiBusy && <p data-vid="negg23q" className="type-meta text-text-muted">Preparing the assessment…</p>}
+            {aiError && <p data-vid="pkj03qj" role="alert" className="type-meta text-status-danger-ink">{aiError}</p>}
+            {aiText && <p data-vid="8ni7sdb" className="type-body whitespace-pre-wrap">{aiText}</p>}
+            <p data-vid="334d04z" className="type-caption text-text-muted">Advisory only. The controller reviews it and records the final assessment in the Review Queue below.</p>
           </div>
         )}
       </section>

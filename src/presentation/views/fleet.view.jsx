@@ -61,13 +61,13 @@ const columns = [
     accessorKey: "openCount",
     header: "Open",
     enableGlobalFilter: false,
-    cell: ({ getValue }) => <span className="type-body tabular-nums">{getValue()}</span>,
+    cell: ({ getValue }) => <span data-vid="8sce38u" className="type-body tabular-nums">{getValue()}</span>,
   },
   {
     accessorKey: "deferredCount",
     header: "Deferred",
     enableGlobalFilter: false,
-    cell: ({ getValue }) => <span className="type-body tabular-nums">{getValue()}</span>,
+    cell: ({ getValue }) => <span data-vid="zvellbs" className="type-body tabular-nums">{getValue()}</span>,
   },
 ];
 

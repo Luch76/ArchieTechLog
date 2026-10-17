@@ -75,10 +75,10 @@ export function AccountSessionsView(props: AccountSessionsViewProps) {
 
   if (props.status === 'memory') {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>{t('_app.sessions.title')}</CardTitle>
-          <CardDescription>{t('_app.sessions.memory')}</CardDescription>
+      <Card data-vid="lm2u45j">
+        <CardHeader data-vid="976deer">
+          <CardTitle data-vid="ovmfaa7">{t('_app.sessions.title')}</CardTitle>
+          <CardDescription data-vid="shmuwxi">{t('_app.sessions.memory')}</CardDescription>
         </CardHeader>
       </Card>
     );
@@ -90,75 +90,75 @@ export function AccountSessionsView(props: AccountSessionsViewProps) {
     row.device ?? row.userAgent ?? t('_app.sessions.unknown-device');
 
   return (
-    <Card aria-busy={loading || busy}>
-      <CardHeader>
-        <CardTitle>{t('_app.sessions.title')}</CardTitle>
-        <CardDescription>{t('_app.sessions.desc')}</CardDescription>
+    <Card data-vid="aoddayu" aria-busy={loading || busy}>
+      <CardHeader data-vid="oot9768">
+        <CardTitle data-vid="1m1adyf">{t('_app.sessions.title')}</CardTitle>
+        <CardDescription data-vid="qz0z3d2">{t('_app.sessions.desc')}</CardDescription>
       </CardHeader>
-      <CardContent className="grid gap-4">
+      <CardContent data-vid="ylj18si" className="grid gap-4">
         {loading ? (
-          <div role="status" aria-busy="true" className="grid gap-2">
-            <span className="sr-only">{t('_app.sessions.loading')}</span>
+          <div data-vid="vl4e4wj" role="status" aria-busy="true" className="grid gap-2">
+            <span data-vid="pvwi9x8" className="sr-only">{t('_app.sessions.loading')}</span>
             {SKELETON_ROWS.map((n) => (
-              <Skeleton key={n} className="h-10 w-full" />
+              <Skeleton data-vid="uty97gw" key={n} className="h-10 w-full" />
             ))}
           </div>
         ) : null}
         {props.status === 'unsupported' ? (
-          <Alert role="status">
-            <AlertDescription>{t('_app.sessions.unavailable')}</AlertDescription>
+          <Alert data-vid="46y8f91" role="status">
+            <AlertDescription data-vid="rrabcao">{t('_app.sessions.unavailable')}</AlertDescription>
           </Alert>
         ) : null}
         {props.status === 'error' ? (
-          <Alert variant="destructive">
-            <AlertDescription className="flex flex-wrap items-center justify-between gap-2">
-              <span>{t(props.signInAgain ? '_app.sessions.error-sign-in' : '_app.sessions.error')}</span>
-              <Button type="button" variant="outline" size="sm" onClick={props.onRetry}>
+          <Alert data-vid="596fero" variant="destructive">
+            <AlertDescription data-vid="v2n9zxt" className="flex flex-wrap items-center justify-between gap-2">
+              <span data-vid="uhdrrne">{t(props.signInAgain ? '_app.sessions.error-sign-in' : '_app.sessions.error')}</span>
+              <Button data-vid="ve1dtye" type="button" variant="outline" size="sm" onClick={props.onRetry}>
                 {t('_app.sessions.retry')}
               </Button>
             </AlertDescription>
           </Alert>
         ) : null}
         {props.status === 'ready' && props.devices.length === 0 ? (
-          <p role="status" className="text-sm text-muted-foreground">
+          <p data-vid="y2l8g0y" role="status" className="text-sm text-muted-foreground">
             {t('_app.sessions.empty')}
           </p>
         ) : null}
         {props.status === 'ready' && props.devices.length > 0 ? (
-          <Table>
-            <TableCaption>{t('_app.sessions.caption')}</TableCaption>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{t('_app.sessions.col-device')}</TableHead>
-                <TableHead>{t('_app.sessions.col-last-active')}</TableHead>
-                <TableHead>{t('_app.sessions.col-created')}</TableHead>
-                <TableHead className="text-right">
-                  <span className="sr-only">{t('_app.sessions.col-actions')}</span>
+          <Table data-vid="u1b22y8">
+            <TableCaption data-vid="nczfgh9">{t('_app.sessions.caption')}</TableCaption>
+            <TableHeader data-vid="t7wq03g">
+              <TableRow data-vid="dolfyvy">
+                <TableHead data-vid="zv1g2sq">{t('_app.sessions.col-device')}</TableHead>
+                <TableHead data-vid="r95ww0a">{t('_app.sessions.col-last-active')}</TableHead>
+                <TableHead data-vid="uyxvtvm">{t('_app.sessions.col-created')}</TableHead>
+                <TableHead data-vid="3fisp0s" className="text-right">
+                  <span data-vid="yuuhdfq" className="sr-only">{t('_app.sessions.col-actions')}</span>
                 </TableHead>
               </TableRow>
             </TableHeader>
-            <TableBody>
+            <TableBody data-vid="fzwxn45">
               {props.devices.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell className="font-medium">
-                    <span className="inline-flex flex-wrap items-center gap-2">
-                      <span>{labelOf(row)}</span>
+                <TableRow data-vid="w2ypc1n" key={row.id}>
+                  <TableCell data-vid="oitc49o" className="font-medium">
+                    <span data-vid="uvujzv7" className="inline-flex flex-wrap items-center gap-2">
+                      <span data-vid="jhn7mjt">{labelOf(row)}</span>
                       {row.current ? (
-                        <Badge variant="secondary">{t('_app.sessions.this-device')}</Badge>
+                        <Badge data-vid="ptnp765" variant="secondary">{t('_app.sessions.this-device')}</Badge>
                       ) : null}
                     </span>
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell data-vid="ao4l9ln" className="text-muted-foreground">
                     {formatDateTime(row.lastUsedAt ?? row.createdAt)}
                   </TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell data-vid="4w6g2c7" className="text-muted-foreground">
                     {formatDateTime(row.createdAt)}
                   </TableCell>
-                  <TableCell className="text-right">
+                  <TableCell data-vid="p6ov74i" className="text-right">
                     {row.current ? null : (
-                      <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                          <Button
+                      <AlertDialog data-vid="jjlan7d">
+                        <AlertDialogTrigger data-vid="y8ol12c" asChild>
+                          <Button data-vid="9tvx24z"
                             type="button"
                             variant="outline"
                             size="sm"
@@ -169,17 +169,17 @@ export function AccountSessionsView(props: AccountSessionsViewProps) {
                             {t('_app.sessions.revoke')}
                           </Button>
                         </AlertDialogTrigger>
-                        <AlertDialogContent>
-                          <AlertDialogHeader>
-                            <AlertDialogTitle>{t('_app.sessions.revoke-confirm-title')}</AlertDialogTitle>
-                            <AlertDialogDescription>
+                        <AlertDialogContent data-vid="goj513b">
+                          <AlertDialogHeader data-vid="auzf5cs">
+                            <AlertDialogTitle data-vid="x9ytyd0">{t('_app.sessions.revoke-confirm-title')}</AlertDialogTitle>
+                            <AlertDialogDescription data-vid="2scdikl">
                               {t('_app.sessions.revoke-confirm-body', { device: labelOf(row) })}
                             </AlertDialogDescription>
                           </AlertDialogHeader>
-                          <AlertDialogFooter>
-                            <AlertDialogCancel>{t('_app.sessions.cancel')}</AlertDialogCancel>
-                            <AlertDialogAction asChild>
-                              <Button
+                          <AlertDialogFooter data-vid="6p218j1">
+                            <AlertDialogCancel data-vid="p9wvsj1">{t('_app.sessions.cancel')}</AlertDialogCancel>
+                            <AlertDialogAction data-vid="cmzao1j" asChild>
+                              <Button data-vid="g6n301s"
                                 type="button"
                                 variant="destructive"
                                 disabled={busy}
@@ -199,10 +199,10 @@ export function AccountSessionsView(props: AccountSessionsViewProps) {
           </Table>
         ) : null}
       </CardContent>
-      <CardFooter>
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button
+      <CardFooter data-vid="7wqq9xz">
+        <AlertDialog data-vid="7lo0fsg">
+          <AlertDialogTrigger data-vid="b0entcm" asChild>
+            <Button data-vid="cj5alr9"
               type="button"
               variant="destructive"
               disabled={loading || busy}
@@ -211,17 +211,17 @@ export function AccountSessionsView(props: AccountSessionsViewProps) {
               {t('_app.sessions.sign-out-all')}
             </Button>
           </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>{t('_app.sessions.sign-out-all-confirm-title')}</AlertDialogTitle>
-              <AlertDialogDescription>
+          <AlertDialogContent data-vid="8aqew79">
+            <AlertDialogHeader data-vid="k6q66he">
+              <AlertDialogTitle data-vid="jg4l9ta">{t('_app.sessions.sign-out-all-confirm-title')}</AlertDialogTitle>
+              <AlertDialogDescription data-vid="q3t6nxy">
                 {t('_app.sessions.sign-out-all-confirm-body')}
               </AlertDialogDescription>
             </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>{t('_app.sessions.cancel')}</AlertDialogCancel>
-              <AlertDialogAction asChild>
-                <Button
+            <AlertDialogFooter data-vid="oy9m7xb">
+              <AlertDialogCancel data-vid="o7p2b1o">{t('_app.sessions.cancel')}</AlertDialogCancel>
+              <AlertDialogAction data-vid="5wuebvd" asChild>
+                <Button data-vid="ac2cbce"
                   type="button"
                   variant="destructive"
                   disabled={props.signingOutAll}

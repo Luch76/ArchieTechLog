@@ -146,40 +146,40 @@ export function FleetFieldView(props) {
                 <Button data-vid="4d80f326" className="min-h-11">Add aircraft</Button>
               </DialogTrigger>
               <DialogContent data-vid="df6ba6ca">
-                <form onSubmit={submitAircraft} className="flex flex-col gap-(--component-gap)">
+                <form data-vid="pl2h3fj" onSubmit={submitAircraft} className="flex flex-col gap-(--component-gap)">
                   <DialogHeader data-vid="7a044cf7">
                     <DialogTitle data-vid="230bc21d">Add aircraft</DialogTitle>
                     <DialogDescription data-vid="84664548">
                       Add one aircraft to your organization's fleet.
                     </DialogDescription>
                   </DialogHeader>
-                  <div className="flex flex-col gap-1">
-                    <label htmlFor="new-aircraft-tail" className="type-meta">Tail number</label>
-                    <Input id="new-aircraft-tail" value={newTail} onChange={(e) => setNewTail(e.target.value)} placeholder="N123AB" autoComplete="off" className="min-h-11" />
+                  <div data-vid="7jy82tb" className="flex flex-col gap-1">
+                    <label data-vid="dhdb5vz" htmlFor="new-aircraft-tail" className="type-meta">Tail number</label>
+                    <Input data-vid="r5usyjv" id="new-aircraft-tail" value={newTail} onChange={(e) => setNewTail(e.target.value)} placeholder="N123AB" autoComplete="off" className="min-h-11" />
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <label htmlFor="new-aircraft-type" className="type-meta">Aircraft type</label>
-                    <Input id="new-aircraft-type" value={newType} onChange={(e) => setNewType(e.target.value)} placeholder="Boeing 737-800" autoComplete="off" className="min-h-11" />
+                  <div data-vid="c4cpxf6" className="flex flex-col gap-1">
+                    <label data-vid="mg14wix" htmlFor="new-aircraft-type" className="type-meta">Aircraft type</label>
+                    <Input data-vid="x1e0c1y" id="new-aircraft-type" value={newType} onChange={(e) => setNewType(e.target.value)} placeholder="Boeing 737-800" autoComplete="off" className="min-h-11" />
                   </div>
-                  <div className="flex flex-col gap-1">
-                    <span className="type-meta">Operating status</span>
-                    <Select value={newStatus} onValueChange={setNewStatus}>
-                      <SelectTrigger className="min-h-11" aria-label="Operating status">
-                        <SelectValue />
+                  <div data-vid="l313zle" className="flex flex-col gap-1">
+                    <span data-vid="vfjca1f" className="type-meta">Operating status</span>
+                    <Select data-vid="w6vwqvc" value={newStatus} onValueChange={setNewStatus}>
+                      <SelectTrigger data-vid="h1dp4up" className="min-h-11" aria-label="Operating status">
+                        <SelectValue data-vid="phiw6ug" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent data-vid="s645r6c">
                         {schema.enums.OperatingStatus.map((s) => (
-                          <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
+                          <SelectItem data-vid="ofvccde" key={s.value} value={s.value}>{s.label}</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
                   </div>
                   {formError !== "" && (
-                    <p role="alert" className="type-caption text-destructive">{formError}</p>
+                    <p data-vid="djzia2e" role="alert" className="type-caption text-destructive">{formError}</p>
                   )}
                   <DialogFooter data-vid="4abada26">
-                    <Button type="button" variant="ghost" className="min-h-11" onClick={() => setAddOpen(false)}>Cancel</Button>
-                    <Button type="submit" className="min-h-11" disabled={saving}>{saving ? "Adding..." : "Add aircraft"}</Button>
+                    <Button data-vid="uiucaax" type="button" variant="ghost" className="min-h-11" onClick={() => setAddOpen(false)}>Cancel</Button>
+                    <Button data-vid="2d7z90k" type="submit" className="min-h-11" disabled={saving}>{saving ? "Adding..." : "Add aircraft"}</Button>
                   </DialogFooter>
                 </form>
               </DialogContent>

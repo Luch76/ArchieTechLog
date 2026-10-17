@@ -19,17 +19,17 @@ function DashboardWithAi(props: AnyProps): React.ReactElement {
     drafter !== null
       ? { onDraftAssessment: (input: Parameters<typeof drafter.draft>[0]) => drafter.draft(input) }
       : {};
-  return <DashboardBase {...props} {...extra} />;
+  return <DashboardBase data-vid="fzd3quf" {...props} {...extra} />;
 }
 
 export default function FleetDashboardCombinedRoute(): React.ReactElement {
   return (
     <>
-      <FleetDashboardScreenContainer
+      <FleetDashboardScreenContainer data-vid="dvcol7p"
         view={DashboardWithAi as unknown as typeof FleetDashboardView}
       />
-      <section id="review-queue" aria-label="Review queue">
-        <ReviewQueueScreenContainer view={ReviewQueueView} />
+      <section data-vid="eztgu7b" id="review-queue" aria-label="Review queue">
+        <ReviewQueueScreenContainer data-vid="ho2sn2i" view={ReviewQueueView} />
       </section>
     </>
   );

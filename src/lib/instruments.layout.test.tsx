@@ -13,7 +13,7 @@ const rows: Ev[] = [
   { id: "b", title: "Holiday", startsAt: "2026-10-01T00:00:00Z", endsAt: "2026-10-02T00:00:00Z", allDay: true },
 ]
 const sched = (view: "week" | "month" | "day", extra: Record<string, unknown> = {}, data: Ev[] = rows) =>
-  renderToString(<Schedule rows={data} start="startsAt" end="endsAt" allDay="allDay" date="2026-10-01" today="2026-10-01" defaultView={view} {...extra} />)
+  renderToString(<Schedule data-vid="8rod4yu" rows={data} start="startsAt" end="endsAt" allDay="allDay" date="2026-10-01" today="2026-10-01" defaultView={view} {...extra} />)
 const eventBoxes = (html: string) => Array.from(html.matchAll(/<(?:button|div|a)\b[^>]*data-event-id="[^"]*"[^>]*>/g), (m) => m[0])
 
 describe("Schedule event boxes", () => {
@@ -119,13 +119,13 @@ describe("assignClusterLanes", () => {
 describe("Board layout", () => {
   const data = [{ id: "1", title: "Card", status: "Open" }]
   test("numeric columnWidth writes px", () => {
-    expect(renderToString(<Board rows={data} columns={["Open"]} columnWidth={288} />)).toContain("--board-col:288px")
+    expect(renderToString(<Board data-vid="8finhad" rows={data} columns={["Open"]} columnWidth={288} />)).toContain("--board-col:288px")
   })
   test("string columnWidth passes through", () => {
-    expect(renderToString(<Board rows={data} columns={["Open"]} columnWidth="18rem" />)).toContain("--board-col:18rem")
+    expect(renderToString(<Board data-vid="png1fa7" rows={data} columns={["Open"]} columnWidth="18rem" />)).toContain("--board-col:18rem")
   })
   test("row of columns is top-aligned on mobile, stretched on desktop", () => {
-    const html = renderToString(<Board rows={data} columns={["Open"]} />)
+    const html = renderToString(<Board data-vid="hvl32gd" rows={data} columns={["Open"]} />)
     expect(html).toContain("items-start")
     expect(html).toContain("md:items-stretch")
   })

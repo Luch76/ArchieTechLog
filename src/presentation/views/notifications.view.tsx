@@ -39,25 +39,25 @@ export function NotificationsView(props: NotificationsScreenViewModel): React.Re
   const filtered = tab !== "all" || q !== "";
 
   return (
-    <MotionConfig reducedMotion="user">
-      <div className="flex flex-col gap-(--component-gap) px-(--container-padding) py-(--section-gap)">
-        <header className="flex flex-wrap items-end justify-between gap-(--component-gap)">
-          <div className="flex min-w-0 flex-col gap-1">
-            <h1 className="type-page-title">{t("notifications.78801183")}</h1>
-            <p className="type-meta text-text-muted tabular-nums">
+    <MotionConfig data-vid="jyb8ayc" reducedMotion="user">
+      <div data-vid="xhnouim" className="flex flex-col gap-(--component-gap) px-(--container-padding) py-(--section-gap)">
+        <header data-vid="t4lrv5y" className="flex flex-wrap items-end justify-between gap-(--component-gap)">
+          <div data-vid="5ve9m3y" className="flex min-w-0 flex-col gap-1">
+            <h1 data-vid="koidnla" className="type-page-title">{t("notifications.78801183")}</h1>
+            <p data-vid="r82rh9d" className="type-meta text-text-muted tabular-nums">
               — {t("notifications.50cc2b76")} {props.notificationsTotal}
             </p>
           </div>
-          <Button variant="outline" className="min-h-11" disabled>
+          <Button data-vid="l3qun9f" variant="outline" className="min-h-11" disabled>
             {t("notifications.d7592650")}
           </Button>
-          <p className="type-caption text-text-muted">{t("_reason.escritura-no-disponible")}</p>
+          <p data-vid="vn0xa0w" className="type-caption text-text-muted">{t("_reason.escritura-no-disponible")}</p>
         </header>
 
-        <div className="flex flex-col gap-3">
-          <div className="flex h-11 items-center gap-2 rounded-control border border-border-strong bg-background px-3 focus-within:ring-2 focus-within:ring-ring">
-            <Search className="size-4 shrink-0 text-text-muted" aria-hidden />
-            <Input
+        <div data-vid="jhmw82z" className="flex flex-col gap-3">
+          <div data-vid="fxwsncy" className="flex h-11 items-center gap-2 rounded-control border border-border-strong bg-background px-3 focus-within:ring-2 focus-within:ring-ring">
+            <Search data-vid="2mj62fp" className="size-4 shrink-0 text-text-muted" aria-hidden />
+            <Input data-vid="wnjmwll"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={t("notifications.3467c01d")}
@@ -65,59 +65,59 @@ export function NotificationsView(props: NotificationsScreenViewModel): React.Re
               className="h-full min-w-0 flex-1 border-0 bg-transparent px-0 focus-visible:ring-0"
             />
           </div>
-          <div className="overflow-x-auto">
-            <Tabs value={tab} onValueChange={setTab}>
-              <TabsList variant="line" className="w-max">
-                <TabsTrigger value="all" className="min-h-11">{t("notifications.a52ace42")} {props.notificationsTotal}</TabsTrigger>
-                <TabsTrigger value="unread" className="min-h-11">{t("notifications.1b9f384c")} —</TabsTrigger>
-                <TabsTrigger value="account" className="min-h-11">{t("notifications.4fc94a35")}</TabsTrigger>
-                <TabsTrigger value="activity" className="min-h-11">{t("notifications.38da1505")}</TabsTrigger>
+          <div data-vid="7keb5gt" className="overflow-x-auto">
+            <Tabs data-vid="sc8ehgy" value={tab} onValueChange={setTab}>
+              <TabsList data-vid="as679mv" variant="line" className="w-max">
+                <TabsTrigger data-vid="pi8d359" value="all" className="min-h-11">{t("notifications.a52ace42")} {props.notificationsTotal}</TabsTrigger>
+                <TabsTrigger data-vid="ccvqepx" value="unread" className="min-h-11">{t("notifications.1b9f384c")} —</TabsTrigger>
+                <TabsTrigger data-vid="2lyo8ga" value="account" className="min-h-11">{t("notifications.4fc94a35")}</TabsTrigger>
+                <TabsTrigger data-vid="bd44upn" value="activity" className="min-h-11">{t("notifications.38da1505")}</TabsTrigger>
               </TabsList>
             </Tabs>
           </div>
         </div>
 
-        <section aria-label={t("notifications.f21d907b")} className="flex flex-col gap-(--component-gap)">
+        <section data-vid="9actibb" aria-label={t("notifications.f21d907b")} className="flex flex-col gap-(--component-gap)">
           {props.loading && (
-            <div className="flex flex-col gap-2">
+            <div data-vid="xckeegl" className="flex flex-col gap-2">
               {[0, 1, 2, 3].map((i) => (
-                <Skeleton key={i} className="h-14 w-full" />
+                <Skeleton data-vid="21kvotv" key={i} className="h-14 w-full" />
               ))}
             </div>
           )}
 
           {!props.loading && props.error !== null && (
-            <Alert variant="destructive">
-              <TriangleAlert className="size-4" aria-hidden />
-              <AlertTitle>{t("notifications.5a1247ec")}</AlertTitle>
-              <AlertDescription>
-                <span>{t("notifications.481859b6")}</span>
+            <Alert data-vid="yh7xysm" variant="destructive">
+              <TriangleAlert data-vid="zh14mgj" className="size-4" aria-hidden />
+              <AlertTitle data-vid="osg19c5">{t("notifications.5a1247ec")}</AlertTitle>
+              <AlertDescription data-vid="xywhqzc">
+                <span data-vid="0k9gbg8">{t("notifications.481859b6")}</span>
               </AlertDescription>
             </Alert>
           )}
 
           {!props.loading && props.error === null && rows.length === 0 && (
-            <EmptyState
+            <EmptyState data-vid="bxjkxoj"
               title={t("notifications.37ecf360")}
               description={t("notifications.9fbebba3")}
             />
           )}
 
           {!props.loading && props.error === null && rows.length > 0 && visible.length === 0 && (
-            <EmptyState
+            <EmptyState data-vid="izdq505"
               title={q ? `${t("notifications.c3d4ba31")}${query}"` : t("notifications.d1f28521")}
               description={t("notifications.14db0b36")}
             />
           )}
 
           {!props.loading && props.error === null && visible.length > 0 && (
-            <ul>
-              <AnimatePresence initial={false}>
+            <ul data-vid="humntt1">
+              <AnimatePresence data-vid="1bhq1w8" initial={false}>
                 {visible.map((n) => {
                   const expanded = open === n.id;
                   const inner = (
                     <>
-                      <span
+                      <span data-vid="95clmwb"
                         className={
                           n.isRead
                             ? "size-2 shrink-0 rounded-full border border-border-strong"
@@ -125,22 +125,22 @@ export function NotificationsView(props: NotificationsScreenViewModel): React.Re
                         }
                         aria-hidden
                       />
-                      <span className="flex min-w-0 flex-1 flex-col">
-                        <span className={n.isRead ? "type-row-title min-w-0 break-words text-text-body" : "type-row-title min-w-0 break-words text-foreground"}>
+                      <span data-vid="dbyh7as" className="flex min-w-0 flex-1 flex-col">
+                        <span data-vid="zt3ayyr" className={n.isRead ? "type-row-title min-w-0 break-words text-text-body" : "type-row-title min-w-0 break-words text-foreground"}>
                           {n.title}
                         </span>
-                        <span className="type-meta truncate text-text-muted">
+                        <span data-vid="upx8mnu" className="type-meta truncate text-text-muted">
                           {n.category}
                           {n.isRead ? "" : t("notifications.4c904152")}
                         </span>
                       </span>
-                      <time dateTime={n.createdAt} className="type-mono-id shrink-0 whitespace-nowrap text-text-muted">
+                      <time data-vid="bhgpybz" dateTime={n.createdAt} className="type-mono-id shrink-0 whitespace-nowrap text-text-muted">
                         {formatDateTime(n.createdAt)}
                       </time>
                     </>
                   );
                   return (
-                    <motion.li
+                    <motion.li data-vid="en1773e"
                       key={n.id}
                       layout
                       initial={false}
@@ -149,30 +149,30 @@ export function NotificationsView(props: NotificationsScreenViewModel): React.Re
                       className="border-b border-border"
                     >
                       {n.actionUrl ? (
-                        <div className="flex min-h-14 items-center gap-3 py-2">
+                        <div data-vid="4vc7bve" className="flex min-h-14 items-center gap-3 py-2">
                           {inner}
-                          <a
+                          <a data-vid="ku8lvqz"
                             href={n.actionUrl}
                             className="type-meta inline-flex min-h-11 shrink-0 items-center gap-1 text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring"
                           >
                             {n.actionText ?? t("notifications.ed077f3d")}
-                            <ArrowUpRight className="size-4" aria-hidden />
+                            <ArrowUpRight data-vid="2jjn00t" className="size-4" aria-hidden />
                           </a>
                         </div>
                       ) : (
                         <>
-                          <button
+                          <button data-vid="vq6z5jc"
                             type="button"
                             aria-expanded={expanded}
                             onClick={() => setOpen(expanded ? null : n.id)}
                             className="flex min-h-14 w-full items-center gap-3 py-2 text-left focus-visible:ring-2 focus-visible:ring-ring"
                           >
                             {inner}
-                            <ChevronDown className={expanded ? "size-4 shrink-0 rotate-180 text-text-muted" : "size-4 shrink-0 text-text-muted"} aria-hidden />
+                            <ChevronDown data-vid="ih8llcg" className={expanded ? "size-4 shrink-0 rotate-180 text-text-muted" : "size-4 shrink-0 text-text-muted"} aria-hidden />
                           </button>
                           {expanded && (
-                            <p className="type-body pb-3 pl-5 text-text-body">
-                              {n.category} {t("notifications.0d985eee")} <span className="type-mono-id">{formatDateTime(n.createdAt)}</span>.
+                            <p data-vid="uzw31xp" className="type-body pb-3 pl-5 text-text-body">
+                              {n.category} {t("notifications.0d985eee")} <span data-vid="lbf16ka" className="type-mono-id">{formatDateTime(n.createdAt)}</span>.
                             </p>
                           )}
                         </>
@@ -185,7 +185,7 @@ export function NotificationsView(props: NotificationsScreenViewModel): React.Re
           )}
 
           {!props.loading && props.error === null && filtered && visible.length > 0 && (
-            <p className="type-caption text-text-muted tabular-nums">
+            <p data-vid="ifyxatc" className="type-caption text-text-muted tabular-nums">
               {t("notifications.d604310a")} {visible.length} {t("notifications.28391d3b")} {props.notificationsTotal}
             </p>
           )}

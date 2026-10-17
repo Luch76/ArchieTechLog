@@ -13,36 +13,36 @@ export default function Screen() {
   const _j1 = "Create, rotate, or revoke the API credentials connected systems use";
   const _j2 = "Review what each connection submitted and received, including failures";
   return (
-    <div className="archie-plan flex w-full flex-1 flex-col bg-background text-foreground" data-archie-plan-card="v1" data-agent-id="screen:integrations">
-      <div className="archie-plan__band flex flex-wrap items-center gap-x-3 gap-y-1 border-b px-6 py-3 border-border bg-status-pending-bg text-status-pending-ink">
-        <span aria-hidden="true" className="archie-plan__dot size-2 shrink-0 rounded-full bg-status-pending"></span>
-        <span className="type-meta font-semibold">This screen has not been built yet</span>
-        <span className="type-meta opacity-90">Everything below is Archie's plan for it, not working software</span>
+    <div data-vid="rczfwqg" className="archie-plan flex w-full flex-1 flex-col bg-background text-foreground" data-archie-plan-card="v1" data-agent-id="screen:integrations">
+      <div data-vid="lrdla12" className="archie-plan__band flex flex-wrap items-center gap-x-3 gap-y-1 border-b px-6 py-3 border-border bg-status-pending-bg text-status-pending-ink">
+        <span data-vid="uto1kkn" aria-hidden="true" className="archie-plan__dot size-2 shrink-0 rounded-full bg-status-pending"></span>
+        <span data-vid="yogohfx" className="type-meta font-semibold">This screen has not been built yet</span>
+        <span data-vid="wzx3dar" className="type-meta opacity-90">Everything below is Archie's plan for it, not working software</span>
       </div>
-      <div className="archie-plan__ground flex flex-1 p-3 md:p-5 bg-surface-sunken">
-        <div className="archie-plan__frame flex min-w-0 flex-1 overflow-hidden rounded-lg border border-dashed border-border-strong bg-background">
-          <div className="flex min-w-0 flex-1 flex-col lg:flex-row">
-            <div className="flex min-w-0 flex-1 flex-col items-start gap-5 p-6 md:p-8">
-              <p className="archie-plan__eyebrow type-eyebrow m-0 uppercase text-text-muted">{_eyebrow}</p>
-              <h1 className="archie-plan__title type-page-title m-0 text-foreground">{_title}</h1>
-              <p className="archie-plan__prose type-body m-0 max-w-prose text-text-body">{_purpose}</p>
-              <Button type="button" size="lg" data-archie-generate="" className="archie-plan__action">{_generate}</Button>
-              <div className="mt-auto flex flex-col items-start gap-3 pt-7">
-                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" className="archie-plan__mark opacity-40 text-status-pending">
-                  <path d="M15 12l-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9" />
-                  <path d="M17.64 15 22 10.64" />
-                  <path d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91" />
+      <div data-vid="gtrkjq9" className="archie-plan__ground flex flex-1 p-3 md:p-5 bg-surface-sunken">
+        <div data-vid="6bqcxfs" className="archie-plan__frame flex min-w-0 flex-1 overflow-hidden rounded-lg border border-dashed border-border-strong bg-background">
+          <div data-vid="9pgy7hq" className="flex min-w-0 flex-1 flex-col lg:flex-row">
+            <div data-vid="ztyfs0l" className="flex min-w-0 flex-1 flex-col items-start gap-5 p-6 md:p-8">
+              <p data-vid="b8tfjuf" className="archie-plan__eyebrow type-eyebrow m-0 uppercase text-text-muted">{_eyebrow}</p>
+              <h1 data-vid="4xztgrg" className="archie-plan__title type-page-title m-0 text-foreground">{_title}</h1>
+              <p data-vid="8z7cmmw" className="archie-plan__prose type-body m-0 max-w-prose text-text-body">{_purpose}</p>
+              <Button data-vid="897ayx3" type="button" size="lg" data-archie-generate="" className="archie-plan__action">{_generate}</Button>
+              <div data-vid="fz9dz35" className="mt-auto flex flex-col items-start gap-3 pt-7">
+                <svg data-vid="zd289vy" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" strokeLinejoin="round" className="archie-plan__mark opacity-40 text-status-pending">
+                  <path data-vid="fcbh3io" d="M15 12l-8.5 8.5a2.12 2.12 0 1 1-3-3L12 9" />
+                  <path data-vid="ab59gmh" d="M17.64 15 22 10.64" />
+                  <path data-vid="kt137ql" d="m20.91 11.7-1.25-1.25c-.6-.6-.93-1.4-.93-2.25v-.86L16.01 4.6a5.56 5.56 0 0 0-3.94-1.64H9l.92.82A6.18 6.18 0 0 1 12 8.4v1.56l2 2h2.47l2.26 1.91" />
                 </svg>
-                <span className="archie-plan__caption type-eyebrow font-semibold uppercase tracking-wide text-status-pending-ink">Prototype</span>
+                <span data-vid="ug0akxo" className="archie-plan__caption type-eyebrow font-semibold uppercase tracking-wide text-status-pending-ink">Prototype</span>
               </div>
             </div>
-            <div className="archie-plan__aside flex min-w-0 flex-1 flex-col gap-7 border-t p-6 md:p-8 lg:border-l lg:border-t-0 border-border">
-              <div className="flex flex-col gap-3">
-                <span className="archie-plan__label type-eyebrow uppercase text-text-subtle">What you'll do here</span>
-                <div className="flex flex-col gap-4">
-                  <span className="archie-plan__job type-row-title text-foreground">{_j0}</span>
-                  <span className="archie-plan__job type-row-title text-foreground">{_j1}</span>
-                  <span className="archie-plan__job type-row-title text-foreground">{_j2}</span>
+            <div data-vid="1o421v0" className="archie-plan__aside flex min-w-0 flex-1 flex-col gap-7 border-t p-6 md:p-8 lg:border-l lg:border-t-0 border-border">
+              <div data-vid="jcr61rl" className="flex flex-col gap-3">
+                <span data-vid="beay5rw" className="archie-plan__label type-eyebrow uppercase text-text-subtle">What you'll do here</span>
+                <div data-vid="urgzfq7" className="flex flex-col gap-4">
+                  <span data-vid="vr3z354" className="archie-plan__job type-row-title text-foreground">{_j0}</span>
+                  <span data-vid="mhdlsh7" className="archie-plan__job type-row-title text-foreground">{_j1}</span>
+                  <span data-vid="jdu229e" className="archie-plan__job type-row-title text-foreground">{_j2}</span>
                 </div>
               </div>
             </div>

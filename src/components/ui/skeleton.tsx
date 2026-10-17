@@ -6,7 +6,7 @@ function Skeleton({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div
+    <div data-vid="rt41985"
       data-slot="skeleton"
       className={cn("animate-pulse rounded-md bg-muted", className)}
       {...props}

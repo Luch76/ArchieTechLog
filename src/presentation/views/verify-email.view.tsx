@@ -25,18 +25,18 @@ export function VerifyEmailView(props: AuthViewModel): React.ReactElement {
   }
 
   return (
-    <main className="flex flex-1 flex-col items-center justify-center bg-background px-(--container-padding) py-(--section-gap)">
-      <div className="flex w-full max-w-md flex-col items-center gap-(--section-gap) text-center">
-        <p className="type-eyebrow text-text-muted">{t("verify-email.43d0ec5c")}</p>
+    <main data-vid="dlder6d" className="flex flex-1 flex-col items-center justify-center bg-background px-(--container-padding) py-(--section-gap)">
+      <div data-vid="cuaoa3w" className="flex w-full max-w-md flex-col items-center gap-(--section-gap) text-center">
+        <p data-vid="wti4hsj" className="type-eyebrow text-text-muted">{t("verify-email.43d0ec5c")}</p>
 
-        <section className="flex flex-col items-center gap-(--component-gap)">
-          <h1 className="type-page-title text-foreground [overflow-wrap:anywhere]">
+        <section data-vid="6b7mp2n" className="flex flex-col items-center gap-(--component-gap)">
+          <h1 data-vid="dgwrd0j" className="type-page-title text-foreground [overflow-wrap:anywhere]">
             {t("verify-email.18e1e771")}
           </h1>
-          <p className="type-body text-text-body">
+          <p data-vid="ahbo4qz" className="type-body text-text-body">
             {t("verify-email.e1bb527e")}{" "}
             {props.email !== "" ? (
-              <span className="type-mono-id text-foreground [overflow-wrap:anywhere]">{props.email}</span>
+              <span data-vid="fcgu5kh" className="type-mono-id text-foreground [overflow-wrap:anywhere]">{props.email}</span>
             ) : (
               t("verify-email.79b2a4c5")
             )}
@@ -44,14 +44,14 @@ export function VerifyEmailView(props: AuthViewModel): React.ReactElement {
           </p>
         </section>
 
-        <form
+        <form data-vid="51uxekr"
           onSubmit={onSubmit}
           noValidate
           className="flex w-full flex-col items-center gap-(--component-gap)"
         >
-          <Field data-invalid={hasError} className="items-center">
-            <FieldLabel htmlFor="code">{t("verify-email.3ee75029")}</FieldLabel>
-            <InputOTP
+          <Field data-vid="j0hxh3i" data-invalid={hasError} className="items-center">
+            <FieldLabel data-vid="a2vd2xv" htmlFor="code">{t("verify-email.3ee75029")}</FieldLabel>
+            <InputOTP data-vid="pduwagg"
               id="code"
               maxLength={6}
               value={props.code}
@@ -61,38 +61,38 @@ export function VerifyEmailView(props: AuthViewModel): React.ReactElement {
               pattern="[0-9]*"
               aria-invalid={hasError}
             >
-              <InputOTPGroup>
-                <InputOTPSlot index={0} />
-                <InputOTPSlot index={1} />
-                <InputOTPSlot index={2} />
-                <InputOTPSlot index={3} />
-                <InputOTPSlot index={4} />
-                <InputOTPSlot index={5} />
+              <InputOTPGroup data-vid="wztdl1j">
+                <InputOTPSlot data-vid="a37uy92" index={0} />
+                <InputOTPSlot data-vid="1t2b4y1" index={1} />
+                <InputOTPSlot data-vid="wfjphxg" index={2} />
+                <InputOTPSlot data-vid="8kzs2ek" index={3} />
+                <InputOTPSlot data-vid="hd7z00g" index={4} />
+                <InputOTPSlot data-vid="md2ualm" index={5} />
               </InputOTPGroup>
             </InputOTP>
-            <FieldDescription>{t("verify-email.30a6936b")}</FieldDescription>
-            {hasError && <FieldError>{props.error}</FieldError>}
+            <FieldDescription data-vid="5in8994">{t("verify-email.30a6936b")}</FieldDescription>
+            {hasError && <FieldError data-vid="t6ig440">{props.error}</FieldError>}
             {props.succeeded && (
-              <p role="status" className="type-meta text-status-success-ink">
+              <p data-vid="h7h4r6h" role="status" className="type-meta text-status-success-ink">
                 {t("verify-email.e1344c3d")}
               </p>
             )}
             {resent && (
-              <p role="status" className="type-meta text-text-body">
+              <p data-vid="rj8p23o" role="status" className="type-meta text-text-body">
                 {t("verify-email.1d610631")}
               </p>
             )}
           </Field>
-          <Button type="submit" className="min-h-11 w-full" disabled={props.loading}>
+          <Button data-vid="rkdfgoy" type="submit" className="min-h-11 w-full" disabled={props.loading}>
             {t("verify-email.e89a77e7")}
           </Button>
         </form>
 
-        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-          <Button type="button" variant="link" className="min-h-11 text-text-link" onClick={onResend}>
+        <div data-vid="r8ehi0n" className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+          <Button data-vid="h0b7at4" type="button" variant="link" className="min-h-11 text-text-link" onClick={onResend}>
             {t("verify-email.b9745740")}
           </Button>
-          <Button
+          <Button data-vid="c43yl7l"
             type="button"
             variant="link"
             onClick={() => props.navigate(routes["login"]())}

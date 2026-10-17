@@ -30,7 +30,7 @@ export interface PictureProps extends Omit<HTMLAttributes<HTMLElement>, "style">
 export function Picture({ src, alt, intent, ratio = 16 / 9, tone = "light", className, imgClassName, children, style, ...rest }: PictureProps) {
   const brief = intent || alt || ""
   return (
-    <figure
+    <figure data-vid="xrgltn5"
       data-slot="picture"
       data-intent={src ? undefined : "true"}
       className={cn("relative isolate w-full overflow-hidden", src ? "bg-surface-sunken" : TONE[tone] ?? TONE.light, className)}
@@ -39,9 +39,9 @@ export function Picture({ src, alt, intent, ratio = 16 / 9, tone = "light", clas
       {...rest}
     >
       {src ? (
-        <img src={src} alt={alt || brief} loading="lazy" decoding="async" className={cn("absolute inset-0 h-full w-full object-cover", imgClassName)} />
+        <img data-vid="ltajgez" src={src} alt={alt || brief} loading="lazy" decoding="async" className={cn("absolute inset-0 h-full w-full object-cover", imgClassName)} />
       ) : brief ? (
-        <figcaption className="absolute inset-x-0 bottom-0 z-10 truncate px-3 py-1.5 type-mono-id uppercase tracking-[0.06em] opacity-80" aria-label={`Image: ${brief}`}>
+        <figcaption data-vid="akxlds1" className="absolute inset-x-0 bottom-0 z-10 truncate px-3 py-1.5 type-mono-id uppercase tracking-[0.06em] opacity-80" aria-label={`Image: ${brief}`}>
           {brief}
         </figcaption>
       ) : null}

@@ -181,18 +181,18 @@ export function ReportDefectScreenContainer(
   return (
     <>
       {loading ? (
-        <ScreenLoading />
+        <ScreenLoading data-vid="ziwqngx" />
       ) : loadError !== null ? (
-        <ScreenError error={loadError} onRetry={reload} />
+        <ScreenError data-vid="j58tsuw" error={loadError} onRetry={reload} />
       ) : (
         <>
           {writeError !== null && (
-            <div
+            <div data-vid="pxbfcyb"
               role="alert"
               data-write-alert=""
               className="flex items-start justify-between gap-3 border-b border-red-300 bg-red-50 px-4 py-2 text-sm text-red-900"
             >
-              <span>
+              <span data-vid="gvngatk">
                 {(writeError.detail ?? '').startsWith('unavailable:')
                   ? t(`_reason.${(writeError.detail ?? '').slice('unavailable:'.length).split('|')[0]}`)
                   : t(
@@ -201,13 +201,13 @@ export function ReportDefectScreenContainer(
                         : '_app.write-error.failed',
                     )}
               </span>
-              <button type="button" aria-label="Dismiss" onClick={() => setWriteError(null)}>
+              <button data-vid="4vv7ert" type="button" aria-label="Dismiss" onClick={() => setWriteError(null)}>
                 ×
               </button>
             </div>
           )}
           {truncatedCap !== null && (
-            <div
+            <div data-vid="295sq6h"
               role="status"
               data-truncation-banner=""
               className="border-b border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-900"
@@ -215,7 +215,7 @@ export function ReportDefectScreenContainer(
               {t('_app.truncated', { limit: truncatedCap.toLocaleString() })}
             </div>
           )}
-          <View {...vm} />
+          <View data-vid="u6rh2dq" {...vm} />
         </>
       )}
     </>
@@ -225,5 +225,5 @@ export function ReportDefectScreenContainer(
 // THE ROUTE MODULE. `routes.config.tsx` lazy-imports this file and needs a prop-less
 // `export default`: it binds the container to its view and does nothing else.
 export default function ReportDefectScreenRoute(): React.ReactElement {
-  return <ReportDefectScreenContainer view={ReportDefectView} />;
+  return <ReportDefectScreenContainer data-vid="i137ejs" view={ReportDefectView} />;
 }

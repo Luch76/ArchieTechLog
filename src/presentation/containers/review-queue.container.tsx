@@ -251,18 +251,18 @@ export function ReviewQueueScreenContainer(
   return (
     <>
       {loading ? (
-        <ScreenLoading />
+        <ScreenLoading data-vid="zzajd9c" />
       ) : loadError !== null ? (
-        <ScreenError error={loadError} onRetry={reload} />
+        <ScreenError data-vid="1cfmffc" error={loadError} onRetry={reload} />
       ) : (
         <>
           {writeError !== null && (
-            <div
+            <div data-vid="4zf0f02"
               role="alert"
               data-write-alert=""
               className="flex items-start justify-between gap-3 border-b border-red-300 bg-red-50 px-4 py-2 text-sm text-red-900"
             >
-              <span>
+              <span data-vid="cpzqbjm">
                 {(writeError.detail ?? '').startsWith('unavailable:')
                   ? t(`_reason.${(writeError.detail ?? '').slice('unavailable:'.length).split('|')[0]}`)
                   : t(
@@ -271,13 +271,13 @@ export function ReviewQueueScreenContainer(
                         : '_app.write-error.failed',
                     )}
               </span>
-              <button type="button" aria-label="Dismiss" onClick={() => setWriteError(null)}>
+              <button data-vid="iczcibi" type="button" aria-label="Dismiss" onClick={() => setWriteError(null)}>
                 ×
               </button>
             </div>
           )}
           {truncatedCap !== null && (
-            <div
+            <div data-vid="ys51etp"
               role="status"
               data-truncation-banner=""
               className="border-b border-amber-300 bg-amber-50 px-4 py-2 text-sm text-amber-900"
@@ -285,7 +285,7 @@ export function ReviewQueueScreenContainer(
               {t('_app.truncated', { limit: truncatedCap.toLocaleString() })}
             </div>
           )}
-          <View {...vm} />
+          <View data-vid="iivoatl" {...vm} />
         </>
       )}
     </>
@@ -295,5 +295,5 @@ export function ReviewQueueScreenContainer(
 // THE ROUTE MODULE. `routes.config.tsx` lazy-imports this file and needs a prop-less
 // `export default`: it binds the container to its view and does nothing else.
 export default function ReviewQueueScreenRoute(): React.ReactElement {
-  return <ReviewQueueScreenContainer view={ReviewQueueView} />;
+  return <ReviewQueueScreenContainer data-vid="y205qlq" view={ReviewQueueView} />;
 }

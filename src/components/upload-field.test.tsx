@@ -35,11 +35,11 @@ async function render(node: React.ReactNode, lng: "en" | "es" = "en", catalogs: 
     resources: Object.fromEntries(Object.entries(catalogs).map(([k, v]) => [k, { translation: v }])),
     interpolation: { escapeValue: false },
   })
-  return renderToStaticMarkup(<I18nextProvider i18n={i18n}>{node}</I18nextProvider>)
+  return renderToStaticMarkup(<I18nextProvider data-vid="oecboyf" i18n={i18n}>{node}</I18nextProvider>)
 }
 
 const field = (uploader: Partial<UploadController> = {}, props: Partial<React.ComponentProps<typeof UploadField>> = {}) => (
-  <UploadField label="Photo" uploader={{ ...idle, ...uploader }} onUploaded={() => {}} {...props} />
+  <UploadField data-vid="byugbdl" label="Photo" uploader={{ ...idle, ...uploader }} onUploaded={() => {}} {...props} />
 )
 
 describe("upload-field policy", () => {

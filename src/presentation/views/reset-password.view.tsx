@@ -58,24 +58,24 @@ export function ResetPasswordView(props: AuthViewModel): React.ReactElement {
   };
 
   return (
-    <div className="flex min-h-full flex-1 flex-col items-center bg-background px-(--container-padding) py-(--section-gap)">
-      <main className="flex w-full max-w-md min-w-0 flex-col gap-(--component-gap)">
+    <div data-vid="rpbh6fl" className="flex min-h-full flex-1 flex-col items-center bg-background px-(--container-padding) py-(--section-gap)">
+      <main data-vid="5gqw4md" className="flex w-full max-w-md min-w-0 flex-col gap-(--component-gap)">
         {props.succeeded ? (
-          <section className="flex flex-col gap-(--component-gap)">
-            <h1 className="type-page-title text-foreground">{t("reset-password.836b6b9b")}</h1>
-            <p className="type-body text-text-body">{t("reset-password.72a1ec5b")}</p>
-            <Button className="min-h-11 w-full" onClick={() => props.navigate(routes.login())}>
+          <section data-vid="zieexix" className="flex flex-col gap-(--component-gap)">
+            <h1 data-vid="di0t970" className="type-page-title text-foreground">{t("reset-password.836b6b9b")}</h1>
+            <p data-vid="0ysiyl7" className="type-body text-text-body">{t("reset-password.72a1ec5b")}</p>
+            <Button data-vid="q5amk8o" className="min-h-11 w-full" onClick={() => props.navigate(routes.login())}>
               {t("reset-password.bfd402b2")}
             </Button>
           </section>
         ) : (
           <>
-            <header className="flex flex-col gap-2">
-              <h1 className="type-page-title text-foreground">{t("reset-password.887a560b")}</h1>
-              <p className="type-body text-text-body">{t("reset-password.d62afe3f")}</p>
+            <header data-vid="ktiapq7" className="flex flex-col gap-2">
+              <h1 data-vid="e55ihoi" className="type-page-title text-foreground">{t("reset-password.887a560b")}</h1>
+              <p data-vid="djkq1hc" className="type-body text-text-body">{t("reset-password.d62afe3f")}</p>
             </header>
 
-            <form
+            <form data-vid="awxtmpi"
               onSubmit={(e) => {
                 e.preventDefault();
                 void form.handleSubmit(onValid)(e);
@@ -83,14 +83,14 @@ export function ResetPasswordView(props: AuthViewModel): React.ReactElement {
               noValidate
               className="flex flex-col gap-(--component-gap) rounded-card border border-border bg-card p-(--card-padding) text-card-foreground"
             >
-              <FieldGroup>
-                <Controller
+              <FieldGroup data-vid="2ohgtzd">
+                <Controller data-vid="197iyc4"
                   name="email"
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel htmlFor="rp-email">{t("reset-password.969ccbd3")}</FieldLabel>
-                      <Input
+                    <Field data-vid="f3jzlle" data-invalid={fieldState.invalid}>
+                      <FieldLabel data-vid="2neru2m" htmlFor="rp-email">{t("reset-password.969ccbd3")}</FieldLabel>
+                      <Input data-vid="g7vl5ts"
                         {...field}
                         id="rp-email"
                         type="email"
@@ -98,17 +98,17 @@ export function ResetPasswordView(props: AuthViewModel): React.ReactElement {
                         aria-invalid={fieldState.invalid}
                         className="min-h-11 border-border-strong"
                       />
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      {fieldState.invalid && <FieldError data-vid="06zyxzq" errors={[fieldState.error]} />}
                     </Field>
                   )}
                 />
-                <Controller
+                <Controller data-vid="1549b09"
                   name="code"
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel htmlFor="rp-code">{t("reset-password.0d1fa0df")}</FieldLabel>
-                      <Input
+                    <Field data-vid="m5hfhug" data-invalid={fieldState.invalid}>
+                      <FieldLabel data-vid="6dse220" htmlFor="rp-code">{t("reset-password.0d1fa0df")}</FieldLabel>
+                      <Input data-vid="jngcux9"
                         {...field}
                         id="rp-code"
                         inputMode="numeric"
@@ -118,17 +118,17 @@ export function ResetPasswordView(props: AuthViewModel): React.ReactElement {
                         aria-invalid={fieldState.invalid}
                         className="min-h-11 border-border-strong font-mono tracking-widest"
                       />
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      {fieldState.invalid && <FieldError data-vid="jim58pd" errors={[fieldState.error]} />}
                     </Field>
                   )}
                 />
-                <Controller
+                <Controller data-vid="xzdmmz3"
                   name="password"
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel htmlFor="rp-password">{t("reset-password.3dd9df44")}</FieldLabel>
-                      <Input
+                    <Field data-vid="qj7950y" data-invalid={fieldState.invalid}>
+                      <FieldLabel data-vid="dargczb" htmlFor="rp-password">{t("reset-password.3dd9df44")}</FieldLabel>
+                      <Input data-vid="d3ws005"
                         {...field}
                         id="rp-password"
                         type="password"
@@ -137,31 +137,31 @@ export function ResetPasswordView(props: AuthViewModel): React.ReactElement {
                         aria-describedby="rp-rules"
                         className="min-h-11 border-border-strong"
                       />
-                      <ul id="rp-rules" className="flex flex-col gap-1">
+                      <ul data-vid="luzs2j7" id="rp-rules" className="flex flex-col gap-1">
                         {rules.map((r) => (
-                          <li
+                          <li data-vid="jj4odsf"
                             key={r.label}
                             className={`type-caption flex items-center gap-2 ${r.ok ? "text-status-success-ink" : "text-text-muted"}`}
                           >
-                            {r.ok ? <Check className="size-4" /> : <Circle className="size-4" />}
-                            <span>{r.label}</span>
-                            <span className="sr-only">
+                            {r.ok ? <Check data-vid="7vai6fj" className="size-4" /> : <Circle data-vid="07k8q29" className="size-4" />}
+                            <span data-vid="ybscamf">{r.label}</span>
+                            <span data-vid="uxgfuol" className="sr-only">
                               {r.ok ? t("reset-password.6efcbfb1") : t("reset-password.7d252b91")}
                             </span>
                           </li>
                         ))}
                       </ul>
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      {fieldState.invalid && <FieldError data-vid="5kzevnl" errors={[fieldState.error]} />}
                     </Field>
                   )}
                 />
-                <Controller
+                <Controller data-vid="u2pn52a"
                   name="confirm"
                   control={form.control}
                   render={({ field, fieldState }) => (
-                    <Field data-invalid={fieldState.invalid}>
-                      <FieldLabel htmlFor="rp-confirm">{t("reset-password.bf000421")}</FieldLabel>
-                      <Input
+                    <Field data-vid="2q9db0w" data-invalid={fieldState.invalid}>
+                      <FieldLabel data-vid="udiv5z2" htmlFor="rp-confirm">{t("reset-password.bf000421")}</FieldLabel>
+                      <Input data-vid="5kctgcb"
                         {...field}
                         id="rp-confirm"
                         type="password"
@@ -169,24 +169,24 @@ export function ResetPasswordView(props: AuthViewModel): React.ReactElement {
                         aria-invalid={fieldState.invalid}
                         className="min-h-11 border-border-strong"
                       />
-                      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                      {fieldState.invalid && <FieldError data-vid="oejhhi8" errors={[fieldState.error]} />}
                     </Field>
                   )}
                 />
               </FieldGroup>
               {props.error !== null && (
-                <p role="alert" className="type-meta text-destructive">
+                <p data-vid="3apyq05" role="alert" className="type-meta text-destructive">
                   {props.error}
                 </p>
               )}
-              <Button type="submit" className="min-h-11 w-full" disabled={props.loading}>
+              <Button data-vid="blwehyc" type="submit" className="min-h-11 w-full" disabled={props.loading}>
                 {t("reset-password.6ee6d9db")}
               </Button>
             </form>
 
-            <p className="type-meta flex flex-wrap items-center gap-x-2 text-text-muted">
-              <span>{t("reset-password.9b8850e0")}</span>
-              <Button
+            <p data-vid="aap6ovv" className="type-meta flex flex-wrap items-center gap-x-2 text-text-muted">
+              <span data-vid="8nk48ck">{t("reset-password.9b8850e0")}</span>
+              <Button data-vid="n61q8z1"
                 type="button"
                 variant="link"
                 className="inline-flex min-h-11 items-center text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring"
@@ -195,13 +195,13 @@ export function ResetPasswordView(props: AuthViewModel): React.ReactElement {
                 {t("reset-password.9200fc2f")}
               </Button>
             </p>
-            <Button
+            <Button data-vid="hg7c188"
               type="button"
               variant="link"
               className="type-meta inline-flex min-h-11 items-center gap-2 text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring"
               onClick={() => props.navigate(routes.login())}
             >
-              <ArrowLeft className="size-4" />
+              <ArrowLeft data-vid="r2us910" className="size-4" />
               {t("reset-password.223aee64")}
             </Button>
           </>

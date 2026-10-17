@@ -43,24 +43,24 @@ export function ForgotPasswordView(props: AuthViewModel): React.ReactElement {
   const sent = props.succeeded;
 
   return (
-    <MotionConfig reducedMotion="user">
-      <div className="flex flex-col items-center gap-(--section-gap) px-(--container-padding) py-(--section-gap)">
-        <header className="flex w-full max-w-md flex-col items-center gap-3 text-center">
-          <h1 className="type-page-title [overflow-wrap:anywhere]">
+    <MotionConfig data-vid="oiltmm9" reducedMotion="user">
+      <div data-vid="bassig8" className="flex flex-col items-center gap-(--section-gap) px-(--container-padding) py-(--section-gap)">
+        <header data-vid="dc4kkdi" className="flex w-full max-w-md flex-col items-center gap-3 text-center">
+          <h1 data-vid="w4z88pc" className="type-page-title [overflow-wrap:anywhere]">
             {t("forgot-password.2f1642b7")}
           </h1>
-          <p className="type-body max-w-prose text-text-body">
+          <p data-vid="wi7s6n0" className="type-body max-w-prose text-text-body">
             {t("forgot-password.5909ca93")}
           </p>
         </header>
 
-        <section
+        <section data-vid="mbg0dno"
           aria-label={t("forgot-password.2d5c87e3")}
           className="w-full max-w-md rounded-card border border-border bg-card p-(--card-padding) text-card-foreground"
         >
-          <AnimatePresence initial={false} mode="wait">
+          <AnimatePresence data-vid="kg25o37" initial={false} mode="wait">
             {!sent ? (
-              <motion.form
+              <motion.form data-vid="8a1gy4i"
                 key="request"
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.15 }}
@@ -71,14 +71,14 @@ export function ForgotPasswordView(props: AuthViewModel): React.ReactElement {
                 noValidate
                 className="flex flex-col gap-(--component-gap)"
               >
-                <FieldGroup>
-                  <Controller
+                <FieldGroup data-vid="thtgisc">
+                  <Controller data-vid="qv9dnmi"
                     name="email"
                     control={form.control}
                     render={({ field, fieldState }) => (
-                      <Field data-invalid={fieldState.invalid}>
-                        <FieldLabel htmlFor={field.name}>{t("forgot-password.969ccbd3")}</FieldLabel>
-                        <Input
+                      <Field data-vid="dn9tk6c" data-invalid={fieldState.invalid}>
+                        <FieldLabel data-vid="8pbbsv6" htmlFor={field.name}>{t("forgot-password.969ccbd3")}</FieldLabel>
+                        <Input data-vid="xzvy6mm"
                           {...field}
                           id={field.name}
                           type="email"
@@ -88,18 +88,18 @@ export function ForgotPasswordView(props: AuthViewModel): React.ReactElement {
                           aria-invalid={fieldState.invalid}
                           className="min-h-11 border-border-strong"
                         />
-                        <FieldDescription>{t("forgot-password.fdcc85dd")}</FieldDescription>
-                        {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                        <FieldDescription data-vid="00k88dx">{t("forgot-password.fdcc85dd")}</FieldDescription>
+                        {fieldState.invalid && <FieldError data-vid="bg1p2ct" errors={[fieldState.error]} />}
                       </Field>
                     )}
                   />
                 </FieldGroup>
                 {props.error !== null && (
-                  <p role="alert" className="type-meta text-destructive">
+                  <p data-vid="6cbr955" role="alert" className="type-meta text-destructive">
                     {props.error}
                   </p>
                 )}
-                <Button
+                <Button data-vid="743grl0"
                   type="button"
                   onClick={() => {
                     void submit();
@@ -111,7 +111,7 @@ export function ForgotPasswordView(props: AuthViewModel): React.ReactElement {
                 </Button>
               </motion.form>
             ) : (
-              <motion.div
+              <motion.div data-vid="cw76xz6"
                 key="sent"
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -119,16 +119,16 @@ export function ForgotPasswordView(props: AuthViewModel): React.ReactElement {
                 className="flex flex-col gap-(--component-gap)"
                 role="status"
               >
-                <h2 className="type-card-title">{t("forgot-password.77322879")}</h2>
-                <p className="type-body text-text-body">
+                <h2 data-vid="o579s84" className="type-card-title">{t("forgot-password.77322879")}</h2>
+                <p data-vid="ll8ahx3" className="type-body text-text-body">
                   {t("forgot-password.56a36924")}{" "}
-                  <span className="type-mono-id [overflow-wrap:anywhere]">{props.email}</span>
+                  <span data-vid="zavzwwa" className="type-mono-id [overflow-wrap:anywhere]">{props.email}</span>
                   {t("forgot-password.ff93aba7")}
                 </p>
-                <p className="type-meta text-text-muted">
+                <p data-vid="s6w706j" className="type-meta text-text-muted">
                   {t("forgot-password.851d5dfe")}
                 </p>
-                <Button
+                <Button data-vid="iz6utfq"
                   type="button"
                   variant="outline"
                   className="min-h-11 w-full border-border-strong"
@@ -142,17 +142,17 @@ export function ForgotPasswordView(props: AuthViewModel): React.ReactElement {
           </AnimatePresence>
         </section>
 
-        <section className="flex w-full max-w-md flex-col items-center gap-3 text-center">
-          <p className="type-meta text-text-muted">
+        <section data-vid="i3czeck" className="flex w-full max-w-md flex-col items-center gap-3 text-center">
+          <p data-vid="g4jblrf" className="type-meta text-text-muted">
             {!sent ? t("forgot-password.df9acac5") : t("forgot-password.f32f8171")}
           </p>
-          <Button
+          <Button data-vid="9m2xmzk"
             type="button"
             variant="link"
             onClick={() => props.navigate(routes["login"]())}
             className="type-meta inline-flex min-h-11 items-center gap-2 text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring"
           >
-            <ArrowLeft className="size-4" aria-hidden="true" />
+            <ArrowLeft data-vid="wp4g43w" className="size-4" aria-hidden="true" />
             {t("forgot-password.223aee64")}
           </Button>
         </section>

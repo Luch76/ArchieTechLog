@@ -503,5 +503,5 @@ export function FirstContactShellContainer({ children }: { readonly children: Re
         }
       : {}),
   };
-  return <FirstContactShell vm={vm}>{children}</FirstContactShell>;
+  return <FirstContactShell data-vid="qu2ie8i" vm={vm}>{children}</FirstContactShell>;
 }

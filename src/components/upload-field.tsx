@@ -196,22 +196,22 @@ export function UploadField({
   const describedBy = [description ? descId : null, statusId].filter(Boolean).join(' ')
 
   return (
-    <div data-slot="upload-field" data-variant={variant} className={cn('flex flex-col gap-2', className)}>
-      <Label htmlFor={buttonId}>{label}</Label>
+    <div data-vid="zfk8m2q" data-slot="upload-field" data-variant={variant} className={cn('flex flex-col gap-2', className)}>
+      <Label data-vid="aotfb79" htmlFor={buttonId}>{label}</Label>
 
-      <div className={cn('flex gap-4', variant === 'avatar' ? 'items-center' : 'flex-col items-start')}>
+      <div data-vid="1ayzesa" className={cn('flex gap-4', variant === 'avatar' ? 'items-center' : 'flex-col items-start')}>
         {variant === 'avatar' ? (
-          <Avatar className="size-20">
-            {previewSrc ? <AvatarImage src={previewSrc} alt={t('uploadField.previewAlt', { defaultValue: 'Selected image preview' })} /> : null}
-            <AvatarFallback aria-hidden="true">
-              <User className="size-8 text-muted-foreground" />
+          <Avatar data-vid="yqwda39" className="size-20">
+            {previewSrc ? <AvatarImage data-vid="bpoty7c" src={previewSrc} alt={t('uploadField.previewAlt', { defaultValue: 'Selected image preview' })} /> : null}
+            <AvatarFallback data-vid="d2wkkf6" aria-hidden="true">
+              <User data-vid="vi0h3jh" className="size-8 text-muted-foreground" />
             </AvatarFallback>
           </Avatar>
         ) : null}
 
-        <div className="flex min-w-0 flex-1 flex-col gap-2 self-stretch">
-          <div className="flex flex-wrap items-center gap-2">
-            <input
+        <div data-vid="xbuq0kl" className="flex min-w-0 flex-1 flex-col gap-2 self-stretch">
+          <div data-vid="3b73gua" className="flex flex-wrap items-center gap-2">
+            <input data-vid="o2ugsc2"
               ref={inputRef}
               id={inputId}
               type="file"
@@ -222,7 +222,7 @@ export function UploadField({
               disabled={disabled || uploader.isUploading}
               onChange={handleChange}
             />
-            <Button
+            <Button data-vid="g3305gu"
               id={buttonId}
               type="button"
               variant="outline"
@@ -230,27 +230,27 @@ export function UploadField({
               aria-describedby={describedBy}
               onClick={() => inputRef.current?.click()}
             >
-              <Upload aria-hidden="true" />
+              <Upload data-vid="adzlmpg" aria-hidden="true" />
               {buttonLabel}
             </Button>
 
             {uploader.isUploading ? (
-              <Button type="button" variant="ghost" onClick={handleAbort}>
-                <X aria-hidden="true" />
+              <Button data-vid="073kufd" type="button" variant="ghost" onClick={handleAbort}>
+                <X data-vid="ev6ayba" aria-hidden="true" />
                 {t('uploadField.cancel', { defaultValue: 'Cancel' })}
               </Button>
             ) : null}
 
             {canRetry ? (
-              <Button type="button" variant="ghost" onClick={handleRetry}>
-                <RotateCw aria-hidden="true" />
+              <Button data-vid="1zafjwc" type="button" variant="ghost" onClick={handleRetry}>
+                <RotateCw data-vid="h6z3n1v" aria-hidden="true" />
                 {t('uploadField.retry', { defaultValue: 'Try again' })}
               </Button>
             ) : null}
           </div>
 
           {uploader.isUploading ? (
-            <Progress
+            <Progress data-vid="fqsrtsf"
               value={progress}
               // Explicit as well: the value must reach assistive tech even if the ui/progress primitive is regenerated.
               aria-valuenow={progress}
@@ -259,26 +259,26 @@ export function UploadField({
           ) : null}
 
           {picked && !uploader.isUploading && !errorText ? (
-            <p className="flex min-w-0 items-center gap-1.5 text-sm text-muted-foreground">
-              {done ? <CircleCheck className="size-4 shrink-0 text-foreground" aria-hidden="true" /> : null}
-              <span className="truncate">{name}</span>
+            <p data-vid="75roh8m" className="flex min-w-0 items-center gap-1.5 text-sm text-muted-foreground">
+              {done ? <CircleCheck data-vid="qfmr2tj" className="size-4 shrink-0 text-foreground" aria-hidden="true" /> : null}
+              <span data-vid="vtu3gno" className="truncate">{name}</span>
             </p>
           ) : null}
 
           {/* Always mounted so assistive tech registers the region before its text changes. */}
-          <p id={statusId} role="status" aria-live="polite" className="sr-only">
+          <p data-vid="s1jqbep" id={statusId} role="status" aria-live="polite" className="sr-only">
             {status}
           </p>
 
           {errorText ? (
-            <p role="alert" className="flex items-start gap-1.5 text-sm text-destructive">
-              <CircleAlert className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
-              <span>{errorText}</span>
+            <p data-vid="c2d4pxn" role="alert" className="flex items-start gap-1.5 text-sm text-destructive">
+              <CircleAlert data-vid="9sb9l81" className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
+              <span data-vid="l0p6kqv">{errorText}</span>
             </p>
           ) : null}
 
           {description ? (
-            <p id={descId} className="text-sm text-muted-foreground">
+            <p data-vid="uuom949" id={descId} className="text-sm text-muted-foreground">
               {description}
             </p>
           ) : null}

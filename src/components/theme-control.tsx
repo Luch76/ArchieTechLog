@@ -123,7 +123,7 @@ export function ThemeControl({
       ? t('themeControl.caption.system', { defaultValue: FALLBACK.caption.system, mode: label(resolved) })
       : t(`themeControl.caption.${value}`, FALLBACK.caption[value])
   const caption = (showCaption ?? hasDefaultCaption(variant)) && (
-    <p id={captionId} data-slot="theme-control-caption" className="text-xs text-muted-foreground">
+    <p data-vid="yec7r8p" id={captionId} data-slot="theme-control-caption" className="text-xs text-muted-foreground">
       {captionText}
     </p>
   )
@@ -132,13 +132,13 @@ export function ThemeControl({
   if (variant === 'radio-items') {
     return (
       <>
-        <DropdownMenuLabel>{groupLabel}</DropdownMenuLabel>
-        <DropdownMenuRadioGroup value={value} onValueChange={change}>
+        <DropdownMenuLabel data-vid="4rbw1l5">{groupLabel}</DropdownMenuLabel>
+        <DropdownMenuRadioGroup data-vid="zhagsge" value={value} onValueChange={change}>
           {THEME_VALUES.map((v) => {
             const Icon = ICONS[v]
             return (
-              <DropdownMenuRadioItem key={v} value={v}>
-                <Icon aria-hidden className="size-4" />
+              <DropdownMenuRadioItem data-vid="nati5oo" key={v} value={v}>
+                <Icon data-vid="l2hpyhq" aria-hidden className="size-4" />
                 {label(v)}
               </DropdownMenuRadioItem>
             )
@@ -151,18 +151,18 @@ export function ThemeControl({
   if (variant === 'submenu') {
     const Current = ICONS[value]
     return (
-      <DropdownMenuSub>
-        <DropdownMenuSubTrigger>
-          <Current aria-hidden className="size-4" />
+      <DropdownMenuSub data-vid="etl33rh">
+        <DropdownMenuSubTrigger data-vid="gj7tspd">
+          <Current data-vid="ouye5te" aria-hidden className="size-4" />
           {groupLabel}
         </DropdownMenuSubTrigger>
-        <DropdownMenuSubContent>
-          <DropdownMenuRadioGroup value={value} onValueChange={change}>
+        <DropdownMenuSubContent data-vid="nzrzdoa">
+          <DropdownMenuRadioGroup data-vid="ptq2sn5" value={value} onValueChange={change}>
             {THEME_VALUES.map((v) => {
               const Icon = ICONS[v]
               return (
-                <DropdownMenuRadioItem key={v} value={v}>
-                  <Icon aria-hidden className="size-4" />
+                <DropdownMenuRadioItem data-vid="02u52gm" key={v} value={v}>
+                  <Icon data-vid="j5si9mz" aria-hidden className="size-4" />
                   {label(v)}
                 </DropdownMenuRadioItem>
               )
@@ -175,14 +175,14 @@ export function ThemeControl({
 
   if (variant === 'select') {
     return (
-      <div data-slot="theme-control" data-variant={variant} className={cn('grid gap-1.5', className)}>
-        <Select value={value} onValueChange={change}>
-          <SelectTrigger aria-label={groupLabel} aria-describedby={describedBy}>
-            <SelectValue />
+      <div data-vid="4qz0a9o" data-slot="theme-control" data-variant={variant} className={cn('grid gap-1.5', className)}>
+        <Select data-vid="7ao0qhb" value={value} onValueChange={change}>
+          <SelectTrigger data-vid="7wivtcw" aria-label={groupLabel} aria-describedby={describedBy}>
+            <SelectValue data-vid="2oah1kd" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent data-vid="r6uiz0y">
             {THEME_VALUES.map((v) => (
-              <SelectItem key={v} value={v}>
+              <SelectItem data-vid="rmdv9u6" key={v} value={v}>
                 {label(v)}
               </SelectItem>
             ))}
@@ -195,8 +195,8 @@ export function ThemeControl({
 
   if (variant === 'preview-cards') {
     return (
-      <div data-slot="theme-control" data-variant={variant} className={cn('grid gap-2', className)}>
-        <RadioGroup
+      <div data-vid="fl4wp9e" data-slot="theme-control" data-variant={variant} className={cn('grid gap-2', className)}>
+        <RadioGroup data-vid="9avcxbh"
           value={value}
           onValueChange={change}
           aria-label={groupLabel}
@@ -205,7 +205,7 @@ export function ThemeControl({
           className="grid-cols-3 gap-3"
         >
           {THEME_VALUES.map((v) => (
-            <RadioGroupPrimitive.Item
+            <RadioGroupPrimitive.Item data-vid="v5wtqyr"
               key={v}
               value={v}
               data-slot="theme-control-item"
@@ -215,14 +215,14 @@ export function ThemeControl({
                 'data-[state=checked]:border-primary data-[state=checked]:ring-1 data-[state=checked]:ring-primary',
               )}
             >
-              <Thumbnail mode={v} />
-              <span className="flex items-center gap-2 text-sm font-medium">
+              <Thumbnail data-vid="yhdvjte" mode={v} />
+              <span data-vid="lpdvigh" className="flex items-center gap-2 text-sm font-medium">
                 {/* The visible radio: the card is the focus target, this dot only shows the state. */}
-                <span
+                <span data-vid="2b4opci"
                   aria-hidden
                   className="grid size-4 shrink-0 place-items-center rounded-full border border-input group-data-[state=checked]:border-primary group-data-[state=checked]:bg-primary"
                 >
-                  <span className="size-1.5 rounded-full bg-primary-foreground opacity-0 group-data-[state=checked]:opacity-100" />
+                  <span data-vid="fjb3jvi" className="size-1.5 rounded-full bg-primary-foreground opacity-0 group-data-[state=checked]:opacity-100" />
                 </span>
                 {label(v)}
               </span>
@@ -237,9 +237,9 @@ export function ThemeControl({
   // segmented-icons | segmented-labels: one container, selected segment marked.
   const iconsOnly = variant === 'segmented-icons'
   return (
-    <TooltipProvider>
-      <div data-slot="theme-control" data-variant={variant} className={cn('grid gap-1.5', className)}>
-        <RadioGroup
+    <TooltipProvider data-vid="ihfkjlg">
+      <div data-vid="cqdp10k" data-slot="theme-control" data-variant={variant} className={cn('grid gap-1.5', className)}>
+        <RadioGroup data-vid="g19nu6v"
           value={value}
           onValueChange={change}
           aria-label={groupLabel}
@@ -250,7 +250,7 @@ export function ThemeControl({
           {THEME_VALUES.map((v) => {
             const Icon = ICONS[v]
             const item = (
-              <RadioGroupPrimitive.Item
+              <RadioGroupPrimitive.Item data-vid="n7os91n"
                 key={v}
                 value={v}
                 aria-label={label(v)}
@@ -261,16 +261,16 @@ export function ThemeControl({
                   'data-[state=checked]:bg-background data-[state=checked]:text-foreground data-[state=checked]:shadow-sm',
                 )}
               >
-                <Icon aria-hidden className="size-4" />
-                {!iconsOnly && <span>{label(v)}</span>}
+                <Icon data-vid="vcc9qc7" aria-hidden className="size-4" />
+                {!iconsOnly && <span data-vid="fv3n7bb">{label(v)}</span>}
               </RadioGroupPrimitive.Item>
             )
             // Tooltip only where the visible text is missing; opens on hover and on keyboard focus.
             if (!iconsOnly) return item
             return (
-              <Tooltip key={v}>
-                <TooltipTrigger asChild>{item}</TooltipTrigger>
-                <TooltipContent>{label(v)}</TooltipContent>
+              <Tooltip data-vid="d9hl6go" key={v}>
+                <TooltipTrigger data-vid="55p39tg" asChild>{item}</TooltipTrigger>
+                <TooltipContent data-vid="bdjib26">{label(v)}</TooltipContent>
               </Tooltip>
             )
           })}
@@ -286,14 +286,14 @@ function Thumbnail({ mode }: { mode: ThemeValue }) {
   const light = 'bg-white [--bar:var(--color-neutral-300)]'
   const dark = 'bg-neutral-900 [--bar:var(--color-neutral-700)]'
   const panel = (cls: string) => (
-    <div className={cn('flex h-full flex-1 flex-col gap-1 p-2', cls)}>
-      <span className="h-1.5 w-2/3 rounded-sm bg-[var(--bar)]" />
-      <span className="h-1.5 w-1/2 rounded-sm bg-[var(--bar)]" />
-      <span className="mt-auto h-3 w-1/3 rounded-sm bg-[var(--bar)]" />
+    <div data-vid="vmqunps" className={cn('flex h-full flex-1 flex-col gap-1 p-2', cls)}>
+      <span data-vid="52n3y76" className="h-1.5 w-2/3 rounded-sm bg-[var(--bar)]" />
+      <span data-vid="9gvb9hg" className="h-1.5 w-1/2 rounded-sm bg-[var(--bar)]" />
+      <span data-vid="vjor3pf" className="mt-auto h-3 w-1/3 rounded-sm bg-[var(--bar)]" />
     </div>
   )
   return (
-    <div aria-hidden className="flex h-16 overflow-hidden rounded-md border border-border">
+    <div data-vid="zhz6u4o" aria-hidden className="flex h-16 overflow-hidden rounded-md border border-border">
       {mode !== 'dark' && panel(light)}
       {mode !== 'light' && panel(dark)}
     </div>

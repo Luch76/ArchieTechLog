@@ -12,7 +12,7 @@ function FieldSet({
   ...props
 }: React.ComponentProps<"fieldset">) {
   return (
-    <fieldset
+    <fieldset data-vid="2cddlwg"
       data-slot="field-set"
       className={cn(
         "flex flex-col gap-4 has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3",
@@ -29,7 +29,7 @@ function FieldLegend({
   ...props
 }: React.ComponentProps<"legend"> & { variant?: "legend" | "label" }) {
   return (
-    <legend
+    <legend data-vid="v6vhgga"
       data-slot="field-legend"
       data-variant={variant}
       className={cn(
@@ -46,7 +46,7 @@ function FieldGroup({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div
+    <div data-vid="020fiez"
       data-slot="field-group"
       className={cn(
         "group/field-group @container/field-group flex w-full flex-col gap-5 data-[slot=checkbox-group]:gap-3 *:data-[slot=field-group]:gap-4",
@@ -81,7 +81,7 @@ function Field({
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof fieldVariants>) {
   return (
-    <div
+    <div data-vid="woh89v2"
       role="group"
       data-slot="field"
       data-orientation={orientation}
@@ -96,7 +96,7 @@ function FieldContent({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div
+    <div data-vid="hebhl4e"
       data-slot="field-content"
       className={cn(
         "group/field-content flex flex-1 flex-col gap-0.5 leading-snug",
@@ -112,7 +112,7 @@ function FieldLabel({
   ...props
 }: React.ComponentProps<typeof Label>) {
   return (
-    <Label
+    <Label data-vid="f219w0o"
       data-slot="field-label"
       className={cn(
         "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:border-primary/30 has-data-checked:bg-primary/5 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-muted/50 has-[>[data-slot=field]]:has-[:focus-visible]:border-ring has-[>[data-slot=field]]:has-[:focus-visible]:ring-3 has-[>[data-slot=field]]:has-[:focus-visible]:ring-ring/50 *:data-[slot=field]:p-2.5 dark:has-data-checked:border-primary/20 dark:has-data-checked:bg-primary/10",
@@ -129,7 +129,7 @@ function FieldTitle({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div
+    <div data-vid="nllz2az"
       data-slot="field-label"
       className={cn(
         "flex w-fit items-center gap-2 text-sm font-medium group-data-[disabled=true]/field:opacity-50",
@@ -145,7 +145,7 @@ function FieldDescription({
   ...props
 }: React.ComponentProps<"p">) {
   return (
-    <p
+    <p data-vid="b65ufkq"
       data-slot="field-description"
       className={cn(
         "text-left text-sm leading-normal font-normal text-muted-foreground group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5",
@@ -164,7 +164,7 @@ function FieldSeparator({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div
+    <div data-vid="cx0ij1a"
       data-slot="field-separator"
       data-content={!!children}
       className={cn(
@@ -173,9 +173,9 @@ function FieldSeparator({
       )}
       {...props}
     >
-      <Separator className="absolute inset-0 top-1/2" />
+      <Separator data-vid="hevt8j3" className="absolute inset-0 top-1/2" />
       {children && (
-        <span
+        <span data-vid="asnbova"
           className="relative mx-auto block w-fit bg-background px-2 text-muted-foreground"
           data-slot="field-separator-content"
         >
@@ -212,10 +212,10 @@ function FieldError({
     }
 
     return (
-      <ul className="ml-4 flex list-disc flex-col gap-1">
+      <ul data-vid="7oj0b1c" className="ml-4 flex list-disc flex-col gap-1">
         {uniqueErrors.map(
           (error, index) =>
-            error?.message && <li key={index}>{error.message}</li>
+            error?.message && <li data-vid="aa9ehoe" key={index}>{error.message}</li>
         )}
       </ul>
     )
@@ -226,7 +226,7 @@ function FieldError({
   }
 
   return (
-    <div
+    <div data-vid="pfd4wtq"
       role="alert"
       data-slot="field-error"
       className={cn("text-sm font-normal text-destructive", className)}

@@ -140,5 +140,5 @@ export function ShellMount({ children }: { readonly children: ReactNode }) {
   const { pathname } = useLocation();
   const surface = surfaceOf(pathname);
   const Shell = surface === undefined ? undefined : SHELL_OF_SURFACE[surface];
-  return Shell === undefined ? <>{children}</> : <Shell>{children}</Shell>;
+  return Shell === undefined ? <>{children}</> : <Shell data-vid="izzvbxq">{children}</Shell>;
 }

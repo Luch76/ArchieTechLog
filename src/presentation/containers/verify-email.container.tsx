@@ -9,5 +9,5 @@ import { AuthContainer } from './auth.container';
 import { VerifyEmailView } from '../views/verify-email.view';
 
 export default function VerifyEmailRoute(): React.ReactElement {
-  return <AuthContainer intent="verifyEmail" view={VerifyEmailView} />;
+  return <AuthContainer data-vid="h37wfka" intent="verifyEmail" view={VerifyEmailView} />;
 }

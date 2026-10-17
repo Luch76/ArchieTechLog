@@ -98,9 +98,9 @@ export function AircraftDetailView(props) {
           <span data-vid="ad91e151" className="type-meta text-text-muted">{OP[aircraft?.operatingStatus] ?? aircraft?.operatingStatus}</span>
         </div>
         <p data-vid="c1ed61e3" className="type-meta text-text-muted tabular-nums">
-          <button type="button" className="min-h-6 underline-offset-2 hover:underline focus-visible:ring-2 focus-visible:ring-ring" onClick={() => showStatus("open")}>{openN} {t('aircraft-detail.19672033')}</button>{" "}
-          <button type="button" className="min-h-6 underline-offset-2 hover:underline focus-visible:ring-2 focus-visible:ring-ring" onClick={() => showStatus("deferred")}>{defN} {t('aircraft-detail.0d1f0b25')}</button>{" "}
-          <button type="button" className="min-h-6 underline-offset-2 hover:underline focus-visible:ring-2 focus-visible:ring-ring" onClick={() => showStatus("all")}>{rows.length} {t('aircraft-detail.fd7f8f31')}</button>
+          <button data-vid="58tcmph" type="button" className="min-h-6 underline-offset-2 hover:underline focus-visible:ring-2 focus-visible:ring-ring" onClick={() => showStatus("open")}>{openN} {t('aircraft-detail.19672033')}</button>{" "}
+          <button data-vid="2rxno12" type="button" className="min-h-6 underline-offset-2 hover:underline focus-visible:ring-2 focus-visible:ring-ring" onClick={() => showStatus("deferred")}>{defN} {t('aircraft-detail.0d1f0b25')}</button>{" "}
+          <button data-vid="ep10ziq" type="button" className="min-h-6 underline-offset-2 hover:underline focus-visible:ring-2 focus-visible:ring-ring" onClick={() => showStatus("all")}>{rows.length} {t('aircraft-detail.fd7f8f31')}</button>
         </p>
       </header>
 
@@ -111,16 +111,16 @@ export function AircraftDetailView(props) {
             {t('aircraft-detail.ed8d87e0')}
           </p>
         ) : (
-          <div className="overflow-x-auto border border-border bg-card">
-            <table className="w-full min-w-[60rem] border-collapse text-left">
-              <thead>
-                <tr className="border-b border-border">
+          <div data-vid="crju3tc" className="overflow-x-auto border border-border bg-card">
+            <table data-vid="2smqqdp" className="w-full min-w-[60rem] border-collapse text-left">
+              <thead data-vid="gsig1u2">
+                <tr data-vid="voya7vv" className="border-b border-border">
                   {["Status", "Defect description", "ATA chapter", "ATA section", "MEL code", "Reported date", "Deferral days", "Projected due date"].map((h) => (
-                    <th key={h} scope="col" className="type-eyebrow whitespace-nowrap px-(--card-padding) py-2 font-medium">{h}</th>
+                    <th data-vid="tbb7sr7" key={h} scope="col" className="type-eyebrow whitespace-nowrap px-(--card-padding) py-2 font-medium">{h}</th>
                   ))}
                 </tr>
               </thead>
-              <tbody>
+              <tbody data-vid="kaycu5l">
                 {attention.map((d) => {
                   const isDef = enumIs(d.status, "deferred", "DefectReport.status");
                   const linked = MelItem.find((m) => m.id === d.melItemId);
@@ -135,27 +135,27 @@ export function AircraftDetailView(props) {
                   const ai = d.classificationRationale ?? d.controllerAssessment ?? null;
                   const daysLeft = d.deferralDueAt ? Math.ceil((Date.parse(d.deferralDueAt) - Date.now()) / 86400000) : null;
                   return (
-                    <tr key={d.id} className="border-b border-border last:border-b-0 hover:bg-muted">
-                      <td className="px-(--card-padding) py-2 whitespace-nowrap"><StatusMark entity="DefectReport" status={d.status} /></td>
-                      <td className="type-body max-w-72 truncate px-(--card-padding) py-2">
-                        <a href={open(d)} className="text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">{d.symptom ?? d.writeUp ?? d.component ?? "—"}</a>
-                        <div className="type-caption mt-1 whitespace-normal border-l-2 border-border pl-2 text-text-muted">
-                          <span className="font-medium text-text-body">AI assessment</span>
+                    <tr data-vid="jw4rbh2" key={d.id} className="border-b border-border last:border-b-0 hover:bg-muted">
+                      <td data-vid="dtaj4su" className="px-(--card-padding) py-2 whitespace-nowrap"><StatusMark data-vid="ai6xu1d" entity="DefectReport" status={d.status} /></td>
+                      <td data-vid="f5kie6x" className="type-body max-w-72 truncate px-(--card-padding) py-2">
+                        <a data-vid="anm2mm5" href={open(d)} className="text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">{d.symptom ?? d.writeUp ?? d.component ?? "—"}</a>
+                        <div data-vid="4kjh7r2" className="type-caption mt-1 whitespace-normal border-l-2 border-border pl-2 text-text-muted">
+                          <span data-vid="0as9yqe" className="font-medium text-text-body">AI assessment</span>
                           {typeof d.classificationConfidence === "number" ? ` (${Math.round(d.classificationConfidence <= 1 ? d.classificationConfidence * 100 : d.classificationConfidence)}% confidence)` : ""}
                           {ai ? `: ${ai}` : ": no assessment yet"}
-                          {sugg.length > 0 && <div>Suggested: {sugg.join(", ")}</div>}
+                          {sugg.length > 0 && <div data-vid="64iobgp">Suggested: {sugg.join(", ")}</div>}
                         </div>
                       </td>
-                      <td className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap">{d.ataChapter ?? (sChapter ? <em className="text-text-muted" title="AI suggested">{sChapter}</em> : "—")}</td>
-                      <td className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap">{d.ataSection ?? (sSection ? <em className="text-text-muted" title="AI suggested">{sSection}</em> : "—")}</td>
-                      <td className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap text-text-muted">{d.melItemId ? melCode(d) : sMel ? <em title="AI suggested">{sMel}</em> : "—"}</td>
-                      <td className="type-caption px-(--card-padding) py-2 whitespace-nowrap">{d.reportedAt ?? d.createdAt ? <DateValue value={d.reportedAt ?? d.createdAt} /> : "—"}</td>
-                      <td className="type-caption px-(--card-padding) py-2 whitespace-nowrap tabular-nums">
+                      <td data-vid="uu2aawl" className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap">{d.ataChapter ?? (sChapter ? <em data-vid="4nvi437" className="text-text-muted" title="AI suggested">{sChapter}</em> : "—")}</td>
+                      <td data-vid="zgqexqb" className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap">{d.ataSection ?? (sSection ? <em data-vid="nw6duvj" className="text-text-muted" title="AI suggested">{sSection}</em> : "—")}</td>
+                      <td data-vid="iafivho" className="type-mono-id px-(--card-padding) py-2 whitespace-nowrap text-text-muted">{d.melItemId ? melCode(d) : sMel ? <em data-vid="gk95g77" title="AI suggested">{sMel}</em> : "—"}</td>
+                      <td data-vid="4xdeue9" className="type-caption px-(--card-padding) py-2 whitespace-nowrap">{d.reportedAt ?? d.createdAt ? <DateValue data-vid="zwb8esi" value={d.reportedAt ?? d.createdAt} /> : "—"}</td>
+                      <td data-vid="uwf8wrw" className="type-caption px-(--card-padding) py-2 whitespace-nowrap tabular-nums">
                         {isDef && daysLeft !== null ? (
-                          <span className="inline-flex items-center gap-1"><Clock className="size-4" />{daysLeft >= 0 ? `${daysLeft} d left` : `${-daysLeft} d overdue`}</span>
-                        ) : sDays != null ? <em className="text-text-muted" title="AI suggested">{sDays} d allowed</em> : "—"}
+                          <span data-vid="3qblp6x" className="inline-flex items-center gap-1"><Clock data-vid="pu7ueic" className="size-4" />{daysLeft >= 0 ? `${daysLeft} d left` : `${-daysLeft} d overdue`}</span>
+                        ) : sDays != null ? <em data-vid="1aaz1vz" className="text-text-muted" title="AI suggested">{sDays} d allowed</em> : "—"}
                       </td>
-                      <td className="type-caption px-(--card-padding) py-2 whitespace-nowrap">{d.deferralDueAt ? <DateValue value={d.deferralDueAt} /> : "—"}</td>
+                      <td data-vid="caesj57" className="type-caption px-(--card-padding) py-2 whitespace-nowrap">{d.deferralDueAt ? <DateValue data-vid="1b407nq" value={d.deferralDueAt} /> : "—"}</td>
                     </tr>
                   );
                 })}
@@ -235,10 +235,10 @@ export function AircraftDetailView(props) {
                 </TableHeader>
                 <TableBody data-vid="5409b621">
                   {shown.map((d) => (
-                    <Fragment key={d.id}>
+                    <Fragment data-vid="t84gs68" key={d.id}>
                     <TableRow data-vid="bcda5a86" className="min-h-11">
                       <TableCell data-vid="52d7ccdd" className="whitespace-nowrap">
-                        <button type="button" aria-expanded={expanded === d.id} onClick={() => setExpanded(expanded === d.id ? null : d.id)} className="mr-2 min-h-6 type-meta text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">
+                        <button data-vid="tm8ulbm" type="button" aria-expanded={expanded === d.id} onClick={() => setExpanded(expanded === d.id ? null : d.id)} className="mr-2 min-h-6 type-meta text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">
                           {expanded === d.id ? "Hide details" : "Details"}
                         </button>
                         <a data-vid="84ed3373" href={open(d)} className="type-mono-id inline-flex min-h-6 items-center hover:underline focus-visible:ring-2 focus-visible:ring-ring">
@@ -259,9 +259,9 @@ export function AircraftDetailView(props) {
                       </TableCell>
                     </TableRow>
                     {expanded === d.id && (
-                      <TableRow className="bg-surface-sunken">
-                        <TableCell colSpan={7}>
-                          <dl className="grid gap-x-6 gap-y-3 py-2 sm:grid-cols-2 lg:grid-cols-3">
+                      <TableRow data-vid="etzxxvh" className="bg-surface-sunken">
+                        <TableCell data-vid="qdl72km" colSpan={7}>
+                          <dl data-vid="bw61h0i" className="grid gap-x-6 gap-y-3 py-2 sm:grid-cols-2 lg:grid-cols-3">
                             {[
                               ["Write-up", d.writeUp],
                               ["Controller assessment", d.controllerAssessment],
@@ -279,9 +279,9 @@ export function AircraftDetailView(props) {
                               ["Classification rationale", d.classificationRationale],
                               ["MEL item", melCode(d)],
                             ].map(([label, value]) => (
-                              <div key={label} className={label === "Write-up" || label === "Controller assessment" || label === "Classification rationale" ? "sm:col-span-2 lg:col-span-3" : undefined}>
-                                <dt className="type-eyebrow text-text-muted">{label}</dt>
-                                <dd className="type-body whitespace-pre-wrap">{value === null || value === undefined || value === "" ? "—" : String(value)}</dd>
+                              <div data-vid="8df4ahf" key={label} className={label === "Write-up" || label === "Controller assessment" || label === "Classification rationale" ? "sm:col-span-2 lg:col-span-3" : undefined}>
+                                <dt data-vid="xptuj5t" className="type-eyebrow text-text-muted">{label}</dt>
+                                <dd data-vid="v16xdfy" className="type-body whitespace-pre-wrap">{value === null || value === undefined || value === "" ? "—" : String(value)}</dd>
                               </div>
                             ))}
                           </dl>

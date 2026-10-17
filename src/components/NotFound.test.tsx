@@ -28,9 +28,9 @@ async function render(
     interpolation: { escapeValue: false },
   })
   return renderToStaticMarkup(
-    <I18nextProvider i18n={i18n}>
-      <MemoryRouter>
-        <NotFound {...props} />
+    <I18nextProvider data-vid="tie7tyr" i18n={i18n}>
+      <MemoryRouter data-vid="u0x86mj">
+        <NotFound data-vid="nu346yt" {...props} />
       </MemoryRouter>
     </I18nextProvider>,
   )

@@ -110,7 +110,7 @@ const ChromeContext = createContext<ChromeTranslator | null>(null)
 /** `value`: { [key]: string }, the dictionary of the project's language (a subset is fine: the missing keys stay English). */
 export function ChromeProvider({ value, children }: { value?: ChromeDictionary | null; children?: ReactNode }) {
   const t = useMemo(() => makeChrome(value), [value])
-  return <ChromeContext.Provider value={t}>{children}</ChromeContext.Provider>
+  return <ChromeContext.Provider data-vid="gn4qa09" value={t}>{children}</ChromeContext.Provider>
 }
 
 /** The `t(key, vars)` of the nearest <ChromeProvider>, or the built-in English one when there is none. */

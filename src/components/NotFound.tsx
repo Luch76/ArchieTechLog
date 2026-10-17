@@ -52,7 +52,7 @@ export function NotFound({ inShell = false, homeHref = '/' }: NotFoundProps = {}
   const Root = inShell ? 'section' : 'main';
 
   return (
-    <Root
+    <Root data-vid="85tdksy"
       aria-labelledby="not-found-title"
       className={cn(
         'flex items-center justify-center p-4',
@@ -62,20 +62,20 @@ export function NotFound({ inShell = false, homeHref = '/' }: NotFoundProps = {}
       )}
       data-testid="not-found"
     >
-      <motion.div
+      <motion.div data-vid="s99kce5"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="max-w-2xl w-full text-center space-y-8"
       >
         {/* Animated 404 */}
-        <motion.div
+        <motion.div data-vid="i03k1mw"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.6, type: "spring" }}
           className="relative"
         >
-          <motion.div
+          <motion.div data-vid="zy3ak83"
             animate={reduceMotion ? undefined : { y: [0, -10, 0] }}
             transition={{
               duration: 3,
@@ -91,7 +91,7 @@ export function NotFound({ inShell = false, homeHref = '/' }: NotFoundProps = {}
           {/* Floating elements (decorative loops: not rendered under reduced motion) */}
           {!reduceMotion && (
             <>
-          <motion.div
+          <motion.div data-vid="xlejg6b"
             animate={{
               rotate: [0, 360],
             }}
@@ -102,7 +102,7 @@ export function NotFound({ inShell = false, homeHref = '/' }: NotFoundProps = {}
             }}
             className="absolute top-0 right-1/4 w-16 h-16 border-2 border-primary/20 rounded-full"
           />
-          <motion.div
+          <motion.div data-vid="zgyia0x"
             animate={{
               rotate: [360, 0],
             }}
@@ -118,43 +118,43 @@ export function NotFound({ inShell = false, homeHref = '/' }: NotFoundProps = {}
         </motion.div>
 
         {/* Content */}
-        <motion.div
+        <motion.div data-vid="a43k34b"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 0.5 }}
           className="space-y-4"
         >
-          <h1 id="not-found-title" className="text-3xl md:text-4xl font-bold text-foreground">
+          <h1 data-vid="vzxztxg" id="not-found-title" className="text-3xl md:text-4xl font-bold text-foreground">
             {t('notFound.title', FALLBACK.title)}
           </h1>
-          <p className="text-lg text-muted-foreground max-w-md mx-auto">
+          <p data-vid="s6bqygz" className="text-lg text-muted-foreground max-w-md mx-auto">
             {t('notFound.body', FALLBACK.body)}
           </p>
         </motion.div>
 
         {/* Action Buttons */}
-        <motion.div
+        <motion.div data-vid="e48zphb"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.5 }}
           className="flex flex-col sm:flex-row gap-4 justify-center items-center"
         >
-          <Button
+          <Button data-vid="7z4ed0d"
             size="lg"
             onClick={() => navigate(homeHref)}
             className="gap-2 min-w-[160px]"
           >
-            <Home className="w-4 h-4" />
+            <Home data-vid="kp400n8" className="w-4 h-4" />
             {t('notFound.home', FALLBACK.home)}
           </Button>
           
-          <Button
+          <Button data-vid="ifz6c1x"
             size="lg"
             variant="outline"
             onClick={goBack}
             className="gap-2 min-w-[160px]"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft data-vid="1jztzag" className="w-4 h-4" />
             {t('notFound.back', FALLBACK.back)}
           </Button>
         </motion.div>

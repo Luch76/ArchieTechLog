@@ -56,7 +56,7 @@ function Button({
   const Comp = asChild ? Slot.Root : "button"
 
   return (
-    <Comp
+    <Comp data-vid="kr0j6dx"
       data-slot="button"
       data-variant={variant}
       data-size={size}

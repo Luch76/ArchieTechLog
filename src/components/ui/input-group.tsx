@@ -11,7 +11,7 @@ function InputGroup({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div
+    <div data-vid="d16qpre"
       data-slot="input-group"
       role="group"
       className={cn(
@@ -50,7 +50,7 @@ function InputGroupAddon({
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof inputGroupAddonVariants>) {
   return (
-    <div
+    <div data-vid="lanb0wp"
       role="group"
       data-slot="input-group-addon"
       data-align={align}
@@ -93,7 +93,7 @@ function InputGroupButton({
 }: Omit<React.ComponentProps<typeof Button>, "size"> &
   VariantProps<typeof inputGroupButtonVariants>) {
   return (
-    <Button
+    <Button data-vid="40vxqj9"
       type={type}
       data-size={size}
       variant={variant}
@@ -108,7 +108,7 @@ function InputGroupText({
   ...props
 }: React.ComponentProps<"span">) {
   return (
-    <span
+    <span data-vid="0o1sfy2"
       className={cn(
         "flex items-center gap-2 text-sm text-muted-foreground [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
         className
@@ -123,7 +123,7 @@ function InputGroupInput({
   ...props
 }: React.ComponentProps<typeof Input>) {
   return (
-    <Input
+    <Input data-vid="9h0p7yt"
       data-slot="input-group-control"
       className={cn(
         "flex-1 rounded-none border-0 bg-transparent shadow-none ring-0 focus-visible:ring-0 disabled:bg-transparent aria-invalid:ring-0 dark:bg-transparent dark:disabled:bg-transparent",
@@ -139,7 +139,7 @@ function InputGroupTextarea({
   ...props
 }: React.ComponentProps<typeof Textarea>) {
   return (
-    <Textarea
+    <Textarea data-vid="n072btf"
       data-slot="input-group-control"
       className={cn(
         "flex-1 resize-none rounded-none border-0 bg-transparent py-2 shadow-none ring-0 focus-visible:ring-0 disabled:bg-transparent aria-invalid:ring-0 dark:bg-transparent dark:disabled:bg-transparent",

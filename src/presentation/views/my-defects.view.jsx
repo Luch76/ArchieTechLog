@@ -68,14 +68,14 @@ export function MyDefectsView(props) {
             ) : null}
           </div>
           <p data-vid="dbd3882e" className="type-body line-clamp-2 text-text-body">{d.writeUp}</p>
-          <div className="type-caption flex flex-wrap gap-x-3 text-text-muted">
-            <span>{t('defectAta.chapter', 'ATA chapter')} <span className="font-mono text-foreground">{d.ataChapter ?? '—'}</span></span>
-            <span>{t('defectAta.section', 'ATA section')} <span className="font-mono text-foreground">{d.ataSection ?? '—'}</span></span>
-            <span>{t('defectMel.code', 'MEL code')} <span className="font-mono text-foreground">{melById[d.melItemId]?.itemCode ?? '—'}</span></span>
+          <div data-vid="delsdgx" className="type-caption flex flex-wrap gap-x-3 text-text-muted">
+            <span data-vid="6pw0ndj">{t('defectAta.chapter', 'ATA chapter')} <span data-vid="w2m2dz9" className="font-mono text-foreground">{d.ataChapter ?? '—'}</span></span>
+            <span data-vid="giu0zam">{t('defectAta.section', 'ATA section')} <span data-vid="ns0zofd" className="font-mono text-foreground">{d.ataSection ?? '—'}</span></span>
+            <span data-vid="7secm9l">{t('defectMel.code', 'MEL code')} <span data-vid="3rn8mk0" className="font-mono text-foreground">{melById[d.melItemId]?.itemCode ?? '—'}</span></span>
           </div>
           <div data-vid="2301f43b" className="type-caption flex flex-wrap gap-x-3 text-text-muted">
             <span data-vid="86e29411">{t('my-defects.34540bb7')} <DateValue data-vid="8ed0b0c5" value={d.reportedAt ?? d.createdAt} /></span>
-            {deferred && d.deferredAt ? <span>{t('defectAta.deferredOn', 'Deferred')} <DateValue value={d.deferredAt} /></span> : null}
+            {deferred && d.deferredAt ? <span data-vid="anda67l">{t('defectAta.deferredOn', 'Deferred')} <DateValue data-vid="d6vkqg6" value={d.deferredAt} /></span> : null}
             {closed && d.closedAt ? <span data-vid="55b3eacf">{t('my-defects.c21ead06.span')} <DateValue data-vid="ebf806ef" value={d.closedAt} /></span> : null}
             {deferred && d.deferralDueAt ? (
               <span data-vid="7aa4132d" className="inline-flex items-center gap-1">

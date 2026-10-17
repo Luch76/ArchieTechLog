@@ -33,17 +33,17 @@ export interface EmptyStateProps {
  */
 export function EmptyState({ title, description, icon, action, className }: EmptyStateProps) {
   return (
-    <Empty data-slot="empty-state" className={cn('border', className)}>
-      <EmptyHeader>
+    <Empty data-vid="w8ztq47" data-slot="empty-state" className={cn('border', className)}>
+      <EmptyHeader data-vid="u5yn0s8">
         {icon && (
-          <EmptyMedia variant="icon" aria-hidden>
+          <EmptyMedia data-vid="t7whtck" variant="icon" aria-hidden>
             {icon}
           </EmptyMedia>
         )}
-        <EmptyTitle>{title}</EmptyTitle>
-        {description && <EmptyDescription>{description}</EmptyDescription>}
+        <EmptyTitle data-vid="q6qh9t7">{title}</EmptyTitle>
+        {description && <EmptyDescription data-vid="jf1zgkq">{description}</EmptyDescription>}
       </EmptyHeader>
-      {action && <EmptyContent>{action}</EmptyContent>}
+      {action && <EmptyContent data-vid="tvdt228">{action}</EmptyContent>}
     </Empty>
   )
 }

@@ -71,7 +71,7 @@ export function ThemeProvider({
   }
 
   return (
-    <ThemeProviderContext.Provider {...props} value={value}>
+    <ThemeProviderContext.Provider data-vid="cw8ba1y" {...props} value={value}>
       {children}
     </ThemeProviderContext.Provider>
   )

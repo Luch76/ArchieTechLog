@@ -293,23 +293,23 @@ export function ReviewQueueView(props) {
 
                     {step === 0 && (
                       <div data-vid="c4cc6546" className="flex flex-col gap-1">
-                        <p className="type-body text-text-body">{t('review-queue.f64e1ab1')}</p>
-                        {!dm && <p className="type-caption text-text-muted">No MEL item is linked to this defect yet. You can still enter your own assessment.</p>}
+                        <p data-vid="mx8jtbo" className="type-body text-text-body">{t('review-queue.f64e1ab1')}</p>
+                        {!dm && <p data-vid="s4lk6od" className="type-caption text-text-muted">No MEL item is linked to this defect yet. You can still enter your own assessment.</p>}
                       </div>
                     )}
                     {step === 1 && (
                       <div data-vid="f3b2d98a" className="flex flex-col gap-3">
-                        <div className="flex flex-wrap items-center justify-between gap-2">
+                        <div data-vid="94nwusx" className="flex flex-wrap items-center justify-between gap-2">
                           <Label data-vid="4b9c68e8" htmlFor="assessment" className="type-meta">{t('review-queue.0de68189')}</Label>
                           {props.onDraftAssessment && (
-                            <Button type="button" variant="outline" size="sm" className="min-h-11 border-border-strong" disabled={drafting} onClick={() => draftWithAi(d, dm, cases, plane)}>
-                              {drafting ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
+                            <Button data-vid="y3kilp1" type="button" variant="outline" size="sm" className="min-h-11 border-border-strong" disabled={drafting} onClick={() => draftWithAi(d, dm, cases, plane)}>
+                              {drafting ? <Loader2 data-vid="g74yo67" className="size-4 animate-spin" /> : <Sparkles data-vid="o0ewe2i" className="size-4" />}
                               {drafting ? "Drafting…" : text.trim() ? "Redraft with AI" : "Draft with AI"}
                             </Button>
                           )}
                         </div>
-                        {aiError && <p role="alert" className="type-caption text-status-danger-ink">{aiError}</p>}
-                        {props.onDraftAssessment && <p className="type-caption text-text-muted">AI drafts are advisory. Review and edit the text before you confirm.</p>}
+                        {aiError && <p data-vid="zmt8kkz" role="alert" className="type-caption text-status-danger-ink">{aiError}</p>}
+                        {props.onDraftAssessment && <p data-vid="4doipth" className="type-caption text-text-muted">AI drafts are advisory. Review and edit the text before you confirm.</p>}
                         <Textarea data-vid="5255f19d" id="assessment" value={text} onChange={(e) => setText(e.target.value)} className="border-input min-h-24" placeholder={t('review-queue.35091100')} />
                         <div data-vid="b44849f1" className="flex items-start gap-2">
                           <Checkbox data-vid="34c59e85" id="ack" checked={ack} onCheckedChange={(v) => setAck(v === true)} className="mt-0.5" />

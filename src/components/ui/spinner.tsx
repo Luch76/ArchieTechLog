@@ -9,7 +9,7 @@ function Spinner({
 }: React.ComponentProps<typeof Loader2Icon>) {
   const t = useChrome()
   return (
-    <Loader2Icon data-slot="spinner" role="status" aria-label={t("kit.spinner.loading")} className={cn("size-4 animate-spin", className)} {...props} />
+    <Loader2Icon data-vid="dhcyd48" data-slot="spinner" role="status" aria-label={t("kit.spinner.loading")} className={cn("size-4 animate-spin", className)} {...props} />
   )
 }
 

@@ -10,7 +10,7 @@ function Avatar({
   size?: "default" | "sm" | "lg"
 }) {
   return (
-    <AvatarPrimitive.Root
+    <AvatarPrimitive.Root data-vid="stfb14v"
       data-slot="avatar"
       data-size={size}
       className={cn(
@@ -27,7 +27,7 @@ function AvatarImage({
   ...props
 }: React.ComponentProps<typeof AvatarPrimitive.Image>) {
   return (
-    <AvatarPrimitive.Image
+    <AvatarPrimitive.Image data-vid="ja8ij8z"
       data-slot="avatar-image"
       className={cn(
         "aspect-square size-full rounded-full object-cover",
@@ -43,7 +43,7 @@ function AvatarFallback({
   ...props
 }: React.ComponentProps<typeof AvatarPrimitive.Fallback>) {
   return (
-    <AvatarPrimitive.Fallback
+    <AvatarPrimitive.Fallback data-vid="k3pvclq"
       data-slot="avatar-fallback"
       className={cn(
         "flex size-full items-center justify-center rounded-full bg-muted text-sm text-muted-foreground group-data-[size=sm]/avatar:text-xs",
@@ -59,7 +59,7 @@ function AvatarBadge({
   ...props
 }: React.ComponentProps<"span">) {
   return (
-    <span
+    <span data-vid="2xd281k"
       data-slot="avatar-badge"
       className={cn(
         "absolute right-0 bottom-0 z-10 inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground bg-blend-color ring-2 ring-background select-none",
@@ -78,7 +78,7 @@ function AvatarGroup({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div
+    <div data-vid="2l7bypm"
       data-slot="avatar-group"
       className={cn(
         "group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background",
@@ -94,7 +94,7 @@ function AvatarGroupCount({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div
+    <div data-vid="xj0rm7d"
       data-slot="avatar-group-count"
       className={cn(
         "relative flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-sm text-muted-foreground ring-2 ring-background group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6 [&>svg]:size-4 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3",

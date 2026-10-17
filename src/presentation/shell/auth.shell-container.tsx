@@ -503,5 +503,5 @@ export function AuthShellContainer({ children }: { readonly children: ReactNode 
         }
       : {}),
   };
-  return <AuthShell vm={vm}>{children}</AuthShell>;
+  return <AuthShell data-vid="9e98hpk" vm={vm}>{children}</AuthShell>;
 }

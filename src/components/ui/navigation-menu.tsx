@@ -13,7 +13,7 @@ function NavigationMenu({
   viewport?: boolean
 }) {
   return (
-    <NavigationMenuPrimitive.Root
+    <NavigationMenuPrimitive.Root data-vid="dcqwg9u"
       data-slot="navigation-menu"
       data-viewport={viewport}
       className={cn(
@@ -23,7 +23,7 @@ function NavigationMenu({
       {...props}
     >
       {children}
-      {viewport && <NavigationMenuViewport />}
+      {viewport && <NavigationMenuViewport data-vid="oxge9rd" />}
     </NavigationMenuPrimitive.Root>
   )
 }
@@ -33,7 +33,7 @@ function NavigationMenuList({
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.List>) {
   return (
-    <NavigationMenuPrimitive.List
+    <NavigationMenuPrimitive.List data-vid="lm2j7qw"
       data-slot="navigation-menu-list"
       className={cn(
         "group flex flex-1 list-none items-center justify-center gap-0",
@@ -49,7 +49,7 @@ function NavigationMenuItem({
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Item>) {
   return (
-    <NavigationMenuPrimitive.Item
+    <NavigationMenuPrimitive.Item data-vid="2bfo934"
       data-slot="navigation-menu-item"
       className={cn("relative", className)}
       {...props}
@@ -67,13 +67,13 @@ function NavigationMenuTrigger({
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Trigger>) {
   return (
-    <NavigationMenuPrimitive.Trigger
+    <NavigationMenuPrimitive.Trigger data-vid="ply6txx"
       data-slot="navigation-menu-trigger"
       className={cn(navigationMenuTriggerStyle(), "group", className)}
       {...props}
     >
       {children}{" "}
-      <ChevronDownIcon className="relative top-px ml-1 size-3 transition duration-300 group-data-popup-open/navigation-menu-trigger:rotate-180 group-data-open/navigation-menu-trigger:rotate-180" aria-hidden="true" />
+      <ChevronDownIcon data-vid="e50adq8" className="relative top-px ml-1 size-3 transition duration-300 group-data-popup-open/navigation-menu-trigger:rotate-180 group-data-open/navigation-menu-trigger:rotate-180" aria-hidden="true" />
     </NavigationMenuPrimitive.Trigger>
   )
 }
@@ -83,7 +83,7 @@ function NavigationMenuContent({
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Content>) {
   return (
-    <NavigationMenuPrimitive.Content
+    <NavigationMenuPrimitive.Content data-vid="l63mi5p"
       data-slot="navigation-menu-content"
       className={cn(
         "top-0 left-0 w-full p-1 ease-[cubic-bezier(0.22,1,0.36,1)] group-data-[viewport=false]/navigation-menu:top-full group-data-[viewport=false]/navigation-menu:mt-1.5 group-data-[viewport=false]/navigation-menu:overflow-hidden group-data-[viewport=false]/navigation-menu:rounded-lg group-data-[viewport=false]/navigation-menu:bg-popover group-data-[viewport=false]/navigation-menu:text-popover-foreground group-data-[viewport=false]/navigation-menu:shadow group-data-[viewport=false]/navigation-menu:ring-1 group-data-[viewport=false]/navigation-menu:ring-foreground/10 group-data-[viewport=false]/navigation-menu:duration-300 data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 data-[motion^=from-]:animate-in data-[motion^=from-]:fade-in data-[motion^=to-]:animate-out data-[motion^=to-]:fade-out **:data-[slot=navigation-menu-link]:focus:ring-0 **:data-[slot=navigation-menu-link]:focus:outline-none md:absolute md:w-auto group-data-[viewport=false]/navigation-menu:data-open:animate-in group-data-[viewport=false]/navigation-menu:data-open:fade-in-0 group-data-[viewport=false]/navigation-menu:data-open:zoom-in-95 group-data-[viewport=false]/navigation-menu:data-closed:animate-out group-data-[viewport=false]/navigation-menu:data-closed:fade-out-0 group-data-[viewport=false]/navigation-menu:data-closed:zoom-out-95",
@@ -99,13 +99,13 @@ function NavigationMenuViewport({
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Viewport>) {
   return (
-    <div
+    <div data-vid="lzm6d7k"
       className={cn(
         "absolute top-full left-0 isolate z-50 flex justify-center"
       )}
     >
       {/* plain `shadow` (not shadow-float) is intentional: the viewport is not a floating menu surface */}
-      <NavigationMenuPrimitive.Viewport
+      <NavigationMenuPrimitive.Viewport data-vid="i39yblr"
         data-slot="navigation-menu-viewport"
         className={cn(
           "origin-top-center relative mt-1.5 h-(--radix-navigation-menu-viewport-height) w-full overflow-hidden rounded-lg bg-popover text-popover-foreground shadow ring-1 ring-foreground/10 duration-100 md:w-(--radix-navigation-menu-viewport-width) data-open:animate-in data-open:zoom-in-90 data-closed:animate-out data-closed:zoom-out-90",
@@ -122,7 +122,7 @@ function NavigationMenuLink({
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Link>) {
   return (
-    <NavigationMenuPrimitive.Link
+    <NavigationMenuPrimitive.Link data-vid="00itd3o"
       data-slot="navigation-menu-link"
       className={cn(
         "flex items-center gap-2 rounded-lg p-2 text-sm transition-all outline-none hover:bg-muted focus:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1 in-data-[slot=navigation-menu-content]:rounded-md data-active:bg-muted/50 data-active:hover:bg-muted data-active:focus:bg-muted [&_svg:not([class*='size-'])]:size-4",
@@ -138,7 +138,7 @@ function NavigationMenuIndicator({
   ...props
 }: React.ComponentProps<typeof NavigationMenuPrimitive.Indicator>) {
   return (
-    <NavigationMenuPrimitive.Indicator
+    <NavigationMenuPrimitive.Indicator data-vid="uvf391z"
       data-slot="navigation-menu-indicator"
       className={cn(
         "top-full z-1 flex h-1.5 items-end justify-center overflow-hidden data-[state=hidden]:animate-out data-[state=hidden]:fade-out data-[state=visible]:animate-in data-[state=visible]:fade-in",
@@ -146,7 +146,7 @@ function NavigationMenuIndicator({
       )}
       {...props}
     >
-      <div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
+      <div data-vid="o29xy52" className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
     </NavigationMenuPrimitive.Indicator>
   )
 }

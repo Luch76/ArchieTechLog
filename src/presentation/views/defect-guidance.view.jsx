@@ -115,56 +115,56 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
   };
 
   const field = (label, k, type = "text") => (
-    <label className="flex min-w-40 flex-1 flex-col gap-1">
-      <span className="type-caption text-text-muted">{label}</span>
-      <Input type={type} value={f[k]} onChange={set(k)} className="min-h-11" />
+    <label data-vid="st1upfe" className="flex min-w-40 flex-1 flex-col gap-1">
+      <span data-vid="7hgd7nn" className="type-caption text-text-muted">{label}</span>
+      <Input data-vid="q1mw93m" type={type} value={f[k]} onChange={set(k)} className="min-h-11" />
     </label>
   );
 
   return (
-    <section aria-labelledby="edit" className="flex flex-col gap-(--component-gap) border-t border-border pt-(--component-gap)">
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <h2 id="edit" className="type-section">Edit report</h2>
-        <Button type="button" variant="outline" className="min-h-11" onClick={suggest} disabled={busy}>
-          <Sparkles className="mr-2 size-4" /> {busy ? "Working…" : "Fill in with AI"}
+    <section data-vid="hwwqlk1" aria-labelledby="edit" className="flex flex-col gap-(--component-gap) border-t border-border pt-(--component-gap)">
+      <div data-vid="cikaq1j" className="flex flex-wrap items-center justify-between gap-2">
+        <h2 data-vid="rtpc5d8" id="edit" className="type-section">Edit report</h2>
+        <Button data-vid="5oo4ll2" type="button" variant="outline" className="min-h-11" onClick={suggest} disabled={busy}>
+          <Sparkles data-vid="ybpt0rh" className="mr-2 size-4" /> {busy ? "Working…" : "Fill in with AI"}
         </Button>
       </div>
-      <p className="type-caption text-text-muted">AI suggests ATA chapter and section, MEL item, deferral due date and an assessment. Review and edit everything before saving.</p>
-      <div className="flex flex-wrap gap-(--component-gap) border border-border p-(--card-padding)">
-        <label className="flex min-w-40 flex-1 flex-col gap-1">
-          <span className="type-caption text-text-muted">Aircraft</span>
-          <select value={f.aircraftId} onChange={set("aircraftId")} className="min-h-11 border border-border bg-background px-2 type-body">
-            {fleet.map((a) => <option key={a.id} value={a.id}>{a.tailNumber}{a.aircraftType ? ` — ${a.aircraftType}` : ""}</option>)}
+      <p data-vid="779k4ih" className="type-caption text-text-muted">AI suggests ATA chapter and section, MEL item, deferral due date and an assessment. Review and edit everything before saving.</p>
+      <div data-vid="3tu590p" className="flex flex-wrap gap-(--component-gap) border border-border p-(--card-padding)">
+        <label data-vid="fla4jai" className="flex min-w-40 flex-1 flex-col gap-1">
+          <span data-vid="njhfv9v" className="type-caption text-text-muted">Aircraft</span>
+          <select data-vid="gqor4uo" value={f.aircraftId} onChange={set("aircraftId")} className="min-h-11 border border-border bg-background px-2 type-body">
+            {fleet.map((a) => <option data-vid="cs9d5ek" key={a.id} value={a.id}>{a.tailNumber}{a.aircraftType ? ` — ${a.aircraftType}` : ""}</option>)}
           </select>
         </label>
-        <label className="flex min-w-40 flex-1 flex-col gap-1">
-          <span className="type-caption text-text-muted">Reported by</span>
-          <select value={f.reporterType} onChange={set("reporterType")} className="min-h-11 border border-border bg-background px-2 type-body">
-            <option value="pilot">Pilot</option>
-            <option value="mechanic">Mechanic</option>
-            <option value="mro_system">MRO system</option>
+        <label data-vid="0mbb3cm" className="flex min-w-40 flex-1 flex-col gap-1">
+          <span data-vid="xk214an" className="type-caption text-text-muted">Reported by</span>
+          <select data-vid="02tk8ps" value={f.reporterType} onChange={set("reporterType")} className="min-h-11 border border-border bg-background px-2 type-body">
+            <option data-vid="ry430hr" value="pilot">Pilot</option>
+            <option data-vid="tm7ifzk" value="mechanic">Mechanic</option>
+            <option data-vid="g14ucs5" value="mro_system">MRO system</option>
           </select>
         </label>
-        <label className="flex w-full flex-col gap-1">
-          <span className="type-caption text-text-muted">Source write-up (original report text)</span>
-          <textarea value={f.writeUp} onChange={set("writeUp")} rows={3} className="border border-border bg-background p-2 type-body" />
+        <label data-vid="pe4ksw2" className="flex w-full flex-col gap-1">
+          <span data-vid="l6py0c1" className="type-caption text-text-muted">Source write-up (original report text)</span>
+          <textarea data-vid="zx53ea1" value={f.writeUp} onChange={set("writeUp")} rows={3} className="border border-border bg-background p-2 type-body" />
         </label>
-        <label className="flex min-w-40 flex-1 flex-col gap-1">
-          <span className="type-caption text-text-muted">Status</span>
-          <select value={f.status} onChange={set("status")} className="min-h-11 border border-border bg-background px-2 type-body">
-            <option value="OPEN">Open</option>
-            <option value="DEFERRED">Deferred</option>
-            <option value="CLOSED">Closed</option>
+        <label data-vid="oeo702w" className="flex min-w-40 flex-1 flex-col gap-1">
+          <span data-vid="rnlrmsw" className="type-caption text-text-muted">Status</span>
+          <select data-vid="cd9b7fe" value={f.status} onChange={set("status")} className="min-h-11 border border-border bg-background px-2 type-body">
+            <option data-vid="ju0avpv" value="OPEN">Open</option>
+            <option data-vid="rg5d62s" value="DEFERRED">Deferred</option>
+            <option data-vid="21dd1ew" value="CLOSED">Closed</option>
           </select>
         </label>
-        <label className="flex min-w-40 flex-1 flex-col gap-1">
-          <span className="type-caption text-text-muted">Priority</span>
-          <select value={f.priority} onChange={set("priority")} className="min-h-11 border border-border bg-background px-2 type-body">
-            <option value="">Not set</option>
-            <option value="LOW">Low</option>
-            <option value="MEDIUM">Medium</option>
-            <option value="HIGH">High</option>
-            <option value="CRITICAL">Critical</option>
+        <label data-vid="zktj2w6" className="flex min-w-40 flex-1 flex-col gap-1">
+          <span data-vid="hljkefe" className="type-caption text-text-muted">Priority</span>
+          <select data-vid="e70a27v" value={f.priority} onChange={set("priority")} className="min-h-11 border border-border bg-background px-2 type-body">
+            <option data-vid="ag3fq76" value="">Not set</option>
+            <option data-vid="u50766v" value="LOW">Low</option>
+            <option data-vid="kso3935" value="MEDIUM">Medium</option>
+            <option data-vid="cur5s4y" value="HIGH">High</option>
+            <option data-vid="vr1xoie" value="CRITICAL">Critical</option>
           </select>
         </label>
         {field("Reported date", "reportedAt", "date")}
@@ -172,30 +172,30 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
         {field("Classification confidence (%)", "classificationConfidence", "number")}
         {field("Repeat count", "repeatCount", "number")}
         {field("Deferred date", "deferredAt", "date")}
-        <label className="flex w-full flex-col gap-1">
-          <span className="type-caption text-text-muted">Classification rationale</span>
-          <textarea value={f.classificationRationale} onChange={set("classificationRationale")} rows={3} className="border border-border bg-background p-2 type-body" />
+        <label data-vid="vufhs5p" className="flex w-full flex-col gap-1">
+          <span data-vid="lief1th" className="type-caption text-text-muted">Classification rationale</span>
+          <textarea data-vid="ob50zt5" value={f.classificationRationale} onChange={set("classificationRationale")} rows={3} className="border border-border bg-background p-2 type-body" />
         </label>
         {field("ATA chapter", "ataChapter")}
         {field("ATA section", "ataSection")}
         {field("Component", "component")}
         {field("Symptom", "symptom")}
-        <label className="flex min-w-40 flex-1 flex-col gap-1">
-          <span className="type-caption text-text-muted">MEL item</span>
-          <select value={f.melItemId} onChange={set("melItemId")} className="min-h-11 border border-border bg-background px-2 type-body">
-            <option value="">None</option>
-            {MelItem.map((m) => <option key={m.id} value={m.id}>{m.itemCode}{m.title ? ` — ${m.title}` : ""}</option>)}
+        <label data-vid="myyuw89" className="flex min-w-40 flex-1 flex-col gap-1">
+          <span data-vid="ws9vups" className="type-caption text-text-muted">MEL item</span>
+          <select data-vid="j94dr8g" value={f.melItemId} onChange={set("melItemId")} className="min-h-11 border border-border bg-background px-2 type-body">
+            <option data-vid="77si3pa" value="">None</option>
+            {MelItem.map((m) => <option data-vid="jkeuf38" key={m.id} value={m.id}>{m.itemCode}{m.title ? ` — ${m.title}` : ""}</option>)}
           </select>
         </label>
         {field("Deferral due date", "deferralDueAt", "date")}
-        <label className="flex w-full flex-col gap-1">
-          <span className="type-caption text-text-muted">Assessment {mel ? `(MEL ${mel.itemCode}, ${mel.deferralInterval} days allowed)` : ""}</span>
-          <textarea value={f.controllerAssessment} onChange={set("controllerAssessment")} rows={5} className="border border-border bg-background p-2 type-body" />
+        <label data-vid="lxses7t" className="flex w-full flex-col gap-1">
+          <span data-vid="1lub1x9" className="type-caption text-text-muted">Assessment {mel ? `(MEL ${mel.itemCode}, ${mel.deferralInterval} days allowed)` : ""}</span>
+          <textarea data-vid="cyr0plf" value={f.controllerAssessment} onChange={set("controllerAssessment")} rows={5} className="border border-border bg-background p-2 type-body" />
         </label>
       </div>
-      <div className="flex flex-wrap items-center gap-3">
-        <Button type="button" className="min-h-11" onClick={save} disabled={busy || !onUpdate}>Save changes</Button>
-        {msg && <span role="status" className="type-meta text-text-muted">{msg}</span>}
+      <div data-vid="wwrwuwy" className="flex flex-wrap items-center gap-3">
+        <Button data-vid="h10vb2x" type="button" className="min-h-11" onClick={save} disabled={busy || !onUpdate}>Save changes</Button>
+        {msg && <span data-vid="65b015w" role="status" className="type-meta text-text-muted">{msg}</span>}
       </div>
     </section>
   );
@@ -260,7 +260,7 @@ export function DefectGuidanceView(props) {
         </div>
         <p data-vid="8f2a7a58" className="type-meta text-text-muted">
           {t('defect-guidance.c170bc77')} {reporter} · <DateValue data-vid="4e7f725d" value={report?.reportedAt ?? report?.createdAt} kind="datetime" />
-          {report?.deferredAt ? <> · {t('defectAta.deferredOn', 'Deferred')} <DateValue value={report.deferredAt} kind="datetime" /></> : null}
+          {report?.deferredAt ? <> · {t('defectAta.deferredOn', 'Deferred')} <DateValue data-vid="d2wa7jm" value={report.deferredAt} kind="datetime" /></> : null}
           {aircraft?.aircraftType ? ` · ${aircraft?.aircraftType}` : ""}
         </p>
       </header>
@@ -270,10 +270,10 @@ export function DefectGuidanceView(props) {
           <h2 data-vid="27d8e893" id="src" className="type-eyebrow text-text-muted">{t('defect-guidance.4b80aa1b')}</h2>
           <blockquote data-vid="503dc46f" className="border border-border bg-card p-(--card-padding)">
             <p data-vid="67dbb50b" className="type-body text-foreground [overflow-wrap:anywhere]">{report?.writeUp}</p>
-              <p className="type-caption mt-2 flex flex-wrap gap-x-4 text-text-muted">
-                <span>{t('defectAta.chapter', 'ATA chapter')} <span className="font-mono text-foreground">{report?.ataChapter ?? '—'}</span></span>
-                <span>{t('defectAta.section', 'ATA section')} <span className="font-mono text-foreground">{report?.ataSection ?? '—'}</span></span>
-                <span>{t('defectMel.code', 'MEL code')} <span className="font-mono text-foreground">{linked?.itemCode ?? '—'}</span></span>
+              <p data-vid="a4h2pb7" className="type-caption mt-2 flex flex-wrap gap-x-4 text-text-muted">
+                <span data-vid="saldhxu">{t('defectAta.chapter', 'ATA chapter')} <span data-vid="d3hz1tb" className="font-mono text-foreground">{report?.ataChapter ?? '—'}</span></span>
+                <span data-vid="k8yb1c1">{t('defectAta.section', 'ATA section')} <span data-vid="2z640lr" className="font-mono text-foreground">{report?.ataSection ?? '—'}</span></span>
+                <span data-vid="9kxzuqn">{t('defectMel.code', 'MEL code')} <span data-vid="ktluqzp" className="font-mono text-foreground">{linked?.itemCode ?? '—'}</span></span>
               </p>
           </blockquote>
           {report?.photo?.src && (
@@ -317,7 +317,7 @@ export function DefectGuidanceView(props) {
         </section>
       </div>
 
-      <DefectEditor key={report.id + (report.controllerAssessment ?? "")} report={report} aircraft={aircraft} fleet={Aircraft} MelItem={MelItem} SdrCase={SdrCase} repeatCount={report.repeatCount} onUpdate={props.onUpdateDefectReport} onDraft={props.onDraftAssessment} />
+      <DefectEditor data-vid="7dpl63j" key={report.id + (report.controllerAssessment ?? "")} report={report} aircraft={aircraft} fleet={Aircraft} MelItem={MelItem} SdrCase={SdrCase} repeatCount={report.repeatCount} onUpdate={props.onUpdateDefectReport} onDraft={props.onDraftAssessment} />
 
       <section data-vid="5273e453" aria-labelledby="mel" className="flex flex-col gap-(--component-gap) border-t border-border pt-(--component-gap)">
         <div data-vid="b1f54eae" className="flex flex-wrap items-center justify-between gap-2">

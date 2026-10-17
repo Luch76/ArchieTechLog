@@ -35,7 +35,7 @@ export interface StatusChipProps extends Omit<ComponentProps<'span'>, 'children'
  */
 export function StatusChip({ label, tone = 'neutral', className, ...props }: StatusChipProps) {
   return (
-    <Badge
+    <Badge data-vid="hzn397j"
       variant="secondary"
       data-slot="status-chip"
       data-tone={tone}
@@ -43,7 +43,7 @@ export function StatusChip({ label, tone = 'neutral', className, ...props }: Sta
       {...props}
     >
       {/* Decorative dot reinforces the tone; the text carries the meaning. */}
-      <span aria-hidden className="size-1.5 shrink-0 rounded-full bg-[var(--dot)]" />
+      <span data-vid="gkz9jbo" aria-hidden className="size-1.5 shrink-0 rounded-full bg-[var(--dot)]" />
       {label}
     </Badge>
   )

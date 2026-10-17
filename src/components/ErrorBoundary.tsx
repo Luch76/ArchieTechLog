@@ -34,8 +34,8 @@ export function ErrorBoundary() {
 
   if (reloading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background p-4">
-        <p className="text-sm text-muted-foreground">Reloading…</p>
+      <div data-vid="zn4rtgo" className="min-h-screen flex items-center justify-center bg-background p-4">
+        <p data-vid="4uv15uj" className="text-sm text-muted-foreground">Reloading…</p>
       </div>
     );
   }
@@ -57,53 +57,53 @@ export function ErrorBoundary() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background p-4">
-      <Card className="max-w-lg w-full border-destructive/50">
-        <CardHeader>
-          <div className="flex items-center gap-4">
-            <div className="p-3 rounded-full bg-destructive/10">
-              <TriangleAlert className="w-6 h-6 text-destructive" />
+    <div data-vid="xux6hy6" className="min-h-screen flex items-center justify-center bg-background p-4">
+      <Card data-vid="vpvzqgj" className="max-w-lg w-full border-destructive/50">
+        <CardHeader data-vid="27h9w18">
+          <div data-vid="vrrji2g" className="flex items-center gap-4">
+            <div data-vid="5wafw9u" className="p-3 rounded-full bg-destructive/10">
+              <TriangleAlert data-vid="z7pzt8l" className="w-6 h-6 text-destructive" />
             </div>
-            <div>
-              <CardTitle className="text-2xl">
+            <div data-vid="unk1bew">
+              <CardTitle data-vid="z3cfc1b" className="text-2xl">
                 {errorStatus ? `Error ${errorStatus}` : 'Something went wrong'}
               </CardTitle>
-              <CardDescription>
+              <CardDescription data-vid="10v5vc7">
                 An unexpected error has occurred
               </CardDescription>
             </div>
           </div>
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="bg-muted p-4 rounded-lg">
-            <p className="text-sm font-mono text-muted-foreground break-words">
+        <CardContent data-vid="pdaarmz" className="space-y-4">
+          <div data-vid="d25uxs7" className="bg-muted p-4 rounded-lg">
+            <p data-vid="dbwl3ci" className="text-sm font-mono text-muted-foreground break-words">
               {errorMessage}
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-2">
-            <Button asChild className="flex-1">
-              <Link to="/">
-                <Home className="w-4 h-4 mr-2" />
+          <div data-vid="kfl4rks" className="flex flex-col sm:flex-row gap-2">
+            <Button data-vid="nih6614" asChild className="flex-1">
+              <Link data-vid="a204ni3" to="/">
+                <Home data-vid="2vigzri" className="w-4 h-4 mr-2" />
                 Go Home
               </Link>
             </Button>
-            <Button 
+            <Button data-vid="vga6tpy" 
               variant="outline" 
               onClick={() => window.location.reload()}
               className="flex-1"
             >
-              <RefreshCw className="w-4 h-4 mr-2" />
+              <RefreshCw data-vid="p4d61zq" className="w-4 h-4 mr-2" />
               Reload Page
             </Button>
           </div>
 
           {import.meta.env.DEV && error instanceof Error && (
-            <details className="mt-4">
-              <summary className="cursor-pointer text-sm text-muted-foreground hover:text-foreground">
+            <details data-vid="oqygwlf" className="mt-4">
+              <summary data-vid="angyd8f" className="cursor-pointer text-sm text-muted-foreground hover:text-foreground">
                 View stack trace (dev only)
               </summary>
-              <pre className="mt-2 text-xs bg-muted p-4 rounded-lg overflow-auto max-h-64">
+              <pre data-vid="jfbjbsu" className="mt-2 text-xs bg-muted p-4 rounded-lg overflow-auto max-h-64">
                 {error.stack}
               </pre>
             </details>
