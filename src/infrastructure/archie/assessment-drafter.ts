@@ -49,6 +49,30 @@ function describe(input: AssessmentDraftInput): string {
   return lines.join('\n');
 }
 
+/** Rule-based draft from the same facts, used when the AI service cannot answer. */
+function templateDraft(input: AssessmentDraftInput): string {
+  const s: string[] = [];
+  const plane = [input.tailNumber, input.aircraftType].filter(Boolean).join(' ');
+  const issue = [input.component, input.symptom].filter(Boolean).join(': ') || input.writeUp;
+  s.push(`${plane ? `${plane} reports` : 'Reported'} ${issue}${input.ataCode ? ` (ATA ${input.ataCode})` : ''}.`);
+  const m = input.melItem;
+  if (m && (m.itemCode || m.title)) {
+    const ref = [m.itemCode, m.title].filter(Boolean).join(' - ');
+    const cat = m.repairCategory ? ` Repair category ${m.repairCategory}` : '';
+    const days = typeof m.deferralInterval === 'number' ? `${cat ? ', ' : ' '}deferral interval ${m.deferralInterval} days` : '';
+    s.push(`MEL item ${ref} appears to apply.${cat}${days}${cat || days ? '.' : ''} Confirm the item's conditions and any operational limitations before deferring.`);
+  } else {
+    s.push('No MEL item is linked, so MEL eligibility must be confirmed before this defect is deferred.');
+  }
+  if ((input.repeatCount ?? 0) > 1) {
+    s.push(`This is a repeat defect (${input.repeatCount} occurrences); consider troubleshooting beyond the deferral.`);
+  }
+  const c = input.similarCases.find((x) => x.correctiveAction);
+  if (c) s.push(`A similar FAA SDR case${c.caseNumber ? ` (${c.caseNumber})` : ''} was resolved by: ${c.correctiveAction}.`);
+  s.push('Draft for controller review; edit before confirming.');
+  return s.join(' ');
+}
+
 export function createAssessmentDrafter(ai: Ai): AssessmentDrafter {
   return {
     async draft(input) {
@@ -68,13 +92,8 @@ export function createAssessmentDrafter(ai: Ai): AssessmentDrafter {
       } catch (cause) {
         const code = (cause as { code?: string } | null)?.code;
         console.error('[review-queue] AI draft failed', cause);
-        if (cause instanceof Error && cause.message === 'The AI returned an empty draft. Try again.') {
-          throw cause;
-        }
-        if (code === 'rate_limited' || code === 'gate_unavailable') {
-          throw new Error('The AI is busy. Try again in a moment.');
-        }
-        throw new Error('AI drafting is unavailable right now. You can still write the assessment yourself.');
+        void code;
+        return templateDraft(input);
       }
     },
   };
