@@ -15,6 +15,8 @@ export type OrganizationsScreenViewModel = {
     readonly adminEmail: string;
     readonly operatorType: string;
     readonly status: OrganizationStatus;
+    readonly repeatThreshold: number;
+    readonly repeatWindow: number;
   }) => void;
   readonly onChangeStatus: (id: string, status: OrganizationStatus) => void;
 };

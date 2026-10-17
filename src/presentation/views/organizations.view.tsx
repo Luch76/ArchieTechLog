@@ -22,6 +22,8 @@ export function OrganizationsView(props: OrganizationsScreenViewModel) {
   const [name, setName] = useState('');
   const [adminEmail, setAdminEmail] = useState('');
   const [operatorType, setOperatorType] = useState('airline');
+  const [repeatThreshold, setRepeatThreshold] = useState('3');
+  const [repeatWindow, setRepeatWindow] = useState('30');
   const [query, setQuery] = useState('');
 
   const needle = query.trim().toLowerCase();
@@ -46,7 +48,7 @@ export function OrganizationsView(props: OrganizationsScreenViewModel) {
 
       {showForm ? (
         <form
-          className="grid gap-3 rounded-lg border border-border bg-card p-4 text-card-foreground md:grid-cols-4"
+          className="grid gap-3 rounded-lg border border-border bg-card p-4 text-card-foreground md:grid-cols-3"
           onSubmit={(event) => {
             event.preventDefault();
             if (!canSubmit) return;
@@ -55,6 +57,8 @@ export function OrganizationsView(props: OrganizationsScreenViewModel) {
               adminEmail: adminEmail.trim(),
               operatorType,
               status: 'ONBOARDING',
+              repeatThreshold: Number(repeatThreshold),
+              repeatWindow: Number(repeatWindow),
             });
             setName('');
             setAdminEmail('');
@@ -81,6 +85,30 @@ export function OrganizationsView(props: OrganizationsScreenViewModel) {
               <option value="airline">Airline</option>
               <option value="mro">MRO</option>
             </select>
+          </label>
+          <label className="flex flex-col gap-1 text-sm">
+            Repeat defect threshold (occurrences)
+            <input
+              className={FIELD}
+              type="number"
+              min={1}
+              step={1}
+              value={repeatThreshold}
+              onChange={(e) => setRepeatThreshold(e.target.value)}
+              required
+            />
+          </label>
+          <label className="flex flex-col gap-1 text-sm">
+            Repeat look-back window (days)
+            <input
+              className={FIELD}
+              type="number"
+              min={1}
+              step={1}
+              value={repeatWindow}
+              onChange={(e) => setRepeatWindow(e.target.value)}
+              required
+            />
           </label>
           <div className="flex items-end">
             <Button type="submit" disabled={!canSubmit}>
