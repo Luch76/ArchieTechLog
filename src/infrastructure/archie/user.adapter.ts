@@ -57,7 +57,10 @@ interface UserUpdateData {
 }
 
 function toUser(row: UserRow): User {
-  const roleName = row.userRolesList?.items?.[0]?.role?.name ?? undefined;
+  const roleNames = (row.userRolesList?.items ?? [])
+    .map((entry) => entry.role?.name ?? '')
+    .filter((name, idx, all) => name !== '' && all.indexOf(name) === idx);
+  const roleName = roleNames.length > 0 ? roleNames.join(', ') : undefined;
   return {
     id: row.id,
     firstName: row.firstName ?? '',
