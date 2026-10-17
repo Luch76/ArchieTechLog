@@ -98,13 +98,14 @@ function parseAtaAnswer(text: string): { ataChapter: string; ataSection: string 
 const MEL_SYSTEM = [
   'You match an aircraft defect write-up to the Minimum Equipment List (MEL) item that covers it.',
   'You receive a numbered candidate list. Answer ONLY with JSON: {"number":N} where N is the best candidate.',
-  'If no candidate clearly covers the defect, answer {"number":0}. Never invent a candidate.',
+  'Match by affected system and component, not by exact wording: for example an inoperative air conditioning or cabin temperature problem relates to pressurization, pneumatic or bleed air items; a generator fault relates to generator or APU generator items.',
+  'Choose the closest related candidate. Answer {"number":0} only if every candidate is about an unrelated system. Never invent a candidate.',
 ].join(' ');
 
 export function createAssessmentDrafter(ai: Ai): AssessmentDrafter {
   return {
     async selectMel(input) {
-      const list = input.candidates.slice(0, 80);
+      const list = input.candidates.slice(0, 150);
       if (list.length === 0) return null;
       try {
         const lines = list.map(

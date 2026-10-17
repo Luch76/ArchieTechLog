@@ -102,10 +102,7 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
     let aiMelId = null;
     if (onSelectMel && MelItem.length > 0) {
       try {
-        const near = ataFound
-          ? MelItem.filter((x) => (x.ataCode || "").slice(0, 2) === ataFound.ataChapter)
-          : [];
-        const pool = near.length > 0 ? near : MelItem;
+        const pool = MelItem;
         aiMelId = await onSelectMel({
           writeUp: sourceText,
           ataChapter: ataFound?.ataChapter,
@@ -117,6 +114,7 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
       }
     }
     const melId = aiMelId || f.melItemId || guess?.id || "";
+    if (onSelectMel && !aiMelId) setMsg("The AI found no MEL item in your library that covers this write-up.");
     const m = MelItem.find((x) => x.id === melId);
     const days = (aiMelId || !f.deferralDueAt) && m && m.repairCategory !== "NOT_DEFERRABLE"
       ? toDateInput(new Date(Date.parse(report.reportedAt ?? report.createdAt) + m.deferralInterval * DAY).toISOString())
