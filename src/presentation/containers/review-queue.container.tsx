@@ -21,6 +21,7 @@ import type { DataNotice } from '../../application/view-models/notices';
 import { reviewQueueScreenViewModelAvailability, type ReviewQueueScreenViewModel } from '../../application/view-models/review-queue.vm';
 import { useRepositories } from '../app-context';
 import { ReviewQueueView } from '../views/review-queue.view';
+import { useAssessmentDrafter } from '../assessment-drafter-context';
 import { ScreenError, ScreenLoading } from '../screen-state';
 
 /** The route builders by slug: `href(slug, params)` is `routes.<slug>(params)` (an
@@ -221,6 +222,7 @@ export function ReviewQueueScreenContainer(
   );
 
   const { t } = useTranslation();
+  const drafter = useAssessmentDrafter();
   const vm: ReviewQueueScreenViewModel = {
     Aircraft,
     AircraftNotice,
@@ -233,6 +235,7 @@ export function ReviewQueueScreenContainer(
     loading,
     error: loadError ?? writeError,
     onUpdateDefectReport,
+    ...(drafter !== null ? { onDraftAssessment: (input) => drafter.draft(input) } : {}),
     availability: reviewQueueScreenViewModelAvailability,
     navigate,
     href,

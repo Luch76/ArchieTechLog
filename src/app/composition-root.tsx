@@ -26,6 +26,8 @@ import { ArchieSdrCaseRepository } from '../infrastructure/archie/sdrCase.adapte
 import { ArchieSearchResultRepository } from '../infrastructure/archie/searchResult.adapter';
 import { ArchieUserRepository } from '../infrastructure/archie/user.adapter';
 import { ArchieUserActivityRepository } from '../infrastructure/archie/userActivity.adapter';
+import { createAssessmentDrafter } from '../infrastructure/archie/assessment-drafter';
+import { AssessmentDrafterProvider } from '../presentation/assessment-drafter-context';
 import {
   AuthProvider,
   IdentityProvider,
@@ -68,6 +70,7 @@ export function AppProviders(props: {
 }): React.ReactElement {
   const client = useArchieClient();
   const repositories = React.useMemo(() => createRepositories(client.graphql), [client]);
+  const drafter = React.useMemo(() => createAssessmentDrafter(client.ai), [client]);
   const auth = useArchieAuth();
   const sessions = useArchieSessions();
   const { identity, pending } = useArchieIdentity();
@@ -85,7 +88,10 @@ export function AppProviders(props: {
         children: React.createElement(IdentityProvider, {
           identity,
           pending,
-          children: props.children,
+          children: React.createElement(AssessmentDrafterProvider, {
+            drafter,
+            children: props.children,
+          }),
         }),
       }),
     }),

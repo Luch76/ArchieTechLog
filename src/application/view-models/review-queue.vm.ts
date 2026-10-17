@@ -10,6 +10,7 @@ import type { DefectReport, DefectReportId } from '../../domain/entities/defectR
 import type { MelItem } from '../../domain/entities/melItem';
 import type { SdrCase } from '../../domain/entities/sdrCase';
 import type { UpdateDefectReport } from '../../domain/ports/defectReport.repository';
+import type { AssessmentDraftInput } from '../../domain/ports/assessmentDrafter';
 import type { DataNotice } from './notices';
 
 // NOTE: This screen has 4 data sources and `loading`/`error` AGGREGATE them: the
@@ -62,6 +63,8 @@ export interface ReviewQueueScreenViewModel {
   /** Updates an existing `DefectReport`. The patch is partial by definition. Returns
    *  `void`. */
   readonly onUpdateDefectReport: (id: DefectReportId, patch: Pick<UpdateDefectReport, 'controllerAssessment' | 'status' | 'melItemId' | 'deferralDueAt'>) => void;
+  /** Drafts a deferral assessment with AI; absent when AI is not wired. Rejects with a displayable `Error`. */
+  readonly onDraftAssessment?: (input: AssessmentDraftInput) => Promise<string>;
   /** Static write availability: render disabled-with-reason from it, never guess. */
   readonly availability: ReviewQueueScreenViewModelAvailability;
   /** Navigates to another screen by route (`/slug`). The view never imports the

@@ -12,7 +12,7 @@ import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { StatusMark } from "@/presentation/components/domain/status-mark";
 import { DateValue, NumberValue } from "@/presentation/components/domain/value-format";
 import { EmptyState } from "@/presentation/components/domain/empty-state";
-import { ArrowLeft, ArrowRight, Clock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Sparkles, Loader2 } from "lucide-react";
 import { schema } from "@/presentation/components/domain/schema";
 import { enumIs, enumLabel, withWireKeys } from "@/presentation/components/domain/enum-vocab";
 import { useTranslation } from "react-i18next";
@@ -70,6 +70,36 @@ export function ReviewQueueView(props) {
   const [step, setStep] = useState(0);
   const [text, setText] = useState("");
   const [ack, setAck] = useState(false);
+  const [drafting, setDrafting] = useState(false);
+  const [aiError, setAiError] = useState("");
+
+  async function draftWithAi(d, dm, cases, plane) {
+    if (!props.onDraftAssessment || drafting) return;
+    setDrafting(true);
+    setAiError("");
+    try {
+      const draft = await props.onDraftAssessment({
+        tailNumber: plane?.tailNumber,
+        aircraftType: plane?.aircraftType,
+        writeUp: d.writeUp,
+        ataCode: d.ataCode,
+        component: d.component,
+        symptom: d.symptom,
+        repeatCount: d.repeatCount,
+        classificationRationale: d.classificationRationale,
+        melItem: dm
+          ? { itemCode: dm.itemCode, title: dm.title, repairCategory: dm.repairCategory, deferralInterval: dm.deferralInterval, procedures: typeof dm.procedures === "string" ? dm.procedures : undefined }
+          : undefined,
+        similarCases: cases.map((s) => ({ caseNumber: s.caseNumber, reportedFindings: s.reportedFindings, correctiveAction: s.correctiveAction })),
+      });
+      setText(draft);
+      setAck(false);
+    } catch (err) {
+      setAiError(err instanceof Error ? err.message : "AI drafting is unavailable right now.");
+    } finally {
+      setDrafting(false);
+    }
+  }
 
   const rows = DefectReport.map((d) => (overrides[d.id] ? { ...d, ...overrides[d.id] } : d));
   const waiting = rows.filter((d) => !enumIs(d.status, "closed", "DefectReport.status"));
@@ -90,6 +120,7 @@ export function ReviewQueueView(props) {
     setStep(0);
     setText("");
     setAck(false);
+    setAiError("");
   }
 
   function record(d) {
@@ -268,7 +299,17 @@ export function ReviewQueueView(props) {
                     )}
                     {step === 1 && (
                       <div data-vid="f3b2d98a" className="flex flex-col gap-3">
-                        <Label data-vid="4b9c68e8" htmlFor="assessment" className="type-meta">{t('review-queue.0de68189')}</Label>
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <Label data-vid="4b9c68e8" htmlFor="assessment" className="type-meta">{t('review-queue.0de68189')}</Label>
+                          {props.onDraftAssessment && (
+                            <Button type="button" variant="outline" size="sm" className="min-h-11 border-border-strong" disabled={drafting} onClick={() => draftWithAi(d, dm, cases, plane)}>
+                              {drafting ? <Loader2 className="size-4 animate-spin" /> : <Sparkles className="size-4" />}
+                              {drafting ? "Drafting…" : text.trim() ? "Redraft with AI" : "Draft with AI"}
+                            </Button>
+                          )}
+                        </div>
+                        {aiError && <p role="alert" className="type-caption text-status-danger-ink">{aiError}</p>}
+                        {props.onDraftAssessment && <p className="type-caption text-text-muted">AI drafts are advisory. Review and edit the text before you confirm.</p>}
                         <Textarea data-vid="5255f19d" id="assessment" value={text} onChange={(e) => setText(e.target.value)} className="border-input min-h-24" placeholder={t('review-queue.35091100')} />
                         <div data-vid="b44849f1" className="flex items-start gap-2">
                           <Checkbox data-vid="34c59e85" id="ack" checked={ack} onCheckedChange={(v) => setAck(v === true)} className="mt-0.5" />
