@@ -67,11 +67,11 @@ export function UsersScreenContainer(
         setInvitationsNotice(null);
       } else {
         if (invitationsResult.ok === false) {
-          setLoadError(invitationsResult.error);
-          setLoading(false);
-          return;
-        }
-        if (invitationsResult.data.hasMore === true) {
+          // Invitations are secondary: keep the member list usable if they cannot be read.
+          console.error('[users] invitations unavailable', invitationsResult.error);
+          setInvitations([]);
+          setInvitationsNotice(null);
+        } else if (invitationsResult.data.hasMore === true) {
           setInvitations([]);
           setInvitationsNotice({ code: 'agregado-truncado' });
         } else {
@@ -84,11 +84,10 @@ export function UsersScreenContainer(
         setRolesNotice(null);
       } else {
         if (rolesResult.ok === false) {
-          setLoadError(rolesResult.error);
-          setLoading(false);
-          return;
-        }
-        if (rolesResult.data.hasMore === true) {
+          console.error('[users] roles unavailable', rolesResult.error);
+          setRoles([]);
+          setRolesNotice(null);
+        } else if (rolesResult.data.hasMore === true) {
           setRoles([]);
           setRolesNotice({ code: 'agregado-truncado' });
         } else {

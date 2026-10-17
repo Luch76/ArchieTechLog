@@ -37,6 +37,13 @@ const USER_LIST = `query App_User_List($first: Int, $skip: Int) {
   }
 }`;
 
+const USER_LIST_PLAIN = `query App_User_ListPlain($first: Int, $skip: Int) {
+  users(first: $first, skip: $skip, orderBy: { createdAt: DESC }) {
+    count
+    items { id firstName lastName email phone createdAt updatedAt }
+  }
+}`;
+
 const USER_BY_ID = `query App_User_ById($id: String) {
   usersById(id: $id) { ${FIELDS} }
 }`;
@@ -80,8 +87,16 @@ export class ArchieUserRepository implements UserRepository {
     if (this.gql === undefined) return { ok: true, data: { items: [], total: 0, hasMore: false } };
     const first = q?.first ?? 100;
     const skip = q?.skip ?? 0;
-    const res = await this.gql.query<UserListData>(USER_LIST, { first, skip });
-    if (res.error !== null) return { ok: false, error: fromGraphQL(res.error) };
+    let res = await this.gql.query<UserListData>(USER_LIST, { first, skip });
+    if (res.error !== null) {
+      console.error('[users] list with roles failed, retrying without roles', res.error);
+      // The role link is a nice-to-have: if it is refused, still show the people.
+      res = await this.gql.query<UserListData>(USER_LIST_PLAIN, { first, skip });
+    }
+    if (res.error !== null) {
+      console.error('[users] list failed', res.error);
+      return { ok: false, error: fromGraphQL(res.error) };
+    }
     if (res.data === null || res.data.users === null) return missingData('User', 'list');
     const items = res.data.users.items.map(toUser);
     const total = res.data.users.count;
