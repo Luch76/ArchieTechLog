@@ -73,8 +73,8 @@ function OperatingMark({ value }) {
   return (
     <Badge data-vid="a65d848c" variant="outline" className={`whitespace-nowrap rounded-full px-3 py-1 font-semibold ${tone.chip}`}>
       <span data-vid="3422fa7f" aria-hidden="true" className="relative mr-2 inline-flex size-2">
-        {tone.pulse && <span className={`absolute inline-flex size-full animate-ping rounded-full opacity-75 ${tone.dot}`} />}
-        <span className={`relative inline-flex size-2 rounded-full ${tone.dot}`} />
+        {tone.pulse && <span data-vid="mz0hnto" className={`absolute inline-flex size-full animate-ping rounded-full opacity-75 ${tone.dot}`} />}
+        <span data-vid="2cii6cj" className={`relative inline-flex size-2 rounded-full ${tone.dot}`} />
       </span>
       <span data-vid="17828fbb" className="type-meta">{statusLabels[value] ?? value}</span>
     </Badge>
@@ -82,13 +82,13 @@ function OperatingMark({ value }) {
 }
 
 function CountPill({ value, tone }) {
-  if (!value) return <span className="type-body tabular-nums text-text-muted/40">–</span>;
+  if (!value) return <span data-vid="3dhtwts" className="type-body tabular-nums text-text-muted/40">–</span>;
   const cls =
     tone === "danger"
       ? "bg-status-danger text-white"
       : "bg-status-warning-bg text-status-warning-ink";
   return (
-    <span className={`inline-flex min-w-8 items-center justify-center rounded-full px-2.5 py-0.5 text-sm font-bold tabular-nums ${cls}`}>
+    <span data-vid="msxni3x" className={`inline-flex min-w-8 items-center justify-center rounded-full px-2.5 py-0.5 text-sm font-bold tabular-nums ${cls}`}>
       {value}
     </span>
   );
@@ -125,13 +125,13 @@ const columns = [
     accessorKey: "openCount",
     header: "Open",
     enableGlobalFilter: false,
-    cell: ({ getValue }) => <CountPill value={getValue()} tone="danger" />,
+    cell: ({ getValue }) => <CountPill data-vid="acg89be" value={getValue()} tone="danger" />,
   },
   {
     accessorKey: "deferredCount",
     header: "Deferred",
     enableGlobalFilter: false,
-    cell: ({ getValue }) => <CountPill value={getValue()} tone="warning" />,
+    cell: ({ getValue }) => <CountPill data-vid="gxi0rth" value={getValue()} tone="warning" />,
   },
 ];
 
@@ -222,14 +222,14 @@ export function FleetView(props) {
           aria-label={t('fleet.7ef0c0af')}
           className="flex flex-wrap items-stretch gap-3"
         >
-          <button
+          <button data-vid="mvys5mm"
             type="button"
             onClick={() => setStatus("all")}
             aria-pressed={status === "all"}
             className={`flex min-h-16 min-w-32 flex-col justify-center rounded-card border px-4 py-2 text-left transition hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring ${status === "all" ? "border-foreground bg-foreground text-background shadow-md" : "border-border bg-card"}`}
           >
-            <span className="text-3xl font-bold leading-none tabular-nums">{Aircraft.length}</span>
-            <span className="type-meta mt-1 opacity-80">{t('fleet.d10149ee')}</span>
+            <span data-vid="g40lw3o" className="text-3xl font-bold leading-none tabular-nums">{Aircraft.length}</span>
+            <span data-vid="ut9f10r" className="type-meta mt-1 opacity-80">{t('fleet.d10149ee')}</span>
           </button>
           {statusOrder
             .filter((s) => (counts[s] ?? 0) > 0 || status === s)
@@ -238,16 +238,16 @@ export function FleetView(props) {
               const tone = TONES[toneOf(s)];
               const active = status === s;
               return (
-                <button
+                <button data-vid="8fhqp7q"
                   key={s}
                   type="button"
                   onClick={() => setStatus(active ? "all" : s)}
                   aria-pressed={active}
                   className={`flex min-h-16 min-w-32 flex-col justify-center rounded-card border px-4 py-2 text-left transition hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring ${active ? "border-foreground bg-card shadow-md ring-2 ring-foreground" : "border-border bg-card"}`}
                 >
-                  <span className="text-3xl font-bold leading-none tabular-nums">{counts[s] ?? 0}</span>
-                  <span className="type-meta mt-1 flex items-center gap-1.5 text-text-muted">
-                    <span aria-hidden="true" className={`size-2 rounded-full ${tone.swatch}`} />
+                  <span data-vid="zh86yzc" className="text-3xl font-bold leading-none tabular-nums">{counts[s] ?? 0}</span>
+                  <span data-vid="t3qx6y7" className="type-meta mt-1 flex items-center gap-1.5 text-text-muted">
+                    <span data-vid="pdf52x0" aria-hidden="true" className={`size-2 rounded-full ${tone.swatch}`} />
                     {statusLabels[s]}
                   </span>
                 </button>
