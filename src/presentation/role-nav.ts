@@ -437,6 +437,8 @@ export function computeNavForRoles(roleKeys: string[]): NavGroup[] {
 }
 
 export function canAccess(slug: string, rawRoles: readonly string[]): boolean {
+  // Temporary: every signed-in user may open the Users page until per-role access is decided.
+  if (slug === 'users') return true;
   const resource = RESOURCE_BY_SLUG[slug];
   if (!resource) return true; // slug no modelado: nunca bloquear por mapeo no resuelto
   const keys = normalizeUserRoles(rawRoles);
