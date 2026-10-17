@@ -174,6 +174,7 @@ export function FleetDashboardView(props) {
                   <TableHead data-vid="da6ab40e" className="type-eyebrow">{t('fleet-dashboard.a6527b2e')}</TableHead>
                   <TableHead data-vid="a3c6cf74" className="type-eyebrow">{enumIs(filter, "open") ? t('fleet-dashboard.34540bb7') : t('fleet-dashboard.9071738f')}</TableHead>
                   <TableHead data-vid="c0d815e8" className="type-eyebrow text-right">{t('fleet-dashboard.b6b7a006')}</TableHead>
+                  <TableHead className="type-eyebrow text-right">Assessment</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody data-vid="212f0eaa">
@@ -204,6 +205,11 @@ export function FleetDashboardView(props) {
                         {(d.repeatCount ?? 0) >= 2 ? (
                           <span data-vid="24c5c8de" className="type-stat inline-block bg-secondary-tone px-2 text-secondary-tone-foreground rounded-sm">×<NumberValue data-vid="ca8ac095" value={d.repeatCount} /></span>
                         ) : "—"}
+                      </TableCell>
+                      <TableCell className="text-right whitespace-nowrap">
+                        <a href="#review-queue" className="type-meta inline-flex min-h-6 items-center text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">
+                          {enumIs(d.status, "open", "DefectReport.status") ? "Add assessment" : "View assessment"}
+                        </a>
                       </TableCell>
                     </TableRow>
                   );
