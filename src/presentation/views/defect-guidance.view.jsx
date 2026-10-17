@@ -265,11 +265,11 @@ export function DefectGuidanceView(props) {
         </p>
       </header>
 
-      <DefectEditor key={report.id + (report.controllerAssessment ?? "")} report={report} aircraft={aircraft} fleet={Aircraft} MelItem={MelItem} SdrCase={SdrCase} repeatCount={report.repeatCount} onUpdate={props.onUpdateDefectReport} onDraft={props.onDraftAssessment} />
+      <DefectEditor data-vid="0k0twxh" key={report.id + (report.controllerAssessment ?? "")} report={report} aircraft={aircraft} fleet={Aircraft} MelItem={MelItem} SdrCase={SdrCase} repeatCount={report.repeatCount} onUpdate={props.onUpdateDefectReport} onDraft={props.onDraftAssessment} />
 
       {report?.photo?.src && (
-        <figure className="flex max-w-sm flex-col gap-2">
-          <Picture src={report.photo.src} intent={report.photo.scene} alt={`Attached report photo for ${aircraft?.tailNumber ?? "this aircraft"}`} ratio={4 / 3} className="border border-border" />
+        <figure data-vid="ofk39qd" className="flex max-w-sm flex-col gap-2">
+          <Picture data-vid="hkpydtf" src={report.photo.src} intent={report.photo.scene} alt={`Attached report photo for ${aircraft?.tailNumber ?? "this aircraft"}`} ratio={4 / 3} className="border border-border" />
         </figure>
       )}
 
