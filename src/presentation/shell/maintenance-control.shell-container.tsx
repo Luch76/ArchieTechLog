@@ -45,13 +45,6 @@ const SURFACES: Readonly<Record<string, SurfaceData>> = {
       "e2d6f469-0ccb-4b16-870b-26a874eed960": [],
       "612d05c6-ead5-4bec-8fac-0aa2efa55bc0": [
         {
-          "slug": "review-queue",
-          "href": "/review-queue",
-          "label": "Review Queue",
-          "order": 0,
-          "icon": "Inbox"
-        },
-        {
           "slug": "fleet-dashboard",
           "href": "/fleet-dashboard",
           "label": "Fleet Dashboard",
@@ -102,10 +95,6 @@ const SURFACES: Readonly<Record<string, SurfaceData>> = {
       },
       "612d05c6-ead5-4bec-8fac-0aa2efa55bc0": {
         "routes": [
-          {
-            "href": "/review-queue",
-            "title": "Review Queue"
-          },
           {
             "href": "/fleet-dashboard",
             "title": "Fleet Dashboard"
