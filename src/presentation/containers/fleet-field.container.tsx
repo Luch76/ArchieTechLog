@@ -13,6 +13,7 @@ import { routes } from '@/presentation/navigation';
 import { useAppNavigate } from '@/presentation/navigation';
 import type { RepoError } from '../../domain/shared';
 import type { Aircraft } from '../../domain/entities/aircraft';
+import type { NewAircraft } from '../../domain/ports/aircraft.repository';
 import type { DataNotice } from '../../application/view-models/notices';
 import type { FleetFieldScreenViewModel } from '../../application/view-models/fleet-field.vm';
 import { useRepositories } from '../app-context';
@@ -56,6 +57,8 @@ export function FleetFieldScreenContainer(
   const [loading, setLoading] = React.useState(true);
   const [loadError, setLoadError] = React.useState<RepoError | null>(null);
   const [reloadToken, setReloadToken] = React.useState(0);
+  const [writeError, setWriteError] = React.useState<RepoError | null>(null);
+  const [fallbackOrgId, setFallbackOrgId] = React.useState<string | null>(null);
   // "A load already SUCCEEDED" — not "first lap": a retry after a first failure must show the
   // spinner again, and a post-write reload must NOT blank the screen (L22).
   const hasLoadedRef = React.useRef(false);
@@ -70,9 +73,14 @@ export function FleetFieldScreenContainer(
     setLoadError(null);
     void Promise.all([
       repositories.aircraft.listAll(),
+      repositories.organization.list({ first: 2 }),
     ])
-    .then(([AircraftResult]) => {
+    .then(([AircraftResult, OrgResult]) => {
       if (!live) return;
+      // With no aircraft yet, the organization is only known when exactly one is visible.
+      setFallbackOrgId(
+        OrgResult.ok === true && OrgResult.data.items.length === 1 ? OrgResult.data.items[0].id : null,
+      );
       if (AircraftResult === null) {
         setAircraft([]);
         setAircraftTruncatedCap(null);
@@ -118,10 +126,47 @@ export function FleetFieldScreenContainer(
     };
   }, [repositories, reloadToken]);
 
+  const organizationId = React.useMemo((): string | null => {
+    const counts: Record<string, number> = {};
+    Aircraft.forEach((a) => {
+      counts[a.organizationId] = (counts[a.organizationId] ?? 0) + 1;
+    });
+    const top = Object.keys(counts).sort((a, b) => counts[b] - counts[a])[0];
+    return top ?? fallbackOrgId;
+  }, [Aircraft, fallbackOrgId]);
+
+  const onCreateAircraft = React.useCallback(
+    (input: Pick<NewAircraft, 'tailNumber' | 'aircraftType' | 'operatingStatus' | 'organizationId'>): Promise<boolean> => {
+      setWriteError(null);
+      return repositories.aircraft
+        .create(input)
+        .then((result): boolean => {
+          if (result.ok === false) {
+            setWriteError(result.error);
+            return false;
+          }
+          reload();
+          return true;
+        })
+        .catch((cause: unknown): boolean => {
+          console.error('[archie] aircraft create failed outside the RepoResult contract:', cause);
+          setWriteError({
+            kind: 'transport',
+            message: 'The write failed in a way the transport could not normalize.',
+            detail: 'promise rejected outside the RepoResult contract',
+          });
+          return false;
+        });
+    },
+    [repositories, reload],
+  );
+
   const { t } = useTranslation();
   const vm: FleetFieldScreenViewModel = {
     Aircraft,
     AircraftNotice,
+    organizationId,
+    onCreateAircraft,
     loading,
     error: loadError,
     navigate,
@@ -139,6 +184,24 @@ export function FleetFieldScreenContainer(
         <ScreenError error={loadError} onRetry={reload} />
       ) : (
         <>
+          {writeError !== null && (
+            <div
+              role="alert"
+              data-write-alert=""
+              className="flex items-start justify-between gap-3 border-b border-red-300 bg-red-50 px-4 py-2 text-sm text-red-900"
+            >
+              <span>
+                {t(
+                  writeError.kind === 'unauthorized' || writeError.kind === 'forbidden' || writeError.kind === 'unidentified'
+                    ? '_app.write-error.denied'
+                    : '_app.write-error.failed',
+                )}
+              </span>
+              <button type="button" aria-label="Dismiss" onClick={() => setWriteError(null)}>
+                ×
+              </button>
+            </div>
+          )}
           {truncatedCap !== null && (
             <div
               role="status"

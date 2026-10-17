@@ -43,8 +43,38 @@ function OpChip({ status }) {
 
 /** @param {import("@/application/view-models/fleet-field.vm").FleetFieldScreenViewModel} props */
 export function FleetFieldView(props) {
-  const { Aircraft, href } = props;
+  const { Aircraft, href, organizationId, onCreateAircraft } = props;
   const { t } = useTranslation();
+  const [addOpen, setAddOpen] = useState(false);
+  const [newTail, setNewTail] = useState("");
+  const [newType, setNewType] = useState("");
+  const [newStatus, setNewStatus] = useState("IN_SERVICE");
+  const [saving, setSaving] = useState(false);
+  const [formError, setFormError] = useState("");
+  const resetForm = () => {
+    setNewTail("");
+    setNewType("");
+    setNewStatus("IN_SERVICE");
+    setFormError("");
+  };
+  const submitAircraft = async (e) => {
+    e.preventDefault();
+    const tail = newTail.trim().toUpperCase();
+    const type = newType.trim();
+    if (!tail) return setFormError("Enter the tail number, for example N123AB.");
+    if (!type) return setFormError("Enter the aircraft type, for example Boeing 737-800.");
+    if (Aircraft.some((a) => a.tailNumber.toUpperCase() === tail)) return setFormError("An aircraft with this tail number already exists.");
+    if (!organizationId) return setFormError("Your organization could not be determined, so the aircraft cannot be created yet.");
+    setSaving(true);
+    const ok = await onCreateAircraft({ tailNumber: tail, aircraftType: type, operatingStatus: newStatus, organizationId });
+    setSaving(false);
+    if (ok) {
+      setAddOpen(false);
+      resetForm();
+    } else {
+      setFormError("The aircraft could not be created. Check the details and try again.");
+    }
+  };
   const { columns } = useMemo(() => {
     const columns = [
     {
@@ -111,20 +141,47 @@ export function FleetFieldView(props) {
               <h1 data-vid="9ec8482e" className="type-page-title">{t('fleet-field.f57d6755.h1')}</h1>
               <p data-vid="5209747e" className="type-meta text-text-muted">{t('fleet-field.22236f64')}</p>
             </div>
-            <Dialog data-vid="079eeef5">
+            <Dialog data-vid="079eeef5" open={addOpen} onOpenChange={(o) => { setAddOpen(o); if (!o) resetForm(); }}>
               <DialogTrigger data-vid="33ce41a1" asChild>
-                <Button data-vid="4d80f326" variant="ghost" className="min-h-11">{t('fleet-field.f4413291.button')}</Button>
+                <Button data-vid="4d80f326" className="min-h-11">Add aircraft</Button>
               </DialogTrigger>
               <DialogContent data-vid="df6ba6ca">
-                <DialogHeader data-vid="7a044cf7">
-                  <DialogTitle data-vid="230bc21d">{t('fleet-field.f4413291.dialogtitle')}</DialogTitle>
-                  <DialogDescription data-vid="84664548">
-                    {t('fleet-field.92a5d65a')}
-                  </DialogDescription>
-                </DialogHeader>
-                <DialogFooter data-vid="4abada26">
-                  <Button data-vid="f9123372" disabled>{t('fleet-field.34627e2d')}</Button>
-                </DialogFooter>
+                <form onSubmit={submitAircraft} className="flex flex-col gap-(--component-gap)">
+                  <DialogHeader data-vid="7a044cf7">
+                    <DialogTitle data-vid="230bc21d">Add aircraft</DialogTitle>
+                    <DialogDescription data-vid="84664548">
+                      Add one aircraft to your organization's fleet.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="flex flex-col gap-1">
+                    <label htmlFor="new-aircraft-tail" className="type-meta">Tail number</label>
+                    <Input id="new-aircraft-tail" value={newTail} onChange={(e) => setNewTail(e.target.value)} placeholder="N123AB" autoComplete="off" className="min-h-11" />
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <label htmlFor="new-aircraft-type" className="type-meta">Aircraft type</label>
+                    <Input id="new-aircraft-type" value={newType} onChange={(e) => setNewType(e.target.value)} placeholder="Boeing 737-800" autoComplete="off" className="min-h-11" />
+                  </div>
+                  <div className="flex flex-col gap-1">
+                    <span className="type-meta">Operating status</span>
+                    <Select value={newStatus} onValueChange={setNewStatus}>
+                      <SelectTrigger className="min-h-11" aria-label="Operating status">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {schema.enums.OperatingStatus.map((s) => (
+                          <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  {formError !== "" && (
+                    <p role="alert" className="type-caption text-destructive">{formError}</p>
+                  )}
+                  <DialogFooter data-vid="4abada26">
+                    <Button type="button" variant="ghost" className="min-h-11" onClick={() => setAddOpen(false)}>Cancel</Button>
+                    <Button type="submit" className="min-h-11" disabled={saving}>{saving ? "Adding..." : "Add aircraft"}</Button>
+                  </DialogFooter>
+                </form>
               </DialogContent>
             </Dialog>
           </div>

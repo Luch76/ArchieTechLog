@@ -6,6 +6,7 @@
 
 import type { RepoError } from '../../domain/shared';
 import type { Aircraft } from '../../domain/entities/aircraft';
+import type { NewAircraft } from '../../domain/ports/aircraft.repository';
 import type { DataNotice } from './notices';
 
 
@@ -19,6 +20,12 @@ export interface FleetFieldScreenViewModel {
   readonly AircraftNotice: DataNotice | null;
   /** `true` while ANY data source of the screen is in flight. Aggregated per screen. */
   readonly loading: boolean;
+  /** The organization new aircraft are created under, or `null` when it cannot be resolved. */
+  readonly organizationId: string | null;
+  /** Creates one aircraft; resolves `true` on success (the list reloads). */
+  readonly onCreateAircraft: (
+    input: Pick<NewAircraft, 'tailNumber' | 'aircraftType' | 'operatingStatus' | 'organizationId'>,
+  ) => Promise<boolean>;
   /** The load failure as a `RepoError`, or `null`. Distinguishes "backend down" from
    *  "no data". */
   readonly error: RepoError | null;
