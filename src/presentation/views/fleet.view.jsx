@@ -94,7 +94,7 @@ export function FleetView(props) {
     [MroConnection]
   );
 
-  const rows = useMemo(
+  const tableData = useMemo(
     () =>
       Aircraft.map((a) => ({
         ...a,
@@ -105,7 +105,7 @@ export function FleetView(props) {
   );
 
   const table = useReactTable({
-    data: rows,
+    data: tableData,
     columns,
     state: {
       sorting,
