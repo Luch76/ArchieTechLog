@@ -124,7 +124,7 @@ function DefectEditor({ report, aircraft, fleet, MelItem, SdrCase, repeatCount, 
   return (
     <section data-vid="hwwqlk1" aria-labelledby="edit" className="flex flex-col gap-(--component-gap) border-t border-border pt-(--component-gap)">
       <div data-vid="cikaq1j" className="flex flex-wrap items-center justify-between gap-2">
-        <h2 data-vid="rtpc5d8" id="edit" className="type-section">Edit report</h2>
+        <h2 data-vid="rtpc5d8" id="edit" className="type-section">Report details: source write-up and classification</h2>
         <Button data-vid="5oo4ll2" type="button" variant="outline" className="min-h-11" onClick={suggest} disabled={busy}>
           <Sparkles data-vid="ybpt0rh" className="mr-2 size-4" /> {busy ? "Working…" : "Fill in with AI"}
         </Button>
@@ -265,7 +265,15 @@ export function DefectGuidanceView(props) {
         </p>
       </header>
 
-      <div data-vid="564e0437" className="grid grid-cols-1 gap-(--section-gap) lg:grid-cols-2">
+      <DefectEditor key={report.id + (report.controllerAssessment ?? "")} report={report} aircraft={aircraft} fleet={Aircraft} MelItem={MelItem} SdrCase={SdrCase} repeatCount={report.repeatCount} onUpdate={props.onUpdateDefectReport} onDraft={props.onDraftAssessment} />
+
+      {report?.photo?.src && (
+        <figure className="flex max-w-sm flex-col gap-2">
+          <Picture src={report.photo.src} intent={report.photo.scene} alt={`Attached report photo for ${aircraft?.tailNumber ?? "this aircraft"}`} ratio={4 / 3} className="border border-border" />
+        </figure>
+      )}
+
+      <div data-vid="564e0437" hidden className="hidden">
         <section data-vid="62e3e49e" aria-labelledby="src" className="flex min-w-0 flex-col gap-(--component-gap)">
           <h2 data-vid="27d8e893" id="src" className="type-eyebrow text-text-muted">{t('defect-guidance.4b80aa1b')}</h2>
           <blockquote data-vid="503dc46f" className="border border-border bg-card p-(--card-padding)">
@@ -316,8 +324,6 @@ export function DefectGuidanceView(props) {
           <p data-vid="b149fa26" className="type-caption text-text-muted">{t('defect-guidance.8720f832')}</p>
         </section>
       </div>
-
-      <DefectEditor data-vid="7dpl63j" key={report.id + (report.controllerAssessment ?? "")} report={report} aircraft={aircraft} fleet={Aircraft} MelItem={MelItem} SdrCase={SdrCase} repeatCount={report.repeatCount} onUpdate={props.onUpdateDefectReport} onDraft={props.onDraftAssessment} />
 
       <section data-vid="5273e453" aria-labelledby="mel" className="flex flex-col gap-(--component-gap) border-t border-border pt-(--component-gap)">
         <div data-vid="b1f54eae" className="flex flex-wrap items-center justify-between gap-2">
