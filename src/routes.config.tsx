@@ -37,15 +37,9 @@ function RootRedirect() {
   return <RoleLandingRedirect />;
 }
 
-const LazyScreen_review_queue = lazy(() => import('./presentation/containers/review-queue.container'));
 function Guarded_review_queue() {
-  return (
-    <AuthGuard loadingComponent={<LoadingFallback />} fallback={<Navigate to="/login" replace />}>
-      <Suspense fallback={<LoadingFallback />}>
-        <LazyScreen_review_queue />
-      </Suspense>
-    </AuthGuard>
-  );
+  // The Review Queue now lives on the Fleet Dashboard.
+  return <Navigate to="/fleet-dashboard#review-queue" replace />;
 }
 
 const LazyScreen_report_defect = lazy(() => import('./presentation/containers/report-defect.container'));
@@ -92,7 +86,7 @@ function Guarded_user_detail() {
   );
 }
 
-const LazyScreen_fleet_dashboard = lazy(() => import('./presentation/containers/fleet-dashboard.container'));
+const LazyScreen_fleet_dashboard = lazy(() => import('./presentation/containers/fleet-dashboard-combined.container'));
 function Guarded_fleet_dashboard() {
   return (
     <AuthGuard loadingComponent={<LoadingFallback />} fallback={<Navigate to="/login" replace />}>
@@ -315,7 +309,7 @@ function Screen_accept_invitation() {
 
 /** ARCH-2675 (STATE.17): in-shell 404 for the "dashboard" layout group. */
 function NotFound_dashboard() {
-  return <NotFound inShell homeHref="/review-queue" />;
+  return <NotFound inShell homeHref="/fleet-dashboard" />;
 }
 
 /** ARCH-2675 (STATE.17): in-shell 404 for the "public" layout group. */
