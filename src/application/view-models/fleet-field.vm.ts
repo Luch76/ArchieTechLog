@@ -22,6 +22,8 @@ export interface FleetFieldScreenViewModel {
   readonly loading: boolean;
   /** The organization new aircraft are created under, or `null` when it cannot be resolved. */
   readonly organizationId: string | null;
+  /** False for people who may only view the fleet (the mechanic role). */
+  readonly canAddAircraft: boolean;
   /** Creates one aircraft; resolves `true` on success (the list reloads). */
   readonly onCreateAircraft: (
     input: Pick<NewAircraft, 'tailNumber' | 'aircraftType' | 'operatingStatus' | 'organizationId'>,

@@ -16,7 +16,7 @@ import type { Aircraft } from '../../domain/entities/aircraft';
 import type { NewAircraft } from '../../domain/ports/aircraft.repository';
 import type { DataNotice } from '../../application/view-models/notices';
 import type { FleetFieldScreenViewModel } from '../../application/view-models/fleet-field.vm';
-import { useRepositories } from '../app-context';
+import { useIdentity, useRepositories } from '../app-context';
 import { FleetFieldView } from '../views/fleet-field.view';
 import { ScreenError, ScreenLoading } from '../screen-state';
 
@@ -45,6 +45,9 @@ export function FleetFieldScreenContainer(
   const View = props.view;
   const repositories = useRepositories();
   const navigate = useAppNavigate();
+  const { identity } = useIdentity();
+  const roles = identity === null ? [] : identity.roles;
+  const canAddAircraft = !(roles.length > 0 && roles.every((r) => r === 'Line Mechanic / Pilot'));
   const routeParams = useParams();
   const [searchParams] = useSearchParams();
   const query: Readonly<Record<string, string | undefined>> = React.useMemo(
@@ -166,6 +169,7 @@ export function FleetFieldScreenContainer(
     Aircraft,
     AircraftNotice,
     organizationId,
+    canAddAircraft,
     onCreateAircraft,
     loading,
     error: loadError,

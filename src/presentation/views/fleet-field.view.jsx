@@ -43,7 +43,7 @@ function OpChip({ status }) {
 
 /** @param {import("@/application/view-models/fleet-field.vm").FleetFieldScreenViewModel} props */
 export function FleetFieldView(props) {
-  const { Aircraft, href, organizationId, onCreateAircraft } = props;
+  const { Aircraft, href, organizationId, onCreateAircraft, canAddAircraft } = props;
   const { t } = useTranslation();
   const [addOpen, setAddOpen] = useState(false);
   const [newTail, setNewTail] = useState("");
@@ -141,7 +141,7 @@ export function FleetFieldView(props) {
               <h1 data-vid="9ec8482e" className="type-page-title">{t('fleet-field.f57d6755.h1')}</h1>
               <p data-vid="5209747e" className="type-meta text-text-muted">{t('fleet-field.22236f64')}</p>
             </div>
-            <Dialog data-vid="079eeef5" open={addOpen} onOpenChange={(o) => { setAddOpen(o); if (!o) resetForm(); }}>
+            {canAddAircraft && <Dialog data-vid="079eeef5" open={addOpen} onOpenChange={(o) => { setAddOpen(o); if (!o) resetForm(); }}>
               <DialogTrigger data-vid="33ce41a1" asChild>
                 <Button data-vid="4d80f326" className="min-h-11">Add aircraft</Button>
               </DialogTrigger>
@@ -183,7 +183,7 @@ export function FleetFieldView(props) {
                   </DialogFooter>
                 </form>
               </DialogContent>
-            </Dialog>
+            </Dialog>}
           </div>
           <div data-vid="9acab42a" className="flex flex-wrap gap-x-(--section-gap) gap-y-3">
             <div data-vid="47cebebd" className="shrink-0">
