@@ -57,11 +57,23 @@ const columns = [
     filterFn: "equals",
     cell: ({ getValue }) => <OperatingMark data-vid="ada3e062" value={getValue()} />,
   },
+  {
+    accessorKey: "openCount",
+    header: "Open",
+    enableGlobalFilter: false,
+    cell: ({ getValue }) => <span className="type-body tabular-nums">{getValue()}</span>,
+  },
+  {
+    accessorKey: "deferredCount",
+    header: "Deferred",
+    enableGlobalFilter: false,
+    cell: ({ getValue }) => <span className="type-body tabular-nums">{getValue()}</span>,
+  },
 ];
 
 /** @param {import("@/application/view-models/fleet.vm").FleetScreenViewModel} props */
 export function FleetView(props) {
-  const { Aircraft, MroConnection, href, defectCounts } = props;
+  const { Aircraft, MroConnection, href, defectsByAircraft } = props;
   const { t } = useTranslation();
   const [sorting, setSorting] = useState([{ id: "tailNumber", desc: false }]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -82,8 +94,18 @@ export function FleetView(props) {
     [MroConnection]
   );
 
+  const rows = useMemo(
+    () =>
+      Aircraft.map((a) => ({
+        ...a,
+        openCount: defectsByAircraft?.[a.id]?.open ?? 0,
+        deferredCount: defectsByAircraft?.[a.id]?.deferred ?? 0,
+      })),
+    [Aircraft, defectsByAircraft]
+  );
+
   const table = useReactTable({
-    data: Aircraft,
+    data: rows,
     columns,
     state: {
       sorting,
@@ -138,11 +160,6 @@ export function FleetView(props) {
               {statusLabels[s]} <span data-vid="2348ac8a" className="text-foreground">{counts[s] ?? 0}</span>
             </p>
           ))}
-          <p data-vid="fleet-defect-counts" className="type-meta whitespace-nowrap text-text-muted tabular-nums">
-            Open defects <span className="text-foreground">{defectCounts?.open ?? 0}</span>
-            {" · "}Deferred <span className="text-foreground">{defectCounts?.deferred ?? 0}</span>
-            {" · "}Closed <span className="text-foreground">{defectCounts?.closed ?? 0}</span>
-          </p>
           {freshest && (
             <p data-vid="619a4ebc" className="type-meta min-w-0 text-text-muted lg:ml-auto">
               {t('fleet.536dc7c4')} {freshest?.name},{" "}

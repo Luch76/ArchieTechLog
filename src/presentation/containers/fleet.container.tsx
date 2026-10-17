@@ -142,16 +142,17 @@ export function FleetScreenContainer(
     };
   }, [repositories, reloadToken]);
 
-  const [defectCounts, setDefectCounts] = React.useState({ open: 0, deferred: 0, closed: 0 });
+  const [defectCounts, setDefectCounts] = React.useState<Record<string, { open: number; deferred: number }>>({});
   React.useEffect(() => {
     let live = true;
     void repositories.defectReport.listAll().then((res) => {
       if (!live || res === null || res.ok === false) return;
-      const c = { open: 0, deferred: 0, closed: 0 };
+      const c: Record<string, { open: number; deferred: number }> = {};
       res.data.items.forEach((d) => {
-        if (d.status === 'OPEN') c.open += 1;
-        else if (d.status === 'DEFERRED') c.deferred += 1;
-        else if (d.status === 'CLOSED') c.closed += 1;
+        const e = c[d.aircraftId] ?? { open: 0, deferred: 0 };
+        if (d.status === 'OPEN') e.open += 1;
+        else if (d.status === 'DEFERRED') e.deferred += 1;
+        c[d.aircraftId] = e;
       });
       setDefectCounts(c);
     }).catch((cause: unknown) => {
@@ -164,7 +165,7 @@ export function FleetScreenContainer(
 
   const { t } = useTranslation();
   const vm: FleetScreenViewModel = {
-    defectCounts,
+    defectsByAircraft: defectCounts,
     Aircraft,
     AircraftNotice,
     MroConnection,

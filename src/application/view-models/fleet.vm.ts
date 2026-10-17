@@ -28,8 +28,8 @@ export interface FleetScreenViewModel {
   /** Why `MroConnection` is empty / `null` without being a transport error, or
    *  `null` when it was served as declared. */
   readonly MroConnectionNotice: DataNotice | null;
-  /** Defect counts by status across the organization's fleet (open / deferred / closed). */
-  readonly defectCounts: { readonly open: number; readonly deferred: number; readonly closed: number };
+  /** Open and deferred defect counts per aircraft id. */
+  readonly defectsByAircraft: Readonly<Record<string, { readonly open: number; readonly deferred: number }>>;
   /** `true` while ANY data source of the screen is in flight. Aggregated per screen. */
   readonly loading: boolean;
   /** The load failure as a `RepoError`, or `null`. Distinguishes "backend down" from
