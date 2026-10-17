@@ -34,6 +34,10 @@ export interface DefectReport {
   classificationRationale?: string;
   melItemId?: string;
   deferralDueAt?: string;
+  /** When the defect was reported / discovered. */
+  reportedAt?: string;
+  /** When the defect was deferred. */
+  deferredAt?: string;
   repeatCount?: number;
   photo?: { readonly scene?: string; readonly src?: string; readonly width?: number; readonly height?: number };
   controllerAssessment?: string;

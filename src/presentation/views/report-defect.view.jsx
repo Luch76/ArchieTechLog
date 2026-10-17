@@ -30,11 +30,13 @@ const formSchema = z.object({
     .min(1, "Enter the write-up: type the squawk or dictate it."),
   ataChapter: z.string().trim().optional(),
   ataSection: z.string().trim().optional(),
+  melItemId: z.string().optional(),
+  reportedDate: z.string().min(1, "Enter the date the defect was reported."),
 });
 
 /** @param {import("@/application/view-models/report-defect.vm").ReportDefectScreenViewModel} props */
 export function ReportDefectView(props) {
-  const { Aircraft, href } = props;
+  const { Aircraft, MelItem = [], href } = props;
   const { t } = useTranslation();
   const reporterLabel = t('report-defect.c9d3cdb4');
 
@@ -46,7 +48,7 @@ export function ReportDefectView(props) {
 
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: { aircraftId: "", writeUp: "", ataChapter: "", ataSection: "" },
+    defaultValues: { aircraftId: "", writeUp: "", ataChapter: "", ataSection: "", melItemId: "", reportedDate: new Date().toISOString().slice(0, 10) },
     mode: "onTouched",
   });
 
@@ -134,7 +136,8 @@ export function ReportDefectView(props) {
       ataSection: values.ataSection?.trim() || undefined,
       reporterType: "mechanic",
       status: "open",
-      reportedAt: new Date().toISOString(),
+      reportedAt: new Date(values.reportedDate + "T00:00:00").toISOString(),
+      melItemId: values.melItemId || undefined,
       organizationId: tail.organizationId,
     });
     if (ok) setSaved({ tail: tail.tailNumber, writeUp: values.writeUp.trim(), ataChapter: values.ataChapter?.trim() || "", ataSection: values.ataSection?.trim() || "" });
@@ -276,6 +279,33 @@ export function ReportDefectView(props) {
         />
 
         <div className="grid grid-cols-1 gap-(--component-gap) sm:grid-cols-2">
+          <Controller
+            name="melItemId"
+            control={form.control}
+            render={({ field }) => (
+              <Field>
+                <FieldLabel htmlFor="melItemId">{t('defectMel.code', 'MEL code')}</FieldLabel>
+                <Select value={field.value || "none"} onValueChange={(v) => field.onChange(v === "none" ? "" : v)}>
+                  <SelectTrigger id="melItemId" className="min-h-11 w-full border-border-strong">
+                    <SelectValue placeholder={t('defectMel.none', 'No MEL item')} />
+                  </SelectTrigger>
+                  <SelectContent className="max-h-72">
+                    <SelectItem value="none">{t('defectMel.none', 'No MEL item')}</SelectItem>
+                    {MelItem.map((m) => (
+                      <SelectItem key={m.id} value={m.id}>
+                        <span className="font-mono">{m.itemCode}</span>
+                        {m.title ? <span className="text-text-muted">, {m.title}</span> : null}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </Field>
+            )}
+          />
+          <Field>
+            <FieldLabel htmlFor="reportedDate">{t('defectDates.reported', 'Date reported')}</FieldLabel>
+            <Input id="reportedDate" type="date" className="min-h-11 border-border-strong" {...form.register("reportedDate")} />
+          </Field>
           <Field>
             <FieldLabel htmlFor="ataChapter">{t('defectAta.chapter', 'ATA chapter')}</FieldLabel>
             <Input id="ataChapter" inputMode="numeric" placeholder="21" className="min-h-11 border-border-strong" {...form.register("ataChapter")} />

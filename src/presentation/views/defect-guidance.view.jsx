@@ -77,7 +77,8 @@ export function DefectGuidanceView(props) {
           {report?.priority && mark(report?.priority)}
         </div>
         <p data-vid="8f2a7a58" className="type-meta text-text-muted">
-          {t('defect-guidance.c170bc77')} {reporter} · <DateValue data-vid="4e7f725d" value={report?.createdAt} kind="datetime" />
+          {t('defect-guidance.c170bc77')} {reporter} · <DateValue data-vid="4e7f725d" value={report?.reportedAt ?? report?.createdAt} kind="datetime" />
+          {report?.deferredAt ? <> · {t('defectAta.deferredOn', 'Deferred')} <DateValue value={report.deferredAt} kind="datetime" /></> : null}
           {aircraft?.aircraftType ? ` · ${aircraft?.aircraftType}` : ""}
         </p>
       </header>

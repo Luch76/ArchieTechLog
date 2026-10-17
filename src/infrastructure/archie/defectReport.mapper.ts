@@ -50,6 +50,8 @@ export interface DefectReportRow {
   classificationRationale: string | null;
   melItemId: string | null;
   deferralDueAt: string | null;
+  reportedAt?: string | null;
+  deferredAt?: string | null;
   repeatCount: number | null;
   photo: { downloadUrl: string | null } | null;
   controllerAssessment: string | null;
@@ -234,6 +236,8 @@ export function toDefectReport(row: DefectReportRow): RepoResult<DefectReport> {
       classificationRationale: assetUrls(row.classificationRationale) ?? undefined,
       melItemId: assetUrls(row.melItemId) ?? undefined,
       deferralDueAt: assetUrls(row.deferralDueAt) ?? undefined,
+      reportedAt: row.reportedAt ?? undefined,
+      deferredAt: row.deferredAt ?? undefined,
       repeatCount: assetUrls(row.repeatCount) ?? undefined,
       photo: row.photo == null || row.photo.downloadUrl == null ? undefined : { src: row.photo.downloadUrl },
       controllerAssessment: assetUrls(row.controllerAssessment) ?? undefined,
@@ -261,6 +265,7 @@ export function toDefectReportCreateInput(input: NewDefectReport): Record<string
   if (input.controllerAssessment !== undefined) out.controllerAssessment = input.controllerAssessment;
   if (input.createdAt !== undefined) out.createdAt = input.createdAt;
   if (input.deferralDueAt !== undefined) out.deferralDueAt = input.deferralDueAt;
+  if (input.deferredAt !== undefined) out.deferredAt = input.deferredAt;
   if (input.priority !== undefined) out.priority = wireEnumOutDefectReport('priority', input.priority);
   if (input.repeatCount !== undefined) out.repeatCount = toInt(input.repeatCount);
   if (input.symptom !== undefined) out.symptom = input.symptom;
@@ -297,6 +302,8 @@ export function toDefectReportUpdateInput(patch: UpdateDefectReport): Record<str
   if (patch.controllerAssessment !== undefined) out.controllerAssessment = patch.controllerAssessment;
   if (patch.createdAt !== undefined) out.createdAt = patch.createdAt;
   if (patch.deferralDueAt !== undefined) out.deferralDueAt = patch.deferralDueAt;
+  if (patch.deferredAt !== undefined) out.deferredAt = patch.deferredAt;
+  if (patch.reportedAt !== undefined) out.reportedAt = patch.reportedAt;
   if (patch.melItemId === null) out.melItemId = null;
   else if (patch.melItemId != null && String(patch.melItemId) !== '') out.melItemId = patch.melItemId;
   if (patch.priority !== undefined) out.priority = wireEnumOutDefectReport('priority', patch.priority);

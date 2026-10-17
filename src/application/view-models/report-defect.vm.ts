@@ -6,6 +6,7 @@
 
 import type { RepoError } from '../../domain/shared';
 import type { Aircraft } from '../../domain/entities/aircraft';
+import type { MelItem } from '../../domain/entities/melItem';
 import type { DataNotice } from './notices';
 import type { NewDefectReport } from '../../domain/ports/defectReport.repository';
 
@@ -24,6 +25,8 @@ export interface ReportDefectScreenViewModel {
    *  never a page). When the cap is hit the container serves `[]` and
    *  `AircraftNotice` says `agregado-truncado`. */
   readonly Aircraft: readonly Aircraft[];
+  /** MEL items a defect can be associated with. */
+  readonly MelItem: readonly MelItem[];
   /** Why `Aircraft` is empty / `null` without being a transport error, or `null`
    *  when it was served as declared. */
   readonly AircraftNotice: DataNotice | null;
@@ -49,6 +52,6 @@ export interface ReportDefectScreenViewModel {
   readonly onUnavailable: (reason: 'escritura-no-disponible') => void;
   /** Files one defect report; resolves `true` when it was saved. */
   readonly onCreateDefectReport: (
-    input: Pick<NewDefectReport, 'aircraftId' | 'writeUp' | 'ataChapter' | 'ataSection' | 'reporterType' | 'status' | 'reportedAt' | 'organizationId'>,
+    input: Pick<NewDefectReport, 'aircraftId' | 'writeUp' | 'ataChapter' | 'ataSection' | 'reporterType' | 'status' | 'reportedAt' | 'melItemId' | 'organizationId'>,
   ) => Promise<boolean>;
 }

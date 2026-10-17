@@ -13,6 +13,7 @@ import { routes } from '@/presentation/navigation';
 import { useAppNavigate } from '@/presentation/navigation';
 import type { RepoError } from '../../domain/shared';
 import type { Aircraft } from '../../domain/entities/aircraft';
+import type { MelItem } from '../../domain/entities/melItem';
 import type { DataNotice } from '../../application/view-models/notices';
 import type { NewDefectReport } from '../../domain/ports/defectReport.repository';
 import { reportDefectScreenViewModelAvailability, type ReportDefectScreenViewModel } from '../../application/view-models/report-defect.vm';
@@ -52,6 +53,7 @@ export function ReportDefectScreenContainer(
     [routeParams, searchParams],
   );
   const [Aircraft, setAircraft] = React.useState<readonly Aircraft[]>([]);
+  const [MelItem, setMelItem] = React.useState<readonly MelItem[]>([]);
   const [AircraftNotice, setAircraftNotice] = React.useState<DataNotice | null>(null);
   const [AircraftTruncatedCap, setAircraftTruncatedCap] = React.useState<number | null>(null);
   const [loading, setLoading] = React.useState(true);
@@ -72,9 +74,11 @@ export function ReportDefectScreenContainer(
     setLoadError(null);
     void Promise.all([
       repositories.aircraft.listAll(),
+      repositories.melItem.listAll(),
     ])
-    .then(([AircraftResult]) => {
+    .then(([AircraftResult, MelResult]) => {
       if (!live) return;
+      setMelItem(MelResult !== null && MelResult.ok === true ? MelResult.data.items : []);
       if (AircraftResult === null) {
         setAircraft([]);
         setAircraftTruncatedCap(null);
@@ -133,7 +137,7 @@ export function ReportDefectScreenContainer(
   );
 
   const onCreateDefectReport = React.useCallback(
-    (input: Pick<NewDefectReport, 'aircraftId' | 'writeUp' | 'ataChapter' | 'ataSection' | 'reporterType' | 'status' | 'reportedAt' | 'organizationId'>): Promise<boolean> => {
+    (input: Pick<NewDefectReport, 'aircraftId' | 'writeUp' | 'ataChapter' | 'ataSection' | 'reporterType' | 'status' | 'reportedAt' | 'melItemId' | 'organizationId'>): Promise<boolean> => {
       setWriteError(null);
       return repositories.defectReport
         .create(input)
@@ -161,6 +165,7 @@ export function ReportDefectScreenContainer(
   const vm: ReportDefectScreenViewModel = {
     onCreateDefectReport,
     Aircraft,
+    MelItem,
     AircraftNotice,
     loading,
     error: loadError ?? writeError,

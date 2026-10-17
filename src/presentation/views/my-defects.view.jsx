@@ -72,7 +72,8 @@ export function MyDefectsView(props) {
             <span>{t('defectAta.section', 'ATA section')} <span className="font-mono text-foreground">{d.ataSection ?? '—'}</span></span>
           </div>
           <div data-vid="2301f43b" className="type-caption flex flex-wrap gap-x-3 text-text-muted">
-            <span data-vid="86e29411">{t('my-defects.34540bb7')} <DateValue data-vid="8ed0b0c5" value={d.createdAt} /></span>
+            <span data-vid="86e29411">{t('my-defects.34540bb7')} <DateValue data-vid="8ed0b0c5" value={d.reportedAt ?? d.createdAt} /></span>
+            {deferred && d.deferredAt ? <span>{t('defectAta.deferredOn', 'Deferred')} <DateValue value={d.deferredAt} /></span> : null}
             {closed && d.closedAt ? <span data-vid="55b3eacf">{t('my-defects.c21ead06.span')} <DateValue data-vid="ebf806ef" value={d.closedAt} /></span> : null}
             {deferred && d.deferralDueAt ? (
               <span data-vid="7aa4132d" className="inline-flex items-center gap-1">
