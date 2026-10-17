@@ -25,12 +25,72 @@ import { useTranslation } from "react-i18next";
 const statusLabels = Object.fromEntries(schema.enums.OperatingStatus.map((s) => [s.value, s.label]));
 const statusOrder = schema.enums.OperatingStatus.map((s) => s.value);
 
+const TONES = {
+  danger: {
+    chip: "border-status-danger bg-status-danger text-white shadow-sm",
+    dot: "bg-white",
+    swatch: "bg-status-danger",
+    row: "shadow-[inset_4px_0_0_var(--status-danger)] bg-status-danger-bg/40",
+    pulse: true,
+  },
+  warning: {
+    chip: "border-status-warning/40 bg-status-warning-bg text-status-warning-ink",
+    dot: "bg-status-warning",
+    swatch: "bg-status-warning",
+    row: "shadow-[inset_4px_0_0_var(--status-warning)]",
+    pulse: false,
+  },
+  success: {
+    chip: "border-status-success/40 bg-status-success-bg text-status-success-ink",
+    dot: "bg-status-success",
+    swatch: "bg-status-success",
+    row: "",
+    pulse: false,
+  },
+  neutral: {
+    chip: "border-border bg-muted text-text-muted",
+    dot: "bg-text-muted",
+    swatch: "bg-text-muted",
+    row: "opacity-60",
+    pulse: false,
+  },
+};
+
+const toneOf = (v) =>
+  v === "aog" || v === "grounded" || v === "out_of_service"
+    ? "danger"
+    : v === "maintenance" || v === "maintenance_hold"
+      ? "warning"
+      : v === "in_service"
+        ? "success"
+        : "neutral";
+
+const urgencyRank = (v) =>
+  ({ aog: 0, grounded: 1, out_of_service: 1, maintenance_hold: 2, maintenance: 2, in_service: 3, retired: 4 })[v] ?? 5;
+
 function OperatingMark({ value }) {
+  const tone = TONES[toneOf(value)];
   return (
-    <Badge data-vid="a65d848c" variant="outline" className="whitespace-nowrap border-border-strong text-status-neutral-ink">
-      <span data-vid="3422fa7f" aria-hidden="true" className="mr-1.5 inline-block size-2 rounded-full border border-border-strong" />
+    <Badge data-vid="a65d848c" variant="outline" className={`whitespace-nowrap rounded-full px-3 py-1 font-semibold ${tone.chip}`}>
+      <span data-vid="3422fa7f" aria-hidden="true" className="relative mr-2 inline-flex size-2">
+        {tone.pulse && <span className={`absolute inline-flex size-full animate-ping rounded-full opacity-75 ${tone.dot}`} />}
+        <span className={`relative inline-flex size-2 rounded-full ${tone.dot}`} />
+      </span>
       <span data-vid="17828fbb" className="type-meta">{statusLabels[value] ?? value}</span>
     </Badge>
+  );
+}
+
+function CountPill({ value, tone }) {
+  if (!value) return <span className="type-body tabular-nums text-text-muted/40">–</span>;
+  const cls =
+    tone === "danger"
+      ? "bg-status-danger text-white"
+      : "bg-status-warning-bg text-status-warning-ink";
+  return (
+    <span className={`inline-flex min-w-8 items-center justify-center rounded-full px-2.5 py-0.5 text-sm font-bold tabular-nums ${cls}`}>
+      {value}
+    </span>
   );
 }
 
@@ -40,7 +100,7 @@ const columns = [
     header: "Tail",
     cell: ({ row }) => (
       <div data-vid="7a609412" className="min-w-0">
-        <span data-vid="c8826ec0" className="type-mono-id block truncate text-foreground">{row.original.tailNumber}</span>
+        <span data-vid="c8826ec0" className="type-mono-id block truncate text-base font-bold tracking-wide text-foreground">{row.original.tailNumber}</span>
         <span data-vid="ed2252e8" className="type-caption block truncate text-text-muted sm:hidden">{row.original.aircraftType}</span>
       </div>
     ),
@@ -49,7 +109,11 @@ const columns = [
     accessorKey: "aircraftType",
     header: "Type",
     meta: { hideOnPhone: true },
-    cell: ({ getValue }) => <span data-vid="3f9f3a32" className="type-body min-w-0 break-words">{getValue()}</span>,
+    cell: ({ getValue }) => (
+      <span data-vid="3f9f3a32" className="type-body min-w-0 break-words capitalize">
+        {String(getValue()).toLowerCase().replace(/^./, (c) => c.toUpperCase())}
+      </span>
+    ),
   },
   {
     accessorKey: "operatingStatus",
@@ -61,13 +125,13 @@ const columns = [
     accessorKey: "openCount",
     header: "Open",
     enableGlobalFilter: false,
-    cell: ({ getValue }) => <span data-vid="8sce38u" className="type-body tabular-nums">{getValue()}</span>,
+    cell: ({ getValue }) => <CountPill value={getValue()} tone="danger" />,
   },
   {
     accessorKey: "deferredCount",
     header: "Deferred",
     enableGlobalFilter: false,
-    cell: ({ getValue }) => <span data-vid="zvellbs" className="type-body tabular-nums">{getValue()}</span>,
+    cell: ({ getValue }) => <CountPill value={getValue()} tone="warning" />,
   },
 ];
 
@@ -75,7 +139,7 @@ const columns = [
 export function FleetView(props) {
   const { Aircraft, MroConnection, href, defectsByAircraft } = props;
   const { t } = useTranslation();
-  const [sorting, setSorting] = useState([{ id: "tailNumber", desc: false }]);
+  const [sorting, setSorting] = useState([]);
   const [globalFilter, setGlobalFilter] = useState("");
   const [status, setStatus] = useState("all");
   const loading = false;
@@ -100,7 +164,13 @@ export function FleetView(props) {
         ...a,
         openCount: defectsByAircraft?.[a.id]?.open ?? 0,
         deferredCount: defectsByAircraft?.[a.id]?.deferred ?? 0,
-      })),
+      })).sort(
+        (a, b) =>
+          urgencyRank(a.operatingStatus) - urgencyRank(b.operatingStatus) ||
+          b.openCount - a.openCount ||
+          b.deferredCount - a.deferredCount ||
+          a.tailNumber.localeCompare(b.tailNumber)
+      ),
     [Aircraft, defectsByAircraft]
   );
 
@@ -150,18 +220,41 @@ export function FleetView(props) {
 
         <section data-vid="96b7abc6"
           aria-label={t('fleet.7ef0c0af')}
-          className="flex flex-wrap items-center gap-x-(--section-gap) gap-y-2 border-y border-border py-3"
+          className="flex flex-wrap items-stretch gap-3"
         >
-          <p data-vid="a21d5a8b" className="type-body tabular-nums whitespace-nowrap">
-            <span data-vid="3e0e4a13" className="type-stat">{Aircraft.length}</span> {t('fleet.d10149ee')}
-          </p>
-          {statusOrder.map((s) => (
-            <p data-vid="3b3f649c" key={s} className="type-meta whitespace-nowrap text-text-muted tabular-nums">
-              {statusLabels[s]} <span data-vid="2348ac8a" className="text-foreground">{counts[s] ?? 0}</span>
-            </p>
-          ))}
+          <button
+            type="button"
+            onClick={() => setStatus("all")}
+            aria-pressed={status === "all"}
+            className={`flex min-h-16 min-w-32 flex-col justify-center rounded-card border px-4 py-2 text-left transition hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring ${status === "all" ? "border-foreground bg-foreground text-background shadow-md" : "border-border bg-card"}`}
+          >
+            <span className="text-3xl font-bold leading-none tabular-nums">{Aircraft.length}</span>
+            <span className="type-meta mt-1 opacity-80">{t('fleet.d10149ee')}</span>
+          </button>
+          {statusOrder
+            .filter((s) => (counts[s] ?? 0) > 0 || status === s)
+            .sort((a, b) => urgencyRank(a) - urgencyRank(b))
+            .map((s) => {
+              const tone = TONES[toneOf(s)];
+              const active = status === s;
+              return (
+                <button
+                  key={s}
+                  type="button"
+                  onClick={() => setStatus(active ? "all" : s)}
+                  aria-pressed={active}
+                  className={`flex min-h-16 min-w-32 flex-col justify-center rounded-card border px-4 py-2 text-left transition hover:-translate-y-0.5 hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring ${active ? "border-foreground bg-card shadow-md ring-2 ring-foreground" : "border-border bg-card"}`}
+                >
+                  <span className="text-3xl font-bold leading-none tabular-nums">{counts[s] ?? 0}</span>
+                  <span className="type-meta mt-1 flex items-center gap-1.5 text-text-muted">
+                    <span aria-hidden="true" className={`size-2 rounded-full ${tone.swatch}`} />
+                    {statusLabels[s]}
+                  </span>
+                </button>
+              );
+            })}
           {freshest && (
-            <p data-vid="619a4ebc" className="type-meta min-w-0 text-text-muted lg:ml-auto">
+            <p data-vid="619a4ebc" className="type-meta min-w-0 self-center text-text-muted lg:ml-auto">
               {t('fleet.536dc7c4')} {freshest?.name},{" "}
               <span data-vid="681c5bde" className="type-mono-id whitespace-nowrap">{formatDateTime(freshest?.lastActivityAt)}</span>
               {freshest?.lastResult ? ` · ${freshest?.lastResult}` : ""} · {MroConnection.length} {t('fleet.878a52fc')}
@@ -215,7 +308,7 @@ export function FleetView(props) {
           )}
         </div>
 
-        <section data-vid="02c4d4f3" aria-label={t('fleet.9679c436')} className="rounded-card border border-border bg-card">
+        <section data-vid="02c4d4f3" aria-label={t('fleet.9679c436')} className="overflow-hidden rounded-card border border-border bg-card shadow-sm">
           {failed ? (
             <div data-vid="a13cb397" className="p-(--card-padding)">
               <Alert data-vid="603f7e47" variant="destructive">
@@ -281,15 +374,17 @@ export function FleetView(props) {
                       key={row.id}
                       layout
                       transition={{ duration: 0.2 }}
-                      className="border-b border-border transition-colors hover:bg-muted"
+                      className={`border-b border-border transition-colors hover:bg-muted ${TONES[toneOf(row.original.operatingStatus)].row}`}
                     >
                       {row.getVisibleCells().map((c) => (
                         <TableCell data-vid="1ee86039"
                           key={c.id}
                           className={
                             c.column.columnDef.meta?.hideOnPhone
-                              ? "hidden max-w-0 sm:table-cell"
-                              : "max-w-0"
+                              ? "hidden max-w-0 px-4 sm:table-cell"
+                              : c.column.id === "operatingStatus"
+                                ? "px-4"
+                                : "max-w-0 px-4"
                           }
                         >
                           {c.column.id === "tailNumber" ? (
@@ -305,7 +400,7 @@ export function FleetView(props) {
                         </TableCell>
                       ))}
                       <TableCell data-vid="7fa8c48c" className="w-10 text-text-muted">
-                        <ChevronRight data-vid="ccbe5a9e" className="size-4" aria-hidden="true" />
+                        <ChevronRight data-vid="ccbe5a9e" className="size-5" aria-hidden="true" />
                       </TableCell>
                     </motion.tr>
                   ))}
