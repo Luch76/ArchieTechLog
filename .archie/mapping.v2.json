@@ -1,0 +1,419 @@
+{
+  "meta": {
+    "version": 2,
+    "projectId": "6a6a2e08-f281-464d-a567-5f27b7390ce0",
+    "schemaHash": "f5835b321264abefd12247dc27dde9bfb7967359b98f30e1f960e7e8618c80ca",
+    "protoHash": "sha256:2a3a622dd2d825f0de326004625e1771e95d106c63594e49a59d22c92c76095a",
+    "model": "C6",
+    "generatedAt": "2026-10-17T16:04:42.843Z",
+    "llmResolved": 7,
+    "unmapped": 0
+  },
+  "entities": [
+    {
+      "proto": "Aircraft",
+      "target": "Aircraft",
+      "confidence": 0.99,
+      "fields": [
+        {
+          "proto": "aircraftType",
+          "target": "aircraftType",
+          "confidence": 0.99
+        },
+        {
+          "proto": "createdAt",
+          "target": "createdAt",
+          "confidence": 0.99
+        },
+        {
+          "proto": "operatingStatus",
+          "target": "operatingStatus",
+          "confidence": 0.99
+        },
+        {
+          "proto": "organizationId",
+          "target": "organizationId",
+          "confidence": 0.99
+        },
+        {
+          "proto": "tailNumber",
+          "target": "tailNumber",
+          "confidence": 0.99
+        }
+      ],
+      "requiredRelations": []
+    },
+    {
+      "proto": "ApiCredential",
+      "target": "ApiCredential",
+      "confidence": 0.99,
+      "fields": [
+        {
+          "proto": "createdAt",
+          "target": "createdAt",
+          "confidence": 0.99
+        },
+        {
+          "proto": "expiresAt",
+          "target": "expiresAt",
+          "confidence": 0.99
+        },
+        {
+          "proto": "label",
+          "target": "label",
+          "confidence": 0.99
+        },
+        {
+          "proto": "lastUsedAt",
+          "target": "lastUsedAt",
+          "confidence": 0.99
+        },
+        {
+          "proto": "mroConnectionId",
+          "target": "mroConnectionId",
+          "confidence": 0.99
+        },
+        {
+          "proto": "organizationId",
+          "target": "organizationId",
+          "confidence": 0.99
+        },
+        {
+          "proto": "revokedAt",
+          "target": "revokedAt",
+          "confidence": 0.99
+        },
+        {
+          "proto": "status",
+          "target": "status",
+          "confidence": 0.99
+        }
+      ],
+      "requiredRelations": []
+    },
+    {
+      "proto": "DefectReport",
+      "target": "DefectReport",
+      "confidence": 0.99,
+      "fields": [
+        {
+          "proto": "aircraftId",
+          "target": "aircraftId",
+          "confidence": 0.99
+        },
+        {
+          "proto": "ataCode",
+          "target": "ataCode",
+          "confidence": 0.99
+        },
+        {
+          "proto": "classificationConfidence",
+          "target": "classificationConfidence",
+          "confidence": 0.99
+        },
+        {
+          "proto": "classificationRationale",
+          "target": "classificationRationale",
+          "confidence": 0.99
+        },
+        {
+          "proto": "closedAt",
+          "target": "closedAt",
+          "confidence": 0.99
+        },
+        {
+          "proto": "component",
+          "target": "component",
+          "confidence": 0.99
+        },
+        {
+          "proto": "controllerAssessment",
+          "target": "controllerAssessment",
+          "confidence": 0.99
+        },
+        {
+          "proto": "createdAt",
+          "target": "createdAt",
+          "confidence": 0.99
+        },
+        {
+          "proto": "deferralDueAt",
+          "target": "deferralDueAt",
+          "confidence": 0.99
+        },
+        {
+          "proto": "melItemId",
+          "target": "melItemId",
+          "confidence": 0.99
+        },
+        {
+          "proto": "photo",
+          "target": "photo",
+          "confidence": 0.9
+        },
+        {
+          "proto": "priority",
+          "target": "priority",
+          "confidence": 0.99
+        },
+        {
+          "proto": "repeatCount",
+          "target": "repeatCount",
+          "confidence": 0.99
+        },
+        {
+          "proto": "reporterType",
+          "target": "reporterType",
+          "confidence": 0.99
+        },
+        {
+          "proto": "status",
+          "target": "status",
+          "confidence": 0.99
+        },
+        {
+          "proto": "symptom",
+          "target": "symptom",
+          "confidence": 0.99
+        },
+        {
+          "proto": "writeUp",
+          "target": "writeUp",
+          "confidence": 0.99
+        }
+      ],
+      "requiredRelations": []
+    },
+    {
+      "proto": "MelItem",
+      "target": "MelItem",
+      "confidence": 0.99,
+      "fields": [
+        {
+          "proto": "ataCode",
+          "target": "ataCode",
+          "confidence": 0.99
+        },
+        {
+          "proto": "deferralInterval",
+          "target": "deferralInterval",
+          "confidence": 0.99
+        },
+        {
+          "proto": "itemCode",
+          "target": "itemCode",
+          "confidence": 0.99
+        },
+        {
+          "proto": "organizationId",
+          "target": "organizationId",
+          "confidence": 0.99
+        },
+        {
+          "proto": "procedures",
+          "target": "procedures",
+          "confidence": 0.99
+        },
+        {
+          "proto": "repairCategory",
+          "target": "repairCategory",
+          "confidence": 0.99
+        },
+        {
+          "proto": "title",
+          "target": "title",
+          "confidence": 0.99
+        },
+        {
+          "proto": "version",
+          "target": "version",
+          "confidence": 0.99
+        }
+      ],
+      "requiredRelations": []
+    },
+    {
+      "proto": "MroConnection",
+      "target": "MroConnection",
+      "confidence": 0.99,
+      "fields": [
+        {
+          "proto": "direction",
+          "target": "direction",
+          "confidence": 0.99
+        },
+        {
+          "proto": "endpointUrl",
+          "target": "endpointUrl",
+          "confidence": 0.99
+        },
+        {
+          "proto": "lastActivityAt",
+          "target": "lastActivityAt",
+          "confidence": 0.99
+        },
+        {
+          "proto": "lastResult",
+          "target": "lastResult",
+          "confidence": 0.99
+        },
+        {
+          "proto": "name",
+          "target": "name",
+          "confidence": 0.99
+        },
+        {
+          "proto": "organizationId",
+          "target": "organizationId",
+          "confidence": 0.99
+        }
+      ],
+      "requiredRelations": []
+    },
+    {
+      "proto": "Organization",
+      "target": "Organization",
+      "confidence": 0.99,
+      "fields": [
+        {
+          "proto": "adminEmail",
+          "target": "adminEmail",
+          "confidence": 0.99
+        },
+        {
+          "proto": "createdAt",
+          "target": "createdAt",
+          "confidence": 0.99
+        },
+        {
+          "proto": "name",
+          "target": "name",
+          "confidence": 0.99
+        },
+        {
+          "proto": "onboardedAt",
+          "target": "onboardedAt",
+          "confidence": 0.99
+        },
+        {
+          "proto": "operatorType",
+          "target": "operatorType",
+          "confidence": 0.99
+        },
+        {
+          "proto": "repeatThreshold",
+          "target": "repeatThreshold",
+          "confidence": 0.99
+        },
+        {
+          "proto": "repeatWindow",
+          "target": "repeatWindow",
+          "confidence": 0.99
+        },
+        {
+          "proto": "status",
+          "target": "status",
+          "confidence": 0.99
+        }
+      ],
+      "requiredRelations": []
+    },
+    {
+      "proto": "SdrCase",
+      "target": "SdrCase",
+      "confidence": 0.99,
+      "fields": [
+        {
+          "proto": "aircraftType",
+          "target": "aircraftType",
+          "confidence": 0.99
+        },
+        {
+          "proto": "ataCode",
+          "target": "ataCode",
+          "confidence": 0.99
+        },
+        {
+          "proto": "caseNumber",
+          "target": "caseNumber",
+          "confidence": 0.99
+        },
+        {
+          "proto": "cause",
+          "target": "cause",
+          "confidence": 0.99
+        },
+        {
+          "proto": "component",
+          "target": "component",
+          "confidence": 0.99
+        },
+        {
+          "proto": "correctiveAction",
+          "target": "correctiveAction",
+          "confidence": 0.99
+        },
+        {
+          "proto": "reportedAt",
+          "target": "reportedAt",
+          "confidence": 0.99
+        },
+        {
+          "proto": "reportedFindings",
+          "target": "reportedFindings",
+          "confidence": 0.99
+        },
+        {
+          "proto": "symptom",
+          "target": "symptom",
+          "confidence": 0.99
+        },
+        {
+          "proto": "version",
+          "target": "version",
+          "confidence": 0.99
+        }
+      ],
+      "requiredRelations": []
+    }
+  ],
+  "enumValueMap": {
+    "Aircraft.operatingStatus": {
+      "aog": "AOG",
+      "in_service": "IN_SERVICE",
+      "maintenance": "MAINTENANCE",
+      "retired": "RETIRED"
+    },
+    "ApiCredential.status": {
+      "Active": "ACTIVE",
+      "Revoked": "REVOKED"
+    },
+    "DefectReport.priority": {
+      "Critical": "CRITICAL",
+      "High": "HIGH",
+      "Low": "LOW",
+      "Medium": "MEDIUM"
+    },
+    "DefectReport.status": {
+      "closed": "CLOSED",
+      "deferred": "DEFERRED",
+      "open": "OPEN"
+    },
+    "MelItem.repairCategory": {
+      "A": "A",
+      "B": "B",
+      "C": "C",
+      "D": "D"
+    },
+    "MroConnection.direction": {
+      "both": "BOTH",
+      "inbound": "INBOUND",
+      "outbound": "OUTBOUND"
+    },
+    "Organization.status": {
+      "Active": "ACTIVE",
+      "Onboarding": "ONBOARDING",
+      "Suspended": "SUSPENDED"
+    }
+  }
+}
