@@ -133,10 +133,18 @@ export function FleetDashboardView(props) {
   const openCount = DefectReport.filter((d) => enumIs(d.status, "open", "DefectReport.status")).length;
   const deferredCount = DefectReport.filter((d) => enumIs(d.status, "deferred", "DefectReport.status")).length;
 
-  const expiryRows = (enumIs(filter, "open")
-    ? DefectReport.filter((d) => enumIs(d.status, "open", "DefectReport.status")).sort((a, b) => a.createdAt.localeCompare(b.createdAt))
-    : DefectReport.filter((d) => enumIs(d.status, "deferred", "DefectReport.status")).sort((a, b) => (a.deferralDueAt ?? "").localeCompare(b.deferralDueAt ?? ""))
-  );
+  const PRIORITY_RANK = { AOG: 0, CRITICAL: 1, URGENT: 2, HIGH: 3, MEDIUM: 4, ROUTINE: 5, LOW: 6 };
+  const rankOf = (d) => PRIORITY_RANK[String(d.priority ?? "").toUpperCase()] ?? 7;
+  const isOpenD = (d) => enumIs(d.status, "open", "DefectReport.status");
+  const isDeferredD = (d) => enumIs(d.status, "deferred", "DefectReport.status");
+  const expiryRows = DefectReport
+    .filter((d) => filter === "open" ? isOpenD(d) : filter === "deferred" ? isDeferredD(d) : (isOpenD(d) || isDeferredD(d)))
+    .sort((a, b) =>
+      rankOf(a) - rankOf(b)
+      || (isDeferredD(a) ? 0 : 1) - (isDeferredD(b) ? 0 : 1)
+      || (isDeferredD(a)
+        ? (a.deferralDueAt ?? "").localeCompare(b.deferralDueAt ?? "")
+        : (a.createdAt ?? "").localeCompare(b.createdAt ?? "")));
 
   const tailData = filter === "all" ? tailRowsAll : tailRowsAll.filter((t) => t[filter] > 0);
 
@@ -209,7 +217,8 @@ export function FleetDashboardView(props) {
                   <TableHead data-vid="ec31a1d6" className="type-eyebrow">{t('fleet-dashboard.ae9c3bd1.tablehead')}</TableHead>
                   <TableHead data-vid="919a45c0" className="type-eyebrow">{t('fleet-dashboard.fad10282')}</TableHead>
                   <TableHead data-vid="da6ab40e" className="type-eyebrow">{t('fleet-dashboard.a6527b2e')}</TableHead>
-                  <TableHead data-vid="a3c6cf74" className="type-eyebrow">{enumIs(filter, "open") ? t('fleet-dashboard.34540bb7') : t('fleet-dashboard.9071738f')}</TableHead>
+                  <TableHead data-vid="a3c6cf74" className="type-eyebrow">{filter === "open" ? t('fleet-dashboard.34540bb7') : filter === "deferred" ? t('fleet-dashboard.9071738f') : "Due / reported"}</TableHead>
+                  <TableHead className="type-eyebrow">Priority</TableHead>
                   <TableHead data-vid="c0d815e8" className="type-eyebrow text-right">{t('fleet-dashboard.b6b7a006')}</TableHead>
                   <TableHead className="type-eyebrow">Status</TableHead>
                   <TableHead className="type-eyebrow text-right">Assessment</TableHead>
@@ -220,7 +229,7 @@ export function FleetDashboardView(props) {
                   const ac = aircraftById[d.aircraftId];
                   const due = d.deferralDueAt ? Date.parse(d.deferralDueAt) : null;
                   const days = due == null ? null : Math.ceil((due - ASOF) / DAY);
-                  const tone = days == null || enumIs(filter, "open") ? "" : days < 0 ? "text-status-danger-ink" : days <= 3 ? "text-status-warning-ink" : "text-text-body";
+                  const tone = days == null || isOpenD(d) ? "" : days < 0 ? "text-status-danger-ink" : days <= 3 ? "text-status-warning-ink" : "text-text-body";
                   const left = days == null ? "" : days < 0 ? `${-days} days overdue` : days === 0 ? t('fleet-dashboard.19e82138') : `${days} days left`;
                   return (
                     <TableRow data-vid="da4bc288" key={d.id}>
@@ -230,7 +239,7 @@ export function FleetDashboardView(props) {
                       <TableCell data-vid="962825cf" className="type-mono-id whitespace-nowrap">{(d.ataCode ?? "—").split(" ")[0]}</TableCell>
                       <TableCell data-vid="21ce75bb" className="type-meta max-w-64 truncate text-text-body">{d.symptom ?? "—"}</TableCell>
                       <TableCell data-vid="9c3f39af" className="whitespace-nowrap">
-                        {enumIs(filter, "open") ? (
+                        {isOpenD(d) ? (
                           <DateValue data-vid="ece5f94e" value={d.createdAt} kind="datetime" />
                         ) : (
                           <span data-vid="9a999020" className={cn("flex flex-col", tone)}>
@@ -239,12 +248,13 @@ export function FleetDashboardView(props) {
                           </span>
                         )}
                       </TableCell>
+                      <TableCell className="type-meta whitespace-nowrap">{d.priority ?? "—"}</TableCell>
                       <TableCell data-vid="16dc0575" className="text-right whitespace-nowrap tabular-nums">
                         {(d.repeatCount ?? 0) >= 2 ? (
                           <span data-vid="24c5c8de" className="type-stat inline-block bg-secondary-tone px-2 text-secondary-tone-foreground rounded-sm">×<NumberValue data-vid="ca8ac095" value={d.repeatCount} /></span>
                         ) : "—"}
                       </TableCell>
-                      <TableCell className="type-meta whitespace-nowrap">{enumIs(d.status, "open", "DefectReport.status") ? "Open" : "Deferred"}</TableCell>
+                      <TableCell className="type-meta whitespace-nowrap">{isOpenD(d) ? "Open" : "Deferred"}</TableCell>
                       <TableCell className="text-right whitespace-nowrap">
                         <a href="#review-queue" className="type-meta inline-flex min-h-6 items-center text-text-link hover:underline focus-visible:ring-2 focus-visible:ring-ring">
                           {enumIs(d.status, "open", "DefectReport.status") ? "Add assessment" : "View assessment"}
