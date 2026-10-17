@@ -143,6 +143,7 @@ export function AircraftDetailView(props) {
         )}
       </section>
 
+      {false && (
       <div data-vid="a949f20c" className="grid grid-cols-1 gap-(--section-gap) xl:grid-cols-[minmax(0,1fr)_minmax(0,22rem)]">
         <section data-vid="8c1b7650" className="flex min-w-0 flex-col gap-(--component-gap)" aria-labelledby="hist">
           <h2 data-vid="73493e8d" id="hist" className="type-section">{t('aircraft-detail.fc9e4ce5')}</h2>
@@ -317,6 +318,7 @@ export function AircraftDetailView(props) {
           )}
         </section>
       </div>
+      )}
     </div>
   );
 }
